@@ -81,7 +81,7 @@ export default function SignUp() {
         <div className="flex items-center gap-3">
           <Checkbox id="terms" name="terms-condition" />
           <Label htmlFor="terms">
-            I agree to the{" "}
+            I agree to the
             <Link href="" className="text-primary hover:underline">
               Terms of Service
             </Link>

@@ -1,6 +1,7 @@
 import { FoundersGrotesk } from "./fonts";
 import { Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
         className={`${FoundersGrotesk.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <Toaster richColors closeButton />
       </body>
     </html>
   );

@@ -45,7 +45,7 @@ export default function SignIn() {
 
         {/* forgot password */}
         <p className="text-right">
-          <Link href="" className="text-primary hover:underline">
+          <Link href="/reset-password" className="text-primary hover:underline">
             Forgot Password?
           </Link>
         </p>
