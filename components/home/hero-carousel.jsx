@@ -12,22 +12,49 @@ import { Button } from "../ui/button";
 import BtnWithLeftIcon from "../btn-with-left-icon";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { PlayIcon } from "@hugeicons/core-free-icons/index";
-import { useState } from "react";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 export default function HeroCarousel({ moviesData }) {
+  const swiperRef = useRef(null);
+
+  useGSAP(
+    () => {
+      const swiper = swiperRef.current.swiper;
+
+      swiper.on("slideChangeTransitionStart", () => {
+        gsap.fromTo(
+          "#slide-details",
+          {
+            opacity: 0,
+            y: 50,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power2.out",
+            delay: 0.5,
+          }
+        );
+      });
+    },
+    { scope: swiperRef, dependencies: [] }
+  );
   return (
     <div>
       <Swiper
+        ref={swiperRef}
         slidesPerView={1}
         spaceBetween={30}
         autoplay={{
-          delay: 3000,
+          delay: 4000,
           pauseOnMouseEnter: true,
         }}
         allowTouchMove={false}
         loop={true}
         modules={[Autoplay, Pagination]}
-        // className="relative"
         pagination={{
           el: "#custom-pagination",
           clickable: true,
@@ -59,7 +86,7 @@ export default function HeroCarousel({ moviesData }) {
             />
 
             {/* movie details */}
-            <div className="space-y-2 w-full max-w-2xl" id="movie-details">
+            <div className="space-y-2 w-full max-w-2xl" id="slide-details">
               <h2 className="font-bold text-5xl">{movie.title}</h2>
               <h4 className="text-3xl font-semibold">
                 {movie.genre.join(", ")}
