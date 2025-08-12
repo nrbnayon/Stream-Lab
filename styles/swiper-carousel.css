@@ -1,0 +1,10 @@
+.swiper-pagination-bullet {
+   transition: transform 0.3s, border-color 0.3s;
+   border: 2px solid transparent;
+   transform: scaleY(1);
+}
+
+.swiper-pagination-bullet-active {
+  border-color: var(--primary);
+  transform: scaleY(1.1);
+}

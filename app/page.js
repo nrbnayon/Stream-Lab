@@ -1,7 +1,10 @@
-import Image from "next/image";
+import HeroCarousel from "@/components/home/hero-carousel";
+import { moviesData } from "@/constants";
 
 export default function Home() {
   return (
-    <div>Hey</div>
+    <div>
+      <HeroCarousel moviesData={moviesData} />
+    </div>
   );
 }
