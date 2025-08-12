@@ -1,5 +1,5 @@
+import SelectOptions from "@/components/auth/select-options";
 import InputField from "@/components/input-field";
-import SelectOptions from "@/components/select-options";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
@@ -30,7 +30,7 @@ export default function SignUp() {
       </div>
 
       {/* Signup form */}
-      <form className="mt-8">
+      <form className="mt-8 space-y-3">
         {/* Full name */}
         <InputField
           placeholder="Enter your full name"
@@ -57,7 +57,6 @@ export default function SignUp() {
           placeholder="Enter your password"
           type="password"
           label="Password"
-          className="pr-12"
           name="password"
         />
         {/* Confirm Password */}
@@ -65,7 +64,6 @@ export default function SignUp() {
           placeholder="Enter your password again"
           type="password"
           label="Confirm Password"
-          className="pr-12"
           name="confirm-password"
         />
 
@@ -93,10 +91,10 @@ export default function SignUp() {
         </div>
 
         {/* Sign in button */}
-        <Button className="w-full mt-5">Create Account</Button>
+        <Button className="w-full mt-3">Create Account</Button>
 
         {/* If Not an existing user */}
-        <p className="text-center mt-4">
+        <p className="text-center">
           Already have an account? &nbsp;
           <Link href="/signin" className="text-primary hover:underline">
             Sign In

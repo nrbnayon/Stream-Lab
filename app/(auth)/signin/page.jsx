@@ -26,7 +26,7 @@ export default function SignIn() {
       </div>
 
       {/* Signin form */}
-      <form className="mt-8">
+      <form className="mt-8 space-y-3">
         {/* Email */}
         <InputField
           placeholder="Enter your email"
@@ -39,7 +39,6 @@ export default function SignIn() {
           placeholder="Enter your password"
           type="password"
           label="Password"
-          className="pr-12"
           name="password"
         />
 
@@ -51,10 +50,10 @@ export default function SignIn() {
         </p>
 
         {/* Sign in button */}
-        <Button className="w-full mt-5">Sign In</Button>
+        <Button className="w-full">Sign In</Button>
 
         {/* If Not an existing user */}
-        <p className="text-center mt-4">
+        <p className="text-center">
           Don&apos;t have an account? &nbsp;
           <Link href="/signup" className="text-primary hover:underline">
             Sign Up

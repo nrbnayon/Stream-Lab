@@ -18,7 +18,7 @@ export default function ResetPasswordForm({ handleSubmit, setStep }) {
         Your password must be 8-10 character long.
       </p>
 
-      <div className="mt-5">
+      <div className="mt-5 space-y-3">
         <InputField
           label="New Password"
           placeholder="Set new password"

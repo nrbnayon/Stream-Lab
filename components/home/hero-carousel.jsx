@@ -15,6 +15,7 @@ import { PlayIcon } from "@hugeicons/core-free-icons/index";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import NavBar from "./nav-bar";
 
 export default function HeroCarousel({ moviesData }) {
   const swiperRef = useRef(null);
@@ -43,7 +44,8 @@ export default function HeroCarousel({ moviesData }) {
     { scope: swiperRef, dependencies: [] }
   );
   return (
-    <div>
+    <div className="relative">
+      <NavBar />
       <Swiper
         ref={swiperRef}
         slidesPerView={1}

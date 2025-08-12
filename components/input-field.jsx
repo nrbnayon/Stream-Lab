@@ -20,10 +20,10 @@ export default function InputField({
     <>
       {/* label if exist */}
       {label && <label className="text-lg font-medium">{label}</label>}
-      <div className="relative">
+      <div className={cn("relative", className)}>
         {/* left icon if applicable */}
         {leftIcon && (
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-secondary-foreground">
+          <span className="absolute left-1 top-1/2 -translate-y-1/2 text-secondary-foreground">
             {leftIcon}
           </span>
         )}
@@ -31,7 +31,9 @@ export default function InputField({
         {/* main input field */}
         <Input
           type={!showPassword ? type : "text"}
-          className={cn("w-full", className)}
+          className={`w-full ${leftIcon ? "pl-8" : ""} ${
+            rightIcon || type === "password" ? "pr-8" : ""
+          }`}
           placeholder={placeholder}
           name={name}
         />
@@ -44,20 +46,22 @@ export default function InputField({
         )}
 
         {/* show/hide icon only for password */}
-        <span
-          className={`${
-            type === "password"
-              ? "absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-secondary-foreground"
-              : "hidden"
-          }`}
-          onClick={() => setShowPassword(!showPassword)}
-        >
-          {!showPassword ? (
-            <HugeiconsIcon icon={ViewOffSlashIcon} />
-          ) : (
-            <HugeiconsIcon icon={ViewIcon} />
-          )}
-        </span>
+        {type === "password" && (
+          <span
+            className={`${
+              type === "password"
+                ? "absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-secondary-foreground"
+                : "hidden"
+            }`}
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {!showPassword ? (
+              <HugeiconsIcon icon={ViewOffSlashIcon} />
+            ) : (
+              <HugeiconsIcon icon={ViewIcon} />
+            )}
+          </span>
+        )}
       </div>
     </>
   );
