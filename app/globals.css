@@ -120,3 +120,9 @@
     background-color: var(--secondary-foreground);
   }
 }
+
+@layer components {
+  .container {
+    @apply mx-auto;
+  }
+}

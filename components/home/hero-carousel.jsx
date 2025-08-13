@@ -9,7 +9,6 @@ import "swiper/css/navigation";
 import "../../styles/swiper-carousel.css";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import BtnWithLeftIcon from "../btn-with-left-icon";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { PlayIcon } from "@hugeicons/core-free-icons/index";
 import { useRef } from "react";
@@ -86,7 +85,7 @@ export default function HeroCarousel({ moviesData }) {
 
             {/* movie details */}
             <div
-              className="space-y-3 relative top-1/2 -translate-y-1/2 container mx-auto"
+              className="space-y-3 relative top-1/2 -translate-y-1/2 container"
               id="slide-details"
             >
               <h2 className="font-bold text-5xl">{movie.title}</h2>
@@ -98,11 +97,11 @@ export default function HeroCarousel({ moviesData }) {
               </p>
 
               <div className="flex gap-5 mt-5">
-                <BtnWithLeftIcon
-                  text="Watch Now"
-                  className="rounded-full px-6"
-                  icon={<HugeiconsIcon icon={PlayIcon} size={25} />}
-                />
+                <Button className="rounded-full px-6">
+                  <HugeiconsIcon icon={PlayIcon} size={25} />
+                  Watch Now
+                </Button>
+
                 <Button className="rounded-full px-8" variant="outline">
                   Trailer
                 </Button>
