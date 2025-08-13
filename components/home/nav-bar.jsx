@@ -1,8 +1,6 @@
 import Image from "next/image";
 import SearchMovie from "../search-movie";
 import { Button } from "../ui/button";
-import { HugeiconsIcon } from "@hugeicons/react";
-import { Search01Icon } from "@hugeicons/core-free-icons/index";
 import Link from "next/link";
 
 export default function NavBar() {
@@ -11,11 +9,7 @@ export default function NavBar() {
       <Image src="/brand-logo.png" height={75} width={120} alt="Brand Logo" />
 
       {/* Search Bar */}
-      <SearchMovie
-        leftIcon={<HugeiconsIcon icon={Search01Icon} />}
-        placeholder="Search Films"
-        className="w-full max-w-md"
-      />
+      <SearchMovie className="w-full max-w-xl" />
 
       {/* Auth Buttons */}
       <div className="flex gap-3">
