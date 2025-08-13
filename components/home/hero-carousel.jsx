@@ -77,7 +77,7 @@ export default function HeroCarousel({ moviesData }) {
         {moviesData.map((movie) => (
           <SwiperSlide
             key={movie.id}
-            className="h-full py-32 px-14 bg-cover bg-center"
+            className="h-full pt-32 pb-12 px-14 bg-cover bg-center"
           >
             <Image
               alt={movie.title}
@@ -112,7 +112,7 @@ export default function HeroCarousel({ moviesData }) {
 
       {/* Custom Pagination Container */}
       <div
-        className="flex gap-2 items-center -mt-8 mx-14"
+        className="flex gap-2 items-center mx-14 mt-5"
         id="custom-pagination"
       ></div>
     </div>
