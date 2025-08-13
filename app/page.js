@@ -5,6 +5,8 @@ export default function Home() {
   return (
     <div>
       <HeroCarousel moviesData={moviesData} />
+
+      <div className="h-svh"></div>
     </div>
   );
 }

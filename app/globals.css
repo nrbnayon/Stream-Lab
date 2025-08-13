@@ -90,12 +90,12 @@
   /* carousel mask */
   .mask-carousel {
     mask-image: 
-    linear-gradient(to bottom, black 10%, transparent 100%), 
-    linear-gradient(to left, black 20%, transparent 100%);
+    linear-gradient(to bottom, black 0, transparent 100%), 
+    linear-gradient(to left, black 0, transparent 100%);
     mask-composite: intersect;
     -webkit-mask-image: 
-      linear-gradient(to bottom, black 10%, transparent 100%), 
-      linear-gradient(to left, black 20%, transparent 100%);
+      linear-gradient(to bottom, black 0, transparent 100%), 
+      linear-gradient(to left, black 0, transparent 100%);
     -webkit-mask-composite: intersect;
   }
 

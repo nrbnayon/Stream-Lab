@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function NavBar() {
   return (
-    <div className="absolute w-full flex items-center justify-between gap-5 px-14 z-20 mt-5">
+    <div className="absolute w-full flex items-center justify-between gap-5 z-20 mt-5 container left-1/2 -translate-x-1/2">
       <Image src="/brand-logo.png" height={75} width={120} alt="Brand Logo" />
 
       {/* Search Bar */}

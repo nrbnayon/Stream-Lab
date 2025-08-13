@@ -44,7 +44,7 @@ export default function HeroCarousel({ moviesData }) {
     { scope: swiperRef, dependencies: [] }
   );
   return (
-    <div className="relative">
+    <div className="h-dvh">
       <NavBar />
       <Swiper
         ref={swiperRef}
@@ -52,11 +52,11 @@ export default function HeroCarousel({ moviesData }) {
         spaceBetween={30}
         autoplay={{
           delay: 4000,
-          pauseOnMouseEnter: true,
         }}
         allowTouchMove={false}
         loop={true}
         modules={[Autoplay, Pagination]}
+        className="h-full"
         pagination={{
           el: "#custom-pagination",
           clickable: true,
@@ -75,10 +75,7 @@ export default function HeroCarousel({ moviesData }) {
         }}
       >
         {moviesData.map((movie) => (
-          <SwiperSlide
-            key={movie.id}
-            className="h-full pt-32 pb-12 px-14 bg-cover bg-center"
-          >
+          <SwiperSlide key={movie.id} className="px-14 bg-cover bg-center">
             <Image
               alt={movie.title}
               src={movie.thumbnail_url}
@@ -88,14 +85,19 @@ export default function HeroCarousel({ moviesData }) {
             />
 
             {/* movie details */}
-            <div className="space-y-2 w-full max-w-2xl" id="slide-details">
+            <div
+              className="space-y-3 relative top-1/2 -translate-y-1/2 container mx-auto"
+              id="slide-details"
+            >
               <h2 className="font-bold text-5xl">{movie.title}</h2>
               <h4 className="text-3xl font-semibold">
                 {movie.genre.join(", ")}
               </h4>
-              <p className="text-secondary-foreground">{movie.logline}</p>
+              <p className="text-secondary-foreground max-w-2xl">
+                {movie.logline}
+              </p>
 
-              <div className="flex gap-5 mt-6">
+              <div className="flex gap-5 mt-5">
                 <BtnWithLeftIcon
                   text="Watch Now"
                   className="rounded-full px-6"
@@ -112,7 +114,7 @@ export default function HeroCarousel({ moviesData }) {
 
       {/* Custom Pagination Container */}
       <div
-        className="flex gap-2 items-center mx-14 mt-5"
+        className="flex gap-2 items-center mx-14 mt-5 absolute bottom-5 z-20 left-1/2 -translate-x-1/2"
         id="custom-pagination"
       ></div>
     </div>
