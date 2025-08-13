@@ -63,7 +63,7 @@ export default function HeroCarousel({ moviesData }) {
           renderBullet: (index, className) => {
             const movie = moviesData[index];
             return `
-              <div class="${className} cursor-pointer rounded-md overflow-hidden" style="width: 7rem; aspect-ratio: 3 / 4;">
+              <div class="${className} cursor-pointer rounded-md overflow-hidden h-48 aspect-[3/4]">
                 <img
                   src="${movie.thumbnail_url}"
                   alt="${movie.title}"
@@ -114,7 +114,7 @@ export default function HeroCarousel({ moviesData }) {
 
       {/* Custom Pagination Container */}
       <div
-        className="flex gap-2 items-center mx-14 mt-5 absolute bottom-5 z-20 left-1/2 -translate-x-1/2"
+        className="flex gap-2 items-center absolute bottom-5 z-20 left-1/2 -translate-x-1/2"
         id="custom-pagination"
       ></div>
     </div>
