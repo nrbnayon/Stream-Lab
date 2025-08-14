@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
-import "videojs-http-source-selector";
+import "videojs-contrib-quality-levels";
+import "videojs-hls-quality-selector";
 
 export default function VideoPlayer({ src }) {
   const videoRef = useRef(null);
@@ -19,7 +20,7 @@ export default function VideoPlayer({ src }) {
       {
         src,
         //   TODO: Update -> application/x-mpegURL
-        type: "video/mp4",
+        type: "application/x-mpegURL",
       },
     ],
   };
@@ -28,8 +29,11 @@ export default function VideoPlayer({ src }) {
     playerRef.current = player;
 
     // Enable resolution selector
-    if (player.httpSourceSelector) {
-      player.httpSourceSelector();
+    if (player.hlsQualitySelector) {
+      player.hlsQualitySelector({
+        displayCurrentQuality: true,
+        default: "auto",
+      });
     }
 
     // You can handle player events here, for example:
@@ -47,8 +51,6 @@ export default function VideoPlayer({ src }) {
       const videoElement = document.createElement("video-js");
       videoElement.classList.add("vjs-big-play-centered");
       videoRef.current.appendChild(videoElement);
-
-      // TODO: update all option & onReady
       const player = (playerRef.current = videojs(videoElement, options, () => {
         onReady && onReady(player);
       }));
