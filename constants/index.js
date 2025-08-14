@@ -13,9 +13,9 @@ const moviesData = [
       thumbnail_url:
          "https://i.pinimg.com/736x/a1/84/5a/a1845a62b076849b90f30b625b105f0d.jpg",
       trailer_url:
-         "https://res.cloudinary.com/demo/video/upload/v1723400000/last_journey_trailer.mp4",
+         "https://videos.pexels.com/video-files/33348415/14200455_2560_1440_24fps.mp4",
       full_film_url:
-         "https://res.cloudinary.com/dubsxif8w/video/upload/v1754738504/samples/cld-sample-video.mp4",
+         "https://videos.pexels.com/video-files/33348415/14200455_2560_1440_24fps.mp4",
       rent_price: 4.99,
       buy_price: 14.99,
    },
@@ -31,9 +31,9 @@ const moviesData = [
       thumbnail_url:
          "https://i.pinimg.com/736x/ba/d0/93/bad0936276a699608b5f8ff8e7ad7d14.jpg",
       trailer_url:
-         "https://res.cloudinary.com/demo/video/upload/v1723400000/shadows_over_horizon_trailer.mp4",
+         "https://videos.pexels.com/video-files/33348415/14200455_2560_1440_24fps.mp4",
       full_film_url:
-         "https://res.cloudinary.com/demo/video/upload/v1754738504/samples/cld-sample-video.mp4",
+         "https://videos.pexels.com/video-files/33348415/14200455_2560_1440_24fps.mp4",
       rent_price: 3.99,
       buy_price: 12.99,
    },
@@ -49,9 +49,9 @@ const moviesData = [
       thumbnail_url:
          "https://i.pinimg.com/1200x/5e/a3/2d/5ea32d22203c77ac258aa62c98eef275.jpg",
       trailer_url:
-         "https://res.cloudinary.com/demo/video/upload/v1723400000/echoes_of_the_sea_trailer.mp4",
+         "https://videos.pexels.com/video-files/33348415/14200455_2560_1440_24fps.mp4",
       full_film_url:
-         "https://res.cloudinary.com/demo/video/upload/v1754738504/samples/cld-sample-video.mp4",
+         "https://videos.pexels.com/video-files/33348415/14200455_2560_1440_24fps.mp4",
       rent_price: 5.49,
       buy_price: 15.99,
    },
@@ -67,9 +67,9 @@ const moviesData = [
       thumbnail_url:
          "https://i.pinimg.com/736x/f1/80/9c/f1809cf269d723d0b1dc2aedf6d3e546.jpg",
       trailer_url:
-         "https://res.cloudinary.com/demo/video/upload/v1723400000/rise_of_the_forgotten_trailer.mp4",
+         "https://videos.pexels.com/video-files/33348415/14200455_2560_1440_24fps.mp4",
       full_film_url:
-         "https://res.cloudinary.com/demo/video/upload/v1754738504/samples/cld-sample-video.mp4",
+         "https://videos.pexels.com/video-files/33348415/14200455_2560_1440_24fps.mp4",
       rent_price: 4.49,
       buy_price: 13.99,
    },
@@ -85,9 +85,9 @@ const moviesData = [
       thumbnail_url:
          "https://i.pinimg.com/736x/c3/a4/1b/c3a41bf5f2e30e8bbe4b0f8a896613bb.jpg",
       trailer_url:
-         "https://res.cloudinary.com/demo/video/upload/v1723400000/whispers_in_the_wind_trailer.mp4",
+         "https://videos.pexels.com/video-files/33348415/14200455_2560_1440_24fps.mp4",
       full_film_url:
-         "https://res.cloudinary.com/demo/video/upload/v1754738504/samples/cld-sample-video.mp4",
+         "https://videos.pexels.com/video-files/33348415/14200455_2560_1440_24fps.mp4",
       rent_price: 3.49,
       buy_price: 11.99,
    },
@@ -103,9 +103,9 @@ const moviesData = [
       thumbnail_url:
          "https://i.pinimg.com/736x/25/88/10/2588108b631c8263ab51bb21bf04dbfd.jpg",
       trailer_url:
-         "https://res.cloudinary.com/demo/video/upload/v1723400000/steel_and_ash_trailer.mp4",
+         "https://videos.pexels.com/video-files/33348415/14200455_2560_1440_24fps.mp4",
       full_film_url:
-         "https://res.cloudinary.com/demo/video/upload/v1754738504/samples/cld-sample-video.mp4",
+         "https://videos.pexels.com/video-files/33348415/14200455_2560_1440_24fps.mp4",
       rent_price: 4.99,
       buy_price: 14.49,
    },
@@ -121,9 +121,9 @@ const moviesData = [
       thumbnail_url:
          "https://i.pinimg.com/1200x/61/26/4c/61264ce8f02ac56c9cb7709c920eecbc.jpg",
       trailer_url:
-         "https://res.cloudinary.com/demo/video/upload/v1723400000/city_of_glass_trailer.mp4",
+         "https://videos.pexels.com/video-files/33348415/14200455_2560_1440_24fps.mp4",
       full_film_url:
-         "https://res.cloudinary.com/demo/video/upload/v1754738504/samples/cld-sample-video.mp4",
+         "https://videos.pexels.com/video-files/33348415/14200455_2560_1440_24fps.mp4",
       rent_price: 4.29,
       buy_price: 13.79,
    },
@@ -139,9 +139,9 @@ const moviesData = [
       thumbnail_url:
          "https://i.pinimg.com/1200x/6f/65/46/6f654637d171089e3f1f4525212e8ac8.jpg",
       trailer_url:
-         "https://res.cloudinary.com/demo/video/upload/v1723400000/veil_of_the_moon_trailer.mp4",
+         "https://videos.pexels.com/video-files/33348415/14200455_2560_1440_24fps.mp4",
       full_film_url:
-         "https://res.cloudinary.com/demo/video/upload/v1754738504/samples/cld-sample-video.mp4",
+         "https://videos.pexels.com/video-files/33348415/14200455_2560_1440_24fps.mp4",
       rent_price: 5.19,
       buy_price: 15.29,
    },
@@ -157,9 +157,9 @@ const moviesData = [
       thumbnail_url:
          "https://i.pinimg.com/1200x/82/81/f2/8281f2139e4209f043e9409e8bcfdca1.jpg",
       trailer_url:
-         "https://res.cloudinary.com/demo/video/upload/v1723400000/ashes_and_embers_trailer.mp4",
+         "https://videos.pexels.com/video-files/33348415/14200455_2560_1440_24fps.mp4",
       full_film_url:
-         "https://res.cloudinary.com/demo/video/upload/v1754738504/samples/cld-sample-video.mp4",
+         "https://videos.pexels.com/video-files/33348415/14200455_2560_1440_24fps.mp4",
       rent_price: 3.79,
       buy_price: 12.59,
    },
@@ -175,9 +175,9 @@ const moviesData = [
       thumbnail_url:
          "https://i.pinimg.com/1200x/d4/99/4a/d4994ac3e2c3c7338f51513a74745f3a.jpg",
       trailer_url:
-         "https://res.cloudinary.com/demo/video/upload/v1723400000/the_silent_frontier_trailer.mp4",
+         "https://videos.pexels.com/video-files/33348415/14200455_2560_1440_24fps.mp4",
       full_film_url:
-         "https://res.cloudinary.com/demo/video/upload/v1754738504/samples/cld-sample-video.mp4",
+         "https://videos.pexels.com/video-files/33348415/14200455_2560_1440_24fps.mp4",
       rent_price: 4.69,
       buy_price: 14.39,
    },

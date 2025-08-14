@@ -11,17 +11,23 @@ import {
 import { Badge } from "./ui/badge";
 import { minutesToHours, truncateText, webShare } from "@/lib/utils";
 import { HugeiconsIcon } from "@hugeicons/react";
-import {
-  PlayIcon,
-  Share01Icon,
-  Time04Icon,
-} from "@hugeicons/core-free-icons/index";
+import { Share01Icon, Time04Icon } from "@hugeicons/core-free-icons/index";
 import { Button } from "./ui/button";
+import TrailerPopup from "./trailer-popup";
 
 export default function MovieCard({ movie }) {
+  const {
+    title,
+    thumbnail_url,
+    duration,
+    logline,
+    buy_price,
+    rent_price,
+    type,
+  } = movie;
   const handleShare = async () => {
     await webShare({
-      title: movie.title,
+      title,
       // TODO: change the url
       url: `${window.location.href}`,
     });
@@ -31,35 +37,29 @@ export default function MovieCard({ movie }) {
       <CardHeader>
         <div className="relative">
           <Image
-            src={movie.thumbnail_url}
-            alt={movie.title}
+            src={thumbnail_url}
+            alt={title}
             width={200}
             height={80}
             className="w-full rounded-md h-44 object-cover"
           />
-          <Button
-            variant="destructive"
-            size="sm"
-            className="absolute bottom-2 left-2 rounded-full"
-          >
-            <HugeiconsIcon icon={PlayIcon} size={25} />
-            Trailer
-          </Button>
+          {/* Trailer button and popup */}
+          <TrailerPopup movie={movie} />
         </div>
-        <CardTitle className="text-xl">{movie.title}</CardTitle>
+        <CardTitle className="text-xl">{title}</CardTitle>
 
         {/* Badge and Duration */}
         <div className="flex gap-5">
-          <Badge variant="secondary">Movie</Badge>
+          <Badge variant="secondary">{type}</Badge>
           <span className="text-secondary-foreground text-sm flex gap-2 items-center">
             <HugeiconsIcon icon={Time04Icon} size={18} />
-            {minutesToHours(movie.duration)}
+            {minutesToHours(duration)}
           </span>
         </div>
 
         {/* movie description */}
         <CardDescription className="text-base">
-          {truncateText(movie.logline)}
+          {truncateText(logline)}
         </CardDescription>
       </CardHeader>
 
@@ -67,11 +67,11 @@ export default function MovieCard({ movie }) {
       <CardContent className="text-muted-foreground">
         <p className="flex justify-between">
           <span>Rent</span>
-          <span>$9.45</span>
+          <span>${rent_price}</span>
         </p>
         <p className="flex justify-between">
           <span>Buy</span>
-          <span>$12.99</span>
+          <span>${buy_price}</span>
         </p>
       </CardContent>
 
@@ -81,7 +81,6 @@ export default function MovieCard({ movie }) {
         <Button className="grow" variant="outline">
           Buy
         </Button>
-
         <Button size="icon" variant="ghost" onClick={handleShare}>
           <HugeiconsIcon icon={Share01Icon} />
         </Button>
