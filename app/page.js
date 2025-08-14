@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import HeroCarousel from "@/components/home/hero-carousel";
 import LatestDrama from "@/components/home/latest-drama";
 import TrendingNow from "@/components/home/trending-now";
@@ -9,8 +10,7 @@ export default function Home() {
       <HeroCarousel moviesData={moviesData} />
       <TrendingNow />
       <LatestDrama />
-
-      <div className="h-svh"></div>
+      <Footer />
     </div>
   );
 }
