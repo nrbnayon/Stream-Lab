@@ -35,7 +35,6 @@ export default function TrailerPopup({ movie }) {
             Watch the official trailer
           </DialogDescription>
         </DialogHeader>
-
         {/* Trailer Player */}
         <VideoPlayer src={trailer_url} />
       </DialogContent>

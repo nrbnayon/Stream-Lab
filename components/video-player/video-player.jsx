@@ -3,6 +3,7 @@ import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import "videojs-contrib-quality-levels";
 import "videojs-hls-quality-selector";
+import "videojs-hotkeys";
 
 export default function VideoPlayer({ src }) {
   const videoRef = useRef(null);
@@ -19,10 +20,16 @@ export default function VideoPlayer({ src }) {
     sources: [
       {
         src,
-        //   TODO: Update -> application/x-mpegURL
         type: "application/x-mpegURL",
       },
     ],
+    plugins: {
+      hotkeys: {
+        volumeStep: 0.2,
+        seekStep: 10,
+        enableModifiersForNumbers: false,
+      },
+    },
   };
   //   handle Player is Ready
   const onReady = (player) => {

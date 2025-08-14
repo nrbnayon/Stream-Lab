@@ -29,7 +29,8 @@
     "swiper": "^11.2.10",
     "tailwind-merge": "^3.3.1",
     "videojs-contrib-quality-levels": "^4.1.0",
-    "videojs-hls-quality-selector": "^2.0.0"
+    "videojs-hls-quality-selector": "^2.0.0",
+    "videojs-hotkeys": "^0.2.30"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
