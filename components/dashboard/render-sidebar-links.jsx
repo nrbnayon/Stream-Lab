@@ -1,3 +1,4 @@
+"use client";
 import { sidebarLinks } from "@/constants";
 import {
   SidebarGroup,
@@ -8,8 +9,10 @@ import {
 } from "../ui/sidebar";
 import Link from "next/link";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { usePathname } from "next/navigation";
 
 export default function RenderSidebarLinks() {
+  const pathname = usePathname();
   // TODO: fetch role and render links
   const role = "user";
   const linkGroups = sidebarLinks[role];
@@ -19,16 +22,22 @@ export default function RenderSidebarLinks() {
         <SidebarGroup key={index}>
           <SidebarGroupLabel>{group.groupName}</SidebarGroupLabel>
           <SidebarMenu>
-            {group.links.map((link, index) => (
-              <SidebarMenuItem key={index}>
-                <SidebarMenuButton asChild>
-                  <Link href={link.href}>
-                    <HugeiconsIcon icon={link.icon} />
-                    <span>{link.name}</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
+            {group.links.map((link, index) => {
+              const isActive = pathname.startsWith(link.href);
+              return (
+                <SidebarMenuItem key={index}>
+                  <SidebarMenuButton
+                    asChild
+                    className={`${isActive ? "bg-sidebar-accent" : ""}`}
+                  >
+                    <Link href={link.href}>
+                      <HugeiconsIcon icon={link.icon} />
+                      <span>{link.name}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              );
+            })}
           </SidebarMenu>
         </SidebarGroup>
       ))}

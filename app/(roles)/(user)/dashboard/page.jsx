@@ -1,3 +1,3 @@
 export default function UserDashboard() {
-  return <div>UserDashboard</div>;
+  return <div>UserDashboard Page</div>;
 }
