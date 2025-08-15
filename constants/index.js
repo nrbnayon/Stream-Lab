@@ -1,3 +1,5 @@
+import { AiMagicIcon, CreditCardValidationIcon, DashboardSquare03Icon, Film01Icon, MoneySend02Icon, PlayListIcon, Settings02Icon, Unlink04Icon, Upload01Icon, UserGroupIcon, Wallet05Icon } from "@hugeicons/core-free-icons/index";
+
 const loginAs = ["Viewer", "Film Maker"];
 
 const moviesData = [
@@ -183,6 +185,44 @@ const moviesData = [
    },
 ];
 
+// sidebar-links
+const sidebarLinks = {
+   user: [
+      {
+         groupName: "User Tools",
+         links: [
+            { name: "Dashboard", href: "/dashboard", icon: DashboardSquare03Icon },
+            { name: "My Library", href: "/my-library", icon: Film01Icon },
+            { name: "Reelbux", href: "/reelbux", icon: Wallet05Icon },
+            { name: "Settings", href: "/settings", icon: Settings02Icon },
+         ]
+      },
+      {
+         groupName: "Creator Tools",
+         links: [
+            { name: "My Films", href: "/my-films", icon: PlayListIcon },
+            { name: "Distro", href: "/distro", icon: Unlink04Icon },
+            { name: "AI Creator Lab", href: "/ai-creator=lab", icon: AiMagicIcon },
+            { name: "Submit Film", href: "/submit-film", icon: Upload01Icon },
+         ]
+      },
+   ],
+   admin: [
+      {
+         groupName: "Admin Tools",
+         links: [
+            { name: "Dashboard", href: "/admin/dashboard", icon: DashboardSquare03Icon },
+            { name: "Users", href: "/admin/users", icon: UserGroupIcon },
+            { name: "Films", href: "/admin/films", icon: PlayListIcon },
+            { name: "Payments", href: "/admin/payments", icon: CreditCardValidationIcon },
+            { name: "Distro", href: "/admin/distro", icon: Unlink04Icon },
+            { name: "Subscribers", href: "/admin/subscribers", icon: MoneySend02Icon },
+            { name: "Settings", href: "/admin/settings", icon: Settings02Icon },
+         ]
+      }
+   ],
+};
 
 
-export { loginAs, moviesData };
+
+export { loginAs, moviesData, sidebarLinks };
