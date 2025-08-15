@@ -202,7 +202,7 @@ const sidebarLinks = {
          links: [
             { name: "My Films", href: "/my-films", icon: PlayListIcon },
             { name: "Distro", href: "/distro", icon: Unlink04Icon },
-            { name: "AI Creator Lab", href: "/ai-creator=lab", icon: AiMagicIcon },
+            { name: "AI Creator Lab", href: "/ai-creator-lab", icon: AiMagicIcon },
             { name: "Submit Film", href: "/submit-film", icon: Upload01Icon },
          ]
       },

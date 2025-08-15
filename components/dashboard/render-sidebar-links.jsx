@@ -28,7 +28,7 @@ export default function RenderSidebarLinks() {
                 <SidebarMenuItem key={index}>
                   <SidebarMenuButton
                     asChild
-                    className={`${isActive ? "bg-sidebar-accent" : ""}`}
+                    variant={isActive ? "active" : "default"}
                   >
                     <Link href={link.href}>
                       <HugeiconsIcon icon={link.icon} />
