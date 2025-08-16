@@ -9,7 +9,7 @@ import { useState } from "react";
 export default function SearchWithOptions({ placeholder, options = [] }) {
   const [selectedOption, setSelectedOption] = useState(options[0] ?? "");
   return (
-    <div className="flex gap-5 mb-3">
+    <div className="flex gap-5 my-3">
       <InputField
         leftIcon={<HugeiconsIcon icon={Search01Icon} />}
         type="text"

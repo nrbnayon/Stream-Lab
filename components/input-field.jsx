@@ -13,7 +13,9 @@ export default function InputField({
   placeholder = "",
   leftIcon,
   rightIcon,
+  inputDisabled = false,
   className,
+  defaultValue = 0,
 }) {
   const [showPassword, setShowPassword] = useState(false);
   return (
@@ -34,8 +36,10 @@ export default function InputField({
           className={`w-full ${leftIcon ? "pl-8" : ""} ${
             rightIcon || type === "password" ? "pr-8" : ""
           }`}
+          {...(defaultValue && { defaultValue })}
           placeholder={placeholder}
           name={name}
+          disabled={inputDisabled}
         />
 
         {/* right icon if applicable */}
