@@ -1,5 +1,5 @@
 import Image from "next/image";
-import SearchMovie from "../search-movie";
+import SearchMovie from "./search-movie";
 import { Button } from "../ui/button";
 import Link from "next/link";
 
