@@ -3,6 +3,7 @@ import InputField from "@/components/input-field";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -14,11 +15,18 @@ import { Label } from "../ui/label";
 import { MasterCardIcon } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { usePathname } from "next/navigation";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+} from "../ui/select";
 
 export default function PaymentDialog({
   triggerBtn,
   payBtnText,
-  dialogTitle,
+  dialogTitle = "",
   inputDisabled,
   inputValue,
   apiEndPoint,
@@ -29,17 +37,31 @@ export default function PaymentDialog({
       <DialogTrigger>{triggerBtn}</DialogTrigger>
       <DialogContent>
         <form>
-          <DialogHeader>
+          <DialogHeader className="mb-2">
             <DialogTitle className="text-2xl"> {dialogTitle} </DialogTitle>
           </DialogHeader>
           <div>
-            <h4>Amount ($)</h4>
+            <h4 className="font-medium">Amount ($)</h4>
             <InputField
               type="number"
               inputDisabled={inputDisabled}
               defaultValue={inputValue}
+              min={1}
             />
-            <RadioGroup className="mt-3" defaultValue="card">
+            {dialogTitle.includes("Rent") && (
+              <div>
+                <h4 className="font-medium">Rent Time</h4>
+                <Select>
+                  <SelectTrigger></SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value=""></SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
+            <RadioGroup className="my-3" defaultValue="card">
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="card" id="card" />
                 <Label htmlFor="card">

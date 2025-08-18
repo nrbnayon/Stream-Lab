@@ -16,6 +16,7 @@ export default function InputField({
   inputDisabled = false,
   className,
   defaultValue = 0,
+  ...props
 }) {
   const [showPassword, setShowPassword] = useState(false);
   return (
@@ -40,6 +41,7 @@ export default function InputField({
           placeholder={placeholder}
           name={name}
           disabled={inputDisabled}
+          {...props}
         />
 
         {/* right icon if applicable */}

@@ -1,4 +1,4 @@
-import { CreditCardValidationIcon, DashboardSquare03Icon, Film01Icon, MoneySend02Icon, PlayListIcon, Settings02Icon, Upload01Icon, UserGroupIcon, } from "@hugeicons/core-free-icons/index";
+import { CreditCardValidationIcon, DashboardSquare03Icon, Film01Icon, MoneySend02Icon, PlayCircleIcon, PlayListIcon, Settings02Icon, Upload01Icon, UserGroupIcon, } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 
 const loginAs = ["Viewer", "Film Maker"];
@@ -192,7 +192,7 @@ const sidebarLinks = {
       {
          groupName: "User Tools",
          links: [
-            { name: "Dashboard", href: "/dashboard", icon: <HugeiconsIcon icon={DashboardSquare03Icon} /> },
+            { name: "Watch", href: "/watch", icon: <HugeiconsIcon icon={PlayCircleIcon} /> },
             { name: "My Library", href: "/my-library", icon: <HugeiconsIcon icon={Film01Icon} /> },
             {
                name: "Reelbux", href: "/reelbux", icon: <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
