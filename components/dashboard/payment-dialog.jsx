@@ -38,7 +38,7 @@ export default function PaymentDialog({
       <DialogContent>
         <form>
           <DialogHeader className="mb-2">
-            <DialogTitle className="text-2xl"> {dialogTitle} </DialogTitle>
+            <DialogTitle> {dialogTitle} </DialogTitle>
           </DialogHeader>
           <div>
             <h4 className="font-medium">Amount ($)</h4>

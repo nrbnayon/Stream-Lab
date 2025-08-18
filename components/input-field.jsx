@@ -22,7 +22,7 @@ export default function InputField({
   return (
     <>
       {/* label if exist */}
-      {label && <label className="text-lg font-medium">{label}</label>}
+      {label && <label className="text-lg font-medium -mb-3">{label}</label>}
       <div className={cn("relative", className)}>
         {/* left icon if applicable */}
         {leftIcon && (

@@ -30,8 +30,8 @@ export default function TrailerPopup({ movie }) {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="text-2xl">{title} — Trailer</DialogTitle>
-          <DialogDescription className="text-base -mt-1">
+          <DialogTitle>{title} — Trailer</DialogTitle>
+          <DialogDescription className="-mt-1">
             Watch the official trailer
           </DialogDescription>
         </DialogHeader>
