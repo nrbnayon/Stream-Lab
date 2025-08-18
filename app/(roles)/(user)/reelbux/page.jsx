@@ -5,7 +5,6 @@ import Image from "next/image";
 export default function Reelbux() {
   return (
     <>
-      {/* TODO: Add logo here */}
       <Image
         src="/reelbux-logo.png"
         height={100}

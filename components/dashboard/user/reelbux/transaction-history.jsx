@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import {
   Table,
   TableBody,
@@ -16,7 +17,7 @@ export default function TransactionHistory() {
       </p>
 
       {/* rendering Table */}
-      <Table>
+      <Table className="mt-5">
         <TableHeader>
           <TableRow>
             <TableHead>Source</TableHead>
@@ -27,10 +28,28 @@ export default function TransactionHistory() {
         </TableHeader>
         <TableBody>
           <TableRow>
-            <TableCell className="font-medium">INV001</TableCell>
-            <TableCell>Paid</TableCell>
-            <TableCell>Credit Card</TableCell>
-            <TableCell>$250.00</TableCell>
+            <TableCell>Paypal</TableCell>
+            <TableCell className="text-green-500">+200.00</TableCell>
+            <TableCell>25 January 2025</TableCell>
+            <TableCell>
+              <Badge variant="success">Completed</Badge>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Card</TableCell>
+            <TableCell className="text-destructive">145.14</TableCell>
+            <TableCell>17 June 2025</TableCell>
+            <TableCell>
+              <Badge variant="destructive">Failed</Badge>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Distro</TableCell>
+            <TableCell className="text-green-500">+94.20</TableCell>
+            <TableCell>11 March 2025</TableCell>
+            <TableCell>
+              <Badge variant="success">Completed</Badge>
+            </TableCell>
           </TableRow>
         </TableBody>
       </Table>
