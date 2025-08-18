@@ -8,7 +8,6 @@ import {
   SidebarMenuItem,
 } from "../ui/sidebar";
 import Link from "next/link";
-import { HugeiconsIcon } from "@hugeicons/react";
 import { usePathname } from "next/navigation";
 
 export default function RenderSidebarLinks() {
@@ -31,7 +30,7 @@ export default function RenderSidebarLinks() {
                     variant={isActive ? "active" : "default"}
                   >
                     <Link href={link.href}>
-                      <HugeiconsIcon icon={link.icon} />
+                      {link.icon}
                       <span>{link.name}</span>
                     </Link>
                   </SidebarMenuButton>

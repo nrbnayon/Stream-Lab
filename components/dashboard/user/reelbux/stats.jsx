@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 export default function ReelbuxBalanceStats() {
   return (
-    <div className="mt-10 bg-secondary py-10 px-5 rounded-md">
+    <div className="my-8 bg-secondary py-10 px-5 rounded-md">
       <span className="flex gap-2 items-center">
         <HugeiconsIcon icon={CreditCardIcon} size={30} />
         <h4 className="font-semibold text-2xl">ReelBux Balance</h4>
