@@ -12,7 +12,10 @@ export default function Reelbux() {
         alt="ReelBux logo"
       />
       <p className="text-secondary-foreground">
-        Manage your balance and view transactions
+        Your ReelBux digital wallet is dollar-for-dollar credit you can use on
+        films, series, upgrades, and AI Creator tools. <br /> You can even
+        transfer your Distro sales into ReelBux and keep your funds ready for
+        what you want next.
       </p>
       <ReelbuxBalanceStats />
       <TransactionHistory />

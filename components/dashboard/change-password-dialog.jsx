@@ -51,10 +51,9 @@ export default function ChangePasswordDialog() {
             />
           </div>
           <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
-            </DialogClose>
-            <Button type="submit">Save changes</Button>
+            <Button type="submit" className="w-full">
+              Save changes
+            </Button>
           </DialogFooter>
         </DialogContent>
       </form>
