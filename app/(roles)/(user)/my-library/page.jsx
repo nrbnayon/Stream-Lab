@@ -4,7 +4,7 @@ import MyLibraryStats from "@/components/dashboard/user/my-library/stats";
 export default function MyLibrary() {
   return (
     <>
-      <h2 className="text-4xl">My Library</h2>
+      <h2 className="text-4xl font-medium">My Library</h2>
       <p className="text-secondary-foreground">
         Your purchased and rented films
       </p>

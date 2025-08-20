@@ -1,4 +1,4 @@
-import { CreditCardValidationIcon, DashboardSquare03Icon, Film01Icon, MoneySend02Icon, PlayCircleIcon, PlayListIcon, Settings02Icon, Upload01Icon, UserGroupIcon, } from "@hugeicons/core-free-icons/index";
+import { CreditCardValidationIcon, DashboardSquare03Icon, File02Icon, Film01Icon, Image03Icon, MoneySend02Icon, PlayCircleIcon, PlayListIcon, Settings02Icon, Upload01Icon, UserGroupIcon, Video01Icon, } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 
 const loginAs = ["Viewer", "Film Maker"];
@@ -257,5 +257,29 @@ const sidebarLinks = {
 };
 
 
+const aiGenerationCards = [
+   {
+      icon: <HugeiconsIcon icon={Video01Icon} />,
+      title: "Video Generate",
+      description: "Create videos from text description",
+      btnText: "Generate Video",
+      href: "/ai-creator-lab/generate-video",
+   },
+   {
+      icon: <HugeiconsIcon icon={Image03Icon} />,
+      title: "Image Generate",
+      description: "Create image from text description",
+      btnText: "Generate Image",
+      href: "/ai-creator-lab/generate-image",
+   },
+   {
+      icon: <HugeiconsIcon icon={File02Icon} />,
+      title: "Analyzing script",
+      description: "Create script for your movie",
+      btnText: "Analyze Script",
+      href: "/ai-creator-lab/analyze-script",
+   },
+]
 
-export { loginAs, moviesData, sidebarLinks };
+
+export { loginAs, moviesData, sidebarLinks, aiGenerationCards };
