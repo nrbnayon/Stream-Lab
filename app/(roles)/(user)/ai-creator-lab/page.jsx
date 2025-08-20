@@ -1,10 +1,7 @@
 import GenerationCards from "@/components/dashboard/user/ai-creator-lab/generation-cards";
 import RecentGeneration from "@/components/dashboard/user/ai-creator-lab/recent-generation";
 import RemainingGenerations from "@/components/dashboard/user/ai-creator-lab/remaining-generations";
-import { Button } from "@/components/ui/button";
-import { Crown03Icon } from "@hugeicons/core-free-icons/index";
-import { HugeiconsIcon } from "@hugeicons/react";
-import Link from "next/link";
+import UpgradePlan from "@/components/dashboard/user/ai-creator-lab/subscriptions/upgrade-plan";
 
 export default function AICreatorLab() {
   return (
@@ -17,12 +14,7 @@ export default function AICreatorLab() {
           </p>
         </span>
         {/* TODO: render the button condionally */}
-        <Link href="/ai-creator-lab/upgrade-plan">
-          <Button>
-            <HugeiconsIcon icon={Crown03Icon} />
-            Upgrade Plan
-          </Button>
-        </Link>
+        <UpgradePlan />
       </div>
 
       <RemainingGenerations />

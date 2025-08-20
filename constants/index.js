@@ -1,4 +1,4 @@
-import { CreditCardValidationIcon, DashboardSquare03Icon, File02Icon, Film01Icon, Image03Icon, MoneySend02Icon, PlayCircleIcon, PlayListIcon, Settings02Icon, Upload01Icon, UserGroupIcon, Video01Icon, } from "@hugeicons/core-free-icons/index";
+import { CreditCardValidationIcon, CrownIcon, DashboardSquare03Icon, File02Icon, Film01Icon, Image03Icon, MoneySend02Icon, PlayCircleIcon, PlayListIcon, Settings02Icon, StarIcon, Upload01Icon, UserGroupIcon, Video01Icon, ZapIcon, } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 
 const loginAs = ["Viewer", "Film Maker"];
@@ -281,5 +281,50 @@ const aiGenerationCards = [
    },
 ]
 
+const subscriptionPlans = [
+   {
+      name: "Basic",
+      icon: <HugeiconsIcon icon={StarIcon} />,
+      price: 9.99,
+      isHighlighted: false,
+      features: [
+         "200 AI generation per month",
+         "Video generation up to 2 minutes",
+         "Image generation up to 2048x2048",
+         "Advance script templets",
+         "Priority support",
+         "Commercial usage rights",
+      ],
+   },
+   {
+      name: "Pro",
+      icon: <HugeiconsIcon icon={ZapIcon} />,
+      price: 19.99,
+      isHighlighted: true,
+      features: [
+         "200 AI generation per month",
+         "Video generation up to 2 minutes",
+         "Image generation up to 2048x2048",
+         "Advance script templets",
+         "Priority support",
+         "Commercial usage rights",
+      ],
+   },
+   {
+      name: "Enterprise",
+      icon: <HugeiconsIcon icon={CrownIcon} />,
+      price: 49.99,
+      isHighlighted: false,
+      features: [
+         "200 AI generation per month",
+         "Video generation up to 2 minutes",
+         "Image generation up to 2048x2048",
+         "Advance script templets",
+         "Priority support",
+         "Commercial usage rights",
+      ],
+   },
+];
 
-export { loginAs, moviesData, sidebarLinks, aiGenerationCards };
+
+export { loginAs, moviesData, sidebarLinks, aiGenerationCards, subscriptionPlans };
