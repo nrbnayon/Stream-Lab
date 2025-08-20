@@ -1,3 +1,13 @@
+import MoviesTable from "@/components/dashboard/user/my-titles/movies-table";
+import MyTitlesStats from "@/components/dashboard/user/my-titles/my-titles-stats";
+
 export default function MyFilms() {
-  return <div>MyFilkmms</div>;
+  return (
+    <>
+      <h2 className="text-4xl">My Titles</h2>
+      <p className="text-secondary-foreground">Manage your films here</p>
+      <MyTitlesStats />
+      <MoviesTable />
+    </>
+  );
 }

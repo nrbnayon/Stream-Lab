@@ -6,7 +6,7 @@ export default function MyLibrary() {
     <>
       <h2 className="text-4xl">My Library</h2>
       <p className="text-secondary-foreground">
-        Your purchased and rented films{" "}
+        Your purchased and rented films
       </p>
       <MyLibraryStats />
 

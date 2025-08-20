@@ -32,6 +32,7 @@ export default function PaymentDialog({
   apiEndPoint,
 }) {
   const pathName = usePathname();
+
   return (
     <Dialog>
       <DialogTrigger>{triggerBtn}</DialogTrigger>
@@ -70,15 +71,15 @@ export default function PaymentDialog({
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem
-                  value={pathName.startsWith("reelbux") ? "distro" : "reelbux"}
-                  id={pathName.startsWith("reelbux") ? "distro" : "reelbux"}
+                  value={pathName.startsWith("/reelbux") ? "distro" : "reelbux"}
+                  id={pathName.startsWith("/reelbux") ? "distro" : "reelbux"}
                 />
                 <Label
                   htmlFor={
-                    pathName.startsWith("reelbux") ? "distro" : "reelbux"
+                    pathName.startsWith("/reelbux") ? "distro" : "reelbux"
                   }
                 >
-                  {pathName.startsWith("reelbux") ? "Distro" : "ReelBux"}
+                  {pathName.startsWith("/reelbux") ? "Distro" : "ReelBux"}
                 </Label>
               </div>
             </RadioGroup>
