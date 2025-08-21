@@ -263,21 +263,21 @@ const aiGenerationCards = [
       title: "Video Generate",
       description: "Create videos from text description",
       btnText: "Generate Video",
-      href: "/ai-creator-lab/generate-video",
+      href: "/ai-creator-lab/generate-and-analyze?tab=video",
    },
    {
       icon: <HugeiconsIcon icon={Image03Icon} />,
       title: "Image Generate",
       description: "Create image from text description",
       btnText: "Generate Image",
-      href: "/ai-creator-lab/generate-image",
+      href: "/ai-creator-lab/generate-and-analyze?tab=image",
    },
    {
       icon: <HugeiconsIcon icon={File02Icon} />,
       title: "Analyzing script",
       description: "Create script for your movie",
       btnText: "Analyze Script",
-      href: "/ai-creator-lab/analyze-script",
+      href: "/ai-creator-lab/generate-and-analyze?tab=script",
    },
 ]
 
