@@ -2,6 +2,7 @@
 
 import AiInput from "@/components/dashboard/user/ai-creator-lab/generate-and-analyze/ai-input";
 import TabNavigation from "@/components/dashboard/user/ai-creator-lab/generate-and-analyze/tab-navigation";
+import RecentGeneration from "@/components/dashboard/user/ai-creator-lab/recent-generation";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
@@ -26,6 +27,8 @@ export default function GenerateAndAnalyzePage() {
       <TabNavigation activeTab={activeTab} handleTabChange={handleTabChange} />
       {/* AI input */}
       <AiInput activeTab={activeTab} />
+      {/* Recent Generation */}
+      <RecentGeneration />
     </div>
   );
 }

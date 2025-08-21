@@ -326,5 +326,35 @@ const subscriptionPlans = [
    },
 ];
 
+const genres = [
+   {
+      value: "mystery",
+      label: "Mystery",
+   },
+   {
+      value: "romance",
+      label: "Romance",
+   },
+   {
+      value: "fantasy",
+      label: "Fantasy",
+   },
+   {
+      value: "adventure",
+      label: "Adventure",
+   },
+   {
+      value: "sci-fi",
+      label: "Sci-Fi",
+   },
+   {
+      value: "thriller",
+      label: "Thriller",
+   },
+   {
+      value: "action",
+      label: "Action",
+   },
+]
 
-export { loginAs, moviesData, sidebarLinks, aiGenerationCards, subscriptionPlans };
+export { loginAs, moviesData, sidebarLinks, aiGenerationCards, subscriptionPlans, genres };

@@ -5,6 +5,7 @@ import { Input } from "./ui/input";
 import { useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ViewIcon, ViewOffSlashIcon } from "@hugeicons/core-free-icons/index";
+import { Label } from "./ui/label";
 
 export default function InputField({
   name = "",
@@ -20,9 +21,9 @@ export default function InputField({
 }) {
   const [showPassword, setShowPassword] = useState(false);
   return (
-    <>
+    <div>
       {/* label if exist */}
-      {label && <label className="text-lg font-medium -mb-3">{label}</label>}
+      {label && <Label>{label}</Label>}
       <div className={cn("relative", className)}>
         {/* left icon if applicable */}
         {leftIcon && (
@@ -69,6 +70,6 @@ export default function InputField({
           </span>
         )}
       </div>
-    </>
+    </div>
   );
 }
