@@ -10,7 +10,7 @@ import {
 
 export default function TransactionHistory() {
   return (
-    <div className="my-8 bg-secondary py-10 px-5 rounded-md">
+    <div className="my-5 bg-secondary py-10 px-5 rounded-md">
       <h3 className="text-2xl font-medium">Transaction History</h3>
       <p className="text-secondary-foreground">
         View your transaction history here

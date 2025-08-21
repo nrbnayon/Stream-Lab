@@ -9,7 +9,6 @@ export default function MyLibrary() {
         Your purchased and rented films
       </p>
       <MyLibraryStats />
-
       {/* TODO: fetch and pass data as para */}
       <PurchasedMovies />
     </>

@@ -1,3 +1,14 @@
+import DistroStats from "@/components/dashboard/user/distro/stats";
+
 export default function Distro() {
-  return <div>Distro</div>;
+  return (
+    <>
+      <h2 className="text-4xl font-medium">Distro Panel</h2>
+      <p className="text-secondary-foreground">
+        Earn money by sharing films you love
+      </p>
+
+      <DistroStats />
+    </>
+  );
 }

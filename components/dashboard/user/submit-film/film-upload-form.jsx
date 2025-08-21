@@ -32,10 +32,10 @@ export default function FilmUploadForm() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-    console.log({ ...data, genre: selectedGenre });
+    // console.log({ ...data, genre: selectedGenre });
   };
   return (
-    <form className="my-5 space-y-10" onSubmit={handleFilmUpload}>
+    <form className="my-5 space-y-5" onSubmit={handleFilmUpload}>
       {/* Film Information Card */}
       <Card>
         <CardHeader>

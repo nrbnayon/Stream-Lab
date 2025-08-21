@@ -7,7 +7,6 @@ export default function SubmitFilm() {
       <p className="text-secondary-foreground">
         Share your creation with the world
       </p>
-
       <FilmUploadForm />
     </div>
   );

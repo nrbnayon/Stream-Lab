@@ -1,6 +1,6 @@
 export default function MyLibraryStats() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-10">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 my-5">
       <div className="bg-secondary text-center py-10 rounded-md px-2 space-y-1">
         <h4 className="text-2xl font-medium text-secondary-foreground">
           Purchased

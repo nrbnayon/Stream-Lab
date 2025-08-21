@@ -19,7 +19,7 @@ export default function RecentGeneration() {
     //
   }, [activeTab]);
   return (
-    <Card>
+    <Card className="my-5">
       <CardHeader>
         <CardTitle>Recent Generations</CardTitle>
         <CardDescription>Recently generated content</CardDescription>
