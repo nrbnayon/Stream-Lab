@@ -3,22 +3,30 @@
 import AiInput from "@/components/dashboard/user/ai-creator-lab/generate-and-analyze/ai-input";
 import TabNavigation from "@/components/dashboard/user/ai-creator-lab/generate-and-analyze/tab-navigation";
 import RecentGeneration from "@/components/dashboard/user/ai-creator-lab/recent-generation";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useCallback } from "react";
+import { useRouter } from "next/navigation";
+import { Suspense, useCallback, useEffect, useState } from "react";
 
 export default function GenerateAndAnalyzePage() {
-  const searchParams = useSearchParams();
-  const activeTab = searchParams.get("tab") || "video";
+  const [activeTab, setActiveTab] = useState("video");
   const router = useRouter();
 
-  // NOTE: update if query changes
+  // Get tab from query params manually
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      setActiveTab(params.get("tab") || "video");
+    }
+  }, []);
+
+  // Update query params when tab changes
   const handleTabChange = useCallback(
     (tab) => {
-      const params = new URLSearchParams(searchParams.toString());
+      setActiveTab(tab);
+      const params = new URLSearchParams(window.location.search);
       params.set("tab", tab);
       router.push(`/ai-creator-lab/generate-and-analyze?${params.toString()}`);
     },
-    [router, searchParams]
+    [router]
   );
 
   return (
@@ -29,9 +37,9 @@ export default function GenerateAndAnalyzePage() {
           activeTab={activeTab}
           handleTabChange={handleTabChange}
         />
-        {/* AI input */}
-        <AiInput activeTab={activeTab} />
       </Suspense>
+      {/* AI input */}
+      <AiInput activeTab={activeTab} />
       {/* Recent Generation */}
       <RecentGeneration />
     </div>
