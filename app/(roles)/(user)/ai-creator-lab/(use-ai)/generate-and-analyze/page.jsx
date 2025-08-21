@@ -29,9 +29,9 @@ export default function GenerateAndAnalyzePage() {
           activeTab={activeTab}
           handleTabChange={handleTabChange}
         />
+        {/* AI input */}
+        <AiInput activeTab={activeTab} />
       </Suspense>
-      {/* AI input */}
-      <AiInput activeTab={activeTab} />
       {/* Recent Generation */}
       <RecentGeneration />
     </div>
