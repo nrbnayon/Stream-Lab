@@ -1,3 +1,4 @@
+import DistroPanel from "@/components/dashboard/user/distro/distro-panel";
 import DistroStats from "@/components/dashboard/user/distro/stats";
 
 export default function Distro() {
@@ -9,6 +10,7 @@ export default function Distro() {
       </p>
 
       <DistroStats />
+      <DistroPanel />
     </>
   );
 }
