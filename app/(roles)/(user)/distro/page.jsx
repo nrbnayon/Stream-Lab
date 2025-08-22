@@ -1,6 +1,7 @@
 import DistroPanel from "@/components/dashboard/user/distro/distro-panel";
 import QuickShare from "@/components/dashboard/user/distro/quick-share";
 import DistroStats from "@/components/dashboard/user/distro/stats";
+import YourPerformance from "@/components/dashboard/user/distro/your-performance";
 
 export default function Distro() {
   return (
@@ -13,6 +14,7 @@ export default function Distro() {
       <DistroStats />
       <DistroPanel />
       <QuickShare />
+      <YourPerformance />
     </>
   );
 }
