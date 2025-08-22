@@ -11,10 +11,12 @@ export default function ReelbuxBalanceStats() {
         <h4 className="font-semibold text-2xl">ReelBux Balance</h4>
       </span>
       <div className="mt-5 flex justify-between items-end">
-        <h2 className="text-5xl font-black">$156.52</h2>
+        <h2 className="text-5xl font-black grow w-full">$156.52</h2>
         <PaymentDialog
+          inputDisabled={false}
+          intention="add"
           dialogTitle="Add Fund"
-          payBtnText="Add"
+          intentionBtnText="Add"
           //  TODO: pass the api endpoint from here
           apiEndPoint=""
           triggerBtn={

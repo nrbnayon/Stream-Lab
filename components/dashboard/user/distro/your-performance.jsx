@@ -14,7 +14,7 @@ export default function YourPerformance() {
         <CardTitle>Your Performance</CardTitle>
         <CardDescription>Track your Distro sharing results</CardDescription>
       </CardHeader>
-      <CardContent className="">
+      <CardContent>
         <PerformanceTable />
       </CardContent>
     </Card>

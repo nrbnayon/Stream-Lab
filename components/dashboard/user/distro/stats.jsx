@@ -5,6 +5,7 @@ import {
   MouseLeftClick06Icon,
 } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
+import PaymentDialog from "../../payment-dialog";
 
 export default function DistroStats() {
   return (
@@ -30,7 +31,18 @@ export default function DistroStats() {
         </h4>
         <h2 className="text-4xl font-black text-green-500">$25.50</h2>
         <div className="grid grid-cols-2 gap-5">
-          <Button variant="ghost">Move to Reelbux</Button>
+          <PaymentDialog
+            triggerBtn={
+              <Button variant="ghost" className="w-full" asChild>
+                <span>Move to Reelbux</span>
+              </Button>
+            }
+            dialogTitle="Transfer money to ReelBux"
+            intentionBtnText="Transfer"
+            dialogDescription="Add money to your Reelbux wallet"
+            inputDisabled={false}
+            intention="transfer"
+          />
           <Button variant="ghost">Withdraw</Button>
         </div>
       </div>

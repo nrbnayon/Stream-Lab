@@ -14,6 +14,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { Share01Icon, Time04Icon } from "@hugeicons/core-free-icons/index";
 import { Button } from "./ui/button";
 import TrailerPopup from "./trailer-popup";
+import PaymentDialog from "./dashboard/payment-dialog";
 
 export default function MovieCard({ movie }) {
   const {
@@ -76,11 +77,32 @@ export default function MovieCard({ movie }) {
       </CardContent>
 
       {/* Footer | button & share */}
-      <CardFooter className="flex gap-3 justify-between">
-        <Button className="grow">Rent</Button>
-        <Button className="grow" variant="outline">
-          Buy
-        </Button>
+      <CardFooter className="flex gap-2">
+        <div className="grid grid-cols-2 w-full gap-2">
+          <PaymentDialog
+            dialogTitle={`Rent  –  ${title}`}
+            inputValue={``}
+            triggerBtn={
+              <Button className="w-full" asChild>
+                <span>Rent</span>
+              </Button>
+            }
+            intention="rent"
+            intentionBtnText="Pay"
+          />
+          <PaymentDialog
+            dialogTitle={`Buy – ${title}`}
+            inputValue={``}
+            triggerBtn={
+              <Button className="w-full" variant="outline" asChild>
+                <span>Buy</span>
+              </Button>
+            }
+            intention="buy"
+            intentionBtnText="Pay"
+          />
+        </div>
+
         <Button size="icon" variant="ghost" onClick={handleShare}>
           <HugeiconsIcon icon={Share01Icon} />
         </Button>

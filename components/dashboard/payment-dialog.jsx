@@ -1,5 +1,4 @@
 "use client";
-import InputField from "@/components/input-field";
 import {
   Dialog,
   DialogContent,
@@ -22,70 +21,109 @@ import {
   SelectItem,
   SelectTrigger,
 } from "../ui/select";
+import { Input } from "../ui/input";
+import { useState } from "react";
 
 export default function PaymentDialog({
+  intention = "",
   triggerBtn,
-  payBtnText,
+  intentionBtnText = "",
   dialogTitle = "",
-  inputDisabled,
+  dialogDescription = "",
+  inputDisabled = true,
   inputValue,
   apiEndPoint,
 }) {
   const pathName = usePathname();
+  const [amount, setAmount] = useState(inputValue);
+  const [errorMessage, setErrorMessage] = useState("");
+  const systemPayOption = intention === "add" ? "Distro" : "ReelBux";
 
   return (
     <Dialog>
       <DialogTrigger>{triggerBtn}</DialogTrigger>
       <DialogContent>
         <form>
-          <DialogHeader className="mb-2">
+          <DialogHeader className="my-3">
             <DialogTitle> {dialogTitle} </DialogTitle>
-          </DialogHeader>
-          <div>
-            <h4 className="font-medium">Amount ($)</h4>
-            <InputField
-              type="number"
-              inputDisabled={inputDisabled}
-              defaultValue={inputValue}
-              min={1}
-            />
-            {dialogTitle.includes("Rent") && (
-              <div>
-                <h4 className="font-medium">Rent Time</h4>
-                <Select>
-                  <SelectTrigger></SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value=""></SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </div>
+            {dialogDescription && (
+              <DialogDescription>{dialogDescription}</DialogDescription>
             )}
-            <RadioGroup className="my-3" defaultValue="card">
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="card" id="card" />
-                <Label htmlFor="card">
-                  <HugeiconsIcon icon={MasterCardIcon} /> Card
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem
-                  value={pathName.startsWith("/reelbux") ? "distro" : "reelbux"}
-                  id={pathName.startsWith("/reelbux") ? "distro" : "reelbux"}
+          </DialogHeader>
+          <div className="space-y-3">
+            {/* NOTE: Amount and rent time */}
+            <div className="flex gap-3">
+              {/* NOTE: Amount Field */}
+              <div className="grow">
+                <Label>Amount ($)</Label>
+                <Input
+                  type="number"
+                  disabled={inputDisabled}
+                  min={1}
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
                 />
-                <Label
-                  htmlFor={
-                    pathName.startsWith("/reelbux") ? "distro" : "reelbux"
-                  }
-                >
-                  {pathName.startsWith("/reelbux") ? "Distro" : "ReelBux"}
-                </Label>
               </div>
-            </RadioGroup>
+
+              {/* NOTE: If for rent - select rent time */}
+              {intention === "rent" && (
+                <div>
+                  <Label>Rent Time</Label>
+                  <Select>
+                    <SelectTrigger>Select time</SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value="4">4 hours</SelectItem>
+                        <SelectItem value="6">6 hours</SelectItem>
+                        <SelectItem value="12">12 hours</SelectItem>
+                        <SelectItem value="24">24 hours</SelectItem>
+                        <SelectItem value="48">48 hours</SelectItem>
+                        <SelectItem value="72">72 hours</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
+            </div>
+
+            {/* NOTE: Show source if not case is transfer  */}
+            {intention !== "transfer" && (
+              <RadioGroup
+                // className="my-3"
+                defaultValue={systemPayOption.toLowerCase()}
+              >
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="card" id="card" />
+                  <Label htmlFor="card"> Card</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="paypal" id="paypal" />
+                  <Label htmlFor="paypal"> PayPal</Label>
+                </div>
+                {/* NOTE: System Pay Option */}
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem
+                    value={systemPayOption.toLowerCase()}
+                    id={systemPayOption}
+                  />
+                  <Label htmlFor={systemPayOption}>{systemPayOption}</Label>
+                </div>
+              </RadioGroup>
+            )}
+
+            {/* NOTE: Show error here */}
+            {/* TODO: change condition */}
+            {intention === "rent" && (
+              <p className="text-destructive text-center">
+                You don&apos;t have enough balance
+              </p>
+            )}
           </div>
           <DialogFooter>
-            <Button className="w-full">{payBtnText}</Button>
+            {/* TODO: change disable condition */}
+            <Button className="w-full my-3" disabled={errorMessage}>
+              {intentionBtnText}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>
