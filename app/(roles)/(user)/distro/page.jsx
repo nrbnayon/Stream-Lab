@@ -1,4 +1,5 @@
 import DistroPanel from "@/components/dashboard/user/distro/distro-panel";
+import QuickShare from "@/components/dashboard/user/distro/quick-share";
 import DistroStats from "@/components/dashboard/user/distro/stats";
 
 export default function Distro() {
@@ -11,6 +12,7 @@ export default function Distro() {
 
       <DistroStats />
       <DistroPanel />
+      <QuickShare />
     </>
   );
 }

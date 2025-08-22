@@ -5,7 +5,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import { Unlink04Icon } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 import DistroCode from "./distro-code";
