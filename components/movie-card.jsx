@@ -15,9 +15,12 @@ import { Share01Icon, Time04Icon } from "@hugeicons/core-free-icons/index";
 import { Button } from "./ui/button";
 import TrailerPopup from "./trailer-popup";
 import PaymentDialog from "./dashboard/payment-dialog";
+import Link from "next/link";
+import WebShare from "./web-share";
 
-export default function MovieCard({ movie }) {
+export default function MovieCard({ movie, useLink = false }) {
   const {
+    id,
     title,
     thumbnail_url,
     duration,
@@ -26,28 +29,36 @@ export default function MovieCard({ movie }) {
     rent_price,
     type,
   } = movie;
-  const handleShare = async () => {
-    await webShare({
-      title,
-      // TODO: change the url
-      url: `${window.location.href}`,
-    });
-  };
+
   return (
     <Card className="w-full">
       <CardHeader>
         <div className="relative">
-          <Image
-            src={thumbnail_url}
-            alt={title}
-            width={200}
-            height={80}
-            className="w-full rounded-md h-44 object-cover"
-          />
+          {useLink ? (
+            <Link href={`/film/${id}`}>
+              <Image
+                src={thumbnail_url}
+                alt={title}
+                width={200}
+                height={80}
+                className="w-full rounded-md h-44 object-cover"
+              />
+            </Link>
+          ) : (
+            <Image
+              src={thumbnail_url}
+              alt={title}
+              width={200}
+              height={80}
+              className="w-full rounded-md h-44 object-cover"
+            />
+          )}
           {/* Trailer button and popup */}
           <TrailerPopup movie={movie} />
         </div>
-        <CardTitle className="text-xl">{title}</CardTitle>
+        <CardTitle className="text-xl">
+          {useLink ? <Link href={`/film/${id}`}>{title}</Link> : title}
+        </CardTitle>
 
         {/* Badge and Duration */}
         <div className="flex gap-5">
@@ -103,9 +114,7 @@ export default function MovieCard({ movie }) {
           />
         </div>
 
-        <Button size="icon" variant="ghost" onClick={handleShare}>
-          <HugeiconsIcon icon={Share01Icon} />
-        </Button>
+        <WebShare title={title} url={`${window.location.href}`} />
       </CardFooter>
     </Card>
   );

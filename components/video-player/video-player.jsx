@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
@@ -5,7 +6,7 @@ import "videojs-contrib-quality-levels";
 import "videojs-hls-quality-selector";
 import "videojs-hotkeys";
 
-export default function VideoPlayer({ src }) {
+export default function VideoPlayer({ src, className }) {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
 
@@ -78,7 +79,11 @@ export default function VideoPlayer({ src }) {
   }, [playerRef]);
   return (
     <div data-vjs-player>
-      <div ref={videoRef} tabIndex="0" />
+      <div
+        ref={videoRef}
+        tabIndex="0"
+        className={cn("rounded-md overflow-clip", className)}
+      />
     </div>
   );
 }
