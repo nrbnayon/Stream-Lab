@@ -129,6 +129,7 @@ export default function FilmUploadForm() {
               title="Upload your full film"
               setContent={setFullFilm}
             />
+            {/* Upload thumbnail */}
             <UploadContent
               content={thumbnail}
               maxSize={20}

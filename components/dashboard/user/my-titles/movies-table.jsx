@@ -14,6 +14,7 @@ import {
 import { HugeiconsIcon } from "@hugeicons/react";
 import Link from "next/link";
 import SearchWithOptions from "../../search-with-options";
+import FilmEditDialog from "./edit-film/film-edit-dialog";
 
 export default function MoviesTable({
   userFilms = [
@@ -160,7 +161,16 @@ export default function MoviesTable({
                 <TableCell className="flex gap-1 justify-center">
                   {film.status === "Published" ? (
                     <>
-                      <HugeiconsIcon icon={PencilEdit02Icon} />
+                      <FilmEditDialog
+                        trigger={
+                          <HugeiconsIcon
+                            icon={PencilEdit02Icon}
+                            className="cursor-pointer"
+                          />
+                        }
+                        filmID={film.film_id}
+                      />
+
                       <Link href={`my-titles/analytics/${film.film_id}`}>
                         <HugeiconsIcon
                           icon={Chart03Icon}
