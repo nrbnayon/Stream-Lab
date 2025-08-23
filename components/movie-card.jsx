@@ -114,7 +114,7 @@ export default function MovieCard({ movie, useLink = false }) {
           />
         </div>
 
-        <WebShare title={title} url={`${window.location.href}`} />
+        <WebShare title={title} url={`affiliated link`} />
       </CardFooter>
     </Card>
   );
