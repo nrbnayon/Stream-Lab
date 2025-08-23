@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 // Swiper styles
 import "swiper/css";
+import "swiper/css/pagination";
 import "swiper/css/navigation";
 // custom CSS
 import "../../styles/swiper-carousel.css";
@@ -15,9 +16,12 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import NavBar from "./nav-bar";
+import { truncateText } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
-export default function HeroCarousel({ moviesData }) {
+export default function HeroCarousel({ moviesData, renderFor = "home" }) {
   const swiperRef = useRef(null);
+  const isMobile = useIsMobile();
 
   useGSAP(
     () => {
@@ -43,8 +47,12 @@ export default function HeroCarousel({ moviesData }) {
     { scope: swiperRef, dependencies: [] }
   );
   return (
-    <div className="h-dvh">
-      <NavBar />
+    <div
+      className={`relative ${
+        renderFor === "home" ? "lg:h-dvh" : "lg:h-[calc(100vh/5*3)] mt-5"
+      }`}
+    >
+      <NavBar renderFor={renderFor} />
       <Swiper
         ref={swiperRef}
         slidesPerView={1}
@@ -57,65 +65,62 @@ export default function HeroCarousel({ moviesData }) {
         modules={[Autoplay, Pagination]}
         className="h-full"
         pagination={{
-          el: "#custom-pagination",
           clickable: true,
-          renderBullet: (index, className) => {
-            const movie = moviesData[index];
-            return `
-              <div class="${className} cursor-pointer rounded-md overflow-hidden h-48 aspect-[3/4]">
-                <img
-                  src="${movie.thumbnail_url}"
-                  alt="${movie.title}"
-                  class="w-full h-full object-cover"
-                />
-              </div>
-            `;
-          },
         }}
       >
         {moviesData.map((movie) => (
-          <SwiperSlide key={movie.id} className="px-14 bg-cover bg-center">
+          <SwiperSlide
+            key={movie.id}
+            className="h-full px-5 xl:px-0 py-20 md:py-12"
+          >
             <Image
               alt={movie.title}
               src={movie.thumbnail_url}
               fill
               priority
-              className="object-cover mask-carousel -z-10"
+              className="object-cover mask-carousel -z-10 h-full w-full"
             />
 
             {/* movie details */}
-            <div
-              className="space-y-3 relative top-1/2 -translate-y-1/2 container"
-              id="slide-details"
-            >
-              <h2 className="font-bold text-5xl">{movie.title}</h2>
-              <h4 className="text-3xl font-semibold">
-                {movie.genre.join(", ")}
-              </h4>
-              <p className="text-secondary-foreground max-w-2xl">
-                {movie.logline}
-              </p>
+            <div className="h-full grid items-center mt-10">
+              <div
+                className={`space-y-2 lg:space-y-3 ${
+                  renderFor === "home" ? "container" : "mx-5"
+                }`}
+                id="slide-details"
+              >
+                <h2 className="font-bold text-3xl md:text-4xl lg:text-5xl">
+                  {movie.title}
+                </h2>
+                <h4 className="text-xl md:text-2xl lg:text-3xl font-semibold">
+                  {movie.genre.join(", ")}
+                </h4>
+                <p className=" text-sm md:text-base text-secondary-foreground max-w-2xl">
+                  {isMobile ? truncateText(movie.logline) : movie.logline}
+                </p>
 
-              <div className="flex gap-5 mt-5">
-                <Button className="rounded-full px-6">
-                  <HugeiconsIcon icon={PlayIcon} size={25} />
-                  Watch Now
-                </Button>
+                <div className="flex gap-2 md:gap-5 mt-5">
+                  <Button
+                    className="rounded-full md:px-6"
+                    size={isMobile ? "sm" : "default"}
+                  >
+                    <HugeiconsIcon icon={PlayIcon} size={25} />
+                    Watch Now
+                  </Button>
 
-                <Button className="rounded-full px-8" variant="outline">
-                  Trailer
-                </Button>
+                  <Button
+                    className="rounded-full md:px-8 px-4"
+                    variant="outline"
+                    size={isMobile ? "sm" : "default"}
+                  >
+                    Trailer
+                  </Button>
+                </div>
               </div>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
-
-      {/* Custom Pagination Container */}
-      <div
-        className="flex gap-2 items-center absolute bottom-5 z-20 left-1/2 -translate-x-1/2"
-        id="custom-pagination"
-      ></div>
     </div>
   );
 }

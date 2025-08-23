@@ -1,7 +1,6 @@
 import RelatedMovies from "@/components/dashboard/user/film-details/related-movies";
 import VideoPlayerClient from "@/components/dashboard/user/film-details/video-player-client";
 import TrailerPopup from "@/components/trailer-popup";
-import { Button } from "@/components/ui/button";
 import WebShare from "@/components/web-share";
 
 export default async function FilmDetails({ params }) {

@@ -1,23 +1,10 @@
 .swiper-pagination-bullet {
-  transition: transform 0.3s, border-color 0.3s, filter 0.3s;
-  border: 2px solid transparent;
-  filter: brightness(0.65);
-  transform: scaleY(1);
-  transform-origin: bottom;
-  -webkit-transition: transform 0.3s, border-color 0.3s, filter 0.3s;
-  -moz-transition: transform 0.3s, border-color 0.3s, filter 0.3s;
-  -ms-transition: transform 0.3s, border-color 0.3s, filter 0.3s;
-  -o-transition: transform 0.3s, border-color 0.3s, filter 0.3s;
-  -webkit-filter: brightness(0.65);
+  width: 16px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--color-secondary-foreground);
 }
 
 .swiper-pagination-bullet-active {
-  border-color: var(--primary);
-  transform: scaleY(1.05);
-  filter: brightness(1);
-  -webkit-filter: brightness(1);
-  -webkit-transform: scaleY(1.05);
-  -moz-transform: scaleY(1.05);
-  -ms-transform: scaleY(1.05);
-  -o-transform: scaleY(1.05);
+background-color: var(--color-primary);
 }

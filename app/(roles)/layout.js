@@ -8,7 +8,7 @@ export default function DashboardLayout({ children }) {
    return (
       <SidebarProvider>
          <DashboardSidebar />
-         <SidebarInset>
+         <SidebarInset className="overflow-hidden">
             <header className="m-2">
                <SidebarTrigger />
             </header>

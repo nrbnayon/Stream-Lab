@@ -11,7 +11,7 @@ export default function UserDashboard() {
       </p>
 
       {/* Carousel */}
-
+      <HeroCarousel moviesData={moviesData} renderFor="dashboard" />
       {/* Trending Movie */}
       <TrendingNow />
     </div>

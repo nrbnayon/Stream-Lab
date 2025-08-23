@@ -17,7 +17,7 @@ export default function SearchMovie({ className }) {
     <div className={cn("relative", className)}>
       <Input
         placeholder="Search Films"
-        className="pl-10"
+        className="pl-10!"
         type="text"
         onChange={(e) => setSearchValue(e.target.value)}
       />
