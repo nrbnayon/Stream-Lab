@@ -6,7 +6,10 @@ import { cn } from "@/lib/utils";
 
 function Table({ className, ...props }) {
   return (
-    <div data-slot="table-container" className="relative w-fulloverflow-x-auto">
+    <div
+      data-slot="table-container"
+      className="relative w-fulloverflow-x-auto text-sm lg:text-base"
+    >
       <table
         data-slot="table"
         className={cn(

@@ -17,7 +17,7 @@ export default function TransactionHistory() {
       </p>
 
       {/* rendering Table */}
-      <Table className="mt-5">
+      <Table className="my-5">
         <TableHeader>
           <TableRow>
             <TableHead>Source</TableHead>

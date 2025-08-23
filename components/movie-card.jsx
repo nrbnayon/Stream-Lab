@@ -17,6 +17,7 @@ import TrailerPopup from "./trailer-popup";
 import PaymentDialog from "./dashboard/payment-dialog";
 import Link from "next/link";
 import WebShare from "./web-share";
+import PaymentTriggerBtn from "./dashboard/payment-trigger-btn";
 
 export default function MovieCard({ movie, useLink = false }) {
   const {
@@ -94,9 +95,9 @@ export default function MovieCard({ movie, useLink = false }) {
             dialogTitle={`Rent  –  ${title}`}
             inputValue={``}
             triggerBtn={
-              <Button className="w-full" asChild>
+              <PaymentTriggerBtn className="w-full" asChild>
                 <span>Rent</span>
-              </Button>
+              </PaymentTriggerBtn>
             }
             intention="rent"
             intentionBtnText="Pay"
@@ -105,9 +106,9 @@ export default function MovieCard({ movie, useLink = false }) {
             dialogTitle={`Buy – ${title}`}
             inputValue={``}
             triggerBtn={
-              <Button className="w-full" variant="outline" asChild>
+              <PaymentTriggerBtn className="w-full" variant="outline" asChild>
                 <span>Buy</span>
-              </Button>
+              </PaymentTriggerBtn>
             }
             intention="buy"
             intentionBtnText="Pay"

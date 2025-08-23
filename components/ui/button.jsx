@@ -3,6 +3,7 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-lg transition-all disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed shrink-0 outline-none focus-visible:border-ring aria-invalid:border-destructive cursor-pointer active:scale-[0.9]",
@@ -36,6 +37,7 @@ const buttonVariants = cva(
 
 function Button({ className, variant, size, asChild = false, ...props }) {
   const Comp = asChild ? Slot : "button";
+  const isMobile = useIsMobile();
 
   return (
     <Comp

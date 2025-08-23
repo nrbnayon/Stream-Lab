@@ -10,6 +10,7 @@ export default function Reelbux() {
         height={100}
         width={200}
         alt="ReelBux logo"
+        className="w-40 md:w-52 lg:w-60 mb-2"
       />
       <p className="text-secondary-foreground">
         Your ReelBux digital wallet is dollar-for-dollar credit you can use on
