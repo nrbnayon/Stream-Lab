@@ -6,8 +6,8 @@ import { moviesData } from "@/constants";
 export default function UserDashboard() {
   return (
     <div>
-      <h2 className="text-4xl">Welcome Back</h2>
-      <p className="text-muted-foreground text-lg">
+      <h2 className="text-2xl md:text-4xl">Welcome Back</h2>
+      <p className="text-muted-foreground text-base md:text-lg">
         Discover amazing films and earn rewards
       </p>
 
