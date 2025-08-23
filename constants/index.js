@@ -233,7 +233,7 @@ const sidebarLinks = {
    ],
    admin: [
       {
-         groupName: "Admin Tools",
+         groupName: "Admin Management",
          links: [
             { name: "Dashboard", href: "/admin/dashboard", icon: <HugeiconsIcon icon={DashboardSquare03Icon} /> },
             { name: "Users", href: "/admin/users", icon: <HugeiconsIcon icon={UserGroupIcon} /> },
