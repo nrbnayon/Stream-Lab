@@ -1,6 +1,7 @@
 import RelatedMovies from "@/components/dashboard/user/film-details/related-movies";
 import VideoPlayerClient from "@/components/dashboard/user/film-details/video-player-client";
 import TrailerPopup from "@/components/trailer-popup";
+import { Button } from "@/components/ui/button";
 import WebShare from "@/components/web-share";
 
 export default async function FilmDetails({ params }) {
@@ -43,8 +44,14 @@ export default async function FilmDetails({ params }) {
         </div>
 
         {/* Buttons */}
-        <div className="space-x-2">
-          <TrailerPopup absolute={false} />
+        <div className="space-x-2 flex items-center">
+          <TrailerPopup
+            triggerBtn={
+              <Button className="px-8" asChild>
+                <span>Trailer</span>
+              </Button>
+            }
+          />
           <WebShare url="url" title="Title" />
         </div>
       </section>

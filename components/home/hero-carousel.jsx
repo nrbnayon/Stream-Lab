@@ -18,6 +18,8 @@ import gsap from "gsap";
 import NavBar from "./nav-bar";
 import { truncateText } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
+import Link from "next/link";
+import TrailerPopup from "../trailer-popup";
 
 export default function HeroCarousel({ moviesData, renderFor = "home" }) {
   const swiperRef = useRef(null);
@@ -71,7 +73,9 @@ export default function HeroCarousel({ moviesData, renderFor = "home" }) {
         {moviesData.map((movie) => (
           <SwiperSlide
             key={movie.id}
-            className="h-full px-5 xl:px-0 py-20 md:py-12"
+            className={`h-full py-20 md:py-12 ${
+              renderFor === "home" ? "px-5 xl:px-0" : ""
+            }`}
           >
             <Image
               alt={movie.title}
@@ -85,7 +89,7 @@ export default function HeroCarousel({ moviesData, renderFor = "home" }) {
             <div className="h-full grid items-center mt-10">
               <div
                 className={`space-y-2 lg:space-y-3 ${
-                  renderFor === "home" ? "container" : "mx-5"
+                  renderFor === "home" ? "container" : ""
                 }`}
                 id="slide-details"
               >
@@ -99,22 +103,29 @@ export default function HeroCarousel({ moviesData, renderFor = "home" }) {
                   {isMobile ? truncateText(movie.logline) : movie.logline}
                 </p>
 
-                <div className="flex gap-2 md:gap-5 mt-5">
-                  <Button
-                    className="rounded-full md:px-6"
-                    size={isMobile ? "sm" : "default"}
-                  >
-                    <HugeiconsIcon icon={PlayIcon} size={25} />
-                    Watch Now
-                  </Button>
+                <div className="flex gap-2 items-center md:gap-5 mt-5">
+                  <Link href={`/film/${movie.id}`}>
+                    <Button
+                      className="rounded-full md:px-6"
+                      size={isMobile ? "sm" : "default"}
+                    >
+                      <HugeiconsIcon icon={PlayIcon} />
+                      Watch Now
+                    </Button>
+                  </Link>
 
-                  <Button
-                    className="rounded-full md:px-8 px-4"
-                    variant="outline"
-                    size={isMobile ? "sm" : "default"}
-                  >
-                    Trailer
-                  </Button>
+                  <TrailerPopup
+                    triggerBtn={
+                      <Button
+                        variant="outline"
+                        className="rounded-full px-4 md:px-6"
+                        size={isMobile ? "sm" : "default"}
+                        asChild
+                      >
+                        <span>Trailer</span>
+                      </Button>
+                    }
+                  />
                 </div>
               </div>
             </div>

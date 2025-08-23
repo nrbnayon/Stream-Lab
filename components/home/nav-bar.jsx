@@ -9,7 +9,7 @@ export default function NavBar({ renderFor }) {
   return (
     <div
       className={`flex items-center justify-between gap-2 md:gap-5 absolute w-full top-2 z-20 left-1/2 -translate-x-1/2 ${
-        renderFor === "home" ? "px-5 xl:px-0 container" : "px-3"
+        renderFor === "home" ? "px-5 xl:px-0 lg:container" : ""
       } `}
     >
       <Link href="/">
@@ -22,7 +22,7 @@ export default function NavBar({ renderFor }) {
       {/* Auth Buttons */}
       <div className="flex gap-3">
         <Link href="/signin" className="hidden md:block">
-          <Button variant="secondary">Sign In</Button>
+          <Button variant="outline">Sign In</Button>
         </Link>
         <Link href="/signup">
           <Button size={isMobile ? "sm" : "default"}>Sign Up</Button>

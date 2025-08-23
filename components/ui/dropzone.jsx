@@ -102,7 +102,7 @@ export const DropzoneContent = ({ children, className }) => {
   return (
     <div className={cn("flex flex-col items-center justify-center", className)}>
       <div className="flex items-center justify-center text-muted-foreground">
-        <HugeiconsIcon icon={ImageUploadIcon} size={50} />
+        <HugeiconsIcon icon={ImageUploadIcon} className="size-10 md:size-12" />
       </div>
       <p className="mt-2 w-full truncate font-medium text-sm">
         {src.length > maxLabelItems
@@ -147,7 +147,7 @@ export const DropzoneEmptyState = ({ children, className, title }) => {
   return (
     <div className={cn("flex flex-col items-center justify-center", className)}>
       <div className="flex items-center justify-center text-muted-foreground">
-        <HugeiconsIcon icon={ImageUploadIcon} size={50} />
+        <HugeiconsIcon icon={ImageUploadIcon} className="size-10 md:size-12" />
       </div>
       <p className="mt-2 w-full truncate text-wrap font-medium text-lg">
         {title ?? "Upload your file"}

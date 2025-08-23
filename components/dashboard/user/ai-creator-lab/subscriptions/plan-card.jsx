@@ -19,7 +19,11 @@ import { HugeiconsIcon } from "@hugeicons/react";
 export default function PlanCard({ plan, setPaymentMethod, paymentMethod }) {
   const { isHighlighted, icon, name, price, features } = plan;
   return (
-    <Card className={`${isHighlighted ? "border-primary" : ""} relative`}>
+    <Card
+      className={`${
+        isHighlighted ? "border-primary mt-3 md:mt-0 pt-7" : ""
+      } relative`}
+    >
       {isHighlighted && (
         <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground rounded-md h-8 px-3 flex items-center ">
           Most Popular

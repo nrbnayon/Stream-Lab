@@ -147,7 +147,7 @@ export default function FilmUploadForm() {
           <CardTitle>Pricing</CardTitle>
           <CardDescription>Set your film pricing</CardDescription>
         </CardHeader>
-        <CardContent className="grid md:grid-cols-2 gap-5">
+        <CardContent className="grid grid-cols-2 gap-3 md:gap-5">
           {/* title */}
           <InputField
             label="Rent Price ($)"

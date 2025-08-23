@@ -16,7 +16,7 @@ export default function QuickShare() {
           Generate Distro links for popular films
         </CardDescription>
       </CardHeader>
-      <CardContent className="grid md:grid-cols-3 gap-2">
+      <CardContent className="grid grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-5">
         {Array.from({ length: 3 }).map((_, i) => (
           <QuickShareCard key={i} />
         ))}

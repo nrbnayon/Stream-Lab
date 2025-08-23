@@ -26,7 +26,7 @@ export default function RecentGeneration() {
       </CardHeader>
       <CardContent>
         {/* Tab Buttons */}
-        <div className="flex gap-3 *:grow">
+        <div className="flex gap-2 md:gap-3 *:grow">
           <Button
             variant={activeTab === "video" ? "default" : "secondary"}
             onClick={() => setActiveTab("video")}

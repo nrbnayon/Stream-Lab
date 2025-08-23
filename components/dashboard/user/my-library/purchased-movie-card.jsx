@@ -79,7 +79,7 @@ export default function PurchasedMovieCard({ movie }) {
         <div className="flex gap-5">
           <Badge variant="secondary">{"Movie"}</Badge>
           <span className="text-secondary-foreground text-sm flex gap-2 items-center">
-            <HugeiconsIcon icon={Time04Icon} size={18} />
+            <HugeiconsIcon icon={Time04Icon} className="size-4" />
             {minutesToHours(214)}
           </span>
         </div>

@@ -6,9 +6,9 @@ import UpgradePlan from "@/components/dashboard/user/ai-creator-lab/subscription
 export default function AICreatorLab() {
   return (
     <>
-      <div className="flex gap-5 justify-between items-center">
+      <div className="flex gap-5 justify-between items-center flex-wrap">
         <span>
-          <h2 className="text-4xl font-medium">AI Creator Lab</h2>
+          <h2 className="text-3xl md:text-4xl font-medium">AI Creator Lab</h2>
           <p className="text-secondary-foreground">
             Create amazing contant with AI Assistance
           </p>

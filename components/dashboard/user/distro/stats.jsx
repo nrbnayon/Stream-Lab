@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   CreditCardIcon,
@@ -10,31 +11,43 @@ import PaymentTriggerBtn from "../../payment-trigger-btn";
 
 export default function DistroStats() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 my-5">
-      <div className="bg-secondary px-5 py-10 rounded-md space-y-3 content-center">
-        <h4 className="text-xl text-secondary-foreground flex justify-between items-center">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3 lg:gap-5 my-5">
+      {/* Total Earning */}
+      <div className="bg-secondary px-3 md:px-5 py-5 md:py-10 rounded-md space-y-1 md:space-y-3 content-center">
+        <h4 className="text-xl md:text-2xl text-secondary-foreground flex justify-between items-center">
           Total Earnings
           <HugeiconsIcon icon={Dollar02Icon} />
         </h4>
-        <h2 className="text-4xl font-black text-green-500">$25.50</h2>
+        <h2 className="text-3xl md:text-4xl font-black text-green-500">
+          $25.50
+        </h2>
       </div>
-      <div className="bg-secondary py-10 rounded-md px-5 space-y-3 content-center">
-        <h4 className="text-xl text-secondary-foreground flex justify-between items-center">
+      {/* Total Clicks */}
+      <div className="bg-secondary px-3 md:px-5 py-5 md:py-10 rounded-md space-y-1 md:space-y-3 content-center">
+        <h4 className="text-xl md:text-2xl text-secondary-foreground flex justify-between items-center">
           Total Clicks
           <HugeiconsIcon icon={MouseLeftClick06Icon} />
         </h4>
-        <h2 className="text-4xl font-black">48</h2>
+        <h2 className="text-3xl md:text-4xl font-black">48</h2>
       </div>
-      <div className="col-span-2 bg-secondary py-10 rounded-md px-5 space-y-3">
-        <h4 className="text-xl text-secondary-foreground flex justify-between items-center">
+      {/* Distro balance */}
+      <div className="col-span-2 bg-secondary px-3 md:px-5 py-5 md:py-10 rounded-md space-y-1 md:space-y-3">
+        <h4 className="text-xl md:text-2xl text-secondary-foreground flex justify-between items-center">
           Distro Balance
           <HugeiconsIcon icon={CreditCardIcon} />
         </h4>
-        <h2 className="text-4xl font-black text-green-500">$25.50</h2>
-        <div className="grid grid-cols-2 gap-5">
+        <h2 className="text-3xl md:text-4xl font-black text-green-500">
+          $25.50
+        </h2>
+        {/* Buttons */}
+        <div className="grid grid-cols-2 gap-2 md:gap-3 lg:gap-5">
           <PaymentDialog
             triggerBtn={
-              <PaymentTriggerBtn variant="ghost" className="w-full" asChild>
+              <PaymentTriggerBtn
+                variant="ghost"
+                className="w-full h-full"
+                asChild
+              >
                 <span>Move to Reelbux</span>
               </PaymentTriggerBtn>
             }

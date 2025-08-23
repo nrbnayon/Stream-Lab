@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 
 export default function GenerationCards() {
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 my-5">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-3 lg:gap-5 my-5">
       {aiGenerationCards.map((card, i) => (
         <Card key={i}>
           <CardHeader>
@@ -23,7 +23,7 @@ export default function GenerationCards() {
           </CardHeader>
           <CardFooter>
             <Link href={card.href}>
-              <Button>{card.btnText}</Button>
+              <Button variant="secondary">{card.btnText}</Button>
             </Link>
           </CardFooter>
         </Card>

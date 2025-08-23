@@ -15,8 +15,8 @@ export default function RemainingGenerations() {
   return (
     <Card className="my-5">
       <CardHeader>
-        <CardTitle className="flex gap-1 items-center">
-          <HugeiconsIcon icon={ZapIcon} />
+        <CardTitle className="flex gap-1">
+          <HugeiconsIcon icon={ZapIcon} className="mt-1" />
           Free Image, Script Analysis & Video Quota
         </CardTitle>
         <CardDescription>
@@ -24,7 +24,7 @@ export default function RemainingGenerations() {
           generations remaining this month
         </CardDescription>
       </CardHeader>
-      <CardContent className="">
+      <CardContent>
         <Progress
           value={(100 / generationLimit) * consumedGenerations}
           color={consumedGenerations === generationLimit ? "red" : "primary"}

@@ -32,7 +32,7 @@ export default function UpgradePlan() {
         </Button>
       </DrawerTrigger>
       <DrawerContent>
-        <div className="grid place-items-center h-full">
+        <div className="grid place-items-center h-full overflow-y-auto">
           <div className="w-full max-w-7xl">
             <DrawerHeader>
               <DrawerTitle>Choose Your AI Plan</DrawerTitle>
@@ -41,7 +41,7 @@ export default function UpgradePlan() {
               </DrawerDescription>
             </DrawerHeader>
             <div className="p-4 pb-0">
-              <div className="grid lg:grid-cols-3 gap-5">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {subscriptionPlans.map((plan, i) => (
                   <PlanCard
                     plan={plan}
@@ -56,7 +56,7 @@ export default function UpgradePlan() {
               <DrawerClose asChild>
                 <Button
                   size="icon"
-                  className="mx-auto mt-10 rounded-full scale-150 bg-destructive/25 hover:bg-destructive/50"
+                  className="mx-auto my-5 lg:my-10 rounded-full scale-150 bg-destructive/25 hover:bg-destructive/50"
                 >
                   <HugeiconsIcon icon={Cancel01Icon} />
                 </Button>

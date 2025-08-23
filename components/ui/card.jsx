@@ -32,7 +32,7 @@ function CardTitle({ className, ...props }) {
   return (
     <div
       data-slot="card-title"
-      className={cn("leading-none font-semibold text-2xl", className)}
+      className={cn("font-semibold text-xl md:text-2xl", className)}
       {...props}
     />
   );
@@ -42,7 +42,7 @@ function CardDescription({ className, ...props }) {
   return (
     <div
       data-slot="card-description"
-      className={cn("text-muted-foreground text-base", className)}
+      className={cn("text-muted-foreground text-base -my-1", className)}
       {...props}
     />
   );

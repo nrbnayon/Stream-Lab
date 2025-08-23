@@ -11,7 +11,11 @@ import {
 import { Badge } from "./ui/badge";
 import { minutesToHours, truncateText, webShare } from "@/lib/utils";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Share01Icon, Time04Icon } from "@hugeicons/core-free-icons/index";
+import {
+  PlayIcon,
+  Share01Icon,
+  Time04Icon,
+} from "@hugeicons/core-free-icons/index";
 import { Button } from "./ui/button";
 import TrailerPopup from "./trailer-popup";
 import PaymentDialog from "./dashboard/payment-dialog";
@@ -55,7 +59,23 @@ export default function MovieCard({ movie, useLink = false }) {
             />
           )}
           {/* Trailer button and popup */}
-          <TrailerPopup movie={movie} />
+          <TrailerPopup
+            movie={movie}
+            absolute={true}
+            triggerBtn={
+              <Button
+                variant="destructive"
+                size="sm"
+                className="rounded-full"
+                asChild
+              >
+                <span>
+                  <HugeiconsIcon icon={PlayIcon} />
+                  Trailer
+                </span>
+              </Button>
+            }
+          />
         </div>
         <CardTitle className="text-xl">
           {useLink ? <Link href={`/film/${id}`}>{title}</Link> : title}

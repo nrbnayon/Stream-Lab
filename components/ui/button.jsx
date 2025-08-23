@@ -3,10 +3,9 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-lg transition-all disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed shrink-0 outline-none focus-visible:border-ring aria-invalid:border-destructive cursor-pointer active:scale-[0.9]",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-lg transition-all disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed shrink-0 outline-none focus-visible:border-ring aria-invalid:border-destructive cursor-pointer active:scale-[0.9] [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -22,9 +21,9 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        default: "px-4 py-2",
-        sm: "px-2 py-1 rounded-sm gap-1.5 text-base",
-        lg: "h-10 rounded-md px-6",
+        default: "h-11 px-4 py-2 [&_svg:not([class*='size-'])]:size-7",
+        sm: "h-8 px-2 py-1 rounded-sm gap-1.5 text-base [&_svg:not([class*='size-'])]:size-5",
+        lg: "h-12 rounded-md px-6",
         icon: "size-9",
       },
     },
@@ -37,7 +36,6 @@ const buttonVariants = cva(
 
 function Button({ className, variant, size, asChild = false, ...props }) {
   const Comp = asChild ? Slot : "button";
-  const isMobile = useIsMobile();
 
   return (
     <Comp

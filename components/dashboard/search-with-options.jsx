@@ -17,7 +17,7 @@ export default function SearchWithOptions({ placeholder, options = [] }) {
   }, [searchValue, selectedOption]);
 
   return (
-    <div className="flex gap-2 md:gap-5 my-3">
+    <div className="flex gap-2 flex-wrap md:gap-5 my-3">
       <div className="relative grow">
         <Input
           placeholder={placeholder ?? "Search Films"}

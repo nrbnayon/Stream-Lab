@@ -13,7 +13,7 @@ export default function RevenueBreakdown() {
         <CardTitle>Revenue Breakdown</CardTitle>
         <CardDescription>Your total revenue so far</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-2 text-lg">
+      <CardContent className="space-y-1 md:space-y-2 text-lg">
         <p className="flex justify-between">
           <span>Rental</span>
           <span className="text-green-500">$280.50</span>

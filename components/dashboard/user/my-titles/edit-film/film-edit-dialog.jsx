@@ -57,7 +57,7 @@ export default function FilmEditDialog({ trigger, filmID }) {
               setContent={setThumbnail}
             />
           </div>
-          <DialogFooter className="flex *:grow">
+          <DialogFooter className="flex *:grow mt-3">
             <DialogClose asChild>
               <Button variant="secondary">Cancel</Button>
             </DialogClose>

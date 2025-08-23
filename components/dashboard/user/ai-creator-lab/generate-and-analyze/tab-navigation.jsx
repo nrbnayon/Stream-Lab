@@ -9,16 +9,15 @@ import { HugeiconsIcon } from "@hugeicons/react";
 
 export default function TabNavigation({ activeTab, handleTabChange }) {
   return (
-    <div className="grid lg:grid-cols-3 gap-4 border-b">
+    <div className="grid grid-cols-3 gap-2 md:gap-3 lg:gap-4">
       {["video", "image", "script"].map((tab) => (
         <Button
           key={tab}
           variant={activeTab === tab ? "default" : "secondary"}
           onClick={() => handleTabChange(tab)}
-          className="px-4 py-2 flex-col"
+          className="px-4 py-2 md:flex-col h-auto"
         >
           <HugeiconsIcon
-            size={40}
             icon={
               tab === "video"
                 ? Video01Icon
@@ -26,6 +25,7 @@ export default function TabNavigation({ activeTab, handleTabChange }) {
                 ? Image03Icon
                 : File02Icon
             }
+            className="size-8"
           />
           {capitalizeWords(tab)}
         </Button>

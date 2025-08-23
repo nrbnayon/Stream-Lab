@@ -1,5 +1,4 @@
 "use client";
-import { HugeiconsIcon } from "@hugeicons/react";
 import {
   Dialog,
   DialogContent,
@@ -8,8 +7,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { PlayIcon } from "@hugeicons/core-free-icons/index";
-import { Button } from "./ui/button";
 import VideoPlayer from "./video-player/video-player";
 
 export default function TrailerPopup({
@@ -17,7 +14,8 @@ export default function TrailerPopup({
     trailer_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
     title: "Movie Title",
   },
-  absolute = true,
+  triggerBtn,
+  absolute = false,
 }) {
   const { trailer_url, title } = movie;
   return (
@@ -25,17 +23,7 @@ export default function TrailerPopup({
       <DialogTrigger
         className={`${absolute ? "absolute bottom-2 left-2" : ""}`}
       >
-        <Button
-          variant={`${absolute ? "destructive" : "default"}`}
-          size={`${absolute ? "sm" : "default"}`}
-          className={`${absolute ? "rounded-full" : ""}`}
-          asChild
-        >
-          <span>
-            <HugeiconsIcon icon={PlayIcon} size={25} />
-            Trailer
-          </span>
-        </Button>
+        {triggerBtn}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
