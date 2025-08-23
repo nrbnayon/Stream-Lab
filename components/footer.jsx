@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <div className="bg-secondary">
-      <div className="container py-12">
+      <div className="container py-8 md:py-12">
         <Image
           src="/brand-logo.png"
           alt="Brand Logo"

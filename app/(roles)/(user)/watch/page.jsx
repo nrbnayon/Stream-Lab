@@ -1,3 +1,4 @@
+import LatestDrama from "@/components/dashboard/user/watch/latest-drama";
 import TrendingNow from "@/components/dashboard/user/watch/trending-now";
 import HeroCarousel from "@/components/home/hero-carousel";
 import { moviesData } from "@/constants";
@@ -14,6 +15,8 @@ export default function UserDashboard() {
       <HeroCarousel moviesData={moviesData} renderFor="dashboard" />
       {/* Trending Movie */}
       <TrendingNow />
+      {/* Latest Drama */}
+      <LatestDrama />
     </div>
   );
 }

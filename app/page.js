@@ -7,11 +7,11 @@ import { moviesData } from "@/constants";
 export default function Home() {
   return (
     <div>
-      <div className="lg:h-dvh">
-        <HeroCarousel moviesData={moviesData} />
+      <HeroCarousel moviesData={moviesData} />
+      <div className="px-5 xl:px-0">
+        <TrendingNow />
+        <LatestDrama />
       </div>
-      <TrendingNow />
-      <LatestDrama />
       <Footer />
     </div>
   );
