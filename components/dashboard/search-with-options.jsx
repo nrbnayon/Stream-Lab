@@ -22,7 +22,7 @@ export default function SearchWithOptions({ placeholder, options = [] }) {
         <Input
           placeholder={placeholder ?? "Search Films"}
           type="text"
-          className="pl-8!"
+          className="pl-8! py-1 pr-2 md:p-3"
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
         />
