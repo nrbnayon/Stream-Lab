@@ -1,4 +1,4 @@
-import { CreditCardValidationIcon, CrownIcon, DashboardSquare03Icon, Dollar01Icon, File02Icon, Film01Icon, Image03Icon, MoneySend02Icon, PlayCircleIcon, PlayListIcon, Settings02Icon, StarIcon, TradeUpIcon, Upload01Icon, UserGroup02Icon, UserGroupIcon, Video01Icon, ViewIcon, ZapIcon, } from "@hugeicons/core-free-icons/index";
+import { CreditCardValidationIcon, CrownIcon, DashboardSquare03Icon, Dollar01Icon, File02Icon, Film01Icon, Image03Icon, Link05Icon, MoneySend02Icon, PlayCircleIcon, PlayListIcon, Settings02Icon, StarIcon, TradeUpIcon, Upload01Icon, UserGroup02Icon, UserGroupIcon, Video01Icon, ViewIcon, ZapIcon, } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 
 const loginAs = ["Viewer", "Film Maker"];
@@ -419,6 +419,26 @@ const adminPaymentsStats = [
    },
 ];
 
+const adminDistroStats = [
+   {
+      heading: "Total Commission",
+      icon: Dollar01Icon,
+      value: 2452,
+      isDollar: true,
+      isGreen: true,
+   },
+   {
+      heading: "Active Distro",
+      value: 10,
+      icon: UserGroupIcon,
+   },
+   {
+      heading: "Total Clicks",
+      value: 2000,
+      icon: Link05Icon,
+   },
+];
+
 const transactions = [
    {
       type: "Film Buy",
@@ -502,6 +522,70 @@ const transactions = [
    },
 ];
 
+const distroTransactions = [
+   {
+      user: "Alice Johnson",
+      total_earning: 1200,
+      total_clicks: 340,
+      status: "completed",
+   },
+   {
+      user: "Mark Smith",
+      total_earning: 980,
+      total_clicks: 275,
+      status: "pending",
+   },
+   {
+      user: "Sophia Lee",
+      total_earning: 0,
+      total_clicks: 190,
+      status: "failed",
+   },
+   {
+      user: "David Brown",
+      total_earning: 1320,
+      total_clicks: 412,
+      status: "completed",
+   },
+   {
+      user: "Emily Davis",
+      total_earning: 800,
+      total_clicks: 250,
+      status: "pending",
+   },
+   {
+      user: "James Wilson",
+      total_earning: 600,
+      total_clicks: 180,
+      status: "completed",
+   },
+   {
+      user: "Olivia Martinez",
+      total_earning: 0,
+      total_clicks: 300,
+      status: "failed",
+   },
+   {
+      user: "Liam Anderson",
+      total_earning: 1100,
+      total_clicks: 350,
+      status: "completed",
+   },
+   {
+      user: "Sophia Thompson",
+      total_earning: 720,
+      total_clicks: 210,
+      status: "pending",
+   },
+   {
+      user: "Noah White",
+      total_earning: 1500,
+      total_clicks: 500,
+      status: "completed",
+   },
+];
 
 
-export { loginAs, moviesData, sidebarLinks, aiGenerationCards, subscriptionPlans, genres, adminDashboardStats, chartData, adminPaymentsStats, transactions };
+
+
+export { loginAs, moviesData, sidebarLinks, aiGenerationCards, subscriptionPlans, genres, adminDashboardStats, chartData, adminPaymentsStats, transactions, adminDistroStats, distroTransactions };
