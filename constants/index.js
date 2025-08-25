@@ -400,5 +400,108 @@ const chartData = [
    { month: "December", last_year: 43210, current: 12345 }
 ];
 
+const adminPaymentsStats = [
+   {
+      heading: "Total Payout",
+      value: 242,
+      isDollar: true,
+      isGreen: true,
+   },
+   {
+      heading: "Processing Fee",
+      value: 520,
+      isDollar: true,
+   },
+   {
+      heading: "Payout Failed",
+      value: 2000,
+      isDollar: true,
+   },
+];
 
-export { loginAs, moviesData, sidebarLinks, aiGenerationCards, subscriptionPlans, genres, adminDashboardStats, chartData };
+const transactions = [
+   {
+      type: "Film Buy",
+      user: "John Carter",
+      amount: 12.99,
+      payment_method: "Credit Card",
+      date: "2025-08-01",
+      status: "Completed",
+   },
+   {
+      type: "Film Rent",
+      user: "Emily Stone",
+      amount: 4.99,
+      payment_method: "PayPal",
+      date: "2025-08-02",
+      status: "Completed",
+   },
+   {
+      type: "Film Buy",
+      user: "Michael Johnson",
+      amount: 14.99,
+      payment_method: "Credit Card",
+      date: "2025-08-03",
+      status: "Failed",
+   },
+   {
+      type: "Film Rent",
+      user: "Sophia Lee",
+      amount: 3.99,
+      payment_method: "PayPal",
+      date: "2025-08-04",
+      status: "Completed",
+   },
+   {
+      type: "Film Buy",
+      user: "David Kim",
+      amount: 10.99,
+      payment_method: "Credit Card",
+      date: "2025-08-05",
+      status: "Pending",
+   },
+   {
+      type: "Film Rent",
+      user: "Olivia Brown",
+      amount: 5.49,
+      payment_method: "PayPal",
+      date: "2025-08-06",
+      status: "Failed",
+   },
+   {
+      type: "Film Buy",
+      user: "James Wilson",
+      amount: 19.99,
+      payment_method: "Credit Card",
+      date: "2025-08-07",
+      status: "Completed",
+   },
+   {
+      type: "Film Rent",
+      user: "Ava Martinez",
+      amount: 6.99,
+      payment_method: "Credit Card",
+      date: "2025-08-08",
+      status: "Pending",
+   },
+   {
+      type: "Film Buy",
+      user: "William Davis",
+      amount: 15.99,
+      payment_method: "PayPal",
+      date: "2025-08-09",
+      status: "Completed",
+   },
+   {
+      type: "Film Rent",
+      user: "Emma Thompson",
+      amount: 4.49,
+      payment_method: "Credit Card",
+      date: "2025-08-10",
+      status: "Completed",
+   },
+];
+
+
+
+export { loginAs, moviesData, sidebarLinks, aiGenerationCards, subscriptionPlans, genres, adminDashboardStats, chartData, adminPaymentsStats, transactions };

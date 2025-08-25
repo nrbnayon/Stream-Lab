@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import Link from "next/link";
+import { Label } from "@/components/ui/label";
 
 export default function PurchasedMovieCard({ movie }) {
   const {} = movie;
@@ -92,10 +93,10 @@ export default function PurchasedMovieCard({ movie }) {
 
       {/* Footer | progress */}
       <CardFooter className="block">
-        <p className="flex justify-between text-secondary-foreground mb-0.5">
+        <Label className="flex justify-between text-secondary-foreground mb-0.5">
           <span>Progress</span>
           <span>75%</span>
-        </p>
+        </Label>
         <Progress value={75} />
       </CardFooter>
     </Card>

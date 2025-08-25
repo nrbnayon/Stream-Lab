@@ -19,7 +19,7 @@ export default function StatsCard({ stat }) {
       <CardHeader>
         <CardDescription className="text-xl md:text-2xl flex justify-between items-center">
           <span>{heading}</span>
-          <HugeiconsIcon icon={icon} className="size-6 md:size-7" />
+          {icon && <HugeiconsIcon icon={icon} className="size-6 md:size-7" />}
         </CardDescription>
         <CardTitle
           className={`mt-4 text-3xl md:text-4xl ${
