@@ -585,7 +585,60 @@ const distroTransactions = [
    },
 ];
 
+const subscribersList = [
+   {
+      subscriber_name: "Alice Johnson",
+      subscription_type: "Enterprise",
+      activation_date: "2025-06-10",
+   },
+   {
+      subscriber_name: "Mark Smith",
+      subscription_type: "Basic",
+      activation_date: "2025-05-28",
+   },
+   {
+      subscriber_name: "Sophia Lee",
+      subscription_type: "Pro",
+      activation_date: "2025-07-01",
+   },
+   {
+      subscriber_name: "David Brown",
+      subscription_type: "Enterprise",
+      activation_date: "2025-06-15",
+   },
+   {
+      subscriber_name: "Emily Davis",
+      subscription_type: "Basic",
+      activation_date: "2025-07-20",
+   },
+   {
+      subscriber_name: "James Wilson",
+      subscription_type: "Pro",
+      activation_date: "2025-06-30",
+   },
+   {
+      subscriber_name: "Olivia Martinez",
+      subscription_type: "Enterprise",
+      activation_date: "2025-05-10",
+   },
+   {
+      subscriber_name: "Liam Anderson",
+      subscription_type: "Pro",
+      activation_date: "2025-06-25",
+   },
+   {
+      subscriber_name: "Sophia Thompson",
+      subscription_type: "Basic",
+      activation_date: "2025-07-05",
+   },
+   {
+      subscriber_name: "Noah White",
+      subscription_type: "Enterprise",
+      activation_date: "2025-06-18",
+   },
+];
 
 
 
-export { loginAs, moviesData, sidebarLinks, aiGenerationCards, subscriptionPlans, genres, adminDashboardStats, chartData, adminPaymentsStats, transactions, adminDistroStats, distroTransactions };
+
+export { loginAs, moviesData, sidebarLinks, aiGenerationCards, subscriptionPlans, genres, adminDashboardStats, chartData, adminPaymentsStats, transactions, adminDistroStats, distroTransactions, subscribersList };
