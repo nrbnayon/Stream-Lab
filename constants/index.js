@@ -1,4 +1,4 @@
-import { CreditCardValidationIcon, CrownIcon, DashboardSquare03Icon, File02Icon, Film01Icon, Image03Icon, MoneySend02Icon, PlayCircleIcon, PlayListIcon, Settings02Icon, StarIcon, Upload01Icon, UserGroupIcon, Video01Icon, ZapIcon, } from "@hugeicons/core-free-icons/index";
+import { CreditCardValidationIcon, CrownIcon, DashboardSquare03Icon, Dollar01Icon, File02Icon, Film01Icon, Image03Icon, MoneySend02Icon, PlayCircleIcon, PlayListIcon, Settings02Icon, StarIcon, TradeUpIcon, Upload01Icon, UserGroup02Icon, UserGroupIcon, Video01Icon, ViewIcon, ZapIcon, } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 
 const loginAs = ["Viewer", "Film Maker"];
@@ -357,4 +357,48 @@ const genres = [
    },
 ]
 
-export { loginAs, moviesData, sidebarLinks, aiGenerationCards, subscriptionPlans, genres };
+
+// Admin --------------------------
+const adminDashboardStats = [
+   {
+      icon: UserGroup02Icon,
+      heading: "Total Users",
+      value: 2000,
+   },
+   {
+      icon: ViewIcon,
+      heading: "Total Views",
+      value: 15000,
+   },
+   {
+      icon: Dollar01Icon,
+      heading: "Total Earning",
+      value: 1425.50,
+      isDollar: true,
+      isGreen: true,
+   },
+   {
+      icon: TradeUpIcon,
+      heading: "Total Subscription",
+      value: 1500,
+      isDollar: true,
+   },
+];
+
+const chartData = [
+   { month: "January", last_year: 0, current: 4234 },
+   { month: "February", last_year: 12345, current: 27890 },
+   { month: "March", last_year: 48723, current: 34987 },
+   { month: "April", last_year: 0, current: 19876 },
+   { month: "May", last_year: 45678, current: 2345 },
+   { month: "June", last_year: 1234, current: 48976 },
+   { month: "July", last_year: 34234, current: 23456 },
+   { month: "August", last_year: 27890, current: 19876 },
+   { month: "September", last_year: 0, current: 23456 },
+   { month: "October", last_year: 19876, current: 43210 },
+   { month: "November", last_year: 23456, current: 34567 },
+   { month: "December", last_year: 43210, current: 12345 }
+];
+
+
+export { loginAs, moviesData, sidebarLinks, aiGenerationCards, subscriptionPlans, genres, adminDashboardStats, chartData };
