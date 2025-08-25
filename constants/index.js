@@ -236,7 +236,7 @@ const sidebarLinks = {
          groupName: "Admin Management",
          links: [
             { name: "Dashboard", href: "/admin/dashboard", icon: <HugeiconsIcon icon={DashboardSquare03Icon} /> },
-            { name: "Users", href: "/admin/users", icon: <HugeiconsIcon icon={UserGroupIcon} /> },
+            { name: "Manage Users", href: "/admin/manage-users", icon: <HugeiconsIcon icon={UserGroupIcon} /> },
             { name: "Films", href: "/admin/films", icon: <HugeiconsIcon icon={PlayListIcon} /> },
             { name: "Payments", href: "/admin/payments", icon: <HugeiconsIcon icon={CreditCardValidationIcon} /> },
             {

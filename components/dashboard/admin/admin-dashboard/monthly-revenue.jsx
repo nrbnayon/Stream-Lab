@@ -17,11 +17,9 @@ import { Bar, BarChart, CartesianGrid, Legend, XAxis, YAxis } from "recharts";
 const chartConfig = {
   last_year: {
     label: "Last Year",
-    //  color: "#2563eb",
   },
   current: {
     label: "This Year",
-    //  color: "#60a5fa",
   },
 };
 
@@ -56,13 +54,13 @@ export default function MonthlyRevenue() {
             <ChartTooltip content={<ChartTooltipContent />} />
             <Bar
               dataKey="last_year"
-              fill="var(--chart-3)"
+              fill="var(--chart-1)"
               radius={200}
               name="Last Year"
             />
             <Bar
               dataKey="current"
-              fill="var(--chart-5)"
+              fill="var(--chart-2)"
               radius={200}
               name="Current"
             />
