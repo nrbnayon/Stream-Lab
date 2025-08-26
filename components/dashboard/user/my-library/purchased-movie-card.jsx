@@ -7,29 +7,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { minutesToHours, webShare } from "@/lib/utils";
+import { minutesToHours } from "@/lib/utils";
 import { HugeiconsIcon } from "@hugeicons/react";
-import {
-  PlayIcon,
-  Share01Icon,
-  Time04Icon,
-} from "@hugeicons/core-free-icons/index";
+import { PlayIcon, Time04Icon } from "@hugeicons/core-free-icons/index";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import Link from "next/link";
 import { Label } from "@/components/ui/label";
+import WebShare from "@/components/web-share";
 
 export default function PurchasedMovieCard({ movie }) {
   const {} = movie;
-  const handleShare = async () => {
-    // TODO: change Title
-    await webShare({
-      title: "Title",
-      // TODO: change the url
-      url: `${window.location.href}`,
-    });
-  };
   return (
     <Card className="w-full">
       <CardHeader>
@@ -45,7 +34,8 @@ export default function PurchasedMovieCard({ movie }) {
           />
           {/* TODO: Redirect to Watch movie page */}
           {/* Continue watch button */}
-          <Link href="">
+          {/* TODO: Update film link */}
+          <Link href="/film/film_id">
             <Button
               variant="destructive"
               size="sm"
@@ -66,14 +56,8 @@ export default function PurchasedMovieCard({ movie }) {
         {/* Movie name and share icon */}
         <CardTitle className="text-xl flex justify-between items-center">
           {"Movie Name"}
-          <Button
-            size="icon"
-            variant="ghost"
-            onClick={handleShare}
-            className="text-primary"
-          >
-            <HugeiconsIcon icon={Share01Icon} />
-          </Button>
+          {/* Share icon */}
+          <WebShare className="text-primary" />
         </CardTitle>
 
         {/* Badge and Duration */}

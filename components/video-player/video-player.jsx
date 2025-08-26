@@ -37,12 +37,12 @@ export default function VideoPlayer({ src, className }) {
     playerRef.current = player;
 
     // Enable resolution selector
-    if (player.hlsQualitySelector) {
-      player.hlsQualitySelector({
-        displayCurrentQuality: true,
-        default: "auto",
-      });
-    }
+    // if (player.hlsQualitySelector) {
+    //   player.hlsQualitySelector({
+    //     displayCurrentQuality: true,
+    //     default: "auto",
+    //   });
+    // }
 
     // You can handle player events here, for example:
     player.on("waiting", () => {

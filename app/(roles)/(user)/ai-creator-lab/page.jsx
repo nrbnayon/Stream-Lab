@@ -8,9 +8,15 @@ export default function AICreatorLab() {
     <>
       <div className="flex gap-5 justify-between items-center flex-wrap">
         <span>
-          <h2 className="text-3xl md:text-4xl font-medium">AI Creator Lab</h2>
-          <p className="text-secondary-foreground">
-            Create amazing contant with AI Assistance
+          <h2 className="text-3xl md:text-4xl font-medium">
+            Bring Your Story to Life
+          </h2>
+          <p className="text-secondary-foreground max-w-3xl">
+            CreatorLab is JusB’s AI-powered toolkit for filmmakers and
+            creators—featuring image generation, video generation, and script
+            analysis. Use these tools to create pitch decks, social media
+            content, get detailed notes on your script or create whatever
+            content you may need for your project!
           </p>
         </span>
         {/* TODO: render the button condionally */}

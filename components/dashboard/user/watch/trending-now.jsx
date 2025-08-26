@@ -3,7 +3,7 @@ import { moviesData } from "@/constants";
 
 export default function TrendingNow() {
   return (
-    <div className="my-5" id="trending-movie">
+    <div className="my-5 md:my-10" id="trending-movie">
       <h2 className="text-2xl md:text-4xl font-medium leading-relaxed">
         Trending Now
       </h2>

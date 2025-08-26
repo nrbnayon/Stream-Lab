@@ -54,7 +54,7 @@ export default function HeroCarousel({ moviesData, renderFor = "home" }) {
         renderFor === "home" ? "lg:h-dvh" : "lg:h-[calc(100vh/5*3)] mt-5"
       }`}
     >
-      <NavBar renderFor={renderFor} />
+      {renderFor === "home" && <NavBar />}
       <Swiper
         ref={swiperRef}
         slidesPerView={1}
@@ -86,7 +86,11 @@ export default function HeroCarousel({ moviesData, renderFor = "home" }) {
             />
 
             {/* movie details */}
-            <div className="h-full grid items-center mt-10">
+            <div
+              className={`h-full grid items-center ${
+                renderFor === "home" ? "mt-10" : ""
+              }`}
+            >
               <div
                 className={`space-y-2 lg:space-y-3 ${
                   renderFor === "home" ? "container" : ""

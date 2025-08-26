@@ -13,7 +13,7 @@ import { usePathname } from "next/navigation";
 export default function RenderSidebarLinks() {
   const pathname = usePathname();
   // TODO: fetch role and render links
-  const role = "admin";
+  const role = "user";
   const linkGroups = sidebarLinks[role];
   return (
     <>

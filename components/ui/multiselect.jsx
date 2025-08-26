@@ -351,9 +351,9 @@ const MultipleSelector = ({
     >
       <div
         className={cn(
-          "border-input focus-within:border-ring has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40 has-aria-invalid:border-destructive relative rounded-md border text-base transition-[color,box-shadow] outline-none has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:opacity-50 p-1",
+          "border-input focus-within:border-ring has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40 has-aria-invalid:border-destructive relative rounded-md border text-base transition-[color,box-shadow] outline-none has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:opacity-50 h-9 md:h-11",
           {
-            "p-3": selected.length !== 0,
+            "p-2": selected.length !== 0,
             "cursor-text": !disabled && selected.length !== 0,
           },
           !hideClearAllButton && "pe-9",
@@ -513,7 +513,7 @@ const MultipleSelector = ({
                                 onChange?.(newOptions);
                               }}
                               className={cn(
-                                "cursor-pointer text-base py-3",
+                                "cursor-pointer text-base py-3 h-9 md:h-11",
                                 option.disable &&
                                   "pointer-events-none cursor-not-allowed opacity-50"
                               )}

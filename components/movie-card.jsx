@@ -11,11 +11,7 @@ import {
 import { Badge } from "./ui/badge";
 import { minutesToHours, truncateText, webShare } from "@/lib/utils";
 import { HugeiconsIcon } from "@hugeicons/react";
-import {
-  PlayIcon,
-  Share01Icon,
-  Time04Icon,
-} from "@hugeicons/core-free-icons/index";
+import { PlayIcon, Time04Icon } from "@hugeicons/core-free-icons/index";
 import { Button } from "./ui/button";
 import TrailerPopup from "./trailer-popup";
 import PaymentDialog from "./dashboard/payment-dialog";

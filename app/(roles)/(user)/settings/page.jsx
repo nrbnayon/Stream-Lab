@@ -1,7 +1,6 @@
 import ChangePasswordDialog from "@/components/dashboard/change-password-dialog";
 import PersonalInformation from "@/components/dashboard/personal-information";
-import SettingsCard from "@/components/dashboard/settings-card";
-import { ShieldUserIcon } from "@hugeicons/core-free-icons/index";
+import TermsAndConditionsDialog from "@/components/dashboard/user/settings/terms-and-conditions-dialog";
 import Image from "next/image";
 
 export default function Settings() {
@@ -26,11 +25,7 @@ export default function Settings() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 mt-4">
           <PersonalInformation />
           <ChangePasswordDialog />
-          <SettingsCard
-            title="Privacy & Policy"
-            description="View our privacy and policy"
-            icon={ShieldUserIcon}
-          />
+          <TermsAndConditionsDialog />
         </div>
       </div>
     </div>

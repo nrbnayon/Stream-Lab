@@ -638,7 +638,86 @@ const subscribersList = [
    },
 ];
 
+const termsAndConditions = [
+   {
+      id: 1,
+      title: "Eligibility",
+      details: [
+         "You must be at least 18 years old to become a Distro.",
+         "JusB.io reserves the right to approve, deny, or terminate any account at its sole discretion."
+      ]
+   },
+   {
+      id: 2,
+      title: "Limited License to Distribute",
+      details: [
+         "Distros are granted a limited, revocable license to promote and sell films or series hosted on JusB.io.",
+         "You do not obtain any ownership or intellectual property rights in the films or related content."
+      ]
+   },
+   {
+      id: 3,
+      title: "Payouts",
+      details: [
+         "Your payout percentage is determined by your membership level at the time of sale.",
+         "All payouts are calculated on net sales (after processing fees and applicable taxes).",
+         "Payouts may be made in USD or ReelBux, subject to your account preferences.",
+         "Once converted to ReelBux, funds are non-refundable and cannot be exchanged for cash."
+      ]
+   },
+   {
+      id: 4,
+      title: "Marketing Conduct",
+      details: [
+         "You may only use official JusB.io marketing materials or materials approved by the platform.",
+         "False, misleading, or deceptive claims about films, JusB.io, or filmmakers are prohibited.",
+         "Spam, unauthorized paid ads, or use of bots is strictly forbidden."
+      ]
+   },
+   {
+      id: 5,
+      title: "Fraud & Abuse",
+      details: [
+         "Any fraudulent activity (including but not limited to fake clicks, bot traffic, or self-purchases intended to inflate earnings) will result in immediate account termination and forfeiture of unpaid earnings.",
+         "JusB.io reserves the right to audit accounts for suspected fraud."
+      ]
+   },
+   {
+      id: 6,
+      title: "Filmmaker Rights",
+      details: [
+         "Filmmakers retain all ownership of their works.",
+         "Distro activity does not create any rights, revenue entitlements, or creative control beyond the defined payout."
+      ]
+   },
+   {
+      id: 7,
+      title: "Termination",
+      details: [
+         "JusB.io may suspend or terminate your account at any time if you violate these terms or engage in harmful conduct.",
+         "Distros may close their account at any time."
+      ]
+   },
+   {
+      id: 8,
+      title: "Limitation of Liability",
+      details: [
+         "JusB.io provides the Distro program “as-is” and makes no guarantees regarding sales volume or earnings.",
+         "JusB.io is not liable for indirect, incidental, or consequential damages."
+      ]
+   },
+   {
+      id: 9,
+      title: "Governing Law",
+      details: [
+         "These terms are governed by the laws of California.",
+         "Any disputes will be resolved through binding arbitration in [Insert Jurisdiction]."
+      ]
+   }
+];
 
 
 
-export { loginAs, moviesData, sidebarLinks, aiGenerationCards, subscriptionPlans, genres, adminDashboardStats, chartData, adminPaymentsStats, transactions, adminDistroStats, distroTransactions, subscribersList };
+
+
+export { loginAs, moviesData, sidebarLinks, aiGenerationCards, subscriptionPlans, genres, adminDashboardStats, chartData, adminPaymentsStats, transactions, adminDistroStats, distroTransactions, subscribersList, termsAndConditions };

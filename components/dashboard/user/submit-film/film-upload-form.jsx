@@ -56,7 +56,7 @@ export default function FilmUploadForm() {
             <Textarea name="logline" placeholder="Enter film logline" />
           </span>
           {/* year , type and genre */}
-          <div className="grid md:grid-cols-3 gap-3 my-3">
+          <div className="grid lg:grid-cols-3 gap-3 my-3">
             {/* year */}
             <InputField
               type="number"
