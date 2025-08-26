@@ -47,7 +47,7 @@ export default function RecentTransactionsTable() {
           <TableBody>
             {transactions.map((transaction, i) => (
               <TableRow key={i}>
-                <TableCell className="flex gap-2">
+                <TableCell className="flex gap-2 justify-center">
                   <HugeiconsIcon
                     icon={
                       transaction.status === "Failed"

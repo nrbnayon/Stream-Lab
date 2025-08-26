@@ -24,7 +24,6 @@ import TermsActionDialog from "./terms-action-dialog";
 
 export default function AdminTermsAndConditionsDialog() {
   const [termsConditions, setTermsConditions] = useState(termsAndConditions);
-  const [id, setId] = useState(null);
   return (
     <Dialog>
       <DialogTrigger className="w-full">

@@ -1,4 +1,4 @@
-import { CreditCardValidationIcon, CrownIcon, DashboardSquare03Icon, Dollar01Icon, File02Icon, Film01Icon, Image03Icon, Link05Icon, MoneySend02Icon, PlayCircleIcon, PlayListIcon, Settings02Icon, StarIcon, TradeUpIcon, Upload01Icon, UserGroup02Icon, UserGroupIcon, Video01Icon, ViewIcon, ZapIcon, } from "@hugeicons/core-free-icons/index";
+import { CreditCardValidationIcon, CrownIcon, DashboardSquare03Icon, Dollar01Icon, File02Icon, Film01Icon, Film02Icon, Image03Icon, Link05Icon, MoneySend02Icon, PlayCircleIcon, PlayListIcon, Settings02Icon, StarIcon, TradeUpIcon, Upload01Icon, UserGroup02Icon, UserGroupIcon, Video01Icon, ViewIcon, ZapIcon, } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 
 const loginAs = ["Viewer", "Film Maker"];
@@ -439,6 +439,27 @@ const adminDistroStats = [
    },
 ];
 
+const adminFilmsStats = [
+   {
+      heading: "Total Films",
+      icon: Film02Icon,
+      value: 242,
+      isGreen: true,
+   },
+   {
+      heading: "Total Purchase",
+      value: 5550,
+      isDollar: true,
+      icon: Dollar01Icon,
+   },
+   {
+      heading: "Total Rent",
+      value: 2000,
+      icon: Dollar01Icon,
+      isDollar: true,
+   },
+];
+
 const transactions = [
    {
       type: "Film Buy",
@@ -716,8 +737,112 @@ const termsAndConditions = [
    }
 ];
 
+const adminFilmsList = [
+   {
+      id: 1,
+      film_title: "Echoes of Tomorrow",
+      user: "Alice Johnson",
+      status: "published",
+      film_type: "movie",
+      upload_date: "2025-08-01",
+      views: 12500,
+      revenue: 3400
+   },
+   {
+      id: 2,
+      film_title: "Shadows in the Mist",
+      user: "Brian Carter",
+      status: "published",
+      film_type: "drama",
+      upload_date: "2025-08-05",
+      views: 8700,
+      revenue: 2150
+   },
+   {
+      id: 3,
+      film_title: "Silent Horizon",
+      user: "Clara Smith",
+      status: "rejected",
+      film_type: "movie",
+      upload_date: "2025-08-07",
+      views: 0,
+      revenue: 0
+   },
+   {
+      id: 4,
+      film_title: "Broken Strings",
+      user: "David Kim",
+      status: "published",
+      film_type: "drama",
+      upload_date: "2025-08-10",
+      views: 15230,
+      revenue: 4200
+   },
+   {
+      id: 5,
+      film_title: "The Last Melody",
+      user: "Ella Brown",
+      status: "rejected",
+      film_type: "movie",
+      upload_date: "2025-08-12",
+      views: 0,
+      revenue: 0
+   },
+   {
+      id: 6,
+      film_title: "City of Whispers",
+      user: "Franklin Lee",
+      status: "published",
+      film_type: "movie",
+      upload_date: "2025-08-14",
+      views: 9800,
+      revenue: 2800
+   },
+   {
+      id: 7,
+      film_title: "Beyond the Veil",
+      user: "Grace Wilson",
+      status: "published",
+      film_type: "drama",
+      upload_date: "2025-08-16",
+      views: 13400,
+      revenue: 3600
+   },
+   {
+      id: 8,
+      film_title: "Fragments of Time",
+      user: "Henry Adams",
+      status: "rejected",
+      film_type: "movie",
+      upload_date: "2025-08-18",
+      views: 0,
+      revenue: 0
+   },
+   {
+      id: 9,
+      film_title: "Fading Lights",
+      user: "Isabella Martinez",
+      status: "published",
+      film_type: "drama",
+      upload_date: "2025-08-20",
+      views: 11000,
+      revenue: 2950
+   },
+   {
+      id: 10,
+      film_title: "Crimson Dawn",
+      user: "Jack Thompson",
+      status: "published",
+      film_type: "movie",
+      upload_date: "2025-08-22",
+      views: 14350,
+      revenue: 4100
+   }
+];
 
 
 
 
-export { loginAs, moviesData, sidebarLinks, aiGenerationCards, subscriptionPlans, genres, adminDashboardStats, chartData, adminPaymentsStats, transactions, adminDistroStats, distroTransactions, subscribersList, termsAndConditions };
+
+
+export { loginAs, moviesData, sidebarLinks, aiGenerationCards, subscriptionPlans, genres, adminDashboardStats, chartData, adminPaymentsStats, transactions, adminDistroStats, distroTransactions, subscribersList, termsAndConditions, adminFilmsStats, adminFilmsList };
