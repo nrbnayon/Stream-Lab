@@ -24,7 +24,12 @@ export default function DistroCode() {
       <Label>Distro Code</Label>
       <div className="flex items-center gap-3">
         <Input disabled={true} defaultValue={distro} />
-        <Button variant="secondary" className="py-3" onClick={onCopy}>
+        <Button
+          variant="secondary"
+          className="py-3"
+          size="responsive"
+          onClick={onCopy}
+        >
           <HugeiconsIcon icon={copied ? TickDouble02Icon : Copy01Icon} />
         </Button>
       </div>

@@ -11,8 +11,8 @@ export default function AllFilms() {
   return (
     <Card className="my-5">
       <CardHeader>
-        <CardTitle>Film Approval</CardTitle>
-        <CardDescription>Film Approval & Management.</CardDescription>
+        <CardTitle>Films</CardTitle>
+        <CardDescription>Track All Films</CardDescription>
       </CardHeader>
       <CardContent>
         {/* TODO: Pass users props  */}

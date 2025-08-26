@@ -60,7 +60,7 @@ export default function AiInput({ activeTab }) {
         {/* Upload file and generate button */}
         <div className="flex gap-3 justify-end">
           {!uploadedFile && activeTab === "script" ? (
-            <Button variant="secondary" className="p-0">
+            <Button variant="secondary" className="p-0" size="responsive">
               <Label
                 htmlFor="file-upload"
                 className="cursor-pointer px-4 py-2 w-full h-full"
@@ -77,7 +77,7 @@ export default function AiInput({ activeTab }) {
               />
             </Button>
           ) : null}
-          <Button disabled={!input}>
+          <Button disabled={!input} size="responsive">
             <HugeiconsIcon icon={SentIcon} />
             {activeTab === "script" ? "Analyze" : "Generate"}
           </Button>

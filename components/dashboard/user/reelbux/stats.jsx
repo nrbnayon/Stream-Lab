@@ -1,7 +1,7 @@
 import { CreditCardIcon, PlusSignIcon } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 import PaymentDialog from "../../payment-dialog";
-import PaymentTriggerBtn from "../../payment-trigger-btn";
+import { Button } from "@/components/ui/button";
 
 export default function ReelbuxBalanceStats() {
   return (
@@ -20,12 +20,12 @@ export default function ReelbuxBalanceStats() {
           //  TODO: pass the api endpoint from here
           apiEndPoint=""
           triggerBtn={
-            <PaymentTriggerBtn variant="ghost" asChild>
+            <Button variant="ghost" size="responsive" asChild>
               <span>
                 <HugeiconsIcon icon={PlusSignIcon} />
                 Add Funds
               </span>
-            </PaymentTriggerBtn>
+            </Button>
           }
         />
       </div>

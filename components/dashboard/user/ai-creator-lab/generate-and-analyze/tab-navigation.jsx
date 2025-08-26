@@ -14,8 +14,9 @@ export default function TabNavigation({ activeTab, handleTabChange }) {
         <Button
           key={tab}
           variant={activeTab === tab ? "default" : "secondary"}
+          size="responsive"
           onClick={() => handleTabChange(tab)}
-          className="px-4 py-2 md:flex-col h-auto"
+          className="px-4 py-2 md:flex-col h-auto!"
         >
           <HugeiconsIcon
             icon={
@@ -25,7 +26,7 @@ export default function TabNavigation({ activeTab, handleTabChange }) {
                 ? Image03Icon
                 : File02Icon
             }
-            className="size-8"
+            className="size-5 md:size-6 lg:size-8"
           />
           {capitalizeWords(tab)}
         </Button>

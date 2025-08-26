@@ -56,7 +56,7 @@ export default function UserDeleteAlert({ user = {} }) {
             account and remove data from your database.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter className="mx-auto">
+        <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             variant="destructive"

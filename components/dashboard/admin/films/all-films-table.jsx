@@ -12,6 +12,7 @@ import { Delete02Icon } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 import Link from "next/link";
 import FilmDeleteDialog from "./film-delete-dialog";
+import { Badge } from "@/components/ui/badge";
 
 export default function AllFilmsTable() {
   return (
@@ -38,7 +39,15 @@ export default function AllFilmsTable() {
               </Link>
             </TableCell>
             <TableCell>{film.user}</TableCell>
-            <TableCell>{film.status}</TableCell>
+            <TableCell>
+              <Badge
+                variant={
+                  film.status === "published" ? "success" : "destructive"
+                }
+              >
+                {film.status}
+              </Badge>
+            </TableCell>
             <TableCell>{film.film_type}</TableCell>
             <TableCell>{film.upload_date}</TableCell>
             <TableCell>{film.views}</TableCell>

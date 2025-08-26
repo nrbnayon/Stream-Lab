@@ -165,7 +165,7 @@ export default function FilmUploadForm() {
       </Card>
       {/* Submit Btn */}
       <div className="text-center">
-        <Button className="w-full active:scale-[0.99]">
+        <Button className="w-full active:scale-[0.99]" size="responsive">
           Submit for review
         </Button>
       </div>

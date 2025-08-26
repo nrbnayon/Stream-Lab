@@ -13,7 +13,7 @@ export default function AdminPaymentsPage() {
 
       <AdminPaymentsStats />
       <RecentTransactionsTable />
-      <div className="grid md:grid-cols-2 gap-5 my-5">
+      <div className="grid lg:grid-cols-2 gap-5 my-5">
         <PaymentMethods />
         <TransferStatus />
       </div>

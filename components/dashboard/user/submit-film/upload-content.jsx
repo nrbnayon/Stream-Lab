@@ -25,6 +25,7 @@ export default function UploadContent({
         onDrop={handleDrop}
         onError={console.error}
         src={content}
+        className=""
       >
         <DropzoneEmptyState title={title} />
         <DropzoneContent />

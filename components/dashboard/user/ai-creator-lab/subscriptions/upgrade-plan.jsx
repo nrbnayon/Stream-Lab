@@ -26,7 +26,7 @@ export default function UpgradePlan() {
   return (
     <Drawer direction="bottom">
       <DrawerTrigger asChild>
-        <Button>
+        <Button size="responsive">
           <HugeiconsIcon icon={Crown03Icon} />
           Upgrade Plan
         </Button>

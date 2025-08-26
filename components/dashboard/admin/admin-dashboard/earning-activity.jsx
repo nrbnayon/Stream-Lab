@@ -11,7 +11,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { PieChart, Pie, Cell, Legend } from "recharts";
+import { PieChart, Pie, Cell, Legend, ResponsiveContainer } from "recharts";
 
 const data = [
   { name: "Total Buy", value: 400, fill: "#26408B" },
@@ -26,34 +26,35 @@ export default function EarningActivity() {
         <CardTitle>Earning Activity</CardTitle>
         <CardDescription>Last month Earning activity</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="h-80 w-full">
         <ChartContainer
           config={{
             value: {
               label: "Earnings",
-              color: "hsl(var(--chart-1))",
             },
           }}
-          className="h-80 w-full"
+          className="h-full w-full"
         >
-          <PieChart>
-            <Pie
-              data={data}
-              cx="50%"
-              cy="50%"
-              innerRadius={70}
-              outerRadius={100}
-              dataKey="value"
-              nameKey="name"
-              isAnimationActive={true}
-            >
-              {data.map((entry, i) => (
-                <Cell key={i} fill={entry.fill} />
-              ))}
-            </Pie>
-            <ChartTooltip content={<ChartTooltipContent />} />
-            <Legend verticalAlign="bottom" />
-          </PieChart>
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+                data={data}
+                cx="50%"
+                cy="50%"
+                innerRadius={70}
+                outerRadius={100}
+                dataKey="value"
+                nameKey="name"
+                isAnimationActive={true}
+              >
+                {data.map((entry, i) => (
+                  <Cell key={i} fill={entry.fill} />
+                ))}
+              </Pie>
+              <ChartTooltip content={<ChartTooltipContent />} />
+              <Legend verticalAlign="bottom" />
+            </PieChart>
+          </ResponsiveContainer>
         </ChartContainer>
       </CardContent>
     </Card>

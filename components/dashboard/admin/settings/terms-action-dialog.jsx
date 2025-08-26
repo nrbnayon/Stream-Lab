@@ -75,7 +75,7 @@ You must be .... become a Distro. // JusB.io .... discretion.`;
             </div>
           </form>
         )}
-        <AlertDialogFooter className="mx-auto">
+        <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             variant={actionFor === "delete" ? "destructive" : "default"}

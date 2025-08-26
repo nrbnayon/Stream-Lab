@@ -7,7 +7,6 @@ import {
 } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 import PaymentDialog from "../../payment-dialog";
-import PaymentTriggerBtn from "../../payment-trigger-btn";
 
 export default function DistroStats() {
   return (
@@ -43,13 +42,14 @@ export default function DistroStats() {
         <div className="grid grid-cols-2 gap-2 md:gap-3 lg:gap-5">
           <PaymentDialog
             triggerBtn={
-              <PaymentTriggerBtn
+              <Button
                 variant="ghost"
+                size="responsive"
                 className="w-full h-full"
                 asChild
               >
                 <span>Move to Reelbux</span>
-              </PaymentTriggerBtn>
+              </Button>
             }
             dialogTitle="Transfer money to ReelBux"
             intentionBtnText="Transfer"
@@ -57,7 +57,9 @@ export default function DistroStats() {
             inputDisabled={false}
             intention="transfer"
           />
-          <Button variant="ghost">Withdraw</Button>
+          <Button variant="ghost" size="responsive">
+            Withdraw
+          </Button>
         </div>
       </div>
     </div>

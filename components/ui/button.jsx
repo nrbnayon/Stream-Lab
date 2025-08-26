@@ -25,6 +25,11 @@ const buttonVariants = cva(
         sm: "h-8 px-2 py-1 rounded-sm gap-1.5 text-base [&_svg:not([class*='size-'])]:size-5",
         lg: "h-12 rounded-md px-6",
         icon: "size-9",
+        responsive:
+          // 📱 Mobile first (small = sm variant)
+          "h-8 px-2 py-1 rounded-sm gap-1.5 text-base [&_svg:not([class*='size-'])]:size-5 " +
+          // 💻 md+ screens (default variant)
+          "md:h-11 md:px-4 md:py-2 md:[&_svg:not([class*='size-'])]:size-7 md:gap-2 md:rounded-md",
       },
     },
     defaultVariants: {

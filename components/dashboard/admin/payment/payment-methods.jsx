@@ -22,9 +22,11 @@ export default function PaymentMethods() {
             <span>Stripe</span>
             <span>65%</span>
           </Label>
-          <div className="grow flex justify-between gap-3 items-center">
-            <p className="text-secondary-foreground">156 transactions</p>
-            <Progress color="green" value={65} className="max-w-md" />
+          <div className="flex justify-between gap-3 items-center">
+            <p className="text-secondary-foreground shrink-0">
+              156 transactions
+            </p>
+            <Progress color="green" value={65} className="w-2/3 lg:max-w-md" />
           </div>
         </div>
         {/* Paypal */}
@@ -34,8 +36,10 @@ export default function PaymentMethods() {
             <span>25%</span>
           </Label>
           <div className="grow flex justify-between gap-3 items-center">
-            <p className="text-secondary-foreground">45 transactions</p>
-            <Progress color="green" value={25} className="max-w-md" />
+            <p className="text-secondary-foreground shrink-0">
+              45 transactions
+            </p>
+            <Progress color="green" value={25} className="w-2/3 lg:max-w-md" />
           </div>
         </div>
         {/* ReelBux */}
@@ -45,8 +49,10 @@ export default function PaymentMethods() {
             <span>12%</span>
           </Label>
           <div className="grow flex justify-between gap-3 items-center">
-            <p className="text-secondary-foreground">18 transactions</p>
-            <Progress color="green" value={12} className="max-w-md" />
+            <p className="text-secondary-foreground shrink-0">
+              18 transactions
+            </p>
+            <Progress color="green" value={12} className="w-2/3 lg:max-w-md" />
           </div>
         </div>
       </CardContent>

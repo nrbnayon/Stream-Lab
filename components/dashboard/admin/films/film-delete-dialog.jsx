@@ -40,7 +40,7 @@ export default function FilmDeleteDialog({ film }) {
             remove film data from your server.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter className="mx-auto">
+        <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction variant="destructive" onClick={handleDeleteFilm}>
             Remove

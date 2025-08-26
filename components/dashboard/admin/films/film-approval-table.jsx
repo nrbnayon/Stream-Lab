@@ -26,16 +26,17 @@ export default function FilmApprovalTable() {
           <TableRow key={movie.id}>
             <TableCell className="flex items-center gap-3">
               {/* TODO: Replace the link */}
-              <Link href={`/film/somewhere`}>
+              <Link href={`/film/somewhere`} className="shrink-0">
                 <Image
                   src={movie.thumbnail_url}
                   alt={movie.title}
                   width={50}
                   height={100}
+                  className="rounded-sm object-cover aspect-[2/3] w-10 h-16"
                 />
               </Link>
-              <div>
-                <h3 className="text-lg md:text-xl font-medium">
+              <div className="min-w-0">
+                <h3 className="text-lg md:text-xl font-medium truncate">
                   {movie.title}
                 </h3>
                 <p className="text-left text-secondary-foreground">
@@ -46,8 +47,12 @@ export default function FilmApprovalTable() {
             <TableCell>20 April 2011</TableCell>
             <TableCell>
               <div className="flex gap-3 justify-center">
-                <Button variant="secondary">Approve</Button>
-                <Button variant="destructive">Reject</Button>
+                <Button variant="secondary" size="responsive">
+                  Approve
+                </Button>
+                <Button variant="destructive" size="responsive">
+                  Reject
+                </Button>
               </div>
             </TableCell>
           </TableRow>

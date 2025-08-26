@@ -53,7 +53,7 @@ export default function SubscriberDeleteAlert({ subscriber = {} }) {
             subscription and remove data from your database.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter className="mx-auto">
+        <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             variant="destructive"
