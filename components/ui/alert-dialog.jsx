@@ -94,10 +94,10 @@ function AlertDialogDescription({ className, ...props }) {
   );
 }
 
-function AlertDialogAction({ className, ...props }) {
+function AlertDialogAction({ className, variant = "default", ...props }) {
   return (
     <AlertDialogPrimitive.Action
-      className={cn(buttonVariants({ variant: "destructive" }), className)}
+      className={cn(buttonVariants({ variant: variant }), className)}
       {...props}
     />
   );

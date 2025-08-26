@@ -58,7 +58,11 @@ export default function UserDeleteAlert({ user = {} }) {
         </AlertDialogHeader>
         <AlertDialogFooter className="mx-auto">
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDelete} disabled={loading}>
+          <AlertDialogAction
+            variant="destructive"
+            onClick={handleDelete}
+            disabled={loading}
+          >
             Delete
           </AlertDialogAction>
         </AlertDialogFooter>

@@ -6,7 +6,6 @@ import {
 } from "@hugeicons/core-free-icons/index";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -16,8 +15,6 @@ import {
 } from "../ui/dialog";
 import SettingsCard from "./settings-card";
 import { Button } from "../ui/button";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
 import Image from "next/image";
 import { useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
