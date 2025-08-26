@@ -42,12 +42,7 @@ export default function DistroStats() {
         <div className="grid grid-cols-2 gap-2 md:gap-3 lg:gap-5">
           <PaymentDialog
             triggerBtn={
-              <Button
-                variant="ghost"
-                size="responsive"
-                className="w-full h-full"
-                asChild
-              >
+              <Button variant="ghost" className="w-full h-full" asChild>
                 <span>Move to Reelbux</span>
               </Button>
             }
@@ -57,9 +52,7 @@ export default function DistroStats() {
             inputDisabled={false}
             intention="transfer"
           />
-          <Button variant="ghost" size="responsive">
-            Withdraw
-          </Button>
+          <Button variant="ghost">Withdraw</Button>
         </div>
       </div>
     </div>

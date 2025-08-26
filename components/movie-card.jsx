@@ -18,7 +18,6 @@ import PaymentDialog from "./dashboard/payment-dialog";
 import Link from "next/link";
 import WebShare from "./web-share";
 
-
 export default function MovieCard({ movie, useLink = false }) {
   const {
     id,
@@ -111,7 +110,7 @@ export default function MovieCard({ movie, useLink = false }) {
             dialogTitle={`Rent  –  ${title}`}
             inputValue={``}
             triggerBtn={
-              <Button className="w-full" size="responsive" asChild>
+              <Button className="w-full" asChild>
                 <span>Rent</span>
               </Button>
             }
@@ -122,12 +121,7 @@ export default function MovieCard({ movie, useLink = false }) {
             dialogTitle={`Buy – ${title}`}
             inputValue={``}
             triggerBtn={
-              <Button
-                className="w-full"
-                variant="outline"
-                size="responsive"
-                asChild
-              >
+              <Button className="w-full" variant="outline" asChild>
                 <span>Buy</span>
               </Button>
             }

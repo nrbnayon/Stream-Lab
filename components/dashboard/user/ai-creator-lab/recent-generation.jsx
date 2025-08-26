@@ -29,21 +29,18 @@ export default function RecentGeneration() {
         <div className="flex gap-2 md:gap-3 *:grow">
           <Button
             variant={activeTab === "video" ? "default" : "secondary"}
-            size="responsive"
             onClick={() => setActiveTab("video")}
           >
             Video
           </Button>
           <Button
             variant={activeTab === "image" ? "default" : "secondary"}
-            size="responsive"
             onClick={() => setActiveTab("image")}
           >
             Image
           </Button>
           <Button
             variant={activeTab === "script" ? "default" : "secondary"}
-            size="responsive"
             onClick={() => setActiveTab("script")}
           >
             Script

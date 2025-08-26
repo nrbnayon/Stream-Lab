@@ -47,12 +47,8 @@ export default function FilmApprovalTable() {
             <TableCell>20 April 2011</TableCell>
             <TableCell>
               <div className="flex gap-3 justify-center">
-                <Button variant="secondary" size="responsive">
-                  Approve
-                </Button>
-                <Button variant="destructive" size="responsive">
-                  Reject
-                </Button>
+                <Button variant="secondary">Approve</Button>
+                <Button variant="destructive">Reject</Button>
               </div>
             </TableCell>
           </TableRow>

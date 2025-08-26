@@ -20,7 +20,7 @@ export default function ReelbuxBalanceStats() {
           //  TODO: pass the api endpoint from here
           apiEndPoint=""
           triggerBtn={
-            <Button variant="ghost" size="responsive" asChild>
+            <Button variant="ghost" asChild>
               <span>
                 <HugeiconsIcon icon={PlusSignIcon} />
                 Add Funds

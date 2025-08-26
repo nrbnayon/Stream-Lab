@@ -50,7 +50,7 @@ export default function ChangePasswordDialog() {
             />
           </div>
           <DialogFooter>
-            <Button type="submit" className="w-full mt-3" size="responsive">
+            <Button type="submit" className="w-full mt-3">
               Save changes
             </Button>
           </DialogFooter>

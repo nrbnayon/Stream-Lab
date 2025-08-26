@@ -80,11 +80,7 @@ export default function PersonalInformation({
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 mt-2">
-            <Button
-              variant="secondary"
-              size="responsive"
-              onClick={() => setIsEditing(true)}
-            >
+            <Button variant="secondary" onClick={() => setIsEditing(true)}>
               <HugeiconsIcon icon={Edit04Icon} />
               Edit Profile
             </Button>

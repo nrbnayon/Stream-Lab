@@ -2,16 +2,10 @@ import Image from "next/image";
 import SearchMovie from "./search-movie";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { useIsMobile } from "@/hooks/use-mobile";
 
-export default function NavBar({ renderFor }) {
-  const isMobile = useIsMobile();
+export default function NavBar() {
   return (
-    <div
-      className={`flex items-center justify-between gap-2 md:gap-5 absolute w-full top-2 z-20 left-1/2 -translate-x-1/2 ${
-        renderFor === "home" ? "px-5 xl:px-0 lg:container" : ""
-      } `}
-    >
+    <div className="flex items-center justify-between gap-2 md:gap-5 absolute w-full top-2 z-20 left-1/2 -translate-x-1/2 lg:container px-5 xl:px-0">
       <Link href="/">
         <Image src="/brand-logo.png" height={75} width={120} alt="Brand Logo" />
       </Link>
@@ -25,7 +19,7 @@ export default function NavBar({ renderFor }) {
           <Button variant="outline">Sign In</Button>
         </Link>
         <Link href="/signup">
-          <Button size={isMobile ? "sm" : "default"}>Sign Up</Button>
+          <Button>Sign Up</Button>
         </Link>
       </div>
     </div>

@@ -23,9 +23,7 @@ export default function GenerationCards() {
           </CardHeader>
           <CardFooter>
             <Link href={card.href}>
-              <Button variant="secondary" size="responsive">
-                {card.btnText}
-              </Button>
+              <Button variant="secondary">{card.btnText}</Button>
             </Link>
           </CardFooter>
         </Card>

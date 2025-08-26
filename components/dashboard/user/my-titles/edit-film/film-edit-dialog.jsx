@@ -59,13 +59,9 @@ export default function FilmEditDialog({ trigger, filmID }) {
           </div>
           <DialogFooter className="flex *:grow mt-3">
             <DialogClose asChild>
-              <Button variant="secondary" size="responsive">
-                Cancel
-              </Button>
+              <Button variant="secondary">Cancel</Button>
             </DialogClose>
-            <Button type="submit" size="responsive">
-              Save changes
-            </Button>
+            <Button type="submit">Save changes</Button>
           </DialogFooter>
         </form>
       </DialogContent>
