@@ -35,7 +35,7 @@ export default function PurchasedMovieCard({ movie }) {
           {/* TODO: Redirect to Watch movie page */}
           {/* Continue watch button */}
           {/* TODO: Update film link */}
-          <Link href="/film/film_id">
+          <Link href="/film/film_id?time=80">
             <Button
               variant="destructive"
               size="sm"

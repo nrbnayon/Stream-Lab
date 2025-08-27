@@ -17,7 +17,7 @@ export default function Settings() {
           height={50}
           width={50}
           alt="Profile Image"
-          className="rounded-full"
+          className="rounded-full h-auto w-auto"
         />
       </div>
 

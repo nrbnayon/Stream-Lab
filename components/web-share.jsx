@@ -2,11 +2,11 @@
 import { Share01Icon } from "@hugeicons/core-free-icons/index";
 import { Button } from "./ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { cn, webShare } from "@/lib/utils";
+import { cn, webShareFunction } from "@/lib/utils";
 
 export default function WebShare({ url = "", title = "", className }) {
   const handleShare = async (e) => {
-    await webShare({
+    await webShareFunction({
       title,
       url,
     });

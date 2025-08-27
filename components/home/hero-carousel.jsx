@@ -122,8 +122,7 @@ export default function HeroCarousel({ moviesData, renderFor = "home" }) {
                     triggerBtn={
                       <Button
                         variant="outline"
-                        className="rounded-full px-4 md:px-6"
-                        size={isMobile ? "sm" : "default"}
+                        className="rounded-full! px-4 md:px-6"
                         asChild
                       >
                         <span>Trailer</span>

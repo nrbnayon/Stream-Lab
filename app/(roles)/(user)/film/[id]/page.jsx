@@ -1,15 +1,16 @@
 import RelatedMovies from "@/components/dashboard/user/film-details/related-movies";
-import VideoPlayerClient from "@/components/dashboard/user/film-details/video-player-client";
 import TrailerPopup from "@/components/trailer-popup";
 import { Button } from "@/components/ui/button";
+import VideoPlayer from "@/components/video-player/video-player";
 import WebShare from "@/components/web-share";
 
-export default async function FilmDetails({ params }) {
-  const { id } = params;
+export default async function FilmDetails() {
+  // const { id } = params;
 
   return (
     <div className="grid gap-5">
-      <VideoPlayerClient />
+      {/* NOTE: Video Player */}
+      <VideoPlayer />
 
       {/* Details section */}
       <section className="my-5 space-y-5">

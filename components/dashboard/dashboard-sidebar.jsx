@@ -25,7 +25,7 @@ export function DashboardSidebar({ ...props }) {
               width={100}
               height={50}
               alt="Brand Logo"
-              className="mx-auto"
+              className="mx-auto w-auto h-auto"
             />
           </SidebarMenuItem>
         </SidebarMenu>

@@ -1,14 +1,23 @@
+"use client";
 import { cn } from "@/lib/utils";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import videojs from "video.js";
-import "video.js/dist/video-js.css";
-import "videojs-contrib-quality-levels";
-import "videojs-hls-quality-selector";
-import "videojs-hotkeys";
+import "./videojs-plugins";
 
-export default function VideoPlayer({ src, className }) {
+export default function VideoPlayer({
+  // TODO: Remove default video
+  src = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+  className,
+  startTime = 0, // fallback start time if no query param
+  onClose,
+}) {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
+  const searchParams = useSearchParams();
+
+  // ✅ take from query first, fallback to prop
+  const initialStartTime = Number(searchParams.get("time")) || startTime;
 
   // options
   const options = {
@@ -44,6 +53,13 @@ export default function VideoPlayer({ src, className }) {
     //   });
     // }
 
+    // Seek to startTime if provided
+    player.on("loadedmetadata", () => {
+      if (initialStartTime > 0) {
+        player.currentTime(initialStartTime);
+      }
+    });
+
     // You can handle player events here, for example:
     player.on("waiting", () => {
       console.log("player is waiting");
@@ -67,22 +83,26 @@ export default function VideoPlayer({ src, className }) {
       player.autoplay(options.autoplay);
       player.src(options.sources);
     }
-  }, [options, videoRef]);
+  }, [src]);
   useEffect(() => {
     const player = playerRef.current;
     return () => {
       if (player && !player.isDisposed()) {
+        // ✅ Save last watched time before disposing
+        const lastTime = player.currentTime();
+        if (onClose) onClose(lastTime);
+
         player.dispose();
         playerRef.current = null;
       }
     };
-  }, [playerRef]);
+  }, [onClose]);
   return (
     <div data-vjs-player>
       <div
         ref={videoRef}
         tabIndex="0"
-        className={cn("rounded-md overflow-clip", className)}
+        className={cn("rounded-md overflow-clip max-w-4xl", className)}
       />
     </div>
   );

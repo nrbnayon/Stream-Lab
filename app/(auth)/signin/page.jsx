@@ -14,7 +14,7 @@ export default function SignIn() {
         src="/brand-logo.png"
         height={100}
         width={120}
-        className="mx-auto"
+        className="mx-auto w-auto h-auto"
         alt="brand-logo"
       />
 

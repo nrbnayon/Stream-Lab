@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { minutesToHours, truncateText, webShare } from "@/lib/utils";
+import { minutesToHours, truncateText } from "@/lib/utils";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { PlayIcon, Time04Icon } from "@hugeicons/core-free-icons/index";
 import { Button } from "./ui/button";
@@ -130,7 +130,7 @@ export default function MovieCard({ movie, useLink = false }) {
           />
         </div>
 
-        <WebShare title={title} url={`affiliated link`} />
+        <WebShare title={title} url={`https://yourwebsite.com/affiliate`} />
       </CardFooter>
     </Card>
   );

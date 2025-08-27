@@ -7,7 +7,13 @@ export default function NavBar() {
   return (
     <div className="flex items-center justify-between gap-2 md:gap-5 absolute w-full top-2 z-20 left-1/2 -translate-x-1/2 lg:container px-5 xl:px-0">
       <Link href="/">
-        <Image src="/brand-logo.png" height={75} width={120} alt="Brand Logo" />
+        <Image
+          src="/brand-logo.png"
+          height={75}
+          width={120}
+          alt="Brand Logo"
+          className="w-auto h-auto"
+        />
       </Link>
 
       {/* Search Bar */}

@@ -20,12 +20,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" data-scroll-behavior="smooth">
       <body
-        className={`${roboto.variable} ${geistMono.variable} antialiased`}
+        className="antialiased"
       >
-        {children}
-        <Toaster richColors closeButton />
+        <main className={`${roboto.variable} ${geistMono.variable}`}>
+          {children}
+          <Toaster richColors closeButton />
+        </main>
       </body>
     </html>
   );

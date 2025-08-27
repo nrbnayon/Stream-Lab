@@ -10,7 +10,7 @@ export default function Footer() {
           alt="Brand Logo"
           height={50}
           width={100}
-          className="mx-auto"
+          className="mx-auto w-auto h-auto"
         />
         <ul className="mt-5 flex gap-3 justify-center">
           <li>

@@ -16,7 +16,7 @@ const moviesData = [
       thumbnail_url:
          "https://i.pinimg.com/736x/a1/84/5a/a1845a62b076849b90f30b625b105f0d.jpg",
       trailer_url:
-         "https://res.cloudinary.com/dubsxif8w/video/upload/full_films/pqggbovamtb6ximqazpc.m3u8",
+         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
       full_film_url:
          "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
       rent_price: 4.99,
