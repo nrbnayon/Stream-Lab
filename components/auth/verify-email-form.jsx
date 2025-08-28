@@ -1,12 +1,27 @@
+"use client";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowLeft02Icon } from "@hugeicons/core-free-icons/index";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { useState } from "react";
 
-export default function VerifyEmailForm({ handleSubmit, setStep }) {
+export default function VerifyEmailForm({ setStep }) {
+  const [otp, setOTP] = useState("");
+  const [error, setError] = useState(null);
+
+  const handleCodeVerify = async (e) => {
+    e.preventDefault();
+    setError(null);
+    if (!otp || otp.length < 6) {
+      setError("Please enter your 6 digit OTP.");
+      return;
+    }
+    //
+    setStep(3);
+  };
   return (
-    <form className="space-y-5" onSubmit={handleSubmit}>
+    <form className="space-y-5" onSubmit={handleCodeVerify}>
       <h2 className="flex gap-4 text-2xl items-center">
         <HugeiconsIcon
           icon={ArrowLeft02Icon}
@@ -23,7 +38,7 @@ export default function VerifyEmailForm({ handleSubmit, setStep }) {
 
       {/* OTP Input Group */}
       <div>
-        <InputOTP maxLength={6} name="otp">
+        <InputOTP maxLength={6} value={otp} onChange={setOTP}>
           <InputOTPGroup>
             <InputOTPSlot index={0} />
             <InputOTPSlot index={1} />
@@ -40,6 +55,8 @@ export default function VerifyEmailForm({ handleSubmit, setStep }) {
           </Link>
         </p>
       </div>
+
+      {error && <p className="text-red-500 text-sm">{error}</p>}
 
       <Button className="w-full">Verify</Button>
     </form>
