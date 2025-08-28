@@ -16,7 +16,9 @@ export default function InputField({
   rightIcon,
   inputDisabled = false,
   className,
-  defaultValue = 0,
+  value,
+  setValue,
+  defaultValue = "",
   ...props
 }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -35,10 +37,11 @@ export default function InputField({
         {/* main input field */}
         <Input
           type={!showPassword ? type : "text"}
-          className={`w-full ${leftIcon ? "pl-8" : ""} ${
-            rightIcon || type === "password" ? "pr-8" : ""
+          className={`w-full ${leftIcon ? "pl-10" : ""} ${
+            rightIcon || type === "password" ? "pr-10" : ""
           }`}
-          {...(defaultValue && { defaultValue })}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
           placeholder={placeholder}
           name={name}
           disabled={inputDisabled}

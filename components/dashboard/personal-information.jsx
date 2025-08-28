@@ -109,7 +109,7 @@ export default function PersonalInformation({
             <div className="grid gap-3">
               <InputField
                 label="Name"
-                defaultValue={full_name}
+                value={full_name}
                 inputDisabled={!isEditing}
                 name="name"
               />
@@ -117,7 +117,7 @@ export default function PersonalInformation({
                 label="Email"
                 type="email"
                 inputDisabled={true}
-                defaultValue={email}
+                value={email}
               />
             </div>
           </div>

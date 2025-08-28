@@ -9,11 +9,19 @@ import {
 } from "../ui/sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function RenderSidebarLinks() {
+  const [role, setRole] = useState(null);
   const pathname = usePathname();
   // TODO: fetch role and render links
-  const role = "user";
+  useEffect(() => {
+    const storedRole = localStorage.getItem("role");
+    if (storedRole) {
+      setRole(storedRole);
+    }
+  }, []);
+  if (!role) return null;
   const linkGroups = sidebarLinks[role];
   return (
     <>
@@ -22,7 +30,8 @@ export default function RenderSidebarLinks() {
           <SidebarGroupLabel>{group.groupName}</SidebarGroupLabel>
           <SidebarMenu>
             {group.links.map((link, index) => {
-              const isActive = pathname.startsWith(link.href);
+              const isActive =
+                pathname === link.href || pathname.startsWith(`${link.href}/`);
               return (
                 <SidebarMenuItem key={index}>
                   <SidebarMenuButton

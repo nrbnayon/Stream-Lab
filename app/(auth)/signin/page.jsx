@@ -1,7 +1,5 @@
-import InputField from "@/components/input-field";
-import { Button } from "@/components/ui/button";
+import SignInForm from "@/components/auth/sign-in-form";
 import Image from "next/image";
-import Link from "next/link";
 
 export const metadata = {
   title: "Signin | ...",
@@ -26,40 +24,7 @@ export default function SignIn() {
       </div>
 
       {/* Signin form */}
-      <form className="mt-8 space-y-3">
-        {/* Email */}
-        <InputField
-          placeholder="Enter your email"
-          type="email"
-          label="Email"
-          name="email"
-        />
-        {/* Password */}
-        <InputField
-          placeholder="Enter your password"
-          type="password"
-          label="Password"
-          name="password"
-        />
-
-        {/* forgot password */}
-        <p className="text-right">
-          <Link href="/reset-password" className="text-primary hover:underline">
-            Forgot Password?
-          </Link>
-        </p>
-
-        {/* Sign in button */}
-        <Button className="w-full">Sign In</Button>
-
-        {/* If Not an existing user */}
-        <p className="text-center">
-          Don&apos;t have an account? &nbsp;
-          <Link href="/signup" className="text-primary hover:underline">
-            Sign Up
-          </Link>
-        </p>
-      </form>
+      <SignInForm />
     </>
   );
 }

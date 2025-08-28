@@ -15,6 +15,7 @@ export default function ReelbuxBalanceStats() {
         <PaymentDialog
           inputDisabled={false}
           intention="add"
+          dialogDescription="Add funds to your Reelbux wallet to purchase films."
           dialogTitle="Add Fund"
           intentionBtnText="Add"
           //  TODO: pass the api endpoint from here

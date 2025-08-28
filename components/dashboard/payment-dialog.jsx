@@ -11,9 +11,6 @@ import {
 import { Button } from "../ui/button";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
-import { MasterCardIcon } from "@hugeicons/core-free-icons/index";
-import { HugeiconsIcon } from "@hugeicons/react";
-import { usePathname } from "next/navigation";
 import {
   Select,
   SelectContent,
@@ -22,7 +19,8 @@ import {
   SelectTrigger,
 } from "../ui/select";
 import { Input } from "../ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import InputField from "../input-field";
 
 export default function PaymentDialog({
   intention = "",
@@ -34,16 +32,26 @@ export default function PaymentDialog({
   inputValue,
   apiEndPoint,
 }) {
-  const pathName = usePathname();
-  const [amount, setAmount] = useState(inputValue);
-  const [errorMessage, setErrorMessage] = useState("");
   const systemPayOption = intention === "add" ? "Distro" : "ReelBux";
+  // DEBUG: make changes here
+  const [amount, setAmount] = useState(
+    inputValue || intention === "transfer" ? 10 : 1
+  );
+  const [rentTime, setRentTime] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState(systemPayOption);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // TODO: Make action here
+  const handlePayment = (e) => {
+    e.preventDefault();
+    console.log("Payment made", { amount, rentTime, paymentMethod });
+  };
 
   return (
     <Dialog>
       <DialogTrigger>{triggerBtn}</DialogTrigger>
       <DialogContent>
-        <form>
+        <form onSubmit={handlePayment}>
           <DialogHeader className="my-3">
             <DialogTitle> {dialogTitle} </DialogTitle>
             {dialogDescription && (
@@ -55,13 +63,13 @@ export default function PaymentDialog({
             <div className="flex gap-3">
               {/* NOTE: Amount Field */}
               <div className="grow">
-                <Label>Amount ($)</Label>
-                <Input
+                <InputField
+                  label="Amount ($)"
                   type="number"
-                  disabled={inputDisabled}
-                  min={1}
+                  inputDisabled={inputDisabled}
+                  min={intention === "transfer" ? 10 : 1}
                   value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
+                  setValue={setAmount}
                 />
               </div>
 
@@ -89,8 +97,8 @@ export default function PaymentDialog({
             {/* NOTE: Show source if not case is transfer  */}
             {intention !== "transfer" && (
               <RadioGroup
-                // className="my-3"
                 defaultValue={systemPayOption.toLowerCase()}
+                onValueChange={(value) => setPaymentMethod(value)}
               >
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="card" id="card" />
@@ -112,7 +120,7 @@ export default function PaymentDialog({
             )}
 
             {/* NOTE: Show error here */}
-            {/* TODO: change condition */}
+            {/* DEBUG: change condition */}
             {intention === "rent" && (
               <p className="text-destructive text-center">
                 You don&apos;t have enough balance

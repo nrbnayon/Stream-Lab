@@ -1,7 +1,6 @@
 import { CreditCardValidationIcon, CrownIcon, DashboardSquare03Icon, Dollar01Icon, File02Icon, Film01Icon, Film02Icon, Image03Icon, Link05Icon, MoneySend02Icon, PlayCircleIcon, PlayListIcon, Settings02Icon, StarIcon, TradeUpIcon, Upload01Icon, UserGroup02Icon, UserGroupIcon, Video01Icon, ViewIcon, ZapIcon, } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 
-const loginAs = ["Viewer", "Film Maker"];
 
 const moviesData = [
    {

@@ -1,29 +1,31 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { Input } from "../ui/input";
 import { Search01Icon } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import InputField from "../input-field";
 
 export default function SearchMovie({ className }) {
   const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState("");
+  // Fetch when input changes
   useEffect(() => {
     //
   }, [searchValue]);
   return (
     <div className={cn("relative", className)}>
-      <Input
+      <InputField
+        leftIcon={
+          <HugeiconsIcon
+            icon={Search01Icon}
+            className="absolute left-2 top-1/2 -translate-y-1/2 text-muted-foreground"
+          />
+        }
         placeholder="Search Films"
-        className="pl-10!"
-        type="text"
-        onChange={(e) => setSearchValue(e.target.value)}
-      />
-      <HugeiconsIcon
-        icon={Search01Icon}
-        className="absolute left-2 top-1/2 -translate-y-1/2 text-muted-foreground"
+        value={searchValue}
+        setValue={setSearchValue}
       />
 
       {/* Search Preview */}
