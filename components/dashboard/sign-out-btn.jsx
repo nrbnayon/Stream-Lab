@@ -47,7 +47,7 @@ export default function SignOutBtn() {
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={handleSignOut}>
+              <AlertDialogAction onClick={handleSignOut} variant="destructive">
                 Continue
               </AlertDialogAction>
             </AlertDialogFooter>
