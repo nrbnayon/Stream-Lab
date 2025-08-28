@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,17 +8,42 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Tick01Icon } from "@hugeicons/core-free-icons/index";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Loading03Icon, Tick01Icon } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
-export default function PlanCard({ plan, setPaymentMethod, paymentMethod }) {
-  const { isHighlighted, icon, name, price, features } = plan;
+import { useState } from "react";
+export default function PlanCard({ subscriptionPlan }) {
+  const { isHighlighted, icon, name, price, features } = subscriptionPlan;
+  const [paymentData, setPaymentData] = useState({
+    payment_method: "",
+    plan_name: name,
+  });
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  // TODO: Pay here
+  const handlePayment = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    console.log(paymentData);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    setOpen(false);
+    setPaymentData({ payment_method: "", plan_name: name });
+  };
   return (
     <Card
       className={`${
@@ -48,38 +74,46 @@ export default function PlanCard({ plan, setPaymentMethod, paymentMethod }) {
         ))}
 
         {/* Choosing payment method */}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger asChild>
             <Button
               className="w-full mt-3"
               variant={isHighlighted ? "default" : "secondary"}
+              disabled={loading}
             >
-              Choose {name}
+              {loading ? (
+                <HugeiconsIcon
+                  icon={Loading03Icon}
+                  className="animate-spin [animation-duration:1.5s]"
+                />
+              ) : (
+                <span>Choose {name}</span>
+              )}
             </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56">
-            <DropdownMenuLabel>Choose Payment Method</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuCheckboxItem
-              checked={paymentMethod === "card"}
-              onCheckedChange={() => setPaymentMethod("card")}
-            >
-              Credit Card
-            </DropdownMenuCheckboxItem>
-            <DropdownMenuCheckboxItem
-              checked={paymentMethod === "wallet"}
-              onCheckedChange={() => setPaymentMethod("wallet")}
-            >
-              Wallet Balance
-            </DropdownMenuCheckboxItem>
-            <DropdownMenuCheckboxItem
-              checked={paymentMethod == "paypal"}
-              onCheckedChange={() => setPaymentMethod("paypal")}
-            >
-              PayPal
-            </DropdownMenuCheckboxItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+          </PopoverTrigger>
+          <PopoverContent>
+            <form className="flex gap-2" onSubmit={handlePayment}>
+              <Select
+                value={paymentData.payment_method}
+                onValueChange={(value) =>
+                  setPaymentData({ ...paymentData, payment_method: value })
+                }
+              >
+                <SelectTrigger className="flex-1">
+                  <SelectValue placeholder="Payment Method?" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="card">card</SelectItem>
+                    <SelectItem value="paypal">paypal</SelectItem>
+                    <SelectItem value="wallet">wallet</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              <Button disabled={!paymentData.payment_method}>Pay Now</Button>
+            </form>
+          </PopoverContent>
+        </Popover>
       </CardContent>
     </Card>
   );

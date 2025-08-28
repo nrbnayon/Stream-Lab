@@ -15,16 +15,13 @@ import { subscriptionPlans } from "@/constants";
 import { Cancel01Icon, Crown03Icon } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 import PlanCard from "./plan-card";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function UpgradePlan() {
-  const [paymentMethod, setPaymentMethod] = useState("");
+  const [open, setOpen] = useState(false);
   // TODO: Call API here
-  useEffect(() => {
-    console.log(paymentMethod);
-  }, [paymentMethod]);
   return (
-    <Drawer direction="bottom">
+    <Drawer direction="bottom" open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <Button>
           <HugeiconsIcon icon={Crown03Icon} />
@@ -43,12 +40,7 @@ export default function UpgradePlan() {
             <div className="p-4 pb-0">
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {subscriptionPlans.map((plan, i) => (
-                  <PlanCard
-                    plan={plan}
-                    key={i}
-                    setPaymentMethod={setPaymentMethod}
-                    paymentMethod={paymentMethod}
-                  />
+                  <PlanCard subscriptionPlan={plan} key={i} />
                 ))}
               </div>
             </div>

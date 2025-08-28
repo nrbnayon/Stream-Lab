@@ -6,7 +6,7 @@ import WatchTime from "@/components/dashboard/user/my-titles/analytics/watch-tim
 import WeeklyEarnings from "@/components/dashboard/user/my-titles/analytics/weekly-earnings";
 
 export default async function FilmAnalyticsPage({ params }) {
-  const { id } = params;
+  const { id } = await params;
 
   return (
     <>

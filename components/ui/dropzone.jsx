@@ -60,7 +60,7 @@ export const Dropzone = ({
     >
       <Button
         className={cn(
-          "relative h-auto w-full flex-col overflow-hidden px-5 lg:py-16 border-2 border-dashed hover:border-primary active:scale-[0.99]",
+          "relative h-full! w-full flex-col overflow-hidden px-5 lg:py-16! border-2 border-dashed hover:border-primary active:scale-[0.99]",
           isDragActive && "border-primary",
           className
         )}

@@ -112,7 +112,7 @@ export default function FilmUploadForm() {
             Upload your project and all its details and we'll get back to you
             within 2-14 days.
           </CardDescription>
-          <CardContent className="mt-3 px-0 grid lg:grid-cols-3 gap-5">
+          <CardContent className="my-5 px-0! grid grid-cols-1 lg:grid-cols-3 gap-5 space-y-3">
             {/* Upload Trailer */}
             <UploadContent
               content={trailer}
