@@ -23,7 +23,7 @@ export default function SignOutBtn() {
     // TODO: Sign out functionality
     console.log("Signing out...");
 
-    router.push("/signin");
+    router.push("/");
   };
 
   return (
