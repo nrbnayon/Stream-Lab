@@ -46,14 +46,8 @@ export default function PersonalInformation({
   // handle data changes and make update
   const handleUpdateProfile = (e) => {
     e.preventDefault();
-    const editedName = e.target.name.value;
-    full_name !== editedName &&
-      setEditedData((prev) => ({ ...prev, full_name: editedName }));
-    if (!editedData.avatar || !editedData.full_name) {
-      // TODO: make alert and close the dialog
-      return;
-    }
     // TODO: send data to backend
+    console.log(editedData);
   };
   return (
     <Dialog
@@ -61,6 +55,8 @@ export default function PersonalInformation({
       onOpenChange={(state) => {
         setOpen(state);
         setIsEditing(false);
+        setEditedData({ avatar: "", full_name: "" });
+        setPreview(null);
       }}
     >
       <DialogTrigger className="w-full">
@@ -80,7 +76,11 @@ export default function PersonalInformation({
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 mt-2">
-            <Button variant="secondary" onClick={() => setIsEditing(true)}>
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => setIsEditing(true)}
+            >
               <HugeiconsIcon icon={Edit04Icon} />
               Edit Profile
             </Button>
@@ -109,9 +109,11 @@ export default function PersonalInformation({
             <div className="grid gap-3">
               <InputField
                 label="Name"
-                value={full_name}
+                value={editedData.full_name || full_name}
                 inputDisabled={!isEditing}
-                name="name"
+                setValue={(value) =>
+                  setEditedData((prev) => ({ ...prev, full_name: value }))
+                }
               />
               <InputField
                 label="Email"
@@ -123,7 +125,15 @@ export default function PersonalInformation({
           </div>
           {isEditing ? (
             <DialogFooter className="mt-3">
-              <Button type="submit" className="w-full">
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={
+                  (!editedData.full_name ||
+                    editedData.full_name === full_name) &&
+                  !editedData.avatar
+                }
+              >
                 Save changes
               </Button>
             </DialogFooter>
