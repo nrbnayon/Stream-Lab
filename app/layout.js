@@ -26,7 +26,7 @@ export const metadata = {
     "earn money with movies",
     "movie studio platform",
   ],
-  authors: [{ name: "Stream Lab Team" }],
+  authors: [{ name: "Nayon Kanti Halder" }],
   creator: "Stream Lab",
   publisher: "Stream Lab",
   openGraph: {
@@ -37,7 +37,7 @@ export const metadata = {
     siteName: "Stream Lab",
     images: [
       {
-        url: "https://i.ibb.co.com/1Y09C1SN/brand-logo.png", 
+        url: "https://i.ibb.co.com/1Y09C1SN/brand-logo.png",
         width: 1200,
         height: 630,
         alt: "Stream Lab - Watch Movies Online & AI Movie Generator",
@@ -51,7 +51,7 @@ export const metadata = {
     title: "Stream Lab | Watch Movies Online & Create AI-Generated Films",
     description:
       "Watch movies online and create your own AI-powered studio with Stream Lab. Publish and earn from your films.",
-    images: ["https://i.ibb.co.com/1Y09C1SN/brand-logo.png"], 
+    images: ["https://i.ibb.co.com/1Y09C1SN/brand-logo.png"],
     creator: "@nrbnayon",
   },
   metadataBase: new URL("https://yourdomain.com"),
@@ -65,13 +65,10 @@ export const metadata = {
   },
 };
 
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body
-        className="antialiased"
-      >
+      <body className="antialiased">
         <main className={`${roboto.variable} ${geistMono.variable}`}>
           {children}
           <Toaster richColors closeButton />
