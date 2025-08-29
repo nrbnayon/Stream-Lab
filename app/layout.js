@@ -33,7 +33,7 @@ export const metadata = {
     title: "Stream Lab | Watch Movies Online & Create AI-Generated Films",
     description:
       "Stream movies online and create your own AI-powered movie studio. Share, publish, and monetize your films with Stream Lab.",
-    url: "https://yourdomain.com",
+    url: "https://stream-lab-one.vercel.app",
     siteName: "Stream Lab",
     images: [
       {
@@ -54,14 +54,14 @@ export const metadata = {
     images: ["https://i.ibb.co.com/1Y09C1SN/brand-logo.png"],
     creator: "@nrbnayon",
   },
-  metadataBase: new URL("https://yourdomain.com"),
+  metadataBase: new URL("https://stream-lab-one.vercel.app"),
   robots: {
     index: true,
     follow: true,
     nocache: true,
   },
   alternates: {
-    canonical: "https://yourdomain.com",
+    canonical: "https://stream-lab-one.vercel.app",
   },
 };
 
