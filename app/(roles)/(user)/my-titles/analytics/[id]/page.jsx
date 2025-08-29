@@ -1,3 +1,4 @@
+// app\(roles)\(user)\my-titles\analytics\[id]\page.jsx
 import AnalyticsHeading from "@/components/dashboard/user/my-titles/analytics-heading";
 import DailyViews from "@/components/dashboard/user/my-titles/analytics/daily-views";
 import RevenueBreakdown from "@/components/dashboard/user/my-titles/analytics/revenue-breakdown";
@@ -6,7 +7,7 @@ import WatchTime from "@/components/dashboard/user/my-titles/analytics/watch-tim
 import WeeklyEarnings from "@/components/dashboard/user/my-titles/analytics/weekly-earnings";
 
 export default async function FilmAnalyticsPage({ params }) {
-  const { id } = params;
+  const { id } = await params;
 
   return (
     <>
