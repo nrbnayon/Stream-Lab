@@ -9,31 +9,37 @@ import {
 } from "../ui/sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { initializeAuth } from "@/redux/store/slices/authSlice";
 
 export default function RenderSidebarLinks() {
-  const [role, setRole] = useState(null);
+  const dispatch = useDispatch();
+  const { role, isAuthenticated } = useSelector((state) => state.auth);
   const pathname = usePathname();
-  // TODO: fetch role and render links
+
   useEffect(() => {
-    const storedRole = localStorage.getItem("role");
-    if (storedRole) {
-      setRole(storedRole);
-    }
-  }, []);
-  if (!role) return null;
+    dispatch(initializeAuth());
+  }, [dispatch]);
+
+  if (!isAuthenticated || !role) return null;
+
   const linkGroups = sidebarLinks[role];
+
+  // Don't render if no link groups found for the role
+  if (!linkGroups) return null;
+
   return (
     <>
       {linkGroups.map((group, index) => (
         <SidebarGroup key={index}>
           <SidebarGroupLabel>{group.groupName}</SidebarGroupLabel>
           <SidebarMenu>
-            {group.links.map((link, index) => {
+            {group.links.map((link, linkIndex) => {
               const isActive =
                 pathname === link.href || pathname.startsWith(`${link.href}/`);
               return (
-                <SidebarMenuItem key={index}>
+                <SidebarMenuItem key={linkIndex}>
                   <SidebarMenuButton
                     asChild
                     variant={isActive ? "active" : "default"}

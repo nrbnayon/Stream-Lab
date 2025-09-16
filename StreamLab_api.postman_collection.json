@@ -1,0 +1,5552 @@
+{
+	"info": {
+		"_postman_id": "e29c6c45-41f1-4ef4-8ad1-f4de83aa4d6b",
+		"name": "StreamLab",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48485286",
+		"_collection_link": "https://munjuralom-8076373.postman.co/workspace/Munjur-Alom's-Workspace~f06c5c61-5527-41fc-89b4-d2f02dcf6f43/collection/46836621-e29c6c45-41f1-4ef4-8ad1-f4de83aa4d6b?action=share&source=collection_link&creator=48485286"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Signin",
+							"item": [
+								{
+									"name": "user",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"email_address\": \"kader@gmail.com\",\r\n  \"password\": \"munju001\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/api/auth/sign-in",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"auth",
+												"sign-in"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"email_address\": \"kader@gmail.com\",\r\n  \"password\": \"munju001\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://127.0.0.1:8000/api/auth/sign-in/",
+													"protocol": "http",
+													"host": [
+														"127",
+														"0",
+														"0",
+														"1"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"auth",
+														"sign-in",
+														""
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Date",
+													"value": "Sat, 06 Sep 2025 11:03:03 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "WSGIServer/0.2 CPython/3.13.5"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept"
+												},
+												{
+													"key": "Allow",
+													"value": "POST, OPTIONS"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "DENY"
+												},
+												{
+													"key": "Content-Length",
+													"value": "555"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MDIwNTgzLCJpYXQiOjE3NTcxNTY1ODMsImp0aSI6ImY0NzI2OGQ3ZTVmMjQzN2Q4ZWM5Nzc1NzVhMDFmOTZjIiwidXNlcl9pZCI6Imp3a1o1TFFmWHFQRSJ9.qSJvK1iadClWKHlmZAf2PPqD9ajYsunZyqa7cn1UhUg\",\n    \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc2MTQ3NjU4MywiaWF0IjoxNzU3MTU2NTgzLCJqdGkiOiJmYmY0ZWU2MzQ0NmY0ZjBlOTdlZWU4ZGI2ZmE0NzQyNyIsInVzZXJfaWQiOiJqd2taNUxRZlhxUEUifQ.3f-fSuIrUyh9ZDMt7IGukW1U8cuGu_hDjekHXnl-Bo0\",\n    \"user_id\": \"jwkZ5LQfXqPE\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Signup",
+							"item": [
+								{
+									"name": "user",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"full_name\": \"Munjur Alom\",\r\n  \"email_address\": \"test@gmail.com\",\r\n  \"password\": \"munju001\",\r\n  \"confirm_password\":\"munju001\",\r\n  \"distro_code\": \"\",\r\n  \"terms_agreed\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/auth/sign-up",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"auth",
+												"sign-up"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"full_name\": \"Munjur Alom\",\r\n  \"email_address\": \"test@gmail.com\",\r\n  \"password\": \"munju001\",\r\n  \"confirm_password\":\"munju001\",\r\n  \"distro_code\": \"\",\r\n  \"terms_agreed\": true\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://127.0.0.1:8000/api/auth/sign-up/",
+													"protocol": "http",
+													"host": [
+														"127",
+														"0",
+														"0",
+														"1"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"auth",
+														"sign-up",
+														""
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Date",
+													"value": "Sat, 06 Sep 2025 11:04:18 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "WSGIServer/0.2 CPython/3.13.5"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept"
+												},
+												{
+													"key": "Allow",
+													"value": "POST, OPTIONS"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "DENY"
+												},
+												{
+													"key": "Content-Length",
+													"value": "77"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"id\": \"LcMRHB8eAaXj\",\n    \"role\": \"user\",\n    \"distro_code\": \"SHAA4UMZ\",\n    \"distro_by\": null\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Forget password",
+							"item": [
+								{
+									"name": "forgo-password",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"email_address\": \"test@gmail.com\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/auth/forgo-password",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"auth",
+												"forgo-password"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"email_address\": \"test@gmail.com\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://127.0.0.1:8000/api/auth/forgo-password",
+													"protocol": "http",
+													"host": [
+														"127",
+														"0",
+														"0",
+														"1"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"auth",
+														"forgo-password"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Date",
+													"value": "Mon, 08 Sep 2025 08:16:58 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "WSGIServer/0.2 CPython/3.13.5"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept"
+												},
+												{
+													"key": "Allow",
+													"value": "POST, OPTIONS"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "DENY"
+												},
+												{
+													"key": "Content-Length",
+													"value": "26"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"user_id\": \"LcMRHB8eAaXj\"\n}"
+										}
+									]
+								},
+								{
+									"name": "verify-reset-code",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"user_id\": \"LcMRHB8eAaXj\",\r\n    \"verification_code\": \"212169\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/auth/verify-reset-code",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"auth",
+												"verify-reset-code"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"user_id\": \"LcMRHB8eAaXj\",\r\n    \"verification_code\": \"212169\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://127.0.0.1:8000/api/auth/verify-reset-code",
+													"protocol": "http",
+													"host": [
+														"127",
+														"0",
+														"0",
+														"1"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"auth",
+														"verify-reset-code"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Date",
+													"value": "Mon, 08 Sep 2025 08:18:13 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "WSGIServer/0.2 CPython/3.13.5"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept"
+												},
+												{
+													"key": "Allow",
+													"value": "POST, OPTIONS"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "DENY"
+												},
+												{
+													"key": "Content-Length",
+													"value": "53"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"secret_key\": \"df0a34da-46b7-40a4-a9c1-30728c4111bc\"\n}"
+										}
+									]
+								},
+								{
+									"name": "reset-password",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"user_id\": \"LcMRHB8eAaXj\",\r\n    \"secret_key\": \"df0a34da-46b7-40a4-a9c1-30728c4111bc\",\r\n    \"new_password\": \"testuser123\",\r\n    \"confirm_password\": \"testuser123\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/auth/reset-password",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"auth",
+												"reset-password"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"user_id\": \"LcMRHB8eAaXj\",\r\n    \"secret_key\": \"df0a34da-46b7-40a4-a9c1-30728c4111bc\",\r\n    \"new_password\": \"testuser123\",\r\n    \"confirm_password\": \"testuser123\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://127.0.0.1:8000/api/auth/reset-password",
+													"protocol": "http",
+													"host": [
+														"127",
+														"0",
+														"0",
+														"1"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"auth",
+														"reset-password"
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Date",
+													"value": "Mon, 08 Sep 2025 08:19:16 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "WSGIServer/0.2 CPython/3.13.5"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept"
+												},
+												{
+													"key": "Allow",
+													"value": "POST, OPTIONS"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "DENY"
+												},
+												{
+													"key": "Content-Length",
+													"value": "0"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												}
+											],
+											"cookie": [],
+											"body": null
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Refresh Token",
+							"item": [
+								{
+									"name": "refresh",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MDIwNTgzLCJpYXQiOjE3NTcxNTY1ODMsImp0aSI6ImY0NzI2OGQ3ZTVmMjQzN2Q4ZWM5Nzc1NzVhMDFmOTZjIiwidXNlcl9pZCI6Imp3a1o1TFFmWHFQRSJ9.qSJvK1iadClWKHlmZAf2PPqD9ajYsunZyqa7cn1UhUg",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc2MTYzOTE2NywiaWF0IjoxNzU3MzE5MTY3LCJqdGkiOiI4MWU5MWI3NDgyZWQ0MjgxYjBhYTRjNTg3ZTYwMWY3ZCIsInVzZXJfaWQiOiJVUEpvUEZGWnY0OHEifQ.1yX7HT6pnHl6kMsfb4p4IulHpQjTsvodkA1vMhd5wV4\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/auth/refresh",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"auth",
+												"refresh"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc2MTYzOTE2NywiaWF0IjoxNzU3MzE5MTY3LCJqdGkiOiI4MWU5MWI3NDgyZWQ0MjgxYjBhYTRjNTg3ZTYwMWY3ZCIsInVzZXJfaWQiOiJVUEpvUEZGWnY0OHEifQ.1yX7HT6pnHl6kMsfb4p4IulHpQjTsvodkA1vMhd5wV4\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://127.0.0.1:8000/api/auth/refresh",
+													"protocol": "http",
+													"host": [
+														"127",
+														"0",
+														"0",
+														"1"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"auth",
+														"refresh"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Date",
+													"value": "Mon, 08 Sep 2025 08:22:39 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "WSGIServer/0.2 CPython/3.13.5"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept"
+												},
+												{
+													"key": "Allow",
+													"value": "GET, HEAD, OPTIONS"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "DENY"
+												},
+												{
+													"key": "Content-Length",
+													"value": "264"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTgzNzU5LCJpYXQiOjE3NTczMTk3NTksImp0aSI6IjkzZTJjYWY0ZjM5OTRkMDc4NjlmMjJlM2E1YWYwOTAyIiwidXNlcl9pZCI6IlVQSm9QRkZadjQ4cSJ9.h-9lmx_Kq0nUkaxVxq2pNIIr4cZe3C4dh-yJtJz2JWY\"\n}"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Watch",
+					"item": [
+						{
+							"name": "trending-films",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/flims/trending",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"flims",
+										"trending"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/flims/trending",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"flims",
+												"trending"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Date",
+											"value": "Sat, 06 Sep 2025 11:06:17 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.13.5"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, HEAD, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "1348"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"message\": \"Trending films fetched successfully\",\n    \"data\": [\n        {\n            \"id\": \"VNbSaAsV2R\",\n            \"title\": \"The Last Journey\",\n            \"slug\": \"the-last-journey\",\n            \"year\": 2025,\n            \"logline\": \"A lone traveler discovers a hidden world..\",\n            \"film_type\": \"Movie\",\n            \"genre\": [\n                \"Action\"\n            ],\n            \"buy_price\": 10,\n            \"rent_price\": 5,\n            \"thumbnail\": \"https://res.cloudinary.com/dubsxif8w/image/upload/v1756877561/thumbnails/n2llpjwutneknprgl80p\",\n            \"trailer_hls_url\": \"https://res.cloudinary.com/dubsxif8w/video/upload/trailers/zobmy3ty92x8qgsdhcha.m3u8\"\n        },\n        {\n            \"id\": \"AZdPAnDyXe\",\n            \"title\": \"Dajngo videos for Application Development\",\n            \"slug\": \"dajngo-videos-for-application-development\",\n            \"year\": 2025,\n            \"logline\": \"A lone python Lover\",\n            \"film_type\": \"Movie\",\n            \"genre\": [\n                \"Drama\"\n            ],\n            \"buy_price\": 10,\n            \"rent_price\": 7,\n            \"thumbnail\": \"https://res.cloudinary.com/dubsxif8w/image/upload/v1756877946/thumbnails/qprifbnyoebrhutpytb1\",\n            \"trailer_hls_url\": \"https://res.cloudinary.com/dubsxif8w/video/upload/trailers/rywjfmcvqxkqhoptgtr3.m3u8\"\n        },\n        {\n            \"id\": \"TrRwmfkfHh\",\n            \"title\": \"UI/UX Videos\",\n            \"slug\": \"uiux-videos\",\n            \"year\": 2025,\n            \"logline\": \"A lone python Lover\",\n            \"film_type\": \"Movie\",\n            \"genre\": [\n                \"Drama\"\n            ],\n            \"buy_price\": 15,\n            \"rent_price\": 7,\n            \"thumbnail\": \"https://res.cloudinary.com/dubsxif8w/image/upload/v1756877700/thumbnails/lmzm1we1yhdrftwnoktg\",\n            \"trailer_hls_url\": \"https://res.cloudinary.com/dubsxif8w/video/upload/trailers/vepcixbstv555w6e2lhb.m3u8\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Latest Films",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/flims/latest",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"flims",
+										"latest"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/flims/latest",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"flims",
+												"latest"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Date",
+											"value": "Sat, 06 Sep 2025 11:06:53 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.13.5"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, HEAD, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "1346"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"message\": \"Latest films fetched successfully\",\n    \"data\": [\n        {\n            \"id\": \"AZdPAnDyXe\",\n            \"title\": \"Dajngo videos for Application Development\",\n            \"slug\": \"dajngo-videos-for-application-development\",\n            \"year\": 2025,\n            \"logline\": \"A lone python Lover\",\n            \"film_type\": \"Movie\",\n            \"genre\": [\n                \"Drama\"\n            ],\n            \"buy_price\": 10,\n            \"rent_price\": 7,\n            \"thumbnail\": \"https://res.cloudinary.com/dubsxif8w/image/upload/v1756877946/thumbnails/qprifbnyoebrhutpytb1\",\n            \"trailer_hls_url\": \"https://res.cloudinary.com/dubsxif8w/video/upload/trailers/rywjfmcvqxkqhoptgtr3.m3u8\"\n        },\n        {\n            \"id\": \"TrRwmfkfHh\",\n            \"title\": \"UI/UX Videos\",\n            \"slug\": \"uiux-videos\",\n            \"year\": 2025,\n            \"logline\": \"A lone python Lover\",\n            \"film_type\": \"Movie\",\n            \"genre\": [\n                \"Drama\"\n            ],\n            \"buy_price\": 15,\n            \"rent_price\": 7,\n            \"thumbnail\": \"https://res.cloudinary.com/dubsxif8w/image/upload/v1756877700/thumbnails/lmzm1we1yhdrftwnoktg\",\n            \"trailer_hls_url\": \"https://res.cloudinary.com/dubsxif8w/video/upload/trailers/vepcixbstv555w6e2lhb.m3u8\"\n        },\n        {\n            \"id\": \"VNbSaAsV2R\",\n            \"title\": \"The Last Journey\",\n            \"slug\": \"the-last-journey\",\n            \"year\": 2025,\n            \"logline\": \"A lone traveler discovers a hidden world..\",\n            \"film_type\": \"Movie\",\n            \"genre\": [\n                \"Action\"\n            ],\n            \"buy_price\": 10,\n            \"rent_price\": 5,\n            \"thumbnail\": \"https://res.cloudinary.com/dubsxif8w/image/upload/v1756877561/thumbnails/n2llpjwutneknprgl80p\",\n            \"trailer_hls_url\": \"https://res.cloudinary.com/dubsxif8w/video/upload/trailers/zobmy3ty92x8qgsdhcha.m3u8\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Search Api",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/flims/search?search=The Last Journey",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"flims",
+										"search"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "The Last Journey"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/flims/search?search=The Last Journey",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"flims",
+												"search"
+											],
+											"query": [
+												{
+													"key": "search",
+													"value": "The Last Journey"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Date",
+											"value": "Sat, 06 Sep 2025 11:08:05 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.13.5"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, HEAD, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "122"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"message\": \"Search films fetched successfully\",\n    \"data\": [\n        {\n            \"id\": \"VNbSaAsV2R\",\n            \"title\": \"The Last Journey\"\n        }\n    ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "My Library",
+					"item": [
+						{
+							"name": "My Library",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MDAxMjEyLCJpYXQiOjE3NTcxMzcyMTIsImp0aSI6IjdmMTBhOWRmNDIwNjRiOGQ5N2JhNDAxYzhkZGZhNmY2IiwidXNlcl9pZCI6Imp3a1o1TFFmWHFQRSJ9.PQYwTH5bwEHTCBKBYZ9RYko69Tkxl0UIPEX0WVPBBg8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/flims/my-library",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"flims",
+										"my-library"
+									],
+									"query": [
+										{
+											"key": "access_type",
+											"value": "Rent",
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": "UI",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://equal-evidently-terrier.ngrok-free.app/api/flims/my-library",
+											"protocol": "https",
+											"host": [
+												"equal-evidently-terrier",
+												"ngrok-free",
+												"app"
+											],
+											"path": [
+												"api",
+												"flims",
+												"my-library"
+											],
+											"query": [
+												{
+													"key": "access_type",
+													"value": "Rent",
+													"disabled": true
+												},
+												{
+													"key": "search",
+													"value": "UI",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Allow",
+											"value": "GET, HEAD, OPTIONS"
+										},
+										{
+											"key": "Content-Length",
+											"value": "587"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 06 Sep 2025 11:05:45 GMT"
+										},
+										{
+											"key": "Ngrok-Agent-Ips",
+											"value": "103.159.73.129"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.13.5"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"count\": 1,\n    \"next\": null,\n    \"previous\": null,\n    \"status\": \"success\",\n    \"message\": \"My titles fetched successfully\",\n    \"stats\": {\n        \"total_buy\": 1,\n        \"total_rent\": 0\n    },\n    \"data\": [\n        {\n            \"film_id\": \"AZdPAnDyXe\",\n            \"title\": \"Dajngo videos for Application Development\",\n            \"film_type\": \"Movie\",\n            \"full_film_duration\": 176,\n            \"access_type\": \"Purchase\",\n            \"status\": \"active\",\n            \"expiry_time\": null,\n            \"thumbnail\": \"https://res.cloudinary.com/dubsxif8w/image/upload/v1756877946/thumbnails/qprifbnyoebrhutpytb1\",\n            \"film_hls_url\": \"https://res.cloudinary.com/dubsxif8w/video/upload/trailers/rywjfmcvqxkqhoptgtr3.m3u8\",\n            \"watch_progress\": 0,\n            \"current_watch_time\": 0\n        }\n    ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "ReelBux",
+					"item": [
+						{
+							"name": "ReelBux",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MDEzMzUzLCJpYXQiOjE3NTcxNDkzNTMsImp0aSI6IjNmMGM1YzM3YmNiYTRjYjk5ODY2ZmM1OWI0NjE3YTBiIiwidXNlcl9pZCI6Imp3a1o1TFFmWHFQRSJ9.b4uDoAPj-dbqLXflJUj6qleGMKOLGTLAcYEsoawVuM8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/reelbux/balance",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"reelbux",
+										"balance"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/reelbux/balance",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"reelbux",
+												"balance"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": null,
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 08 Sep 2025 08:32:01 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.13.5"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, HEAD, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "410"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"message\": \"Wallet fetched successfully\",\n    \"reel_bux_balance\": 39.37,\n    \"txn_data\": [\n        {\n            \"source\": \"ReelBux\",\n            \"tx_type\": \"Rent Film\",\n            \"amount\": 6.5,\n            \"date\": \"06 September 2025\",\n            \"status\": \"Completed\"\n        },\n        {\n            \"source\": \"ReelBux\",\n            \"tx_type\": \"Buy Film\",\n            \"amount\": 10,\n            \"date\": \"06 September 2025\",\n            \"status\": \"Completed\"\n        },\n        {\n            \"source\": \"ReelBux\",\n            \"tx_type\": \"Rent Film\",\n            \"amount\": 5,\n            \"date\": \"06 September 2025\",\n            \"status\": \"Completed\"\n        }\n    ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Settings",
+					"item": [
+						{
+							"name": "Personal Information",
+							"item": [
+								{
+									"name": "personal-information/me",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4NDMzMzk2LCJpYXQiOjE3NTc1NjkzOTYsImp0aSI6ImFlMTk4ZWMzZjZkNDQxM2Q5ZDIzM2UzOTk0NWExNzRkIiwidXNlcl9pZCI6Imp3a1o1TFFmWHFQRSJ9.kT0LXizvhaaglHsZG8SrvTyDfF4gnWonNbvutcGC4-8",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/settings/personal-information/me",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"settings",
+												"personal-information",
+												"me"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "http://127.0.0.1:8000/api/auth/personal-information/me",
+													"protocol": "http",
+													"host": [
+														"127",
+														"0",
+														"0",
+														"1"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"auth",
+														"personal-information",
+														"me"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Date",
+													"value": "Thu, 11 Sep 2025 06:25:05 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "WSGIServer/0.2 CPython/3.13.5"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept"
+												},
+												{
+													"key": "Allow",
+													"value": "GET, PUT, PATCH, HEAD, OPTIONS"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "DENY"
+												},
+												{
+													"key": "Content-Length",
+													"value": "201"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"data\": {\n        \"status\": \"success\",\n        \"message\": \"Personal info fetched successfully\",\n        \"id\": \"jwkZ5LQfXqPE\",\n        \"full_name\": \"Abdul Kader\",\n        \"email\": \"kader@gmail.com\",\n        \"avatar\": \"/profile/Screenshot_2025-08-14_111157.png\"\n    }\n}"
+										}
+									]
+								},
+								{
+									"name": "personal-information/me",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4NDMzMzk2LCJpYXQiOjE3NTc1NjkzOTYsImp0aSI6ImFlMTk4ZWMzZjZkNDQxM2Q5ZDIzM2UzOTk0NWExNzRkIiwidXNlcl9pZCI6Imp3a1o1TFFmWHFQRSJ9.kT0LXizvhaaglHsZG8SrvTyDfF4gnWonNbvutcGC4-8",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "full_name",
+													"value": "Md Kader",
+													"type": "text"
+												},
+												{
+													"key": "avatar",
+													"type": "file",
+													"src": "/C:/Users/munju/Pictures/Screenshots/b.png"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/settings/personal-information/me",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"settings",
+												"personal-information",
+												"me"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "full_name",
+															"value": "Md Kader",
+															"type": "text"
+														},
+														{
+															"key": "avatar",
+															"type": "file",
+															"src": "/C:/Users/munju/Pictures/Screenshots/b.png"
+														}
+													],
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://127.0.0.1:8000/api/auth/personal-information/me",
+													"protocol": "http",
+													"host": [
+														"127",
+														"0",
+														"0",
+														"1"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"auth",
+														"personal-information",
+														"me"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Date",
+													"value": "Thu, 11 Sep 2025 06:18:02 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "WSGIServer/0.2 CPython/3.13.5"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept"
+												},
+												{
+													"key": "Allow",
+													"value": "GET, PUT, PATCH, HEAD, OPTIONS"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "DENY"
+												},
+												{
+													"key": "Content-Length",
+													"value": "171"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"data\": {\n        \"status\": \"success\",\n        \"message\": \"Personal info fetched successfully\",\n        \"id\": \"jwkZ5LQfXqPE\",\n        \"full_name\": \"Md Kader\",\n        \"email\": \"kader@gmail.com\",\n        \"avatar\": \"/profile/b.png\"\n    }\n}"
+										}
+									]
+								},
+								{
+									"name": "personal-information/me",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4NDMzMzk2LCJpYXQiOjE3NTc1NjkzOTYsImp0aSI6ImFlMTk4ZWMzZjZkNDQxM2Q5ZDIzM2UzOTk0NWExNzRkIiwidXNlcl9pZCI6Imp3a1o1TFFmWHFQRSJ9.kT0LXizvhaaglHsZG8SrvTyDfF4gnWonNbvutcGC4-8",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "full_name",
+													"value": "Abdul Kader",
+													"type": "text"
+												},
+												{
+													"key": "avatar",
+													"type": "file",
+													"src": "/C:/Users/munju/Pictures/Screenshots/Screenshot 2025-08-14 111157.png"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/settings/personal-information/me",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"settings",
+												"personal-information",
+												"me"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PATCH",
+												"header": [],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "full_name",
+															"value": "Abdul Kader",
+															"type": "text"
+														},
+														{
+															"key": "avatar",
+															"type": "file",
+															"src": "/C:/Users/munju/Pictures/Screenshots/Screenshot 2025-08-14 111157.png"
+														}
+													],
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://127.0.0.1:8000/api/auth/personal-information/me",
+													"protocol": "http",
+													"host": [
+														"127",
+														"0",
+														"0",
+														"1"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"auth",
+														"personal-information",
+														"me"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Date",
+													"value": "Thu, 11 Sep 2025 06:23:54 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "WSGIServer/0.2 CPython/3.13.5"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept"
+												},
+												{
+													"key": "Allow",
+													"value": "GET, PUT, PATCH, HEAD, OPTIONS"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "DENY"
+												},
+												{
+													"key": "Content-Length",
+													"value": "201"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"data\": {\n        \"status\": \"success\",\n        \"message\": \"Personal info fetched successfully\",\n        \"id\": \"jwkZ5LQfXqPE\",\n        \"full_name\": \"Abdul Kader\",\n        \"email\": \"kader@gmail.com\",\n        \"avatar\": \"/profile/Screenshot_2025-08-14_111157.png\"\n    }\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Change password",
+							"item": [
+								{
+									"name": "change-password",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4NDMzMzk2LCJpYXQiOjE3NTc1NjkzOTYsImp0aSI6ImFlMTk4ZWMzZjZkNDQxM2Q5ZDIzM2UzOTk0NWExNzRkIiwidXNlcl9pZCI6Imp3a1o1TFFmWHFQRSJ9.kT0LXizvhaaglHsZG8SrvTyDfF4gnWonNbvutcGC4-8",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"old_password\": \"munju001\",\r\n    \"new_password\": \"munju002\",\r\n    \"confirm_password\": \"munju002\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/settings/change-password",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"settings",
+												"change-password"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"old_password\": \"munju001\",\r\n    \"new_password\": \"munju002\",\r\n    \"confirm_password\": \"munju002\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://127.0.0.1:8000/api/auth/change-password",
+													"protocol": "http",
+													"host": [
+														"127",
+														"0",
+														"0",
+														"1"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"auth",
+														"change-password"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Date",
+													"value": "Thu, 11 Sep 2025 06:26:58 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "WSGIServer/0.2 CPython/3.13.5"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept"
+												},
+												{
+													"key": "Allow",
+													"value": "POST, OPTIONS"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "DENY"
+												},
+												{
+													"key": "Content-Length",
+													"value": "44"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Password changed successfully.\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Terms & Conditions",
+							"item": [
+								{
+									"name": "terms&conditions",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "full_name",
+													"value": "",
+													"type": "text"
+												},
+												{
+													"key": "avatar",
+													"type": "file",
+													"src": []
+												}
+											]
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/settings/user-terms",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"settings",
+												"user-terms"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "My Titles",
+					"item": [
+						{
+							"name": "MyTitles",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3OTk3OTEwLCJpYXQiOjE3NTcxMzM5MTAsImp0aSI6ImU0MzI4YTA2YTBjZjQ0N2ViYTMzOWY5NzU3YjdlZWZjIiwidXNlcl9pZCI6ImthejZuVThHdUhKMyJ9.mvg7hF96FMReDVBxAdCysqHPxmxFHbCUVXALRSgugoU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/flims/my-titles",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"flims",
+										"my-titles"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "My Titles Analytics",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3OTk3OTEwLCJpYXQiOjE3NTcxMzM5MTAsImp0aSI6ImU0MzI4YTA2YTBjZjQ0N2ViYTMzOWY5NzU3YjdlZWZjIiwidXNlcl9pZCI6ImthejZuVThHdUhKMyJ9.mvg7hF96FMReDVBxAdCysqHPxmxFHbCUVXALRSgugoU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"film_id\": \"VNbSaAsV2R\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/flims/my-titles/analytics",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"flims",
+										"my-titles",
+										"analytics"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Film Details",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3OTk3OTEwLCJpYXQiOjE3NTcxMzM5MTAsImp0aSI6ImU0MzI4YTA2YTBjZjQ0N2ViYTMzOWY5NzU3YjdlZWZjIiwidXNlcl9pZCI6ImthejZuVThHdUhKMyJ9.mvg7hF96FMReDVBxAdCysqHPxmxFHbCUVXALRSgugoU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"film_id\":\"5v6Bj2dcPP\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/flims/details",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"flims",
+										"details"
+									],
+									"query": [
+										{
+											"key": "film_id",
+											"value": "ULjwYhv9P5",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit Films",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3OTk3OTEwLCJpYXQiOjE3NTcxMzM5MTAsImp0aSI6ImU0MzI4YTA2YTBjZjQ0N2ViYTMzOWY5NzU3YjdlZWZjIiwidXNlcl9pZCI6ImthejZuVThHdUhKMyJ9.mvg7hF96FMReDVBxAdCysqHPxmxFHbCUVXALRSgugoU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "film_id",
+											"value": "5v6Bj2dcPP",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "good movie",
+											"type": "text"
+										},
+										{
+											"key": "logline",
+											"value": "mmmmmmmmmm",
+											"type": "text"
+										},
+										{
+											"key": "thumbnail",
+											"type": "file",
+											"src": "/C:/Users/munju/Pictures/Screenshots/Screenshot 2025-08-14 111157.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/flims/my-titles/edit",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"flims",
+										"my-titles",
+										"edit"
+									],
+									"query": [
+										{
+											"key": "film_id",
+											"value": "ULjwYhv9P5",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit Films",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3OTk3OTEwLCJpYXQiOjE3NTcxMzM5MTAsImp0aSI6ImU0MzI4YTA2YTBjZjQ0N2ViYTMzOWY5NzU3YjdlZWZjIiwidXNlcl9pZCI6ImthejZuVThHdUhKMyJ9.mvg7hF96FMReDVBxAdCysqHPxmxFHbCUVXALRSgugoU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/flims/my-titles/single?film_id=5v6Bj2dcPP",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"flims",
+										"my-titles",
+										"single"
+									],
+									"query": [
+										{
+											"key": "film_id",
+											"value": "5v6Bj2dcPP"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Distro",
+					"item": [
+						{
+							"name": "Distro",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTY0NDM1LCJpYXQiOjE3NTczMDA0MzUsImp0aSI6Ijg2YTQwZmM2NjQ4NjRiNThiZmYzNDEyMzM4MGU2OTEyIiwidXNlcl9pZCI6IlVQSm9QRkZadjQ4cSJ9.CHNsR7I35aSOZFGMJ_jl7hoSavCPZlIK8SlXOKYfSN4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/distro/balance",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"distro",
+										"balance"
+									]
+								},
+								"description": "### Endpoint: Retrieve Distribution Balance\n\nThis endpoint retrieves the distribution balance details for a user. It provides insights into the user's earnings, clicks, and associated films.\n\n#### Request\n\n- **Method**: GET\n    \n- **URL**: `http://127.0.0.1:8000/api/distro/balance`\n    \n\n#### Response\n\nOn a successful request, the API returns a JSON object with the following structure:\n\n- **status**: (string) The status of the request.\n    \n- **message**: (string) A message providing additional context about the request.\n    \n- **total_earning**: (integer) The total earnings from the distribution.\n    \n- **total_clicks**: (integer) The total number of clicks recorded.\n    \n- **distro_balance**: (integer) The current distribution balance.\n    \n- **distro_urls**: (string) A list of URLs associated with the distribution.\n    \n- **random_films**: (array) A list of randomly selected films, each containing:\n    \n    - **film_id**: (string) The unique identifier for the film.\n        \n    - **film_title**: (string) The title of the film.\n        \n    - **film_type**: (string) The type/category of the film.\n        \n    - **quick_copy**: (string) A brief description or tagline for the film.\n        \n- **per_film**: (array) Detailed information for each film, including:\n    \n    - **film_id**: (string) The unique identifier for the film.\n        \n    - **film_title**: (string) The title of the film.\n        \n    - **first_click_date**: (string) The date of the first click on the film.\n        \n    - **film_clicks**: (integer) The number of clicks for the film.\n        \n    - **film_earning**: (integer) The earnings from the film.\n        \n    - **status**: (string) The current status of the film.\n        \n\n#### Usage\n\nTo effectively use this endpoint, simply send a GET request to the specified URL. The response will provide a comprehensive overview of your distribution balance, including earnings and click statistics, along with details about associated films. This information can be useful for tracking performance and making informed decisions regarding your distribution strategy."
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/distro/balance",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"distro",
+												"balance"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 08 Sep 2025 08:10:51 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.13.5"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, HEAD, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "1044"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"message\": \"Wallet fetched successfully\",\n    \"total_earning\": 4.3,\n    \"total_clicks\": 3,\n    \"distro_balance\": 19.06,\n    \"distro_urls\": \"https://equal-evidently-terrier.ngrok-free.app/distro/JFTFPDES\",\n    \"random_popular_films\": [\n        {\n            \"film_id\": \"AZdPAnDyXe\",\n            \"film_title\": \"Dajngo videos for Application Development\",\n            \"film_type\": \"Movie\",\n            \"quick_copy\": \"https://equal-evidently-terrier.ngrok-free.app/distro/AZdPAnDyXe\"\n        },\n        {\n            \"film_id\": \"VNbSaAsV2R\",\n            \"film_title\": \"The Last Journey\",\n            \"film_type\": \"Movie\",\n            \"quick_copy\": \"https://equal-evidently-terrier.ngrok-free.app/distro/VNbSaAsV2R\"\n        },\n        {\n            \"film_id\": \"TrRwmfkfHh\",\n            \"film_title\": \"UI/UX Videos\",\n            \"film_type\": \"Movie\",\n            \"quick_copy\": \"https://equal-evidently-terrier.ngrok-free.app/distro/TrRwmfkfHh\"\n        }\n    ],\n    \"per_film\": [\n        {\n            \"film_id\": \"VNbSaAsV2R\",\n            \"film_title\": \"The Last Journey\",\n            \"first_click_date\": \"2025-09-06\",\n            \"film_clicks\": 2,\n            \"film_earning\": 2.3,\n            \"status\": \"Completed\"\n        },\n        {\n            \"film_id\": \"AZdPAnDyXe\",\n            \"film_title\": \"Dajngo videos for Application Development\",\n            \"first_click_date\": \"2025-09-06\",\n            \"film_clicks\": 1,\n            \"film_earning\": 2,\n            \"status\": \"Completed\"\n        }\n    ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Submit Film",
+					"item": [
+						{
+							"name": "Flim Upload",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3NzQxMjA2LCJpYXQiOjE3NTY4NzcyMDYsImp0aSI6ImVjZjAxMDEwNzhkODRiODBhZDZmZTgwZTFjNDgyNTk4IiwidXNlcl9pZCI6ImthejZuVThHdUhKMyJ9.Me-gCpBwqb9q3x10B76mLBPrq1jG8t7bXd_HiC1yRW0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Test Movie three hfds",
+											"type": "text"
+										},
+										{
+											"key": "year",
+											"value": "2025",
+											"type": "text"
+										},
+										{
+											"key": "logline",
+											"value": "A lone traveler discovers a hidden world..",
+											"type": "text"
+										},
+										{
+											"key": "film_type",
+											"value": "MOVIE",
+											"type": "text"
+										},
+										{
+											"key": "genre",
+											"value": "Action, Drama",
+											"type": "text"
+										},
+										{
+											"key": "thumbnail",
+											"type": "file",
+											"src": "/C:/Users/munju/Pictures/Screenshots/b.png"
+										},
+										{
+											"key": "trailer",
+											"type": "file",
+											"src": "/C:/Users/munju/Downloads/It Just Happened Trailer JusB.io.mp4"
+										},
+										{
+											"key": "full_film",
+											"type": "file",
+											"src": "/C:/Users/munju/Downloads/CGI Animated Short Film Watermelon A Cautionary Tale by Kefei Li _ Connie Qin He  CGMeetup - CGMeetup (720p, h264).mp4"
+										},
+										{
+											"key": "buy_price",
+											"value": "10",
+											"type": "text"
+										},
+										{
+											"key": "rent_price",
+											"value": "5",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/flims/upload",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"flims",
+										"upload"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "title",
+													"value": "Test Movie three hfds",
+													"type": "text"
+												},
+												{
+													"key": "year",
+													"value": "2025",
+													"type": "text"
+												},
+												{
+													"key": "logline",
+													"value": "A lone traveler discovers a hidden world..",
+													"type": "text"
+												},
+												{
+													"key": "film_type",
+													"value": "MOVIE",
+													"type": "text"
+												},
+												{
+													"key": "genre",
+													"value": "Action",
+													"type": "text"
+												},
+												{
+													"key": "thumbnail",
+													"type": "file",
+													"src": "/C:/Users/munju/Pictures/Screenshots/Screenshot 2025-08-26 141623.png"
+												},
+												{
+													"key": "trailer",
+													"type": "file",
+													"src": "/C:/Users/munju/Downloads/CGI Animated Short Film Watermelon A Cautionary Tale by Kefei Li _ Connie Qin He  CGMeetup - CGMeetup (720p, h264).mp4"
+												},
+												{
+													"key": "full_film",
+													"type": "file",
+													"src": "/C:/Users/munju/Downloads/CGI Animated Short Film Watermelon A Cautionary Tale by Kefei Li _ Connie Qin He  CGMeetup - CGMeetup (720p, h264).mp4"
+												},
+												{
+													"key": "buy_price",
+													"value": "10",
+													"type": "text"
+												},
+												{
+													"key": "rent_price",
+													"value": "5",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "https://equal-evidently-terrier.ngrok-free.app/api/flims/upload",
+											"protocol": "https",
+											"host": [
+												"equal-evidently-terrier",
+												"ngrok-free",
+												"app"
+											],
+											"path": [
+												"api",
+												"flims",
+												"upload"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Allow",
+											"value": "POST, OPTIONS"
+										},
+										{
+											"key": "Content-Length",
+											"value": "1068"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 09 Sep 2025 05:12:18 GMT"
+										},
+										{
+											"key": "Ngrok-Agent-Ips",
+											"value": "103.159.73.129"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.13.5"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": \"hyVTkKGkMk\",\n    \"genre\": [\n        \"Action\"\n    ],\n    \"title\": \"Test Movie three hfds\",\n    \"slug\": \"test-movie-three-hfds\",\n    \"year\": 2025,\n    \"logline\": \"A lone traveler discovers a hidden world..\",\n    \"film_type\": \"MOVIE\",\n    \"thumbnail\": \"https://res.cloudinary.com/dvyff8deo/image/upload/v1757394732/thumbnails/vj5lj2uxefbdeh9uttlq.png\",\n    \"trailer\": null,\n    \"full_film\": null,\n    \"thumbnail_public_id\": \"thumbnails/vj5lj2uxefbdeh9uttlq\",\n    \"trailer_public_id\": \"trailers/hnpky2lzlmhsj6pwqfql\",\n    \"full_film_public_id\": \"full_films/h1eksnelncmu0om42k0z\",\n    \"status\": \"REVIEW\",\n    \"currency\": \"USD\",\n    \"rent_price\": \"5.00\",\n    \"rental_hours\": 48,\n    \"buy_price\": \"10.00\",\n    \"full_film_duration\": 176,\n    \"created_at\": \"2025-09-09T05:12:18.814524Z\",\n    \"updated_at\": \"2025-09-09T05:12:18.824797Z\",\n    \"unique_views\": 0,\n    \"total_views\": 0,\n    \"total_earning\": \"0.00\",\n    \"total_watch_time\": 0,\n    \"total_buy_earning\": \"0.00\",\n    \"total_rent_earning\": \"0.00\",\n    \"trailer_hls_url\": \"https://res.cloudinary.com/dvyff8deo/video/upload/trailers/hnpky2lzlmhsj6pwqfql.m3u8\",\n    \"film_hls_url\": \"https://res.cloudinary.com/dvyff8deo/video/upload/full_films/h1eksnelncmu0om42k0z.m3u8\",\n    \"filmmaker\": \"kaz6nU8GuHJ3\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Film Purchase",
+					"item": [
+						{
+							"name": "Film Buy Using Stripe",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MDIzODE0LCJpYXQiOjE3NTcxNTk4MTQsImp0aSI6ImIzZjM5YzZmNTg3ZjQ4ZTViYTFjNjE3MTY2MWI2YTAzIiwidXNlcl9pZCI6IlVQSm9QRkZadjQ4cSJ9.OS7BTXiWZ4mHN17xKFiQib8_DJlxrilbLcdzuLc39VI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"film_id\": \"VNbSaAsV2R\",\r\n  \"distro_code\": \"\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/flims/stripe/create-purchase-checkout-session",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"flims",
+										"stripe",
+										"create-purchase-checkout-session"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"film_id\": \"VNbSaAsV2R\",\r\n  \"distro_code\": \"\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://equal-evidently-terrier.ngrok-free.app/api/flims/stripe/create-purchase-checkout-session",
+											"protocol": "https",
+											"host": [
+												"equal-evidently-terrier",
+												"ngrok-free",
+												"app"
+											],
+											"path": [
+												"api",
+												"flims",
+												"stripe",
+												"create-purchase-checkout-session"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": null,
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Allow",
+											"value": "POST, OPTIONS"
+										},
+										{
+											"key": "Content-Length",
+											"value": "458"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 06 Sep 2025 11:59:02 GMT"
+										},
+										{
+											"key": "Ngrok-Agent-Ips",
+											"value": "103.159.73.129"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.13.5"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"sessionId\": \"cs_test_a1vWr0C08kL5ojglMakCjLCp6vYXbUQVIKycXcxtGzkNdCiBHFFKhubycy\",\n    \"checkoutUrl\": \"https://checkout.stripe.com/c/pay/cs_test_a1vWr0C08kL5ojglMakCjLCp6vYXbUQVIKycXcxtGzkNdCiBHFFKhubycy#fidkdWxOYHwnPyd1blpxYHZxWjA0V2lrT1FGRDJ9TF9fT0JWTVx1fH1LTmQ0bnJOUGpMdGJ3T3NzdndOM0dzbn9pU2BWa0NdTDNvYTY2b2phMmhWQGluS31vM2xWV31sbVRcUjNTYjxDNjxxNTVjY1FUYkFiYCcpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Film Buy Using PayPal",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3NzQyMTUxLCJpYXQiOjE3NTY4NzgxNTEsImp0aSI6ImIwZmVlNDM1ZGU1MzQ3M2Y5N2MwY2M3NTljNDQ4MjFkIiwidXNlcl9pZCI6Imp3a1o1TFFmWHFQRSJ9.wq9le0_85xriCIJPWoSMW3Eh95FPgIfPAR9ne4hiwSk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"film_id\": \"TrRwmfkfHh\",\r\n  \"referral_code\": \"NYBYRRSA\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/flims/paypal/create-purchase-checkout",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"flims",
+										"paypal",
+										"create-purchase-checkout"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Film Buy Using ReelBux",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4Mjc0NzA3LCJpYXQiOjE3NTc0MTA3MDcsImp0aSI6IjBjM2QxOWE3ZDZjODRiYTlhNTI2M2QxMzljZDc0YzQyIiwidXNlcl9pZCI6IlVQSm9QRkZadjQ4cSJ9.FIcBswVW26dlRuj92J4RmbAdbt5OU6pIoNnbLNpkP-M",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"film_id\": \"VNbSaAsV2R\",\r\n  \"distro_code\": \"NEC9DSTC\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/flims/reelbux/purchase",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"flims",
+										"reelbux",
+										"purchase"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"film_id\": \"AZdPAnDyXe\",\r\n  \"distro_code\": \"JFTFPDES\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://equal-evidently-terrier.ngrok-free.app/api/flims/reelbux/purchase",
+											"protocol": "https",
+											"host": [
+												"equal-evidently-terrier",
+												"ngrok-free",
+												"app"
+											],
+											"path": [
+												"api",
+												"flims",
+												"reelbux",
+												"purchase"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": null,
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Allow",
+											"value": "POST, OPTIONS"
+										},
+										{
+											"key": "Content-Length",
+											"value": "214"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 06 Sep 2025 11:36:07 GMT"
+										},
+										{
+											"key": "Ngrok-Agent-Ips",
+											"value": "103.159.73.129"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.13.5"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Film purchased successfully\",\n    \"film\": \"Dajngo videos for Application Development\",\n    \"subscription_id\": \"buy_570616388d52\",\n    \"new_balance\": 45.87,\n    \"filmmaker_share\": 7,\n    \"affiliate_share\": 2,\n    \"platform_share\": 1\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Film Rented",
+					"item": [
+						{
+							"name": "Film Rent Using Stripe",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3NzQyMTUxLCJpYXQiOjE3NTY4NzgxNTEsImp0aSI6ImIwZmVlNDM1ZGU1MzQ3M2Y5N2MwY2M3NTljNDQ4MjFkIiwidXNlcl9pZCI6Imp3a1o1TFFmWHFQRSJ9.wq9le0_85xriCIJPWoSMW3Eh95FPgIfPAR9ne4hiwSk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"film_id\": \"VNbSaAsV2R\",\r\n  \"distro_code\": \"JFTFPDES\",\r\n  \"rent_price\": 5.8,\r\n  \"rent_hour\": 4\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/flims/stripe/create-rented-checkout-session",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"flims",
+										"stripe",
+										"create-rented-checkout-session"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Film Rent Using PayPal",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3NzQyMTUxLCJpYXQiOjE3NTY4NzgxNTEsImp0aSI6ImIwZmVlNDM1ZGU1MzQ3M2Y5N2MwY2M3NTljNDQ4MjFkIiwidXNlcl9pZCI6Imp3a1o1TFFmWHFQRSJ9.wq9le0_85xriCIJPWoSMW3Eh95FPgIfPAR9ne4hiwSk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"film_id\": \"VNbSaAsV2R\",\r\n  \"referral_code\": \"JFTFPDES\",\r\n  \"rent_price\": 5,\r\n  \"rent_hour\": 6\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/flims/paypal/create-rented-checkout",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"flims",
+										"paypal",
+										"create-rented-checkout"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Film Rent Using ReelBux",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3NzQyMTUxLCJpYXQiOjE3NTY4NzgxNTEsImp0aSI6ImIwZmVlNDM1ZGU1MzQ3M2Y5N2MwY2M3NTljNDQ4MjFkIiwidXNlcl9pZCI6Imp3a1o1TFFmWHFQRSJ9.wq9le0_85xriCIJPWoSMW3Eh95FPgIfPAR9ne4hiwSk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"film_id\": \"VNbSaAsV2R\",\r\n  \"distro_code\": \"JFTFPDES\",\r\n  \"rent_price\": 6.5,\r\n  \"rent_hour\": 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/flims/reelbux/rented",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"flims",
+										"reelbux",
+										"rented"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"film_id\": \"VNbSaAsV2R\",\r\n  \"distro_code\": \"JFTFPDES\",\r\n  \"rent_price\": 5,\r\n  \"rent_hour\": 6\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://equal-evidently-terrier.ngrok-free.app/api/flims/reelbux/rented",
+											"protocol": "https",
+											"host": [
+												"equal-evidently-terrier",
+												"ngrok-free",
+												"app"
+											],
+											"path": [
+												"api",
+												"flims",
+												"reelbux",
+												"rented"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": null,
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Allow",
+											"value": "POST, OPTIONS"
+										},
+										{
+											"key": "Content-Length",
+											"value": "186"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 06 Sep 2025 11:14:24 GMT"
+										},
+										{
+											"key": "Ngrok-Agent-Ips",
+											"value": "103.159.73.129"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.13.5"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Film rented successfully\",\n    \"film\": \"The Last Journey\",\n    \"subscription_id\": \"buy_e051c8df2a6a\",\n    \"new_balance\": 60.87,\n    \"filmmaker_share\": 3.5,\n    \"affiliate_share\": 1,\n    \"platform_share\": 0.5\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "AI Subscription",
+					"item": [
+						{
+							"name": "Subscription Using Stripe",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MzY2OTM1LCJpYXQiOjE3NTc1MDI5MzUsImp0aSI6ImYxOTFiMzM0MTQxMjRkYzNiY2U1ZjVjZjMxY2I0NjQ3IiwidXNlcl9pZCI6Imp3a1o1TFFmWHFQRSJ9.eHa1k3J6bJ1IMwynaasFSmguSFok88cs2zCB44RA8pQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"plan\": \"Pro\",\r\n    \"duration_days\": 30,\r\n    \"limit_value\": 200\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/payment/stripe/create-checkout-session",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"payment",
+										"stripe",
+										"create-checkout-session"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Subscription Using PayPal",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MzUwMjI0LCJpYXQiOjE3NTc0ODYyMjQsImp0aSI6IjliMjgwMWFiNzE4NzRiMjNiMThhZTQxNjUyYmJiZjAwIiwidXNlcl9pZCI6ImthejZuVThHdUhKMyJ9.mM7BXQhAGWUn-zNjBejP0ZDz_g2jocPcrQG5HwgeHQI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"plan\": \"Pro\",\r\n    \"duration_days\": 30,\r\n    \"limit_value\": 500\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/payment/paypal/checkout-create",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"payment",
+										"paypal",
+										"checkout-create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Subscription Using ReelBux",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3NTcxMzk1LCJpYXQiOjE3NTY3MDczOTUsImp0aSI6ImI5ZjMwZTk5YmM0ZTQ1OTg5OWY0ODdkZjgxMTZmZDc0IiwidXNlcl9pZCI6IjdWZ2dhMjNTcXlIWSJ9.gHs0IbBuMBT1BxlD-ujir188VKWT_4qwZIJjifZMjDk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"plan\": \"Pro\",\r\n    \"duration_days\": 30,\r\n    \"limit_value\": 500\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/payment/reelbux/checkout-create",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"payment",
+										"reelbux",
+										"checkout-create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Add Funds",
+					"item": [
+						{
+							"name": "Add Funds Using Stripe",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3OTI3ODIyLCJpYXQiOjE3NTcwNjM4MjIsImp0aSI6Ijc1YjFhZmQ4YmI1ZTQ2OTdiY2Y3YTA5OWNhNjE0MDZlIiwidXNlcl9pZCI6Imp3a1o1TFFmWHFQRSJ9.Lg7SH0xmK5I5pV0gWKzlKEfXIPsVauWZUImEq-aQY8Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{   \r\n    \"amount\":24\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/payment/stripe/create-add-funds-checkout-session",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"payment",
+										"stripe",
+										"create-add-funds-checkout-session"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Funds Using PayPal",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3NzQxNTYyLCJpYXQiOjE3NTY4Nzc1NjIsImp0aSI6IjhhMDEwZjEzNmM3MDQ0NGY4NjAxNmE1OGM5ZTE5NTE1IiwidXNlcl9pZCI6IlVQSm9QRkZadjQ4cSJ9.lTitE3F-KOYA1fcTDKo4sUOwXkYowFMZ3_eqvfVTE10",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"amount\":34\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/payment/paypal/create-addfunds-checkout",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"payment",
+										"paypal",
+										"create-addfunds-checkout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Transfer Distro To ReelBux",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3NTcxMzk1LCJpYXQiOjE3NTY3MDczOTUsImp0aSI6ImI5ZjMwZTk5YmM0ZTQ1OTg5OWY0ODdkZjgxMTZmZDc0IiwidXNlcl9pZCI6IjdWZ2dhMjNTcXlIWSJ9.gHs0IbBuMBT1BxlD-ujir188VKWT_4qwZIJjifZMjDk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"amount\":10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/payment/transfer/distro-to-reelbux",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"payment",
+										"transfer",
+										"distro-to-reelbux"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Transfer Disto to ReelBux",
+					"item": [
+						{
+							"name": "Transfer Distro To ReelBux",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3NTcxMzk1LCJpYXQiOjE3NTY3MDczOTUsImp0aSI6ImI5ZjMwZTk5YmM0ZTQ1OTg5OWY0ODdkZjgxMTZmZDc0IiwidXNlcl9pZCI6IjdWZ2dhMjNTcXlIWSJ9.gHs0IbBuMBT1BxlD-ujir188VKWT_4qwZIJjifZMjDk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"amount\":10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/payment/transfer/distro-to-reelbux",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"payment",
+										"transfer",
+										"distro-to-reelbux"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Views & Watch Time Count",
+					"item": [
+						{
+							"name": "Views Count",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MDEzMzUzLCJpYXQiOjE3NTcxNDkzNTMsImp0aSI6IjNmMGM1YzM3YmNiYTRjYjk5ODY2ZmM1OWI0NjE3YTBiIiwidXNlcl9pZCI6Imp3a1o1TFFmWHFQRSJ9.b4uDoAPj-dbqLXflJUj6qleGMKOLGTLAcYEsoawVuM8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"film_id\": \"AZdPAnDyXe\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/flims/views-count",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"flims",
+										"views-count"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Watch Time Count",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"film_id\": \"AZdPAnDyXe\",\r\n    \"watch_time\": 36\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/flims/watch-time-count",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"flims",
+										"watch-time-count"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Sign-in",
+							"item": [
+								{
+									"name": "admin-sign-in",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"email_address\": \"admin@gmail.com\",\r\n  \"password\": \"123\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/auth/admin-sign-in",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"auth",
+												"admin-sign-in"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"email_address\": \"admin@gmail.com\",\r\n  \"password\": \"123\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://127.0.0.1:8000/api/auth/admin-sign-in",
+													"protocol": "http",
+													"host": [
+														"127",
+														"0",
+														"0",
+														"1"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"auth",
+														"admin-sign-in"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Date",
+													"value": "Mon, 08 Sep 2025 08:26:55 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "WSGIServer/0.2 CPython/3.13.5"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept"
+												},
+												{
+													"key": "Allow",
+													"value": "POST, OPTIONS"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "DENY"
+												},
+												{
+													"key": "Content-Length",
+													"value": "555"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA\",\n    \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc2MTY0MDAxNSwiaWF0IjoxNzU3MzIwMDE1LCJqdGkiOiJmOGJkODE5MDhlMzc0YzdkYTQ0NmIxNjYwNGZhNTliNyIsInVzZXJfaWQiOiJKTjdacUFOd2pmN2QifQ.B2_NohdOj9_tzejKi9Rh7sTd7Dm0vNVjL6lN9CyDmmQ\",\n    \"user_id\": \"JN7ZqANwjf7d\"\n}"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Dashboard",
+					"item": [
+						{
+							"name": "Dashboard",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/admin/dashboard",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"admin",
+										"dashboard"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://equal-evidently-terrier.ngrok-free.app/api/admin/dashboard",
+											"protocol": "https",
+											"host": [
+												"equal-evidently-terrier",
+												"ngrok-free",
+												"app"
+											],
+											"path": [
+												"api",
+												"admin",
+												"dashboard"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Allow",
+											"value": "GET, HEAD, OPTIONS"
+										},
+										{
+											"key": "Content-Length",
+											"value": "837"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 11 Sep 2025 05:25:13 GMT"
+										},
+										{
+											"key": "Ngrok-Agent-Ips",
+											"value": "103.159.73.129"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.13.5"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"message\": \"Dashboard stats fetched successfully\",\n    \"stats\": {\n        \"total_users\": 3,\n        \"total_views\": 5,\n        \"total_earning\": 204.98,\n        \"subscription_earning\": 170.37\n    },\n    \"monthly_revenue\": {\n        \"labels\": [\n            \"Jan\",\n            \"Feb\",\n            \"Mar\",\n            \"Apr\",\n            \"May\",\n            \"Jun\",\n            \"Jul\",\n            \"Aug\",\n            \"Sep\",\n            \"Oct\",\n            \"Nov\",\n            \"Dec\"\n        ],\n        \"current_year\": [\n            0,\n            0,\n            0,\n            0,\n            0,\n            0,\n            0,\n            0,\n            82.41,\n            0,\n            0,\n            0\n        ],\n        \"last_year\": [\n            0,\n            0,\n            0,\n            0,\n            0,\n            0,\n            0,\n            0,\n            0,\n            0,\n            0,\n            0\n        ]\n    },\n    \"last_month_earning_activity\": {\n        \"total_buy\": 0,\n        \"total_rent\": 0,\n        \"total_subscriber_earning\": 0\n    },\n    \"new_signups\": [\n        {\n            \"user_id\": \"UPJoPFFZv48q\",\n            \"full_name\": \"Munjur Alom\",\n            \"email\": \"munjuralom@gmail.com\",\n            \"joining_date\": \"2025-09-03\"\n        },\n        {\n            \"user_id\": \"kaz6nU8GuHJ3\",\n            \"full_name\": \"Kamrul Hassan\",\n            \"email\": \"kamrul@gmail.com\",\n            \"joining_date\": \"2025-09-03\"\n        },\n        {\n            \"user_id\": \"jwkZ5LQfXqPE\",\n            \"full_name\": \"Abdul Kader\",\n            \"email\": \"kader@gmail.com\",\n            \"joining_date\": \"2025-09-03\"\n        }\n    ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Manage Users",
+					"item": [
+						{
+							"name": "User List",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/admin/manage-users",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"admin",
+										"manage-users"
+									],
+									"query": [
+										{
+											"key": "user_id",
+											"value": "LcMRHB8eAaXj",
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": "kader@gmail.com",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://equal-evidently-terrier.ngrok-free.app/api/admin/manage-users",
+											"protocol": "https",
+											"host": [
+												"equal-evidently-terrier",
+												"ngrok-free",
+												"app"
+											],
+											"path": [
+												"api",
+												"admin",
+												"manage-users"
+											],
+											"query": [
+												{
+													"key": "user_id",
+													"value": "LcMRHB8eAaXj",
+													"disabled": true
+												},
+												{
+													"key": "search",
+													"value": "kader@gmail.com",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Allow",
+											"value": "GET, DELETE, HEAD, OPTIONS"
+										},
+										{
+											"key": "Content-Length",
+											"value": "396"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 08 Sep 2025 09:48:18 GMT"
+										},
+										{
+											"key": "Ngrok-Agent-Ips",
+											"value": "103.159.73.129"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.13.5"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"message\": \"Users fetched successfully\",\n    \"total_users\": 3,\n    \"users\": [\n        {\n            \"id\": \"jwkZ5LQfXqPE\",\n            \"full_name\": \"Abdul Kader\",\n            \"email\": \"kader@gmail.com\",\n            \"date_joined\": \"2025-09-03\"\n        },\n        {\n            \"id\": \"kaz6nU8GuHJ3\",\n            \"full_name\": \"Kamrul Hassan\",\n            \"email\": \"kamrul@gmail.com\",\n            \"date_joined\": \"2025-09-03\"\n        },\n        {\n            \"id\": \"UPJoPFFZv48q\",\n            \"full_name\": \"Munjur Alom\",\n            \"email\": \"munjuralom@gmail.com\",\n            \"date_joined\": \"2025-09-03\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete User",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/admin/manage-users?user_id=LcMRHB8eAaXj",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"admin",
+										"manage-users"
+									],
+									"query": [
+										{
+											"key": "user_id",
+											"value": "LcMRHB8eAaXj"
+										},
+										{
+											"key": "search",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://equal-evidently-terrier.ngrok-free.app/api/admin/manage-users?user_id=LcMRHB8eAaXj",
+											"protocol": "https",
+											"host": [
+												"equal-evidently-terrier",
+												"ngrok-free",
+												"app"
+											],
+											"path": [
+												"api",
+												"admin",
+												"manage-users"
+											],
+											"query": [
+												{
+													"key": "user_id",
+													"value": "LcMRHB8eAaXj"
+												},
+												{
+													"key": "search",
+													"value": null,
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Allow",
+											"value": "GET, DELETE, HEAD, OPTIONS"
+										},
+										{
+											"key": "Content-Length",
+											"value": "45"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 08 Sep 2025 09:45:42 GMT"
+										},
+										{
+											"key": "Ngrok-Agent-Ips",
+											"value": "103.159.73.129"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.13.5"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"error\",\n    \"message\": \"User not found\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Films",
+					"item": [
+						{
+							"name": "Films",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/admin/films",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"admin",
+										"films"
+									],
+									"query": [
+										{
+											"key": "user_id",
+											"value": "LcMRHB8eAaXj",
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": "kader@gmail.com",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://equal-evidently-terrier.ngrok-free.app/api/admin/films",
+											"protocol": "https",
+											"host": [
+												"equal-evidently-terrier",
+												"ngrok-free",
+												"app"
+											],
+											"path": [
+												"api",
+												"admin",
+												"films"
+											],
+											"query": [
+												{
+													"key": "user_id",
+													"value": "LcMRHB8eAaXj",
+													"disabled": true
+												},
+												{
+													"key": "search",
+													"value": "kader@gmail.com",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Allow",
+											"value": "GET, HEAD, OPTIONS"
+										},
+										{
+											"key": "Content-Length",
+											"value": "753"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 09 Sep 2025 03:31:37 GMT"
+										},
+										{
+											"key": "Ngrok-Agent-Ips",
+											"value": "103.159.73.129"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.13.5"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"message\": \"Films fetched successfully\",\n    \"stats\": {\n        \"total_films\": 3,\n        \"total_buy\": 13.59,\n        \"total_rent\": 8.05\n    },\n    \"review_films\": [\n        {\n            \"id\": \"AZdPAnDyXe\",\n            \"title\": \"Dajngo videos for Application Development\",\n            \"film_type\": \"Movie\",\n            \"thumbnail\": \"https://res.cloudinary.com/dubsxif8w/image/upload/v1756877946/thumbnails/qprifbnyoebrhutpytb1\",\n            \"release_date\": \"2025-09-03\"\n        }\n    ],\n    \"track_all_films\": [\n        {\n            \"id\": \"TrRwmfkfHh\",\n            \"filmmaker\": \"munjuralom@gmail.com\",\n            \"title\": \"UI/UX Videos\",\n            \"film_type\": \"Movie\",\n            \"status\": \"Rejected\",\n            \"release_date\": \"2025-09-03\",\n            \"total_views\": 0,\n            \"total_earning\": 0\n        },\n        {\n            \"id\": \"VNbSaAsV2R\",\n            \"filmmaker\": \"kamrul@gmail.com\",\n            \"title\": \"The Last Journey\",\n            \"film_type\": \"Movie\",\n            \"status\": \"Published\",\n            \"release_date\": \"2025-09-03\",\n            \"total_views\": 2,\n            \"total_earning\": 14.64\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete Film",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/admin/films-delete?film_id=hyVTkKGkMk",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"admin",
+										"films-delete"
+									],
+									"query": [
+										{
+											"key": "film_id",
+											"value": "hyVTkKGkMk"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Film Approve or Reject",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"film_id\": \"AZdPAnDyXe\",\r\n    \"action\": \"AppRove\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/admin/films-approve-reject",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"admin",
+										"films-approve-reject"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Payments",
+					"item": [
+						{
+							"name": "Payments",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/admin/payments-overview?page=1",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"admin",
+										"payments-overview"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://equal-evidently-terrier.ngrok-free.app/api/admin/payments-overview?page=1",
+											"protocol": "https",
+											"host": [
+												"equal-evidently-terrier",
+												"ngrok-free",
+												"app"
+											],
+											"path": [
+												"api",
+												"admin",
+												"payments-overview"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Allow",
+											"value": "GET, HEAD, OPTIONS"
+										},
+										{
+											"key": "Content-Length",
+											"value": "1105"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 10 Sep 2025 05:46:05 GMT"
+										},
+										{
+											"key": "Ngrok-Agent-Ips",
+											"value": "103.159.73.129"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.13.5"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"message\": \"Payments Overview fetched successfully\",\n    \"stats\": {\n        \"total_completed_earning\": 41.5,\n        \"total_pending_earning\": 0,\n        \"total_failed_earning\": 0\n    },\n    \"transfer_status\": {\n        \"completed_count\": 5,\n        \"pending_count\": 0,\n        \"failed_count\": 0\n    },\n    \"payment_method\": {\n        \"Stripe\": {\n            \"total\": 1,\n            \"percentage\": 20\n        },\n        \"Paypal\": {\n            \"total\": 0,\n            \"percentage\": 0\n        },\n        \"Reelbux\": {\n            \"total\": 4,\n            \"percentage\": 80\n        }\n    },\n    \"transactions_list\": [\n        {\n            \"tx_type\": \"purchase\",\n            \"user\": \"Munjur Alom\",\n            \"amount\": 10,\n            \"payment_method\": \"reelbux\",\n            \"date\": \"2025-09-09\",\n            \"status\": \"Completed\"\n        },\n        {\n            \"tx_type\": \"purchase\",\n            \"user\": \"Munjur Alom\",\n            \"amount\": 10,\n            \"payment_method\": \"stripe\",\n            \"date\": \"2025-09-06\",\n            \"status\": \"Completed\"\n        },\n        {\n            \"tx_type\": \"rent\",\n            \"user\": \"Abdul Kader\",\n            \"amount\": 6.5,\n            \"payment_method\": \"reelbux\",\n            \"date\": \"2025-09-06\",\n            \"status\": \"Completed\"\n        },\n        {\n            \"tx_type\": \"purchase\",\n            \"user\": \"Abdul Kader\",\n            \"amount\": 10,\n            \"payment_method\": \"reelbux\",\n            \"date\": \"2025-09-06\",\n            \"status\": \"Completed\"\n        },\n        {\n            \"tx_type\": \"rent\",\n            \"user\": \"Abdul Kader\",\n            \"amount\": 5,\n            \"payment_method\": \"reelbux\",\n            \"date\": \"2025-09-06\",\n            \"status\": \"Completed\"\n        }\n    ],\n    \"pagination\": {\n        \"count\": 5,\n        \"total_pages\": 1,\n        \"current_page\": 1,\n        \"next\": null,\n        \"previous\": null\n    }\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Distro Report",
+					"item": [
+						{
+							"name": "Distro",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/admin/distro-report",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"admin",
+										"distro-report"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://equal-evidently-terrier.ngrok-free.app/api/admin/distro-report",
+											"protocol": "https",
+											"host": [
+												"equal-evidently-terrier",
+												"ngrok-free",
+												"app"
+											],
+											"path": [
+												"api",
+												"admin",
+												"distro-report"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Allow",
+											"value": "GET, HEAD, OPTIONS"
+										},
+										{
+											"key": "Content-Length",
+											"value": "545"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 09 Sep 2025 09:50:02 GMT"
+										},
+										{
+											"key": "Ngrok-Agent-Ips",
+											"value": "103.159.73.129"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.13.5"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"message\": \"Distro fetched successfully\",\n    \"total_earning\": 6.3,\n    \"total_clicks\": 4,\n    \"user_wise\": [\n        {\n            \"user_id\": \"UPJoPFFZv48q\",\n            \"full_name\": \"Munjur Alom\",\n            \"total_earning\": 4.3,\n            \"total_clicks\": 3,\n            \"status\": \"Completed\"\n        },\n        {\n            \"user_id\": \"jwkZ5LQfXqPE\",\n            \"full_name\": \"Abdul Kader\",\n            \"total_earning\": 2,\n            \"total_clicks\": 1,\n            \"status\": \"Completed\"\n        }\n    ],\n    \"top_3_monthly_users\": [\n        {\n            \"user_id\": \"UPJoPFFZv48q\",\n            \"full_name\": \"Munjur Alom\",\n            \"monthly_earning\": 4.3,\n            \"monthly_clicks\": 3\n        },\n        {\n            \"user_id\": \"jwkZ5LQfXqPE\",\n            \"full_name\": \"Abdul Kader\",\n            \"monthly_earning\": 2,\n            \"monthly_clicks\": 1\n        }\n    ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Subscribers",
+					"item": [
+						{
+							"name": "Subscribers",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/admin/subscribers",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"admin",
+										"subscribers"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://equal-evidently-terrier.ngrok-free.app/api/admin/subscribers",
+											"protocol": "https",
+											"host": [
+												"equal-evidently-terrier",
+												"ngrok-free",
+												"app"
+											],
+											"path": [
+												"api",
+												"admin",
+												"subscribers"
+											],
+											"query": [
+												{
+													"key": "search",
+													"value": "",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Allow",
+											"value": "GET, DELETE, HEAD, OPTIONS"
+										},
+										{
+											"key": "Content-Length",
+											"value": "378"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 09 Sep 2025 10:47:19 GMT"
+										},
+										{
+											"key": "Ngrok-Agent-Ips",
+											"value": "103.159.73.129"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.13.5"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"message\": \"Subscribers fetched successfully\",\n    \"total_subscriber\": 2,\n    \"subscribers\": [\n        {\n            \"user_id\": \"kaz6nU8GuHJ3\",\n            \"full_name\": \"Kamrul Hassan\",\n            \"email\": \"kamrul@gmail.com\",\n            \"plan_name\": \"Pro\",\n            \"current_period_start\": \"2025-09-03\"\n        },\n        {\n            \"user_id\": \"UPJoPFFZv48q\",\n            \"full_name\": \"Munjur Alom\",\n            \"email\": \"munjuralom@gmail.com\",\n            \"plan_name\": \"Basic\",\n            \"current_period_start\": \"2025-09-03\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete Subscriber",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://equal-evidently-terrier.ngrok-free.app/api/admin/subscribers?subscriber_id=1",
+									"protocol": "https",
+									"host": [
+										"equal-evidently-terrier",
+										"ngrok-free",
+										"app"
+									],
+									"path": [
+										"api",
+										"admin",
+										"subscribers"
+									],
+									"query": [
+										{
+											"key": "subscriber_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://equal-evidently-terrier.ngrok-free.app/api/admin/subscribers?subscriber_id=1",
+											"protocol": "https",
+											"host": [
+												"equal-evidently-terrier",
+												"ngrok-free",
+												"app"
+											],
+											"path": [
+												"api",
+												"admin",
+												"subscribers"
+											],
+											"query": [
+												{
+													"key": "subscriber_id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Allow",
+											"value": "GET, DELETE, HEAD, OPTIONS"
+										},
+										{
+											"key": "Content-Length",
+											"value": "106"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 09 Sep 2025 11:00:13 GMT"
+										},
+										{
+											"key": "Ngrok-Agent-Ips",
+											"value": "103.159.73.129"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.13.5"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"success\",\n    \"message\": \"Subscription deleted successfully for Kamrul Hassan and user unsubscribed\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Settings",
+					"item": [
+						{
+							"name": "Personal Information",
+							"item": [
+								{
+									"name": "personal-information/me",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/settings/personal-information/me",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"settings",
+												"personal-information",
+												"me"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "http://127.0.0.1:8000/api/auth/personal-information/me",
+													"protocol": "http",
+													"host": [
+														"127",
+														"0",
+														"0",
+														"1"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"auth",
+														"personal-information",
+														"me"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Date",
+													"value": "Thu, 11 Sep 2025 08:15:15 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "WSGIServer/0.2 CPython/3.13.5"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept"
+												},
+												{
+													"key": "Allow",
+													"value": "GET, PUT, PATCH, HEAD, OPTIONS"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "DENY"
+												},
+												{
+													"key": "Content-Length",
+													"value": "161"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"data\": {\n        \"status\": \"success\",\n        \"message\": \"Personal info fetched successfully\",\n        \"id\": \"JN7ZqANwjf7d\",\n        \"full_name\": \"Super User\",\n        \"email\": \"admin@gmail.com\",\n        \"avatar\": null\n    }\n}"
+										}
+									]
+								},
+								{
+									"name": "personal-information/me",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "full_name",
+													"value": "",
+													"type": "text"
+												},
+												{
+													"key": "avatar",
+													"type": "file",
+													"src": []
+												}
+											]
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/settings/personal-information/me",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"settings",
+												"personal-information",
+												"me"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "full_name",
+															"value": "Super Admin",
+															"type": "text"
+														},
+														{
+															"key": "avatar",
+															"type": "file",
+															"src": "/C:/Users/munju/Downloads/Munjur0.jpg"
+														}
+													]
+												},
+												"url": {
+													"raw": "http://127.0.0.1:8000/api/settings/personal-information/me",
+													"protocol": "http",
+													"host": [
+														"127",
+														"0",
+														"0",
+														"1"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"settings",
+														"personal-information",
+														"me"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Date",
+													"value": "Thu, 11 Sep 2025 09:30:35 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "WSGIServer/0.2 CPython/3.13.5"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept"
+												},
+												{
+													"key": "Allow",
+													"value": "GET, PUT, PATCH, HEAD, OPTIONS"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "DENY"
+												},
+												{
+													"key": "Content-Length",
+													"value": "180"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"data\": {\n        \"status\": \"success\",\n        \"message\": \"Personal info fetched successfully\",\n        \"id\": \"JN7ZqANwjf7d\",\n        \"full_name\": \"Super Admin\",\n        \"email\": \"admin@gmail.com\",\n        \"avatar\": \"/profile/Munjur0.jpg\"\n    }\n}"
+										}
+									]
+								},
+								{
+									"name": "personal-information/me",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "full_name",
+													"value": "",
+													"type": "text"
+												},
+												{
+													"key": "avatar",
+													"type": "file",
+													"src": []
+												}
+											]
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/settings/personal-information/me",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"settings",
+												"personal-information",
+												"me"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PATCH",
+												"header": [],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "full_name",
+															"value": "Super User",
+															"type": "text"
+														},
+														{
+															"key": "avatar",
+															"type": "file",
+															"src": []
+														}
+													]
+												},
+												"url": {
+													"raw": "http://127.0.0.1:8000/api/settings/personal-information/me",
+													"protocol": "http",
+													"host": [
+														"127",
+														"0",
+														"0",
+														"1"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"settings",
+														"personal-information",
+														"me"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Date",
+													"value": "Thu, 11 Sep 2025 09:31:51 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "WSGIServer/0.2 CPython/3.13.5"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept"
+												},
+												{
+													"key": "Allow",
+													"value": "GET, PUT, PATCH, HEAD, OPTIONS"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "DENY"
+												},
+												{
+													"key": "Content-Length",
+													"value": "179"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"data\": {\n        \"status\": \"success\",\n        \"message\": \"Personal info fetched successfully\",\n        \"id\": \"JN7ZqANwjf7d\",\n        \"full_name\": \"Super User\",\n        \"email\": \"admin@gmail.com\",\n        \"avatar\": \"/profile/Munjur0.jpg\"\n    }\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Change password",
+							"item": [
+								{
+									"name": "change-password",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"old_password\": \"munju001\",\r\n    \"new_password\": \"munju002\",\r\n    \"confirm_password\": \"munju002\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/settings/change-password",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"settings",
+												"change-password"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"old_password\": \"munju001\",\r\n    \"new_password\": \"munju002\",\r\n    \"confirm_password\": \"munju002\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://127.0.0.1:8000/api/settings/change-password",
+													"protocol": "http",
+													"host": [
+														"127",
+														"0",
+														"0",
+														"1"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"settings",
+														"change-password"
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Date",
+													"value": "Thu, 11 Sep 2025 09:34:57 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "WSGIServer/0.2 CPython/3.13.5"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept"
+												},
+												{
+													"key": "Allow",
+													"value": "POST, OPTIONS"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "DENY"
+												},
+												{
+													"key": "Content-Length",
+													"value": "35"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Invalid old password.\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Terms & Conditions",
+							"item": [
+								{
+									"name": "terms & conditions",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/settings/admin-terms",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"settings",
+												"admin-terms"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "http://127.0.0.1:8000/api/settings/terms",
+													"protocol": "http",
+													"host": [
+														"127",
+														"0",
+														"0",
+														"1"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"settings",
+														"terms"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Date",
+													"value": "Thu, 11 Sep 2025 08:36:07 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "WSGIServer/0.2 CPython/3.13.5"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept"
+												},
+												{
+													"key": "Allow",
+													"value": "GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "DENY"
+												},
+												{
+													"key": "Content-Length",
+													"value": "1024"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"status\": \"success\",\n    \"message\": \"Terms & Condition fetched successfully\",\n    \"data\": [\n        {\n            \"id\": 2,\n            \"title\": \"Eligibility\",\n            \"details\": [\n                \"You must be at least 18 years old to become a Distro.\",\n                \"JusB.io reserves the right to approve, deny, or terminate any account at its sole discretion.\"\n            ],\n            \"created_at\": \"2025-09-11 08:19:59\"\n        },\n        {\n            \"id\": 3,\n            \"title\": \"Limited License to Distribute\",\n            \"details\": [\n                \"Distros are granted a limited, revocable license to promote and sell films or series hosted on JusB.io.\",\n                \"You do not obtain any ownership or intellectual property rights in the films or related content.\"\n            ],\n            \"created_at\": \"2025-09-11 08:21:52\"\n        },\n        {\n            \"id\": 4,\n            \"title\": \"Payouts\",\n            \"details\": [\n                \"Your payout percentage is determined by your membership level at the time of sale.\",\n                \"All payouts are calculated on net sales (after processing fees and applicable taxes).\",\n                \"Payouts may be made in USD or ReelBux, subject to your account preferences.\",\n                \"Once converted to ReelBux, funds are non-refundable and cannot be exchanged for cash.\"\n            ],\n            \"created_at\": \"2025-09-11 08:24:58\"\n        }\n    ]\n}"
+										}
+									]
+								},
+								{
+									"name": "terms & conditions",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"title\": \"test\",\r\n  \"details\": \"membership level at the time of sale. // All payouts are calculated on net sales (after processing fees and applicable taxes). // Once converted to ReelBux, funds are non-refundable and cannot be exchanged for cash.\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/settings/admin-terms",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"settings",
+												"admin-terms"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "terms & conditions",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"terms_id\": 6,\r\n    \"title\": \"test\",\r\n    \"details\": \"hdjsj jij ijdisji membership level at the time of sale. // All payouts are calculated on net sales (after processing fees and applicable taxes). // Once converted to ReelBux, funds are non-refundable and cannot be exchanged for cash. // dksjiajfij i // ifsdifiudsi ipsdpp pol // udsfusdujfij.\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/settings/admin-terms",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"settings",
+												"admin-terms"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "terms & conditions",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"terms_id\": 6,\r\n    \"title\": \"test\",\r\n    \"details\": \"membership level at the time of sale. // All payouts are calculated on net sales (after processing fees and applicable taxes). // Once converted to ReelBux, funds are non-refundable and cannot be exchanged for cash.\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/settings/admin-terms",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"settings",
+												"admin-terms"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "terms & conditions",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"terms_id\": 6\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/api/settings/admin-terms",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"settings",
+												"admin-terms"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"terms_id\": 5\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://127.0.0.1:8000/api/settings/terms",
+													"protocol": "http",
+													"host": [
+														"127",
+														"0",
+														"0",
+														"1"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"settings",
+														"terms"
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Date",
+													"value": "Thu, 11 Sep 2025 08:49:54 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "WSGIServer/0.2 CPython/3.13.5"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept"
+												},
+												{
+													"key": "Allow",
+													"value": "GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "DENY"
+												},
+												{
+													"key": "Content-Length",
+													"value": "71"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"status\": \"success\",\n    \"message\": \"Terms & Condition deleted successfully\"\n}"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Genre",
+					"item": [
+						{
+							"name": "Genre List",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg0MDE1LCJpYXQiOjE3NTczMjAwMTUsImp0aSI6IjlhODIwNmI0NDM5NTQ5ODQ5NTFkNGNlMDM1NGE4MThhIiwidXNlcl9pZCI6IkpON1pxQU53amY3ZCJ9.5mi9acNTmJ3Yt7ZmlzN4M_C2ErNHgaaatLGCuPGGPLA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/flims/genre",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"flims",
+										"genre"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

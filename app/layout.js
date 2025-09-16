@@ -1,6 +1,7 @@
 import { Geist_Mono, Roboto } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
+import { Providers } from "@/redux/provider/Providers";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -70,8 +71,10 @@ export default function RootLayout({ children }) {
     <html lang="en" data-scroll-behavior="smooth">
       <body className="antialiased">
         <main className={`${roboto.variable} ${geistMono.variable}`}>
+        <Providers>
           {children}
           <Toaster richColors closeButton />
+          </Providers>
         </main>
       </body>
     </html>

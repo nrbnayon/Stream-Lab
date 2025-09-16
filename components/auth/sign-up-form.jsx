@@ -11,7 +11,6 @@ export default function SignUpForm() {
   const router = useRouter();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [distroCode, setDistroCode] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isAgreed, setIsAgreed] = useState(false);
@@ -41,7 +40,6 @@ export default function SignUpForm() {
     console.log({
       fullName,
       email,
-      distroCode,
       password,
     });
 
@@ -66,14 +64,7 @@ export default function SignUpForm() {
         value={email}
         setValue={setEmail}
       />
-      {/* Distro Code */}
-      <InputField
-        placeholder="Give Distro Code Here"
-        type="text"
-        label="Distro Code"
-        value={distroCode}
-        setValue={setDistroCode}
-      />
+
       {/* Password */}
       <InputField
         placeholder="Enter your password"
