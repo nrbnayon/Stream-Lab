@@ -5,10 +5,14 @@ import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { useState } from "react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useSignupMutation } from "@/redux/store/api/authApi"; 
+import { toast } from "sonner";
 
 export default function SignUpForm() {
   const router = useRouter();
+  const [signup, { isLoading }] = useSignupMutation();
+
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,11 +20,11 @@ export default function SignUpForm() {
   const [isAgreed, setIsAgreed] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
 
-    // simple validation
+    // Client-side validation
     if (!fullName || !email || !password || !confirmPassword) {
       setError("All fields are required!");
       return;
@@ -36,14 +40,44 @@ export default function SignUpForm() {
       return;
     }
 
-    // TODO: Success - send data to API here
-    console.log({
-      fullName,
-      email,
-      password,
-    });
+    try {
+      // Prepare data according to API specification
+      const signupData = {
+        full_name: fullName,
+        email_address: email,
+        password: password,
+        confirm_password: confirmPassword,
+        terms_agreed: isAgreed,
+      };
 
-    router.push("/signin");
+      // Call the signup API
+      const response = await signup(signupData).unwrap();
+
+      // If signup is successful, show success toast and redirect to sign in page
+      if (response.status === "success") {
+        toast.success(
+          "Account created successfully! Please sign in to continue."
+        );
+        // Small delay to let user see the toast before redirecting
+        setTimeout(() => {
+          router.push("/signin");
+        }, 1500);
+      }
+    } catch (err) {
+      // Handle API errors
+      let errorMessage = "An error occurred during signup. Please try again.";
+
+      if (err.data && err.data.message) {
+        errorMessage = err.data.message;
+      } else if (err.message) {
+        errorMessage = err.message;
+      }
+
+      // Show error toast
+      toast.error(errorMessage);
+      // Also set error state for form display
+      setError(errorMessage);
+    }
   };
 
   return (
@@ -55,6 +89,7 @@ export default function SignUpForm() {
         label="Full Name"
         value={fullName}
         setValue={setFullName}
+        disabled={isLoading}
       />
       {/* Email */}
       <InputField
@@ -63,6 +98,7 @@ export default function SignUpForm() {
         label="Email"
         value={email}
         setValue={setEmail}
+        disabled={isLoading}
       />
 
       {/* Password */}
@@ -72,6 +108,7 @@ export default function SignUpForm() {
         label="Password"
         value={password}
         setValue={setPassword}
+        disabled={isLoading}
       />
       {/* Confirm Password */}
       <InputField
@@ -80,6 +117,7 @@ export default function SignUpForm() {
         label="Confirm Password"
         value={confirmPassword}
         setValue={setConfirmPassword}
+        disabled={isLoading}
       />
 
       {/* agree with Terms and conditions */}
@@ -88,6 +126,7 @@ export default function SignUpForm() {
           id="terms"
           checked={isAgreed}
           onCheckedChange={(checked) => setIsAgreed(checked)}
+          disabled={isLoading}
         />
         <Label htmlFor="terms">
           I agree to the
@@ -104,10 +143,12 @@ export default function SignUpForm() {
       {/* error message */}
       {error && <p className="text-red-500 text-sm">{error}</p>}
 
-      {/* Sign in button */}
-      <Button className="w-full mt-3">Create Account</Button>
+      {/* Sign up button */}
+      <Button className="w-full mt-3" type="submit" disabled={isLoading}>
+        {isLoading ? "Creating Account..." : "Create Account"}
+      </Button>
 
-      {/* If Not an existing user */}
+      {/* If already have an account */}
       <p className="text-center">
         Already have an account? &nbsp;
         <Link href="/signin" className="text-primary hover:underline">

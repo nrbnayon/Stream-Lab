@@ -71,9 +71,25 @@ export default function RootLayout({ children }) {
     <html lang="en" data-scroll-behavior="smooth">
       <body className="antialiased">
         <main className={`${roboto.variable} ${geistMono.variable}`}>
-        <Providers>
-          {children}
-          <Toaster richColors closeButton />
+          <Providers>
+            {children}
+            <Toaster
+              richColors
+              closeButton
+              position="top-center"
+              duration={4000}
+              expand={false}
+              visibleToasts={5}
+              // toastOptions={{
+              //   style: {
+              //     background: "white",
+              //     color: "black",
+              //     border: "1px solid #e5e5e5",
+              //   },
+              //   className: "my-toast",
+              //   descriptionClassName: "my-toast-description",
+              // }}
+            />
           </Providers>
         </main>
       </body>

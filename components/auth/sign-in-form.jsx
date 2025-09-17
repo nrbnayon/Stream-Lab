@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "@/redux/store/slices/authSlice";
 import { useLoginMutation } from "@/redux/store/api/authApi";
+import { toast } from "sonner";
 
 export default function SignInForm() {
   const router = useRouter();
@@ -38,10 +39,12 @@ export default function SignInForm() {
       }).unwrap();
 
       console.log("Login response:", response);
-
       // Dispatch credentials to Redux store
       dispatch(setCredentials(response));
 
+      toast.success(
+        `Successfully signed in! Welcome ${response?.full_name} 🎉🎞️.`
+      );
       // Redirect based on role
       if (response.role === "admin") {
         router.push("/admin/dashboard");
@@ -49,15 +52,15 @@ export default function SignInForm() {
         router.push("/watch");
       }
     } catch (err) {
-      console.error("Login error:", err);
-      // Handle different error scenarios
-      if (err?.data?.message) {
-        setError(err.data.message);
-      } else if (err?.message) {
-        setError(err.message);
-      } else {
-        setError("Login failed. Please try again.");
+      let errorMessage =
+        "Login failed. Please check your credentials and try again.";
+      if (err.data && err.data.message) {
+        errorMessage = err.data.message;
+      } else if (err.message) {
+        errorMessage = err.message;
       }
+      toast.error(errorMessage);
+      setError(errorMessage);
     }
   };
 
