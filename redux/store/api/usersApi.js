@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 export const usersApi = createApi({
   reducerPath: "usersApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_BASE_URL}/settings`,
     credentials: "include",
     prepareHeaders: (headers) => {
       const token = Cookies.get("accessToken");
@@ -15,106 +15,95 @@ export const usersApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["User", "Users"],
+  tagTypes: ["User", "Terms", "AdminTerms"],
   endpoints: (builder) => ({
-    getAllUsers: builder.query({
-      query: (params) => ({
-        url: "/all",
-        params,
-      }),
-      providesTags: ["Users"],
-    }),
-
-    getUserById: builder.query({
-      query: (id) => `/${id}`,
-      providesTags: (result, error, id) => [{ type: "User", id }],
-    }),
-
+    // User and Admin: Get user profile
     getMe: builder.query({
-      query: () => "/me",
+      query: () => "/personal-information/me",
       providesTags: ["User"],
     }),
 
-    createUser: builder.mutation({
-      query: (data) => ({
-        url: "/sign-up",
-        method: "POST",
-        body: data,
-      }),
-      invalidatesTags: ["Users"],
-    }),
-
+    // User and Admin: Update user profile (PUT method)
     updateProfile: builder.mutation({
       query: (data) => ({
-        url: "/profile-update",
-        method: "PATCH",
+        url: "/personal-information/me",
+        method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["User", "Users"],
+      invalidatesTags: ["User"],
     }),
 
+    // User and Admin: Update user profile with multipart form-data (PATCH method)
     updateProfileImage: builder.mutation({
       query: (formData) => ({
-        url: "/profile-image",
+        url: "/personal-information/me",
         method: "PATCH",
         body: formData,
       }),
-      invalidatesTags: ["User", "Users"],
+      invalidatesTags: ["User"],
     }),
 
-    adminUpdateUser: builder.mutation({
-      query: ({ id, data }) => ({
-        url: `/${id}`,
-        method: "PATCH",
-        body: data,
-      }),
-      invalidatesTags: ["User", "Users"],
-    }),
-
-    changeUserStatus: builder.mutation({
-      query: ({ id, status }) => ({
-        url: `/${id}/status`,
-        method: "PATCH",
-        body: { status },
-      }),
-      invalidatesTags: ["User", "Users"],
-    }),
-
-    deleteUser: builder.mutation({
-      query: (id) => ({
-        url: `/${id}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: ["Users"],
-    }),
-
-    searchUsers: builder.query({
-      query: (searchTerm) => ({
-        url: "/search",
-        params: { searchTerm },
-      }),
-    }),
-
-    registerDeviceToken: builder.mutation({
+    // User and Admin: Change password
+    changePassword: builder.mutation({
       query: (data) => ({
-        url: "/register-device-token",
+        url: "/change-password",
         method: "POST",
         body: data,
       }),
+    }),
+
+    // User and Admin: Get user terms
+    getUserTerms: builder.query({
+      query: () => "/user-terms",
+      providesTags: ["Terms"],
+    }),
+
+    // Admin only: Get admin terms
+    getAdminTerms: builder.query({
+      query: () => "/admin-terms",
+      providesTags: ["AdminTerms"],
+    }),
+
+    // Admin only: Create admin terms
+    createAdminTerms: builder.mutation({
+      query: (data) => ({
+        url: "/admin-terms",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["AdminTerms"],
+    }),
+
+    // Admin only: Update admin terms
+    updateAdminTerms: builder.mutation({
+      query: ({ terms_id, ...data }) => ({
+        url: "/admin-terms",
+        method: "PATCH",
+        body: { terms_id, ...data },
+      }),
+      invalidatesTags: ["AdminTerms"],
+    }),
+
+    // Admin only: Delete admin terms
+    deleteAdminTerms: builder.mutation({
+      query: (terms_id) => ({
+        url: "/admin-terms",
+        method: "DELETE",
+        body: { terms_id },
+      }),
+      invalidatesTags: ["AdminTerms"],
     }),
   }),
 });
 
 export const {
-  useGetAllUsersQuery,
-  useGetUserByIdQuery,
   useGetMeQuery,
-  useCreateUserMutation,
   useUpdateProfileMutation,
   useUpdateProfileImageMutation,
-  useAdminUpdateUserMutation,
-  useChangeUserStatusMutation,
-  useDeleteUserMutation,
-  useSearchUsersQuery,
-  useRegisterDeviceTokenMutation,
+  useChangePasswordMutation,
+  useGetUserTermsQuery,
+  useGetAdminTermsQuery,
+  useCreateAdminTermsMutation,
+  useUpdateAdminTermsMutation,
+  useDeleteAdminTermsMutation,
 } = usersApi;

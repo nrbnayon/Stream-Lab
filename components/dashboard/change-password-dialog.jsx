@@ -1,3 +1,4 @@
+// components/dashboard/change-password-dialog.js
 "use client";
 import { LockPasswordIcon } from "@hugeicons/core-free-icons/index";
 import {
@@ -10,25 +11,27 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import SettingsCard from "./settings-card";
-
 import { Button } from "../ui/button";
 import InputField from "../input-field";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { useChangePasswordMutation } from "@/redux/store/api/usersApi";
 
 export default function ChangePasswordDialog() {
   const router = useRouter();
+  const [changePassword, { isLoading }] = useChangePasswordMutation();
+
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
+  const [open, setOpen] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     setError(null);
-    setSuccess(null);
 
     if (!oldPassword || !newPassword || !confirmPassword) {
       setError("All fields are required.");
@@ -45,23 +48,28 @@ export default function ChangePasswordDialog() {
       return;
     }
 
-    // TODO: replace with API call
-    console.log({
-      oldPassword,
-      newPassword,
-      confirmPassword,
-    });
+    try {
+      const result = await changePassword({
+        old_password: oldPassword,
+        new_password: newPassword,
+        confirm_password: confirmPassword,
+      }).unwrap();
 
-    setSuccess("Password changed successfully!");
-    setOldPassword("");
-    setNewPassword("");
-    setConfirmPassword("");
+      toast.success(result.message || "Password changed successfully!");
 
-    // TODO: logout and redirect
-    router.push("/login");
+      // Clear form
+      setOldPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+      setOpen(false);
+    } catch (error) {
+      setError(error?.data?.message || "Failed to change password");
+      console.error("Password change error:", error);
+    }
   };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger className="w-full">
         <SettingsCard
           title="Change Password"
@@ -102,11 +110,10 @@ export default function ChangePasswordDialog() {
           </div>
 
           {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
-          {success && <p className="text-green-500 text-sm mt-2">{success}</p>}
 
           <DialogFooter>
-            <Button type="submit" className="w-full mt-3">
-              Save changes
+            <Button type="submit" className="w-full mt-3" disabled={isLoading}>
+              {isLoading ? "Changing..." : "Save changes"}
             </Button>
           </DialogFooter>
         </form>

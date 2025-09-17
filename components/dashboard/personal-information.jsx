@@ -1,3 +1,4 @@
+// components/dashboard/personal-information.js
 "use client";
 import {
   Camera01Icon,
@@ -19,21 +20,26 @@ import Image from "next/image";
 import { useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import InputField from "../input-field";
+import {
+  useGetMeQuery,
+  useUpdateProfileImageMutation,
+} from "@/redux/store/api/usersApi";
+import { toast } from "sonner";
+import { getFullImageUrl } from "@/lib/utils";
 
-// TODO: remove default Data
-export default function PersonalInformation({
-  userInfo = {
-    avatar:
-      "https://i.pinimg.com/736x/dd/48/f0/dd48f03b51d3b5db635307cb5a3fc5fb.jpg",
-    full_name: "User Name",
-    email: "username@domain.com",
-  },
-}) {
+export default function PersonalInformation() {
+  const { data: userResponse, isLoading, refetch } = useGetMeQuery();
+  const [updateProfileImage, { isLoading: isUpdating }] =
+    useUpdateProfileImageMutation();
+
+  const userInfo = userResponse?.data || {};
   const { avatar, full_name, email } = userInfo;
+
   const [preview, setPreview] = useState(null);
   const [open, setOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editedData, setEditedData] = useState({ avatar: "", full_name: "" });
+
   // Handle file change to show instant preview
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
@@ -43,12 +49,50 @@ export default function PersonalInformation({
       setEditedData((prev) => ({ ...prev, avatar: file }));
     }
   };
+
   // handle data changes and make update
-  const handleUpdateProfile = (e) => {
+  const handleUpdateProfile = async (e) => {
     e.preventDefault();
-    // TODO: send data to backend
-    console.log(editedData);
+
+    try {
+      const formData = new FormData();
+
+      if (editedData.full_name && editedData.full_name !== full_name) {
+        formData.append("full_name", editedData.full_name);
+      }
+
+      if (editedData.avatar) {
+        formData.append("avatar", editedData.avatar);
+      }
+
+      const result = await updateProfileImage(formData).unwrap();
+
+      toast.success(result.data?.message || "Profile updated successfully!");
+
+      // Reset form and close dialog
+      setIsEditing(false);
+      setEditedData({ avatar: "", full_name: "" });
+      setPreview(null);
+      setOpen(false);
+
+      // Refetch user data
+      refetch();
+    } catch (error) {
+      toast.error(error?.data?.message || "Failed to update profile");
+      console.error("Profile update error:", error);
+    }
   };
+
+  if (isLoading) {
+    return (
+      <SettingsCard
+        title="Personal Information"
+        description="Loading..."
+        icon={UserIcon}
+      />
+    );
+  }
+
   return (
     <Dialog
       open={open}
@@ -86,8 +130,8 @@ export default function PersonalInformation({
             </Button>
             <div className="relative">
               <Image
-                src={preview || avatar}
-                alt={`${full_name}'s profile picture`}
+                src={preview || getFullImageUrl(avatar)}
+                alt={`${full_name || "User"}'s profile picture`}
                 width={200}
                 height={200}
                 className="aspect-square rounded-full object-cover mx-auto"
@@ -96,7 +140,6 @@ export default function PersonalInformation({
               {isEditing && (
                 <label className="absolute top-1/2 left-1/2 -translate-1/2 cursor-pointer bg-secondary/50 p-3 rounded-full">
                   <HugeiconsIcon icon={Camera01Icon} className="" />
-                  {/* <HugeiconsIcon icon={Edit04Icon} /> */}
                   <input
                     type="file"
                     accept="image/*"
@@ -109,7 +152,7 @@ export default function PersonalInformation({
             <div className="grid gap-3">
               <InputField
                 label="Name"
-                value={editedData.full_name || full_name}
+                value={editedData.full_name || full_name || ""}
                 inputDisabled={!isEditing}
                 setValue={(value) =>
                   setEditedData((prev) => ({ ...prev, full_name: value }))
@@ -119,7 +162,7 @@ export default function PersonalInformation({
                 label="Email"
                 type="email"
                 inputDisabled={true}
-                value={email}
+                value={email || ""}
               />
             </div>
           </div>
@@ -129,12 +172,13 @@ export default function PersonalInformation({
                 type="submit"
                 className="w-full"
                 disabled={
-                  (!editedData.full_name ||
+                  isUpdating ||
+                  ((!editedData.full_name ||
                     editedData.full_name === full_name) &&
-                  !editedData.avatar
+                    !editedData.avatar)
                 }
               >
-                Save changes
+                {isUpdating ? "Saving..." : "Save changes"}
               </Button>
             </DialogFooter>
           ) : null}

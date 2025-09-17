@@ -1,3 +1,4 @@
+// components/dashboard/sign-out-btn.jsx
 "use client";
 
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "../ui/sidebar";
@@ -16,24 +17,43 @@ import {
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { logout } from "@/redux/store/slices/authSlice";
+import { useState } from "react";
 
 export default function SignOutBtn() {
   const router = useRouter();
-  const handleSignOut = () => {
-    // TODO: Sign out functionality
-    console.log("Signing out...");
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-    router.push("/");
+  const handleSignOut = () => {
+    try {
+      setIsLoading(true);
+      dispatch(logout());
+      setOpen(false);
+
+      router.push("/");
+      console.log("Successfully logged out");
+    } catch (error) {
+      console.error("Logout error:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <AlertDialog>
+        <AlertDialog open={open} onOpenChange={setOpen}>
           <AlertDialogTrigger asChild>
-            <SidebarMenuButton className="cursor-pointer" variant="destructive">
+            <SidebarMenuButton
+              className="cursor-pointer"
+              variant="destructive"
+              disabled={isLoading}
+            >
               <HugeiconsIcon icon={Logout01Icon} />
-              <span>Sign Out</span>
+              <span>{isLoading ? "Signing out..." : "Sign Out"}</span>
             </SidebarMenuButton>
           </AlertDialogTrigger>
           <AlertDialogContent>
@@ -42,13 +62,17 @@ export default function SignOutBtn() {
                 Are you sure you want to sign out?
               </AlertDialogTitle>
               <AlertDialogDescription>
-                You’ll need to log in again to access your account.
+                You'll need to log in again to access your account.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={handleSignOut} variant="destructive">
-                Continue
+              <AlertDialogCancel disabled={isLoading}>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={handleSignOut}
+                variant="destructive"
+                disabled={isLoading}
+              >
+                {isLoading ? "Signing out..." : "Continue"}
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
