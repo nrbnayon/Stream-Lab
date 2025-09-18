@@ -15,7 +15,22 @@ export const filmsApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Films", "MyLibrary", "MyTitles", "FilmDetails"],
+  tagTypes: [
+    "Films",
+    "MyLibrary",
+    "MyTitles",
+    "FilmDetails",
+    "Drama",
+    "Drama Movies",
+    "Action Movies",
+    "Comedy Movies",
+    "Horror Movies",
+    "Romance Movies",
+    "Sci-Fi Movies",
+    "Thriller Movies",
+    "War Movies",
+    "Western Movies",
+  ],
   endpoints: (builder) => ({
     // Public endpoints
     getTrendingFilms: builder.query({
@@ -25,7 +40,7 @@ export const filmsApi = createApi({
 
     getLatestFilms: builder.query({
       query: () => "/latest",
-      providesTags: ["Films"],
+      providesTags: ["Films", "Drama", "Drama Movies"],
     }),
 
     searchFilms: builder.query({

@@ -9,11 +9,7 @@ export default function TrendingNow() {
     isLoading,
     error,
   } = useGetTrendingFilmsQuery();
-
-  console.log("trendingResponse", trendingResponse);
   const trendingFilms = trendingResponse?.data || [];
-
-  console.log("trendingFilms", trendingFilms);
 
   if (isLoading) {
     return (
