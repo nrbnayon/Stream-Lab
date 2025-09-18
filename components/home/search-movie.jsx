@@ -21,7 +21,7 @@ export default function SearchMovie({ className }) {
     }
   );
 
-  console.log("searchResponse", searchResponse);
+  // console.log("searchResponse", searchResponse);
 
   const movies = useMemo(() => searchResponse?.data || [], [searchResponse]);
 

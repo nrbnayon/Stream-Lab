@@ -21,6 +21,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import Link from "next/link";
 import TrailerPopup from "../trailer-popup";
 import { useGetLatestFilmsQuery } from "../../redux/store/api/filmsApi";
+import CircularLoader from "../ui/CircularLoader";
 
 export default function HeroCarousel({ renderFor = "home" }) {
   const swiperRef = useRef(null);
@@ -34,8 +35,6 @@ export default function HeroCarousel({ renderFor = "home" }) {
     ? apiResponse
     : apiResponse?.data || apiResponse?.films || [];
   
-  console.log("moviesData", moviesData);
-
   useGSAP(
     () => {
       if (swiperRef.current?.swiper) {
@@ -71,7 +70,19 @@ export default function HeroCarousel({ renderFor = "home" }) {
         } flex items-center justify-center bg-gray-900`}
       >
         {renderFor === "home" && <NavBar />}
-        <div className="text-white text-lg">Loading...</div>
+        <div className="p-3 md:p-6">
+          <CircularLoader
+            size={60}
+            thickness={5}
+            gap={4}
+            message=""
+            outerColor="border-primary"
+            innerColor="border-red-500"
+            textColor="text-blue-600"
+            className="py-12"
+            showMessage={false}
+          />
+        </div>
       </div>
     );
   }
