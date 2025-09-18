@@ -20,34 +20,90 @@ import { truncateText } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Link from "next/link";
 import TrailerPopup from "../trailer-popup";
+import { useGetLatestFilmsQuery } from "../../redux/store/api/filmsApi";
 
-export default function HeroCarousel({ moviesData, renderFor = "home" }) {
+export default function HeroCarousel({ renderFor = "home" }) {
   const swiperRef = useRef(null);
   const isMobile = useIsMobile();
 
+  // Fetch latest films data
+  const { data: apiResponse, isLoading, error } = useGetLatestFilmsQuery();
+
+  // Extract movies array from API response
+  const moviesData = Array.isArray(apiResponse)
+    ? apiResponse
+    : apiResponse?.data || apiResponse?.films || [];
+  
+  console.log("moviesData", moviesData);
+
   useGSAP(
     () => {
-      const swiper = swiperRef.current.swiper;
+      if (swiperRef.current?.swiper) {
+        const swiper = swiperRef.current.swiper;
 
-      swiper.on("slideChangeTransitionStart", () => {
-        gsap.fromTo(
-          "#slide-details",
-          {
-            opacity: 0,
-            y: 50,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power2.out",
-            delay: 0.5,
-          }
-        );
-      });
+        swiper.on("slideChangeTransitionStart", () => {
+          gsap.fromTo(
+            "#slide-details",
+            {
+              opacity: 0,
+              y: 50,
+            },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 1,
+              ease: "power2.out",
+              delay: 0.5,
+            }
+          );
+        });
+      }
     },
-    { scope: swiperRef, dependencies: [] }
+    { scope: swiperRef, dependencies: [moviesData] }
   );
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <div
+        className={`relative ${
+          renderFor === "home" ? "lg:h-dvh" : "lg:h-[calc(100vh/5*3)] mt-5"
+        } flex items-center justify-center bg-gray-900`}
+      >
+        {renderFor === "home" && <NavBar />}
+        <div className="text-white text-lg">Loading...</div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div
+        className={`relative ${
+          renderFor === "home" ? "lg:h-dvh" : "lg:h-[calc(100vh/5*3)] mt-5"
+        } flex items-center justify-center bg-gray-900`}
+      >
+        {renderFor === "home" && <NavBar />}
+        <div className="text-white text-lg">Error loading films</div>
+      </div>
+    );
+  }
+
+  // No data state
+  if (!moviesData || moviesData.length === 0) {
+    return (
+      <div
+        className={`relative ${
+          renderFor === "home" ? "lg:h-dvh" : "lg:h-[calc(100vh/5*3)] mt-5"
+        } flex items-center justify-center bg-gray-900`}
+      >
+        {renderFor === "home" && <NavBar />}
+        <div className="text-white text-lg">No films available</div>
+      </div>
+    );
+  }
+
   return (
     <div
       className={`relative ${
@@ -79,7 +135,7 @@ export default function HeroCarousel({ moviesData, renderFor = "home" }) {
           >
             <Image
               alt={movie.title}
-              src={movie.thumbnail_url}
+              src={movie.thumbnail}
               fill
               priority
               className="object-cover mask-carousel -z-10 h-full w-full"
@@ -101,7 +157,9 @@ export default function HeroCarousel({ moviesData, renderFor = "home" }) {
                   {movie.title}
                 </h2>
                 <h4 className="text-xl md:text-2xl lg:text-3xl font-semibold">
-                  {movie.genre.join(", ")}
+                  {Array.isArray(movie.genre)
+                    ? movie.genre.join(", ")
+                    : movie.genre}
                 </h4>
                 <p className=" text-sm md:text-base text-secondary-foreground max-w-2xl">
                   {isMobile ? truncateText(movie.logline) : movie.logline}
@@ -119,6 +177,10 @@ export default function HeroCarousel({ moviesData, renderFor = "home" }) {
                   </Link>
 
                   <TrailerPopup
+                    movie={{
+                      trailer_url: movie.trailer_hls_url,
+                      title: movie.title
+                    }}
                     triggerBtn={
                       <Button
                         variant="outline"

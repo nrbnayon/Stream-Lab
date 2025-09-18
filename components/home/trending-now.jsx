@@ -11,6 +11,8 @@ export default function TrendingNow() {
   } = useGetTrendingFilmsQuery();
   const trendingFilms = trendingResponse?.data || [];
 
+  console.log("trendingFilms", trendingFilms);
+
   if (isLoading) {
     return (
       <div className="container my-10 md:my-16" id="trending-movie">
