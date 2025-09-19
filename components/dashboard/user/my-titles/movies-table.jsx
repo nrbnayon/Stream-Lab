@@ -1,3 +1,4 @@
+// components/dashboard/user/my-titles/movies-table.jsx
 "use client";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -18,9 +19,11 @@ import SearchWithOptions from "../../search-with-options";
 import FilmEditDialog from "./edit-film/film-edit-dialog";
 import { useGetMyTitlesQuery } from "@/redux/store/api/filmsApi";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function MoviesTable() {
   const [filter, setFilter] = useState({ searchValue: "", selectedOption: "" });
+  const [currentPage, setCurrentPage] = useState(1);
 
   const {
     data: titlesResponse,
@@ -29,14 +32,35 @@ export default function MoviesTable() {
   } = useGetMyTitlesQuery({
     status: filter.selectedOption === "All" ? undefined : filter.selectedOption,
     search: filter.searchValue || undefined,
+    page: currentPage,
+    page_size: 20,
   });
 
-  const userFilms = titlesResponse?.data || [];
-  const stats = titlesResponse?.stats || {};
+  const userFilms = titlesResponse?.results?.data || [];
+  const stats = titlesResponse?.results?.stats || {};
+  const totalCount = titlesResponse?.count || 0;
+  const hasNext = titlesResponse?.next !== null;
+  const hasPrevious = titlesResponse?.previous !== null;
+
+  console.log("Get all response::", titlesResponse);
 
   useEffect(() => {
     console.log(filter);
+    // Reset to page 1 when filter changes
+    setCurrentPage(1);
   }, [filter]);
+
+  const handleNextPage = () => {
+    if (hasNext) {
+      setCurrentPage((prev) => prev + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (hasPrevious) {
+      setCurrentPage((prev) => prev - 1);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -63,7 +87,7 @@ export default function MoviesTable() {
         Manage your uploaded films here
       </p>
       <SearchWithOptions
-        options={["All", "Published", "Review", "Rejected"]}
+        options={["All", "Published", "Under Review", "Rejected"]}
         onChange={(data) => setFilter(data)}
       />
       {/* rendering Table */}
@@ -81,9 +105,12 @@ export default function MoviesTable() {
         <TableBody>
           {userFilms.length > 0 ? (
             userFilms.map((film) => (
-              <TableRow key={film.id}>
+              <TableRow key={film.film_id}>
                 <TableCell>
-                  <Link href={`/film/${film.id}`} className="hover:underline">
+                  <Link
+                    href={`/film/${film.film_id}`}
+                    className="hover:underline"
+                  >
                     {film.title}
                   </Link>
                 </TableCell>
@@ -92,7 +119,7 @@ export default function MoviesTable() {
                     variant={
                       film.status === "Published"
                         ? "success"
-                        : film.status === "Review"
+                        : film.status === "Under Review"
                         ? "warning"
                         : "destructive"
                     }
@@ -101,7 +128,7 @@ export default function MoviesTable() {
                   </Badge>
                 </TableCell>
                 <TableCell>{film.film_type}</TableCell>
-                <TableCell>{film.total_views || "—"}</TableCell>
+                <TableCell>{film.views || "—"}</TableCell>
                 <TableCell
                   className={`${film.total_earning && "text-green-500"}`}
                 >
@@ -117,10 +144,10 @@ export default function MoviesTable() {
                             className="cursor-pointer"
                           />
                         }
-                        filmID={film.id}
+                        filmID={film.film_id}
                       />
 
-                      <Link href={`my-titles/analytics/${film.id}`}>
+                      <Link href={`my-titles/analytics/${film.film_id}`}>
                         <HugeiconsIcon
                           icon={Chart03Icon}
                           className="text-[#16A4AE]"
@@ -142,6 +169,34 @@ export default function MoviesTable() {
           )}
         </TableBody>
       </Table>
+
+      {/* Pagination */}
+      {totalCount > 20 && (
+        <div className="flex justify-between items-center mt-4">
+          <p className="text-sm text-secondary-foreground">
+            Showing {(currentPage - 1) * 20 + 1} to{" "}
+            {Math.min(currentPage * 20, totalCount)} of {totalCount} results
+          </p>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handlePreviousPage}
+              disabled={!hasPrevious}
+            >
+              Previous
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleNextPage}
+              disabled={!hasNext}
+            >
+              Next
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

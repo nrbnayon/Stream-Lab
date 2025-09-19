@@ -51,24 +51,25 @@ export default function TransactionHistory() {
   };
 
   const getAmountColor = (txType) => {
-    switch (txType.toLowerCase()) {
-      case "rent film":
-      case "buy film":
-        return "text-destructive";
-      case "add funds":
-      case "refund":
-        return "text-green-500";
-      default:
-        return "text-destructive";
-    }
+    // Transactions that increase the balance (positive/green)
+    const creditTransactions = ["add fund", "refund"];
+
+    const isCredit = creditTransactions.some((creditType) =>
+      txType.toLowerCase().includes(creditType)
+    );
+
+    return isCredit ? "text-green-500" : "text-destructive";
   };
 
   const formatAmount = (amount, txType) => {
-    const prefix =
-      txType.toLowerCase() === "add funds" || txType.toLowerCase() === "refund"
-        ? "+"
-        : "-";
-    return `${prefix}${amount.toFixed(2)}`;
+    const creditTransactions = ["add fund", "refund"];
+
+    const isCredit = creditTransactions.some((creditType) =>
+      txType.toLowerCase().includes(creditType)
+    );
+
+    const prefix = isCredit ? "+" : "-";
+    return `${prefix}$${amount.toFixed(2)}`;
   };
 
   if (isLoading) {
@@ -110,7 +111,7 @@ export default function TransactionHistory() {
                 <TableCell>{transaction.source}</TableCell>
                 <TableCell>{transaction.tx_type}</TableCell>
                 <TableCell className={getAmountColor(transaction.tx_type)}>
-                  ${formatAmount(transaction.amount, transaction.tx_type)}
+                  {formatAmount(transaction.amount, transaction.tx_type)}
                 </TableCell>
                 <TableCell>{transaction.date}</TableCell>
                 <TableCell>
