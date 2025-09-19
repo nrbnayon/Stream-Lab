@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { useState } from "react";
 import {
   Card,
   CardContent,
@@ -31,36 +32,55 @@ export default function PurchasedMovieCard({ movie }) {
     current_watch_time,
   } = movie;
 
+  // State to handle image error
+  const [imageError, setImageError] = useState(false);
+  const [imageSrc, setImageSrc] = useState(
+    thumbnail || "/placeholder-movie.jpg"
+  );
+
   // Calculate progress percentage
   const progressPercentage = watch_progress || 0;
 
-  // Format expiry or purchase date
+  // Format purchase/rental date
   const getAccessDate = () => {
-    if (access_type === "Rent" && expiry_time) {
+    if ((access_type === "Rent" || access_type === "Rented") && expiry_time) {
       const expiryDate = new Date(expiry_time);
-      return `Expires: ${expiryDate.toLocaleDateString()}`;
+      const isExpired = expiryDate <= new Date();
+      if (isExpired) {
+        return `Expired on ${expiryDate.toLocaleDateString()}`;
+      }
+      // return `Expires on ${expiryDate.toLocaleDateString()}`;
     }
-    // For purchased items, you might want to show purchase date if available
-    return access_type === "Purchase" ? "Purchased" : "Rented";
+    // For purchased items, show generic purchased message or use creation date if available
+    return access_type === "Purchase" || access_type === "Purchased"
+      ? "Purchased"
+      : "Rented";
   };
 
   // Determine if user should continue or start watching
   const watchButtonText = progressPercentage > 0 ? "Continue" : "Watch";
   const watchTime = current_watch_time || 0;
 
+  // Handle image error
+  const handleImageError = () => {
+    if (!imageError) {
+      setImageError(true);
+      setImageSrc("/placeholder-movie.jpg");
+    }
+  };
+
   return (
-    <Card className="w-full">
-      <CardHeader>
+    <Card className="w-full md:gap-2">
+      <CardHeader className="md:gap-0">
         <div className="relative">
           <Image
-            src={thumbnail || "/placeholder-movie.jpg"}
-            alt={title}
+            src={imageSrc}
+            alt={title || "Movie"}
             width={200}
             height={80}
             className="w-full rounded-md h-44 object-cover"
-            onError={(e) => {
-              e.currentTarget.src = "/placeholder-movie.jpg";
-            }}
+            onError={handleImageError}
+            unoptimized={imageError}
           />
 
           {/* Continue/Watch button */}
@@ -83,11 +103,10 @@ export default function PurchasedMovieCard({ movie }) {
           </Link>
 
           {/* Access type badge */}
-          <Badge
-            variant={access_type === "Purchase" ? "secondary" : "outline"}
-            className="absolute top-2 left-2"
-          >
-            {access_type === "Purchase" ? "Purchased" : "Rented"}
+          <Badge variant="secondary" className="absolute top-2 left-2">
+            {access_type === "Purchase" || access_type === "Purchased"
+              ? "Purchased"
+              : "Rented"}
           </Badge>
 
           {/* Status indicator for inactive/expired content */}
@@ -99,10 +118,11 @@ export default function PurchasedMovieCard({ movie }) {
         </div>
 
         {/* Movie name and share icon */}
-        <CardTitle className="text-xl flex items-center gap-2 min-w-0">
-          <span className="truncate flex-1 min-w-0">{title}</span>
+        <CardTitle className="text-xl flex justify-between items-center">
+          {title || "Movie Name"}
+          {/* Share icon */}
           <WebShare
-            className="text-primary flex-shrink-0"
+            className="text-primary"
             url={`${
               typeof window !== "undefined" ? window.location.origin : ""
             }/film/${film_id}`}
@@ -111,29 +131,30 @@ export default function PurchasedMovieCard({ movie }) {
         </CardTitle>
 
         {/* Badge and Duration */}
-        <div className="flex gap-5">
-          <Badge variant="secondary">{film_type}</Badge>
+        <div className="flex gap-5 mt-1">
+          <Badge variant="secondary">{film_type || "Movie"}</Badge>
           <span className="text-secondary-foreground text-sm flex gap-2 items-center">
             <HugeiconsIcon icon={Time04Icon} className="size-4" />
-            {minutesToHours(full_film_duration)}
+            {minutesToHours(full_film_duration || 0)}
           </span>
         </div>
       </CardHeader>
 
-      {/* Access info */}
+      {/* Purchase/rental info */}
       <CardContent className="text-muted-foreground">
         <p>{getAccessDate()}</p>
-        {access_type === "Rent" && expiry_time && (
-          <p className="text-sm mt-1">
-            {new Date(expiry_time) > new Date()
-              ? `Valid until ${new Date(expiry_time).toLocaleDateString()}`
-              : "Expired"}
-          </p>
-        )}
+        {(access_type === "Rent" || access_type === "Rented") &&
+          expiry_time && (
+            <p className="text-xs mt-1">
+              {new Date(expiry_time) > new Date()
+                ? `Valid until ${new Date(expiry_time).toLocaleDateString()}`
+                : "Rental expired"}
+            </p>
+          )}
       </CardContent>
 
       {/* Footer | progress */}
-      <CardFooter className="block">
+      <CardFooter className="block p-0">
         <Label className="flex justify-between text-secondary-foreground mb-0.5">
           <span>Progress</span>
           <span>{Math.round(progressPercentage)}%</span>

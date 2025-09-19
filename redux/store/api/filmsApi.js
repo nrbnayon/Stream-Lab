@@ -64,11 +64,25 @@ export const filmsApi = createApi({
         if (params.search) {
           searchParams.append("search", params.search);
         }
+        if (params.page) {
+          searchParams.append("page", params.page);
+        }
+        if (params.page_size) {
+          searchParams.append("page_size", params.page_size);
+        }
 
         const queryString = searchParams.toString();
         return `/my-library${queryString ? `?${queryString}` : ""}`;
       },
-      providesTags: ["MyLibrary"],
+      providesTags: (result, error, params) => [
+        { type: "MyLibrary", id: `page-${params?.page || 1}` },
+        "MyLibrary",
+      ],
+      // Keep cache for different pages/filters
+      serializeQueryArgs: ({ queryArgs }) => {
+        const { page, ...otherParams } = queryArgs || {};
+        return { page, ...otherParams };
+      },
     }),
 
     getMyLibraryDetails: builder.query({
@@ -77,13 +91,18 @@ export const filmsApi = createApi({
     }),
 
     getMyTitles: builder.query({
-      query: ({ status, search } = {}) => {
+      query: ({ status, search, page, page_size } = {}) => {
         const params = new URLSearchParams();
         if (status) params.append("status", status);
         if (search) params.append("search", search);
+        if (page) params.append("page", page);
+        if (page_size) params.append("page_size", page_size);
         return `/my-titles${params.toString() ? `?${params.toString()}` : ""}`;
       },
-      providesTags: ["MyTitles"],
+      providesTags: (result, error, params) => [
+        { type: "MyTitles", id: `page-${params?.page || 1}` },
+        "MyTitles",
+      ],
     }),
 
     getMyTitlesAnalytics: builder.query({
@@ -144,6 +163,8 @@ export const filmsApi = createApi({
         method: "POST",
         body: { film_id: filmId, watch_time: watchTime },
       }),
+      // Invalidate library cache to update progress
+      invalidatesTags: ["MyLibrary"],
     }),
   }),
 });
