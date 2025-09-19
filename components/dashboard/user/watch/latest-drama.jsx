@@ -9,7 +9,7 @@ export default function LatestDrama() {
 
   if (isLoading) {
     return (
-      <div className="container my-10 md:my-16" id="latest-drama">
+      <div className="my-5 md:my-10" id="latest-drama">
         <h2 className="text-2xl md:text-4xl font-medium leading-relaxed">
           Latest Drama
         </h2>
@@ -33,7 +33,7 @@ export default function LatestDrama() {
     latestFilms.length > 0 ? latestFilms : moviesData.slice(0, 8);
 
   return (
-    <div className="container my-10 md:my-16" id="latest-drama">
+    <div className="my-5 md:my-10" id="latest-drama">
       <h2 className="text-2xl md:text-4xl font-medium leading-relaxed">
         Latest Drama
       </h2>

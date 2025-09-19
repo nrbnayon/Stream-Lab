@@ -55,12 +55,24 @@ export const filmsApi = createApi({
 
     // Protected endpoints
     getMyLibrary: builder.query({
-      query: ({ access_type, search } = {}) => {
-        const params = new URLSearchParams();
-        if (access_type) params.append("access_type", access_type);
-        if (search) params.append("search", search);
-        return `/my-library${params.toString() ? `?${params.toString()}` : ""}`;
+      query: (params = {}) => {
+        const searchParams = new URLSearchParams();
+
+        if (params.access_type) {
+          searchParams.append("access_type", params.access_type);
+        }
+        if (params.search) {
+          searchParams.append("search", params.search);
+        }
+
+        const queryString = searchParams.toString();
+        return `/my-library${queryString ? `?${queryString}` : ""}`;
       },
+      providesTags: ["MyLibrary"],
+    }),
+
+    getMyLibraryDetails: builder.query({
+      query: (filmId) => `/my-library-details?film_id=${filmId}`,
       providesTags: ["MyLibrary"],
     }),
 
@@ -142,6 +154,7 @@ export const {
   useSearchFilmsQuery,
   useGetGenresQuery,
   useGetMyLibraryQuery,
+  useGetMyLibraryDetailsQuery,
   useGetMyTitlesQuery,
   useGetMyTitlesAnalyticsQuery,
   useGetFilmDetailsQuery,

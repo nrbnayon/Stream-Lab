@@ -18,24 +18,57 @@ import { Label } from "@/components/ui/label";
 import WebShare from "@/components/web-share";
 
 export default function PurchasedMovieCard({ movie }) {
-  const {} = movie;
+  const {
+    film_id,
+    title,
+    film_type,
+    full_film_duration,
+    access_type,
+    status,
+    expiry_time,
+    thumbnail,
+    watch_progress,
+    current_watch_time,
+  } = movie;
+
+  // Calculate progress percentage
+  const progressPercentage = watch_progress || 0;
+
+  // Format expiry or purchase date
+  const getAccessDate = () => {
+    if (access_type === "Rent" && expiry_time) {
+      const expiryDate = new Date(expiry_time);
+      return `Expires: ${expiryDate.toLocaleDateString()}`;
+    }
+    // For purchased items, you might want to show purchase date if available
+    return access_type === "Purchase" ? "Purchased" : "Rented";
+  };
+
+  // Determine if user should continue or start watching
+  const watchButtonText = progressPercentage > 0 ? "Continue" : "Watch";
+  const watchTime = current_watch_time || 0;
+
   return (
     <Card className="w-full">
       <CardHeader>
         <div className="relative">
           <Image
-            src={
-              "https://i.pinimg.com/1200x/b4/e2/59/b4e259133c021a727a797d07bc89086b.jpg"
-            }
-            alt={"Change title"}
+            src={thumbnail || "/placeholder-movie.jpg"}
+            alt={title}
             width={200}
             height={80}
             className="w-full rounded-md h-44 object-cover"
+            onError={(e) => {
+              e.currentTarget.src = "/placeholder-movie.jpg";
+            }}
           />
-          {/* TODO: Redirect to Watch movie page */}
-          {/* Continue watch button */}
-          {/* TODO: Update film link */}
-          <Link href="/film/film_id?time=80">
+
+          {/* Continue/Watch button */}
+          <Link
+            href={`/film/${film_id}${
+              watchTime > 0 ? `?time=${watchTime}` : ""
+            }`}
+          >
             <Button
               variant="destructive"
               size="sm"
@@ -44,44 +77,74 @@ export default function PurchasedMovieCard({ movie }) {
             >
               <span>
                 <HugeiconsIcon icon={PlayIcon} size={25} />
-                Continue
+                {watchButtonText}
               </span>
             </Button>
           </Link>
-          {/* Purchase badge */}
-          <Badge variant="secondary" className="absolute top-2 left-2">
-            Purchased
+
+          {/* Access type badge */}
+          <Badge
+            variant={access_type === "Purchase" ? "secondary" : "outline"}
+            className="absolute top-2 left-2"
+          >
+            {access_type === "Purchase" ? "Purchased" : "Rented"}
           </Badge>
+
+          {/* Status indicator for inactive/expired content */}
+          {status !== "active" && (
+            <Badge variant="destructive" className="absolute top-2 right-2">
+              {status === "expired" ? "Expired" : "Inactive"}
+            </Badge>
+          )}
         </div>
+
         {/* Movie name and share icon */}
-        <CardTitle className="text-xl flex justify-between items-center">
-          {"Movie Name"}
-          {/* Share icon */}
-          <WebShare className="text-primary" />
+        <CardTitle className="text-xl flex items-center gap-2 min-w-0">
+          <span className="truncate flex-1 min-w-0">{title}</span>
+          <WebShare
+            className="text-primary flex-shrink-0"
+            url={`${
+              typeof window !== "undefined" ? window.location.origin : ""
+            }/film/${film_id}`}
+            title={title}
+          />
         </CardTitle>
 
         {/* Badge and Duration */}
         <div className="flex gap-5">
-          <Badge variant="secondary">{"Movie"}</Badge>
+          <Badge variant="secondary">{film_type}</Badge>
           <span className="text-secondary-foreground text-sm flex gap-2 items-center">
             <HugeiconsIcon icon={Time04Icon} className="size-4" />
-            {minutesToHours(214)}
+            {minutesToHours(full_film_duration)}
           </span>
         </div>
       </CardHeader>
 
-      {/* purchase || view history */}
+      {/* Access info */}
       <CardContent className="text-muted-foreground">
-        <p>Purchased at 12-12-2023</p>
+        <p>{getAccessDate()}</p>
+        {access_type === "Rent" && expiry_time && (
+          <p className="text-sm mt-1">
+            {new Date(expiry_time) > new Date()
+              ? `Valid until ${new Date(expiry_time).toLocaleDateString()}`
+              : "Expired"}
+          </p>
+        )}
       </CardContent>
 
       {/* Footer | progress */}
       <CardFooter className="block">
         <Label className="flex justify-between text-secondary-foreground mb-0.5">
           <span>Progress</span>
-          <span>75%</span>
+          <span>{Math.round(progressPercentage)}%</span>
         </Label>
-        <Progress value={75} />
+        <Progress value={progressPercentage} />
+        {current_watch_time > 0 && (
+          <p className="text-xs text-muted-foreground mt-1">
+            Watched {minutesToHours(current_watch_time)} of{" "}
+            {minutesToHours(full_film_duration)}
+          </p>
+        )}
       </CardFooter>
     </Card>
   );

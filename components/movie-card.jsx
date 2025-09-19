@@ -19,16 +19,28 @@ import Link from "next/link";
 import WebShare from "./web-share";
 
 export default function MovieCard({ movie, useLink = false }) {
+  // Map API data structure to component props
   const {
     id,
     title,
     thumbnail_url,
+    thumbnail,
+    full_film_duration,
     duration,
     logline,
     buy_price,
     rent_price,
+    film_type,
     type,
+    trailer_hls_url,
+    trailer_url,
   } = movie;
+
+  // Use the correct field names based on API structure
+  const thumbnailSrc = thumbnail_url || thumbnail;
+  const movieDuration = duration || full_film_duration;
+  const movieType = type || film_type;
+  const trailerUrl = trailer_url || trailer_hls_url;
 
   return (
     <Card className="w-full">
@@ -37,7 +49,7 @@ export default function MovieCard({ movie, useLink = false }) {
           {useLink ? (
             <Link href={`/film/${id}`}>
               <Image
-                src={thumbnail_url}
+                src={thumbnailSrc}
                 alt={title}
                 width={200}
                 height={80}
@@ -46,31 +58,36 @@ export default function MovieCard({ movie, useLink = false }) {
             </Link>
           ) : (
             <Image
-              src={thumbnail_url}
+              src={thumbnailSrc}
               alt={title}
               width={200}
               height={80}
               className="w-full rounded-md h-44 object-cover"
             />
           )}
-          {/* Trailer button and popup */}
-          <TrailerPopup
-            movie={movie}
-            absolute={true}
-            triggerBtn={
-              <Button
-                variant="destructive"
-                size="sm"
-                className="rounded-full"
-                asChild
-              >
-                <span>
-                  <HugeiconsIcon icon={PlayIcon} />
-                  Trailer
-                </span>
-              </Button>
-            }
-          />
+          {/* Trailer button and popup - Pass trailer URL directly */}
+          {trailerUrl && (
+            <TrailerPopup
+              movie={{
+                trailer_url: trailerUrl,
+                title: title,
+              }}
+              absolute={true}
+              triggerBtn={
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  className="rounded-full"
+                  asChild
+                >
+                  <span>
+                    <HugeiconsIcon icon={PlayIcon} />
+                    Trailer
+                  </span>
+                </Button>
+              }
+            />
+          )}
         </div>
         <CardTitle className="text-xl">
           {useLink ? <Link href={`/film/${id}`}>{title}</Link> : title}
@@ -78,59 +95,71 @@ export default function MovieCard({ movie, useLink = false }) {
 
         {/* Badge and Duration */}
         <div className="flex gap-5">
-          <Badge variant="secondary">{type}</Badge>
-          <span className="text-secondary-foreground text-sm flex gap-2 items-center">
-            <HugeiconsIcon icon={Time04Icon} size={18} />
-            {minutesToHours(duration)}
-          </span>
+          <Badge variant="secondary">{movieType}</Badge>
+          {movieDuration && (
+            <span className="text-secondary-foreground text-sm flex gap-2 items-center">
+              <HugeiconsIcon icon={Time04Icon} size={18} />
+              {minutesToHours(movieDuration)}
+            </span>
+          )}
         </div>
 
         {/* movie description */}
-        <CardDescription className="text-base">
-          {truncateText(logline)}
-        </CardDescription>
+        {logline && (
+          <CardDescription className="text-base">
+            {truncateText(logline)}
+          </CardDescription>
+        )}
       </CardHeader>
 
       {/* Content | prices */}
       <CardContent className="text-muted-foreground">
-        <p className="flex justify-between">
-          <span>Rent</span>
-          <span>${rent_price}</span>
-        </p>
-        <p className="flex justify-between">
-          <span>Buy</span>
-          <span>${buy_price}</span>
-        </p>
+        {rent_price && (
+          <p className="flex justify-between">
+            <span>Rent</span>
+            <span>${rent_price}</span>
+          </p>
+        )}
+        {buy_price && (
+          <p className="flex justify-between">
+            <span>Buy</span>
+            <span>${buy_price}</span>
+          </p>
+        )}
       </CardContent>
 
       {/* Footer | button & share */}
       <CardFooter className="flex gap-2">
         <div className="grid grid-cols-2 w-full gap-2">
-          <PaymentDialog
-            dialogTitle={`Rent  –  ${title}`}
-            inputValue={``}
-            triggerBtn={
-              <Button className="w-full" asChild>
-                <span>Rent</span>
-              </Button>
-            }
-            intention="rent"
-            intentionBtnText="Pay"
-          />
-          <PaymentDialog
-            dialogTitle={`Buy – ${title}`}
-            inputValue={``}
-            triggerBtn={
-              <Button className="w-full" variant="outline" asChild>
-                <span>Buy</span>
-              </Button>
-            }
-            intention="buy"
-            intentionBtnText="Pay"
-          />
+          {rent_price && (
+            <PaymentDialog
+              dialogTitle={`Rent  –  ${title}`}
+              inputValue={``}
+              triggerBtn={
+                <Button className="w-full" asChild>
+                  <span>Rent</span>
+                </Button>
+              }
+              intention="rent"
+              intentionBtnText="Pay"
+            />
+          )}
+          {buy_price && (
+            <PaymentDialog
+              dialogTitle={`Buy – ${title}`}
+              inputValue={``}
+              triggerBtn={
+                <Button className="w-full" variant="outline" asChild>
+                  <span>Buy</span>
+                </Button>
+              }
+              intention="buy"
+              intentionBtnText="Pay"
+            />
+          )}
         </div>
 
-        <WebShare title={title} url={`https://yourwebsite.com/affiliate`} />
+        <WebShare title={title} url={`https://yourwebsite.com/film/${id}`} />
       </CardFooter>
     </Card>
   );
