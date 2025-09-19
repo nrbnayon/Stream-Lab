@@ -15,7 +15,7 @@ export const paymentApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Payment"],
+  tagTypes: ["Payment", "Distro"],
   endpoints: (builder) => ({
     // Film Purchase - Stripe
     createStripePurchaseCheckout: builder.mutation({
@@ -134,7 +134,7 @@ export const paymentApi = createApi({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["Payment"],
+      invalidatesTags: ["Payment", "Distro"],
     }),
   }),
 });

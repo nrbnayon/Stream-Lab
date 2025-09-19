@@ -1,3 +1,4 @@
+// Updated WebShare Component
 "use client";
 import { Share01Icon } from "@hugeicons/core-free-icons/index";
 import { Button } from "./ui/button";
@@ -11,12 +12,13 @@ export default function WebShare({ url = "", title = "", className }) {
       url,
     });
   };
+
   return (
     <Button
       size="icon"
       variant="ghost"
       onClick={handleShare}
-      className={cn("bg-transparent", className)}
+      className={cn("bg-transparent hover:bg-primary/10", className)}
     >
       <HugeiconsIcon icon={Share01Icon} />
     </Button>

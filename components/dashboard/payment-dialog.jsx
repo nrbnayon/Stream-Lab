@@ -17,10 +17,12 @@ import {
   SelectGroup,
   SelectItem,
   SelectTrigger,
+  SelectValue,
 } from "../ui/select";
 import { Input } from "../ui/input";
 import { useEffect, useState } from "react";
 import InputField from "../input-field";
+import { toast } from "sonner";
 
 export default function PaymentDialog({
   intention = "",
@@ -30,55 +32,131 @@ export default function PaymentDialog({
   dialogDescription = "",
   inputDisabled = true,
   inputValue,
-  apiEndPoint,
+  maxAmount = 0,
+  transferAmount,
+  setTransferAmount,
+  onTransfer,
+  isTransferring = false,
 }) {
   const systemPayOption = intention === "add" ? "Distro" : "ReelBux";
-  // DEBUG: make changes here
+
   const [amount, setAmount] = useState(
-    inputValue || intention === "transfer" ? 10 : 1
+    inputValue || (intention === "transfer" ? 10 : 1)
   );
   const [rentTime, setRentTime] = useState("");
   const [paymentMethod, setPaymentMethod] = useState(systemPayOption);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  // TODO: Make action here
-  const handlePayment = (e) => {
-    e.preventDefault();
-    console.log("Payment made", { amount, rentTime, paymentMethod });
+  // Use transferAmount and setTransferAmount for transfer intention
+  const currentAmount = intention === "transfer" ? transferAmount : amount;
+  const setCurrentAmount =
+    intention === "transfer" ? setTransferAmount : setAmount;
+
+  // Validation for transfer
+  const isValidTransfer = () => {
+    if (intention !== "transfer") return true;
+
+    const numAmount = parseFloat(currentAmount);
+    if (!currentAmount || isNaN(numAmount) || numAmount <= 0) {
+      return false;
+    }
+
+    if (numAmount > parseFloat(maxAmount)) {
+      return false;
+    }
+
+    return true;
   };
 
+  const handlePayment = async (e) => {
+    e.preventDefault();
+
+    if (intention === "transfer") {
+      if (!isValidTransfer()) {
+        toast.error("Please enter a valid amount");
+        return;
+      }
+
+      // Call the onTransfer function passed from parent
+      try {
+        await onTransfer();
+        setIsDialogOpen(false); // Close dialog on success
+      } catch (error) {
+        // Error is handled in the parent component
+      }
+    } else {
+      // Handle other payment types
+      console.log("Payment made", {
+        amount: currentAmount,
+        rentTime,
+        paymentMethod,
+      });
+      setIsDialogOpen(false);
+    }
+  };
+
+  const getErrorMessage = () => {
+    if (intention !== "transfer") return "";
+
+    const numAmount = parseFloat(currentAmount);
+
+    if (!currentAmount || isNaN(numAmount) || numAmount <= 0) {
+      return "Please enter a valid amount";
+    }
+
+    if (numAmount > parseFloat(maxAmount)) {
+      return "Insufficient distro balance";
+    }
+
+    return "";
+  };
+
+  const errorMessage = getErrorMessage();
+
   return (
-    <Dialog>
-      <DialogTrigger>{triggerBtn}</DialogTrigger>
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      <DialogTrigger asChild>{triggerBtn}</DialogTrigger>
       <DialogContent>
         <form onSubmit={handlePayment}>
           <DialogHeader className="my-3">
-            <DialogTitle> {dialogTitle} </DialogTitle>
+            <DialogTitle>{dialogTitle}</DialogTitle>
             {dialogDescription && (
               <DialogDescription>{dialogDescription}</DialogDescription>
             )}
           </DialogHeader>
+
           <div className="space-y-3">
-            {/* NOTE: Amount and rent time */}
+            {/* Amount and rent time */}
             <div className="flex gap-3">
-              {/* NOTE: Amount Field */}
+              {/* Amount Field */}
               <div className="grow">
-                <InputField
-                  label="Amount ($)"
+                <Label htmlFor="amount">Amount ($)</Label>
+                <Input
+                  id="amount"
                   type="number"
-                  inputDisabled={inputDisabled}
-                  min={intention === "transfer" ? 10 : 1}
-                  value={amount}
-                  setValue={setAmount}
+                  min={intention === "transfer" ? 1 : 1}
+                  max={intention === "transfer" ? maxAmount : undefined}
+                  step="0.01"
+                  disabled={inputDisabled || isTransferring}
+                  value={currentAmount}
+                  onChange={(e) => setCurrentAmount(e.target.value)}
+                  placeholder="Enter amount"
                 />
+                {intention === "transfer" && (
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Available: ${parseFloat(maxAmount).toFixed(2)}
+                  </p>
+                )}
               </div>
 
-              {/* NOTE: If for rent - select rent time */}
+              {/* If for rent - select rent time */}
               {intention === "rent" && (
-                <div>
+                <div className="min-w-[120px]">
                   <Label>Rent Time</Label>
-                  <Select>
-                    <SelectTrigger>Select time</SelectTrigger>
+                  <Select value={rentTime} onValueChange={setRentTime}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select time" />
+                    </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
                         <SelectItem value="4">4 hours</SelectItem>
@@ -94,43 +172,50 @@ export default function PaymentDialog({
               )}
             </div>
 
-            {/* NOTE: Show source if not case is transfer  */}
+            {/* Show source if not case is transfer */}
             {intention !== "transfer" && (
-              <RadioGroup
-                defaultValue={systemPayOption.toLowerCase()}
-                onValueChange={(value) => setPaymentMethod(value)}
-              >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="card" id="card" />
-                  <Label htmlFor="card"> Card</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="paypal" id="paypal" />
-                  <Label htmlFor="paypal"> PayPal</Label>
-                </div>
-                {/* NOTE: System Pay Option */}
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem
-                    value={systemPayOption.toLowerCase()}
-                    id={systemPayOption}
-                  />
-                  <Label htmlFor={systemPayOption}>{systemPayOption}</Label>
-                </div>
-              </RadioGroup>
+              <div>
+                <Label className="text-sm font-medium">Payment Method</Label>
+                <RadioGroup
+                  value={paymentMethod.toLowerCase()}
+                  onValueChange={(value) => setPaymentMethod(value)}
+                  className="mt-2"
+                >
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="card" id="card" />
+                    <Label htmlFor="card">Card</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="paypal" id="paypal" />
+                    <Label htmlFor="paypal">PayPal</Label>
+                  </div>
+                  {/* System Pay Option */}
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem
+                      value={systemPayOption.toLowerCase()}
+                      id={systemPayOption}
+                    />
+                    <Label htmlFor={systemPayOption}>{systemPayOption}</Label>
+                  </div>
+                </RadioGroup>
+              </div>
             )}
 
-            {/* NOTE: Show error here */}
-            {/* DEBUG: change condition */}
-            {intention === "rent" && (
-              <p className="text-destructive text-center">
-                You don&apos;t have enough balance
+            {/* Show error message */}
+            {errorMessage && (
+              <p className="text-destructive text-center text-sm">
+                {errorMessage}
               </p>
             )}
           </div>
+
           <DialogFooter>
-            {/* TODO: change disable condition */}
-            <Button className="w-full my-3" disabled={errorMessage}>
-              {intentionBtnText}
+            <Button
+              type="submit"
+              className="w-full my-3"
+              disabled={!!errorMessage || isTransferring}
+            >
+              {isTransferring ? "Processing..." : intentionBtnText}
             </Button>
           </DialogFooter>
         </form>

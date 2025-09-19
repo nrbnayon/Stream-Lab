@@ -1,4 +1,5 @@
 "use client";
+
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
@@ -6,10 +7,9 @@ import videojs from "video.js";
 import "./videojs-plugins";
 
 export default function VideoPlayer({
-  // TODO: Remove default video
   src = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
   className,
-  startTime = 0, // fallback start time if no query param
+  startTime = 0,
   onClose,
 }) {
   const videoRef = useRef(null);
@@ -19,7 +19,6 @@ export default function VideoPlayer({
   // ✅ take from query first, fallback to prop
   const initialStartTime = Number(searchParams.get("time")) || startTime;
 
-  // options
   const options = {
     autoplay: true,
     controls: true,
@@ -41,17 +40,17 @@ export default function VideoPlayer({
       },
     },
   };
-  //   handle Player is Ready
+
   const onReady = (player) => {
     playerRef.current = player;
 
-    // Enable resolution selector
-    // if (player.hlsQualitySelector) {
-    //   player.hlsQualitySelector({
-    //     displayCurrentQuality: true,
-    //     default: "auto",
-    //   });
-    // }
+    // ✅ Enable resolution selector
+    if (player.hlsQualitySelector) {
+      player.hlsQualitySelector({
+        displayCurrentQuality: true,
+        default: "auto",
+      });
+    }
 
     // Seek to startTime if provided
     player.on("loadedmetadata", () => {
@@ -60,7 +59,7 @@ export default function VideoPlayer({
       }
     });
 
-    // You can handle player events here, for example:
+    // Debug events
     player.on("waiting", () => {
       console.log("player is waiting");
     });
@@ -75,8 +74,9 @@ export default function VideoPlayer({
       const videoElement = document.createElement("video-js");
       videoElement.classList.add("vjs-big-play-centered");
       videoRef.current.appendChild(videoElement);
+
       const player = (playerRef.current = videojs(videoElement, options, () => {
-        onReady && onReady(player);
+        onReady(player);
       }));
     } else {
       const player = playerRef.current;
@@ -84,11 +84,11 @@ export default function VideoPlayer({
       player.src(options.sources);
     }
   }, [src]);
+
   useEffect(() => {
     const player = playerRef.current;
     return () => {
       if (player && !player.isDisposed()) {
-        // ✅ Save last watched time before disposing
         const lastTime = player.currentTime();
         if (onClose) onClose(lastTime);
 
@@ -97,6 +97,7 @@ export default function VideoPlayer({
       }
     };
   }, [onClose]);
+
   return (
     <div data-vjs-player>
       <div

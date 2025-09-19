@@ -11,10 +11,13 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { copyToClipboard } from "@/lib/utils";
 import { useState } from "react";
 
-export default function QuickShareCard() {
+export default function QuickShareCard({ film }) {
   const isMobile = useIsMobile();
   const [isCopied, setIsCopied] = useState(false);
-  const url = "link - I'll update later";
+
+  const { film_title, film_type, quick_copy } = film;
+  const url = quick_copy;
+
   const handleCopy = async () => {
     const success = await copyToClipboard(url);
     if (success) {
@@ -27,9 +30,9 @@ export default function QuickShareCard() {
     <Card>
       <CardHeader>
         <CardTitle className="font-medium text-lg md:text-xl">
-          Midnight Dreams
+          {film_title}
         </CardTitle>
-        <CardDescription>Movie</CardDescription>
+        <CardDescription>{film_type}</CardDescription>
       </CardHeader>
       <CardFooter>
         <Button

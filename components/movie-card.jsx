@@ -17,6 +17,8 @@ import TrailerPopup from "./trailer-popup";
 import PaymentDialog from "./dashboard/payment-dialog";
 import Link from "next/link";
 import WebShare from "./web-share";
+import DistroPopup from "./DistroPopup";
+import { useGetMeQuery } from "@/redux/store/api/usersApi";
 
 export default function MovieCard({ movie, useLink = false }) {
   // Map API data structure to component props
@@ -36,6 +38,9 @@ export default function MovieCard({ movie, useLink = false }) {
     trailer_url,
   } = movie;
 
+  const { data: userData, isLoading: userLoading } = useGetMeQuery();
+  const referralCode = userData?.data?.referral_code || "user123";
+
   // Use the correct field names based on API structure
   const thumbnailSrc = thumbnail_url || thumbnail;
   const movieDuration = duration || full_film_duration;
@@ -51,9 +56,11 @@ export default function MovieCard({ movie, useLink = false }) {
               <Image
                 src={thumbnailSrc}
                 alt={title}
-                width={200}
-                height={80}
+                width={800}
+                height={400}
+                quality={100}
                 className="w-full rounded-md h-44 object-cover"
+                priority={true}
               />
             </Link>
           ) : (
@@ -159,7 +166,14 @@ export default function MovieCard({ movie, useLink = false }) {
           )}
         </div>
 
-        <WebShare title={title} url={`https://yourwebsite.com/film/${id}`} />
+        <div className="flex gap-1">
+          {/* <WebShare title={title} url={`${process.env.NEXT_PUBLIC_LIVE_URL}/film/${id}?referral=${referralCode}`} /> */}
+          <DistroPopup
+            movieId={id}
+            movieTitle={title}
+            distributionUrl={`${process.env.NEXT_PUBLIC_LIVE_URL}/film/${id}?referral=${referralCode}`}
+          />
+        </div>
       </CardFooter>
     </Card>
   );

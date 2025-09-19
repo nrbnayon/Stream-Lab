@@ -1,4 +1,4 @@
-import DistroPanel from "@/components/dashboard/user/distro/distro-panel";
+// app\(roles)\(user)\distro\page.jsx
 import QuickShare from "@/components/dashboard/user/distro/quick-share";
 import DistroStats from "@/components/dashboard/user/distro/stats";
 import YourPerformance from "@/components/dashboard/user/distro/your-performance";
@@ -17,7 +17,6 @@ export default function Distro() {
       </p>
 
       <DistroStats />
-      <DistroPanel />
       <QuickShare />
       <YourPerformance />
     </>
