@@ -91,9 +91,11 @@ export const filmsApi = createApi({
         return { page, ...otherParams };
       },
     }),
-
     getMyLibraryDetails: builder.query({
-      query: (filmId) => `/my-library-details?film_id=${filmId}`,
+      query: (filmId) => ({
+        url: `/my-library-details?film_id=${filmId}`,
+        method: "GET",
+      }),
       providesTags: ["MyLibrary"],
     }),
 
@@ -131,13 +133,35 @@ export const filmsApi = createApi({
 
     // Film upload
     uploadFilm: builder.mutation({
-      query: (formData) => ({
-        url: "/upload",
-        method: "POST",
-        body: formData,
-        // Don't set headers - let RTK Query handle FormData
-      }),
-      invalidatesTags: ["MyTitles"],
+      query: (formData) => {
+        // Debug log to verify FormData contents
+        console.log("Upload FormData entries:");
+        for (let [key, value] of formData.entries()) {
+          console.log(key, value);
+          if (value instanceof File) {
+            console.log(
+              `File: ${value.name}, Size: ${value.size}, Type: ${value.type}`
+            );
+          }
+        }
+
+        return {
+          url: "/upload",
+          method: "POST",
+          body: formData,
+          // Don't set headers - let RTK Query handle FormData
+        };
+      },
+      invalidatesTags: ["MyTitles", "Films"],
+      // Handle upload progress if needed
+      onQueryStarted: async (formData, { queryFulfilled, dispatch }) => {
+        try {
+          const result = await queryFulfilled;
+          console.log("Upload successful:", result);
+        } catch (error) {
+          console.error("Upload failed:", error);
+        }
+      },
     }),
 
     // Edit film - Fixed to properly handle FormData
