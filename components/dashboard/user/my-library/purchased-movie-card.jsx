@@ -38,6 +38,8 @@ export default function PurchasedMovieCard({ movie }) {
     thumbnail || "/placeholder-movie.jpg"
   );
 
+  console.log("status::", status);
+
   // Calculate progress percentage
   const progressPercentage = watch_progress || 0;
 
@@ -110,9 +112,9 @@ export default function PurchasedMovieCard({ movie }) {
           </Badge>
 
           {/* Status indicator for inactive/expired content */}
-          {status !== "active" && (
+          {status?.toLowerCase() !== "active" && (
             <Badge variant="destructive" className="absolute top-2 right-2">
-              {status === "expired" ? "Expired" : "Inactive"}
+              {status?.toLowerCase() === "expired" ? "Expired" : "Inactive"}
             </Badge>
           )}
         </div>

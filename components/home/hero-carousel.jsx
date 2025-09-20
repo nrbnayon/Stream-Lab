@@ -34,7 +34,7 @@ export default function HeroCarousel({ renderFor = "home" }) {
   const moviesData = Array.isArray(apiResponse)
     ? apiResponse
     : apiResponse?.data || apiResponse?.films || [];
-  
+
   useGSAP(
     () => {
       if (swiperRef.current?.swiper) {
@@ -177,7 +177,7 @@ export default function HeroCarousel({ renderFor = "home" }) {
                 </p>
 
                 <div className="flex gap-2 items-center md:gap-5 mt-5">
-                  <Link href={`/film/${movie.id}`}>
+                  <Link href={`/watch/${movie.id}`}>
                     <Button
                       className="rounded-full md:px-6"
                       size={isMobile ? "sm" : "default"}
@@ -190,7 +190,7 @@ export default function HeroCarousel({ renderFor = "home" }) {
                   <TrailerPopup
                     movie={{
                       trailer_url: movie.trailer_hls_url,
-                      title: movie.title
+                      title: movie.title,
                     }}
                     triggerBtn={
                       <Button

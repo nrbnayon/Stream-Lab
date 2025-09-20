@@ -1,131 +1,38 @@
-// app\(roles)\(user)\film\[id]\page.jsx
 "use client";
 import RelatedMovies from "@/components/dashboard/user/film-details/related-movies";
 import TrailerPopup from "@/components/trailer-popup";
 import PaymentDialog from "@/components/dashboard/payment-dialog";
 import { Button } from "@/components/ui/button";
 import VideoPlayer from "@/components/video-player/video-player";
-import {
-  useGetMyLibraryDetailsQuery,
-  useIncrementViewCountMutation,
-  useUpdateWatchTimeMutation,
-} from "@/redux/store/api/filmsApi";
+import { useGetFilmDetailsQuery } from "@/redux/store/api/filmsApi";
 import { useParams, useSearchParams } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { minutesToHours } from "@/lib/utils";
-import { useEffect, useRef, useState } from "react";
 import DistroPopup from "@/components/DistroPopup";
 
-export default function FilmDetails() {
+export default function WatchFilm() {
   const { id } = useParams();
   const searchParams = useSearchParams();
   const startTime = searchParams.get("time") || 0;
 
-  // Tracking states
-  const [hasIncrementedView, setHasIncrementedView] = useState(false);
-  const [lastWatchTime, setLastWatchTime] = useState(0);
-  const watchTimeInterval = useRef(null);
-
-  // First try to get from user's library
   const {
-    data: libraryResponse,
-    isLoading: libraryLoading,
-    error: libraryError,
-  } = useGetMyLibraryDetailsQuery(id);
-
-  // Mutations for tracking
-  const [incrementViewCount] = useIncrementViewCountMutation();
-  const [updateWatchTime] = useUpdateWatchTimeMutation();
+    data: generalResponse,
+    isLoading: generalLoading,
+    error: generalError,
+  } = useGetFilmDetailsQuery(id);
 
   // Determine which data to use
-  const isLoading = libraryLoading;
-  const error = libraryError;
-  const filmResponse = libraryResponse;
+  const isLoading = generalLoading;
+  const error = generalError;
+  const filmResponse = generalResponse;
   const filmData = filmResponse?.film_details;
   const relatedMovies = filmResponse?.related_movies || [];
 
   // Determine if user has access (only true if from library API)
-  const hasLibraryAccess = !!libraryResponse;
   const hasFullAccess =
-    hasLibraryAccess &&
-    (filmData?.access_type === "Owned" ||
-      filmData?.access_type === "Rented" ||
-      filmData?.access_type === "Purchase" ||
-      filmData?.access_type === "Purchased" ||
-      filmData?.access_type === "Filmmaker");
+    filmData?.access_type === "Owned" || filmData?.access_type === "Rented";
 
-  // Check if rental is expired
-  const isRentalExpired =
-    hasLibraryAccess &&
-    (filmData?.access_type === "Rented" || filmData?.access_type === "Rent") &&
-    filmData?.expiry_time &&
-    new Date(filmData.expiry_time) < new Date();
-
-  // Final access check (not expired)
-  const canWatchFullFilm = hasFullAccess && !isRentalExpired;
-
-  console.log("Library response:", libraryResponse);
-  console.log("Can watch full film:", canWatchFullFilm);
-  console.log("Has library access:", hasLibraryAccess);
-  console.log("Is rental expired:", isRentalExpired);
-
-  // Increment view count when user starts watching full film
-  useEffect(() => {
-    if (canWatchFullFilm && !hasIncrementedView && filmData?.id) {
-      console.log("Incrementing view count for film:", filmData.id);
-      incrementViewCount(filmData.id)
-        .unwrap()
-        .then(() => {
-          console.log("View count incremented successfully");
-          setHasIncrementedView(true);
-        })
-        .catch((error) => {
-          console.error("Failed to increment view count:", error);
-        });
-    }
-  }, [canWatchFullFilm, hasIncrementedView, filmData?.id, incrementViewCount]);
-
-  // Handle watch time tracking
-  const handleTimeUpdate = (currentTime) => {
-    if (canWatchFullFilm && filmData?.id) {
-      const watchTimeMinutes = Math.floor(currentTime / 60);
-
-      // Only update if watch time has increased by at least 1 minute
-      if (watchTimeMinutes > lastWatchTime) {
-        setLastWatchTime(watchTimeMinutes);
-
-        // Clear previous timeout
-        if (watchTimeInterval.current) {
-          clearTimeout(watchTimeInterval.current);
-        }
-
-        // Debounce API calls - update after 2 seconds of no change
-        watchTimeInterval.current = setTimeout(() => {
-          console.log("Updating watch time:", watchTimeMinutes, "minutes");
-          updateWatchTime({
-            filmId: filmData.id,
-            watchTime: watchTimeMinutes,
-          })
-            .unwrap()
-            .then(() => {
-              console.log("Watch time updated successfully");
-            })
-            .catch((error) => {
-              console.error("Failed to update watch time:", error);
-            });
-        }, 2000);
-      }
-    }
-  };
-
-  // Clean up interval on component unmount
-  useEffect(() => {
-    return () => {
-      if (watchTimeInterval.current) {
-        clearTimeout(watchTimeInterval.current);
-      }
-    };
-  }, []);
+  console.log("General response:", generalResponse);
 
   if (isLoading) {
     return (
@@ -235,7 +142,6 @@ export default function FilmDetails() {
     year,
     full_film_duration,
     trailer_hls_url,
-    film_hls_url,
     thumbnail,
     id: film_id,
     buy_price,
@@ -247,27 +153,18 @@ export default function FilmDetails() {
     current_watch_time,
   } = filmData;
 
-  // Use full film URL if user can watch full film, otherwise trailer
-  // Important: Check if film_hls_url is different from trailer_hls_url
-  const videoSrc =
-    canWatchFullFilm && film_hls_url && film_hls_url !== trailer_hls_url
-      ? film_hls_url
-      : trailer_hls_url;
-
   // Show payment buttons only if user doesn't have library access and prices are available
-  const showPaymentButtons = !hasLibraryAccess && (buy_price || rent_price);
+  const showPaymentButtons = !hasFullAccess && (buy_price || rent_price);
 
   return (
     <div className="grid gap-5">
-      {/* Video Player */}
+      {/* Video Player - Fixed to use trailer_hls_url */}
       <VideoPlayer
-        src={videoSrc}
+        src={filmData?.trailer_hls_url}
         poster={thumbnail}
         title={title}
         startTime={parseInt(startTime)}
         filmId={film_id}
-        onTimeUpdate={handleTimeUpdate}
-        isFullFilm={canWatchFullFilm}
       />
 
       {/* Details section */}
@@ -310,76 +207,41 @@ export default function FilmDetails() {
           </div>
 
           {/* Access status badge - only show if user has library access */}
-          {hasLibraryAccess && access_type && (
+          {hasFullAccess && access_type && (
             <div className="flex items-center gap-2">
               <span
                 className={`px-3 py-1 rounded-full text-sm font-medium ${
-                  access_type === "Owned" ||
-                  access_type === "Purchase" ||
-                  access_type === "Purchased"
+                  access_type === "Owned"
                     ? "bg-green-100 text-green-800"
-                    : access_type === "Filmmaker"
-                    ? "bg-purple-100 text-purple-800"
-                    : access_type === "Rented" || access_type === "Rent"
-                    ? isRentalExpired
-                      ? "bg-red-100 text-red-800"
-                      : "bg-blue-100 text-blue-800"
+                    : access_type === "Rented"
+                    ? "bg-blue-100 text-blue-800"
                     : "bg-gray-100 text-gray-800"
                 }`}
               >
-                {access_type === "Purchase" || access_type === "Purchased"
-                  ? "Purchased"
-                  : access_type}
-                {isRentalExpired ? " (Expired)" : ""}
+                {access_type}
               </span>
-              {(access_type === "Rented" || access_type === "Rent") &&
-                expiry_time && (
-                  <span className="text-sm text-muted-foreground">
-                    Expires: {new Date(expiry_time).toLocaleDateString()}
-                  </span>
-                )}
+              {access_type === "Rented" && expiry_time && (
+                <span className="text-sm text-muted-foreground">
+                  Expires: {new Date(expiry_time).toLocaleDateString()}
+                </span>
+              )}
             </div>
           )}
         </div>
 
-        {/* Show rental expired message */}
-        {isRentalExpired && (
-          <div className="bg-red-50 border border-red-200 rounded-md p-3">
-            <p className="text-sm text-red-800">
-              <strong>Rental Expired:</strong> This rental has expired. You'll
-              need to rent again to watch the full film.
-            </p>
-          </div>
-        )}
-
-        {/* Show trailer only message if user doesn't have full access */}
-        {!canWatchFullFilm && trailer_hls_url && (
+        {/* Show trailer only message if user doesn't have library access */}
+        {!hasFullAccess && trailer_hls_url && (
           <div className="bg-yellow-50 border border-yellow-200 rounded-md p-3">
             <p className="text-sm text-yellow-800">
               <strong>Trailer Preview:</strong> You're currently watching the
               trailer.
               {showPaymentButtons && " Rent or buy to watch the full film."}
-              {isRentalExpired &&
-                " Your rental has expired - rent again to watch the full film."}
             </p>
           </div>
         )}
 
-        {/* Show full film access message if user has access */}
-        {canWatchFullFilm && (
-          <div className="bg-green-50 border border-green-200 rounded-md p-3">
-            <p className="text-sm text-green-800">
-              <strong>Full Film Access:</strong> You have access to watch the
-              complete film.
-              {(access_type === "Rented" || access_type === "Rent") &&
-                expiry_time &&
-                ` Valid until ${new Date(expiry_time).toLocaleDateString()}.`}
-            </p>
-          </div>
-        )}
-
-        {/* Watch Progress - only show if user has full access and not expired */}
-        {canWatchFullFilm &&
+        {/* Watch Progress - only show if user has full access */}
+        {hasFullAccess &&
           watch_progress !== undefined &&
           watch_progress > 0 && (
             <div className="bg-muted p-3 rounded-md">
@@ -442,7 +304,7 @@ export default function FilmDetails() {
               </div>
             </div>
           )}
-          {hasLibraryAccess && status && (
+          {hasFullAccess && status && (
             <div className="table-row">
               <div className="table-cell font-medium pr-12">Status:</div>
               <div className="table-cell capitalize">{status}</div>
