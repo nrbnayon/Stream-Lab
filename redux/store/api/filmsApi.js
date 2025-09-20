@@ -7,11 +7,18 @@ export const filmsApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.NEXT_PUBLIC_API_BASE_URL}/flims`,
     credentials: "include",
-    prepareHeaders: (headers) => {
+    prepareHeaders: (headers, { endpoint }) => {
       const token = Cookies.get("accessToken");
       if (token) {
         headers.set("authorization", `Bearer ${token}`);
       }
+
+      // Don't set Content-Type for FormData - let browser set it with boundary
+      if (endpoint === "editFilm" || endpoint === "uploadFilm") {
+        // Remove any existing content-type to let browser handle FormData
+        headers.delete("content-type");
+      }
+
       return headers;
     },
   }),
@@ -108,7 +115,7 @@ export const filmsApi = createApi({
     getMyTitlesAnalytics: builder.query({
       query: (filmId) => ({
         url: "/my-titles/analytics",
-        method: "GET",
+        method: "post",
         body: { film_id: filmId },
       }),
       providesTags: ["MyTitles"],
@@ -116,16 +123,10 @@ export const filmsApi = createApi({
 
     getFilmDetails: builder.query({
       query: (filmId) => ({
-        url: "/details",
-        method: "GET",
-        body: { film_id: filmId },
+        url: `/details?film_id=${filmId}`,
+        method: "get",
       }),
       providesTags: ["FilmDetails"],
-    }),
-
-    getSingleMyTitle: builder.query({
-      query: (filmId) => `/my-titles/single?film_id=${filmId}`,
-      providesTags: ["MyTitles"],
     }),
 
     // Film upload
@@ -134,18 +135,33 @@ export const filmsApi = createApi({
         url: "/upload",
         method: "POST",
         body: formData,
+        // Don't set headers - let RTK Query handle FormData
       }),
       invalidatesTags: ["MyTitles"],
     }),
 
-    // Edit film
+    // Edit film - Fixed to properly handle FormData
     editFilm: builder.mutation({
-      query: (formData) => ({
-        url: "/my-titles/edit",
-        method: "PUT",
-        body: formData,
-      }),
-      invalidatesTags: ["MyTitles", "FilmDetails"],
+      query: (formData) => {
+        // Debug log to verify FormData contents
+        console.log("FormData entries:");
+        for (let [key, value] of formData.entries()) {
+          console.log(key, value);
+          if (value instanceof File) {
+            console.log(
+              `File: ${value.name}, Size: ${value.size}, Type: ${value.type}`
+            );
+          }
+        }
+
+        return {
+          url: "/my-titles/edit",
+          method: "PUT",
+          body: formData,
+          // Don't manually set Content-Type - let browser handle FormData with boundary
+        };
+      },
+      invalidatesTags: ["MyTitles", "FilmDetails", "MyLibrary"],
     }),
 
     // Views and watch time tracking
@@ -179,7 +195,6 @@ export const {
   useGetMyTitlesQuery,
   useGetMyTitlesAnalyticsQuery,
   useGetFilmDetailsQuery,
-  useGetSingleMyTitleQuery,
   useUploadFilmMutation,
   useEditFilmMutation,
   useIncrementViewCountMutation,

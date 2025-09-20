@@ -1,4 +1,4 @@
-// app\(roles)\(user)\my-titles\analytics\[id]\page.jsx
+// app/(roles)/(user)/my-titles/analytics/[id]/page.jsx
 import AnalyticsHeading from "@/components/dashboard/user/my-titles/analytics-heading";
 import DailyViews from "@/components/dashboard/user/my-titles/analytics/daily-views";
 import RevenueBreakdown from "@/components/dashboard/user/my-titles/analytics/revenue-breakdown";
@@ -11,15 +11,15 @@ export default async function FilmAnalyticsPage({ params }) {
 
   return (
     <>
-      <AnalyticsHeading movieName="Movie Name" />
-      <AnalyticsStats />
+      <AnalyticsHeading filmId={id} />
+      <AnalyticsStats filmId={id} />
       <div className="my-5 grid lg:grid-cols-2 gap-5">
-        <DailyViews />
-        <WeeklyEarnings />
+        <DailyViews filmId={id} />
+        <WeeklyEarnings filmId={id} />
       </div>
       <div className="my-5 grid lg:grid-cols-2 gap-5">
-        <WatchTime />
-        <RevenueBreakdown />
+        <WatchTime filmId={id} />
+        <RevenueBreakdown filmId={id} />
       </div>
     </>
   );

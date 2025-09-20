@@ -87,7 +87,7 @@ export default function MoviesTable() {
         Manage your uploaded films here
       </p>
       <SearchWithOptions
-        options={["All", "Published", "Under Review", "Rejected"]}
+        options={["All", "Published", "Review", "Rejected"]}
         onChange={(data) => setFilter(data)}
       />
       {/* rendering Table */}
@@ -119,12 +119,12 @@ export default function MoviesTable() {
                     variant={
                       film.status === "Published"
                         ? "success"
-                        : film.status === "Under Review"
+                        : film.status === "Review"
                         ? "warning"
                         : "destructive"
                     }
                   >
-                    {film.status}
+                    {film.status === "Review" ? "Under Review" : film.status}
                   </Badge>
                 </TableCell>
                 <TableCell>{film.film_type}</TableCell>

@@ -1,4 +1,4 @@
-// app\(roles)\(user)\my-titles\page.jsx
+// app/(roles)/(user)/my-titles/page.jsx
 import MoviesTable from "@/components/dashboard/user/my-titles/movies-table";
 import MyTitlesStats from "@/components/dashboard/user/my-titles/my-titles-stats";
 
