@@ -13,31 +13,37 @@ import {
 import { Button } from "./ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
-  Share01Icon,
   QrCode01Icon,
   Copy01Icon,
   Download01Icon,
+  UserIcon,
+  LockIcon,
 } from "@hugeicons/core-free-icons/index";
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
+import CustomIcon from "./ui/CustomIcon";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function DistroPopup({
   movieId,
   movieTitle,
+  movie_pic,
   distributionUrl,
   className,
+  isUserLogin = true,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [downloaded, setDownloaded] = useState(false);
   const [qrDataUrl, setQrDataUrl] = useState("");
 
-  // Generate QR code when dialog opens
+  // Generate QR code when dialog opens (only if user is logged in)
   useEffect(() => {
-    if (isOpen && !qrDataUrl) {
+    if (isOpen && !qrDataUrl && isUserLogin) {
       generateQRCode();
     }
-  }, [isOpen, qrDataUrl]);
+  }, [isOpen, qrDataUrl, isUserLogin]);
 
   const generateQRCode = async () => {
     try {
@@ -177,99 +183,175 @@ export default function DistroPopup({
           variant="ghost"
           className={cn("bg-transparent hover:bg-primary/10", className)}
         >
-          <HugeiconsIcon icon={Share01Icon} />
+          {/* <HugeiconsIcon icon={Share01Icon} /> */}
+          <CustomIcon width={24} height={24} fill="#fff" />
         </Button>
       </DialogTrigger>
-      <DialogOverlay className="bg-black/10 backdrop-blur-xs" />
+      {/* <DialogOverlay className="bg-black/10 backdrop-blur-xs" /> */}
       <DialogContent className="sm:max-w-md backdrop-blur-md bg-white border border-white/20 text-black">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <HugeiconsIcon icon={QrCode01Icon} />
-            Distribute "{movieTitle}"
+            {isUserLogin ? (
+              <HugeiconsIcon icon={QrCode01Icon} />
+            ) : (
+              <HugeiconsIcon icon={LockIcon} />
+            )}
+            {isUserLogin ? `Distribute "${movieTitle}"` : `"${movieTitle}"`}
           </DialogTitle>
           <DialogDescription asChild>
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-center backdrop-blur-sm">
-              <span className="text-green-800 font-medium">
-                Share this film and earn 30% commission when someone purchases
-                from your link.
+            <div
+              className={cn(
+                "border rounded-lg p-3 text-center backdrop-blur-sm",
+                isUserLogin
+                  ? "bg-green-50 border-green-200"
+                  : "bg-blue-50 border-blue-200"
+              )}
+            >
+              <span
+                className={cn(
+                  "font-medium",
+                  isUserLogin ? "text-green-800" : "text-blue-800"
+                )}
+              >
+                {isUserLogin
+                  ? "Share this film and earn 30% commission when someone purchases from your link."
+                  : "Login to share this film and earn 30% commission on purchases!"}
               </span>
             </div>
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-4">
-          {/* QR Code Display */}
-          <div className="flex justify-center p-4 bg-white rounded-lg border shadow-sm">
-            {qrDataUrl ? (
-              <img
-                src={qrDataUrl}
-                alt="QR Code for movie distribution"
-                className="w-[200px] h-[200px]"
-              />
-            ) : (
-              <div className="w-[200px] h-[200px] bg-gray-100 rounded-lg flex items-center justify-center">
-                <div className="text-center">
-                  <HugeiconsIcon
-                    icon={QrCode01Icon}
-                    size={48}
-                    className="mx-auto mb-2 text-gray-400"
-                  />
-                  <p className="text-sm text-gray-500">Generating QR Code...</p>
+        {isUserLogin ? (
+          // Logged in user view - show sharing functionality
+          <div className="space-y-4">
+            {/* QR Code Display */}
+            <div className="flex justify-center p-4 bg-white rounded-lg border shadow-sm">
+              {qrDataUrl ? (
+                <img
+                  src={qrDataUrl}
+                  alt="QR Code for movie distribution"
+                  className="w-[200px] h-[200px]"
+                />
+              ) : (
+                <div className="w-[200px] h-[200px] bg-gray-100 rounded-lg flex items-center justify-center">
+                  <div className="text-center">
+                    <HugeiconsIcon
+                      icon={QrCode01Icon}
+                      size={48}
+                      className="mx-auto mb-2 text-gray-400"
+                    />
+                    <p className="text-sm text-gray-500">
+                      Generating QR Code...
+                    </p>
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
 
-          {/* Distribution Link */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">
-              Your Distribution Link:
-            </label>
-            <div className="flex items-center gap-2">
-              <input
-                readOnly
-                value={distributionUrl}
-                className="flex-1 px-3 py-2 bg-gray-50/80 backdrop-blur-sm border rounded-md text-sm"
-              />
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={handleCopyLink}
-                className="whitespace-nowrap bg-white/80 backdrop-blur-sm"
-              >
-                {copied ? (
-                  <Check size={16} className="text-green-600" />
-                ) : (
-                  <HugeiconsIcon icon={Copy01Icon} size={16} />
-                )}
-                {copied ? "Copied!" : "Copy"}
-              </Button>
+            {/* Distribution Link */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium">
+                Your Distribution Link:
+              </label>
+              <div className="flex items-center gap-2">
+                <input
+                  readOnly
+                  value={distributionUrl}
+                  className="flex-1 px-3 py-2 bg-gray-50/80 backdrop-blur-sm border rounded-md text-sm"
+                />
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={handleCopyLink}
+                  className="whitespace-nowrap bg-white/80 backdrop-blur-sm"
+                >
+                  {copied ? (
+                    <Check size={16} className="text-green-600" />
+                  ) : (
+                    <HugeiconsIcon icon={Copy01Icon} size={16} />
+                  )}
+                  {copied ? "Copied!" : "Copy"}
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          // Not logged in view - show movie details and login prompt
+          <div className="space-y-4">
+            {/* Movie Details */}
+            <div className="flex justify-center p-6 bg-gray-50 rounded-lg border">
+              <div className="text-center">
+                <Image
+                  src={movie_pic}
+                  alt={movieTitle}
+                  width={200}
+                  height={60}
+                  className="w-full rounded-md h-40 object-cover"
+                />
+                <h3 className="text-lg font-semibold mb-2">{movieTitle}</h3>
+                <p className="text-gray-600 mb-4">
+                  Login to unlock sharing features and start earning
+                  commissions!
+                </p>
+                <div className="bg-white rounded-md p-3 border">
+                  <p className="text-sm text-gray-700">
+                    <strong>Benefits of sharing:</strong>
+                  </p>
+                  <ul className="text-sm text-gray-600 mt-2 space-y-1">
+                    <li>• Earn 30% commission on every purchase</li>
+                    <li>• Get your personalized QR code</li>
+                    {/* <li>• Track your referrals and earnings</li> */}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         <DialogFooter className="flex gap-2 sm:gap-2">
-          <Button
-            variant="outline"
-            onClick={handleDownloadQR}
-            className="flex-1 bg-white/80 backdrop-blur-sm"
-            disabled={!qrDataUrl}
-          >
-            {downloaded ? (
-              <Check size={16} className="text-green-600" />
-            ) : (
-              <HugeiconsIcon icon={Download01Icon} size={16} />
-            )}
-            {downloaded ? "Downloaded!" : "Download QR"}
-          </Button>
-          <Button onClick={handleCopyLink} className="flex-1">
-            {copied ? (
-              <Check size={16} className="mr-1" />
-            ) : (
-              <HugeiconsIcon icon={Copy01Icon} size={16} className="mr-1" />
-            )}
-            {copied ? "Link Copied!" : "Copy Link"}
-          </Button>
+          {isUserLogin ? (
+            // Logged in user buttons
+            <>
+              <Button
+                variant="outline"
+                onClick={handleDownloadQR}
+                className="flex-1 bg-white/80 backdrop-blur-sm"
+                disabled={!qrDataUrl}
+              >
+                {downloaded ? (
+                  <Check size={16} className="text-green-600" />
+                ) : (
+                  <HugeiconsIcon icon={Download01Icon} size={16} />
+                )}
+                {downloaded ? "Downloaded!" : "Download QR"}
+              </Button>
+              <Button onClick={handleCopyLink} className="flex-1">
+                {copied ? (
+                  <Check size={16} className="mr-1" />
+                ) : (
+                  <HugeiconsIcon icon={Copy01Icon} size={16} className="mr-1" />
+                )}
+                {copied ? "Link Copied!" : "Copy Link"}
+              </Button>
+            </>
+          ) : (
+            // Not logged in user buttons
+            <>
+              <Button
+                variant="outline"
+                onClick={() => setIsOpen(false)}
+                className="flex-1"
+              >
+                Close
+              </Button>
+              <Button asChild className="flex-1">
+                <Link href="/login">
+                  <HugeiconsIcon icon={UserIcon} size={16} className="mr-1" />
+                  Login to Share
+                </Link>
+              </Button>
+            </>
+          )}
         </DialogFooter>
       </DialogContent>
     </Dialog>

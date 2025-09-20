@@ -1,3 +1,4 @@
+// components\home\latest-drama.jsx
 "use client";
 import { useGetLatestFilmsQuery } from "@/redux/store/api/filmsApi";
 import { moviesData } from "@/constants";
@@ -48,6 +49,7 @@ export default function LatestDrama() {
               type: movie?.film_type || movie?.type,
               trailer_url: movie.trailer_hls_url || movie.trailer_url,
             }}
+            isUserLogin={false}
           />
         ))}
       </div>

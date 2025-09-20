@@ -55,6 +55,7 @@ export default function TrendingNow() {
               type: movie?.film_type || movie?.type,
               trailer_url: movie.trailer_hls_url || movie.trailer_url,
             }}
+            isUserLogin={false}
           />
         ))}
       </div>

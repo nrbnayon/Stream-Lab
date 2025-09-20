@@ -22,7 +22,11 @@ import DistroPopup from "./DistroPopup";
 import { useGetMeQuery } from "@/redux/store/api/usersApi";
 import { useState } from "react";
 
-export default function MovieCard({ movie, useLink = false }) {
+export default function MovieCard({
+  movie,
+  useLink = false,
+  isUserLogin = true,
+}) {
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState(null);
 
@@ -193,7 +197,9 @@ export default function MovieCard({ movie, useLink = false }) {
           <DistroPopup
             movieId={id}
             movieTitle={title}
+            movie_pic={thumbnailSrc}
             distributionUrl={`${process.env.NEXT_PUBLIC_LIVE_URL}/film/${id}?referral=${referralCode}`}
+            isUserLogin={isUserLogin}
           />
         </div>
       </CardFooter>

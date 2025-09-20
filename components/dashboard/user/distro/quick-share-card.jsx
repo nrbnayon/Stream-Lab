@@ -9,17 +9,24 @@ import {
 } from "@/components/ui/card";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { copyToClipboard } from "@/lib/utils";
+import DistroPopup from "@/components/DistroPopup";
+import { useGetMeQuery } from "@/redux/store/api/usersApi";
 import { useState } from "react";
 
 export default function QuickShareCard({ film }) {
   const isMobile = useIsMobile();
   const [isCopied, setIsCopied] = useState(false);
 
-  const { film_title, film_type, quick_copy } = film;
-  const url = quick_copy;
+  const { data: userData, isLoading: userLoading } = useGetMeQuery();
+  const referralCode = userData?.data?.referral_code || "user123";
+
+  const { film_id, film_title, film_type } = film;
+
+  // Generate distribution URL with same structure as MovieCard
+  const distributionUrl = `${process.env.NEXT_PUBLIC_LIVE_URL}/film/${film_id}?referral=${referralCode}`;
 
   const handleCopy = async () => {
-    const success = await copyToClipboard(url);
+    const success = await copyToClipboard(distributionUrl);
     if (success) {
       setIsCopied(true);
       setTimeout(() => setIsCopied(false), 1500);
@@ -34,14 +41,22 @@ export default function QuickShareCard({ film }) {
         </CardTitle>
         <CardDescription>{film_type}</CardDescription>
       </CardHeader>
-      <CardFooter>
+      <CardFooter className="flex gap-2">
         <Button
           variant="secondary"
           onClick={handleCopy}
           size={isMobile ? "sm" : "default"}
+          className="flex-1"
         >
           {isCopied ? "Copied" : "Quick Copy"}
         </Button>
+
+        <DistroPopup
+          movieId={film_id}
+          movieTitle={film_title}
+          distributionUrl={distributionUrl}
+          className="flex-shrink-0"
+        />
       </CardFooter>
     </Card>
   );
