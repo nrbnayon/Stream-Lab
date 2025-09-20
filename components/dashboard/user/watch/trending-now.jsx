@@ -1,3 +1,4 @@
+// components\dashboard\user\watch\trending-now.jsx
 "use client";
 import { useGetTrendingFilmsQuery } from "@/redux/store/api/filmsApi";
 import { moviesData } from "@/constants";

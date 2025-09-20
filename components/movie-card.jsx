@@ -1,3 +1,4 @@
+// components/movie-card.jsx
 "use client";
 import Image from "next/image";
 import {
@@ -19,8 +20,12 @@ import Link from "next/link";
 import WebShare from "./web-share";
 import DistroPopup from "./DistroPopup";
 import { useGetMeQuery } from "@/redux/store/api/usersApi";
+import { useState } from "react";
 
 export default function MovieCard({ movie, useLink = false }) {
+  const [isTrailerOpen, setIsTrailerOpen] = useState(false);
+  const [hoverTimeout, setHoverTimeout] = useState(null);
+
   // Map API data structure to component props
   const {
     id,
@@ -47,6 +52,32 @@ export default function MovieCard({ movie, useLink = false }) {
   const movieType = type || film_type;
   const trailerUrl = trailer_url || trailer_hls_url;
 
+  const handleTrailerHover = () => {
+    const timeout = setTimeout(() => {
+      setIsTrailerOpen(true);
+    }, 800); // Netflix-like delay
+    setHoverTimeout(timeout);
+  };
+
+  const handleTrailerLeave = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+    }
+  };
+
+  const handleTrailerClick = () => {
+    setIsTrailerOpen(true);
+  };
+
+  const handleTrailerClose = () => {
+    setIsTrailerOpen(false);
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+    }
+  };
+
   return (
     <Card className="w-full">
       <CardHeader>
@@ -72,28 +103,19 @@ export default function MovieCard({ movie, useLink = false }) {
               className="w-full rounded-md h-44 object-cover"
             />
           )}
-          {/* Trailer button and popup - Pass trailer URL directly */}
+          {/* Trailer button with hover/click functionality */}
           {trailerUrl && (
-            <TrailerPopup
-              movie={{
-                trailer_url: trailerUrl,
-                title: title,
-              }}
-              absolute={true}
-              triggerBtn={
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  className="rounded-full"
-                  asChild
-                >
-                  <span>
-                    <HugeiconsIcon icon={PlayIcon} />
-                    Trailer
-                  </span>
-                </Button>
-              }
-            />
+            <Button
+              variant="destructive"
+              size="sm"
+              className="rounded-full absolute bottom-2 left-2"
+              onMouseEnter={handleTrailerHover}
+              onMouseLeave={handleTrailerLeave}
+              onClick={handleTrailerClick}
+            >
+              <HugeiconsIcon icon={PlayIcon} />
+              Trailer
+            </Button>
           )}
         </div>
         <CardTitle className="text-xl">
@@ -175,6 +197,19 @@ export default function MovieCard({ movie, useLink = false }) {
           />
         </div>
       </CardFooter>
+
+      {/* Netflix-style Trailer Popup */}
+      {trailerUrl && (
+        <TrailerPopup
+          movie={{
+            trailer_url: trailerUrl,
+            title: title,
+          }}
+          isOpen={isTrailerOpen}
+          onClose={handleTrailerClose}
+          netflixMode={true}
+        />
+      )}
     </Card>
   );
 }
