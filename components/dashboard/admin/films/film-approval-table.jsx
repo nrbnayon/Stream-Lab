@@ -8,6 +8,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import Image from "next/image";
 import Link from "next/link";
 import { useApproveOrRejectFilmMutation } from "@/redux/store/api/adminApi";
@@ -18,8 +29,9 @@ import CircularLoader from "@/components/ui/CircularLoader";
 export default function FilmApprovalTable({ reviewFilms, isLoading }) {
   const [approveOrRejectFilm, { isLoading: isSubmitting }] =
     useApproveOrRejectFilmMutation();
-  
+
   const [currentPage, setCurrentPage] = useState(1);
+  const [pendingAction, setPendingAction] = useState(null);
   const itemsPerPage = 20;
 
   const paginatedData = useMemo(() => {
@@ -40,8 +52,20 @@ export default function FilmApprovalTable({ reviewFilms, isLoading }) {
         action: action,
       }).unwrap();
       console.log(`Film ${action.toLowerCase()}d successfully`);
+      setPendingAction(null);
     } catch (error) {
       console.error(`Failed to ${action.toLowerCase()} film:`, error);
+      setPendingAction(null);
+    }
+  };
+
+  const openConfirmationModal = (filmId, action, filmTitle) => {
+    setPendingAction({ filmId, action, filmTitle });
+  };
+
+  const confirmAction = () => {
+    if (pendingAction) {
+      handleApproveOrReject(pendingAction.filmId, pendingAction.action);
     }
   };
 
@@ -104,17 +128,29 @@ export default function FilmApprovalTable({ reviewFilms, isLoading }) {
                 <div className="flex gap-3 justify-center">
                   <Button
                     variant="secondary"
-                    onClick={() => handleApproveOrReject(film.id, "Approve")}
+                    onClick={() =>
+                      openConfirmationModal(film.id, "Approve", film.title)
+                    }
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? "Processing..." : "Approve"}
+                    {isSubmitting &&
+                    pendingAction?.filmId === film.id &&
+                    pendingAction?.action === "Approve"
+                      ? "Processing..."
+                      : "Approve"}
                   </Button>
                   <Button
                     variant="destructive"
-                    onClick={() => handleApproveOrReject(film.id, "Reject")}
+                    onClick={() =>
+                      openConfirmationModal(film.id, "Reject", film.title)
+                    }
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? "Processing..." : "Reject"}
+                    {isSubmitting &&
+                    pendingAction?.filmId === film.id &&
+                    pendingAction?.action === "Reject"
+                      ? "Processing..."
+                      : "Reject"}
                   </Button>
                 </div>
               </TableCell>
@@ -130,6 +166,38 @@ export default function FilmApprovalTable({ reviewFilms, isLoading }) {
         totalItems={reviewFilms.length}
         itemsPerPage={itemsPerPage}
       />
+
+      {/* Confirmation Modal */}
+      <AlertDialog
+        open={!!pendingAction}
+        onOpenChange={(open) => !open && setPendingAction(null)}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Confirm {pendingAction?.action}</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to {pendingAction?.action.toLowerCase()} the
+              film "{pendingAction?.filmTitle}"? This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isSubmitting}>
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={confirmAction}
+              disabled={isSubmitting}
+              className={
+                pendingAction?.action === "Reject"
+                  ? "bg-destructive hover:bg-destructive/90"
+                  : ""
+              }
+            >
+              {isSubmitting ? "Processing..." : `${pendingAction?.action}`}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 }
