@@ -11,7 +11,7 @@ export default function MyLibrary() {
         </p>
       </div>
 
-      <MyLibraryStats />
+      {/* <MyLibraryStats /> */}
       <PurchasedMovies />
     </div>
   );

@@ -16,7 +16,8 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import Link from "next/link";
 import { Label } from "@/components/ui/label";
-import WebShare from "@/components/web-share";
+import DistroPopup from "@/components/DistroPopup";
+import { useGetMeQuery } from "@/redux/store/api/usersApi";
 
 export default function PurchasedMovieCard({ movie }) {
   const {
@@ -37,6 +38,9 @@ export default function PurchasedMovieCard({ movie }) {
   const [imageSrc, setImageSrc] = useState(
     thumbnail || "/placeholder-movie.jpg"
   );
+
+    const { data: userData, isLoading: userLoading } = useGetMeQuery();
+  const referralCode = userData?.data?.referral_code || "user123";
 
   console.log("status::", status);
 
@@ -123,12 +127,12 @@ export default function PurchasedMovieCard({ movie }) {
         <CardTitle className="text-xl flex justify-between items-center">
           {title || "Movie Name"}
           {/* Share icon */}
-          <WebShare
-            className="text-primary"
-            url={`${
-              typeof window !== "undefined" ? window.location.origin : ""
-            }/film/${film_id}`}
-            title={title}
+          <DistroPopup
+            movieId={film_id}
+            movieTitle={title}
+            movie_pic={imageSrc}
+            distributionUrl={`${process.env.NEXT_PUBLIC_LIVE_URL}/film/${film_id}?referral=${referralCode}`}
+            isUserLogin={true}
           />
         </CardTitle>
 

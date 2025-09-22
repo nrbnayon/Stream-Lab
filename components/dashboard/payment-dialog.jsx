@@ -20,9 +20,19 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Input } from "../ui/input";
-import { useEffect, useState } from "react";
-import InputField from "../input-field";
+import { useState } from "react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useGetMeQuery } from "@/redux/store/api/usersApi";
+import {
+  useCreateStripePurchaseCheckoutMutation,
+  useCreatePayPalPurchaseCheckoutMutation,
+  usePurchaseFilmWithReelBuxMutation,
+  useCreateStripeRentalCheckoutMutation,
+  useCreatePayPalRentalCheckoutMutation,
+  useRentFilmWithReelBuxMutation,
+} from "@/redux/store/api/paymentApi";
 
 export default function PaymentDialog({
   intention = "",
@@ -37,20 +47,53 @@ export default function PaymentDialog({
   setTransferAmount,
   onTransfer,
   isTransferring = false,
+  filmId,
+  filmTitle,
+  maxRentPrice,
 }) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const referralCode = searchParams.get("referral") || "";
+
   const systemPayOption = intention === "add" ? "Distro" : "ReelBux";
 
   const [amount, setAmount] = useState(
     inputValue || (intention === "transfer" ? 10 : 1)
   );
-  const [rentTime, setRentTime] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState(systemPayOption);
+  const [rentTime, setRentTime] = useState("24");
+  const [paymentMethod, setPaymentMethod] = useState("card");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [showReelBuxConfirm, setShowReelBuxConfirm] = useState(false);
+
+  // Payment mutations
+  const [createStripePurchaseCheckout] =
+    useCreateStripePurchaseCheckoutMutation();
+  const [createPayPalPurchaseCheckout] =
+    useCreatePayPalPurchaseCheckoutMutation();
+  const [purchaseFilmWithReelBux] = usePurchaseFilmWithReelBuxMutation();
+  const [createStripeRentalCheckout] = useCreateStripeRentalCheckoutMutation();
+  const [createPayPalRentalCheckout] = useCreatePayPalRentalCheckoutMutation();
+  const [rentFilmWithReelBux] = useRentFilmWithReelBuxMutation();
 
   // Use transferAmount and setTransferAmount for transfer intention
   const currentAmount = intention === "transfer" ? transferAmount : amount;
   const setCurrentAmount =
     intention === "transfer" ? setTransferAmount : setAmount;
+
+  // Calculate rent price based on selected hours
+  const calculateRentPrice = (basePrice, hours) => {
+    const maxHours = 72; // Maximum rent hours
+    const hourlyRate = basePrice / maxHours;
+    return (hourlyRate * hours).toFixed(2);
+  };
+
+  const getRentPrice = () => {
+    if (intention === "rent" && maxRentPrice) {
+      return calculateRentPrice(maxRentPrice, parseInt(rentTime));
+    }
+    return currentAmount;
+  };
 
   // Validation for transfer
   const isValidTransfer = () => {
@@ -68,6 +111,112 @@ export default function PaymentDialog({
     return true;
   };
 
+  const handlePaymentSuccess = (message) => {
+    toast.success(message || "Payment successful!");
+    setIsDialogOpen(false);
+    router.push("/my-library");
+  };
+
+  const handlePaymentCancel = () => {
+    toast.info("Payment cancelled");
+    setIsDialogOpen(false);
+  };
+
+  const handlePaymentError = (error) => {
+    console.error("Payment error:", error);
+    toast.error(error?.data?.message || "Payment failed. Please try again.");
+    setIsProcessing(false);
+  };
+
+  const processStripePayment = async () => {
+    try {
+      let response;
+      const paymentData = {
+        film_id: filmId,
+        ...(referralCode && { referral_code: referralCode }),
+      };
+
+      if (intention === "buy") {
+        response = await createStripePurchaseCheckout(paymentData).unwrap();
+      } else if (intention === "rent") {
+        response = await createStripeRentalCheckout({
+          ...paymentData,
+          rent_price: parseFloat(getRentPrice()),
+          rent_hour: parseInt(rentTime),
+        }).unwrap();
+      }
+
+      if (response?.checkoutUrl) {
+        window.location.href = response.checkoutUrl;
+      }
+    } catch (error) {
+      handlePaymentError(error);
+    }
+  };
+
+  const processPayPalPayment = async () => {
+    try {
+      let response;
+      const paymentData = {
+        film_id: filmId,
+        ...(referralCode && { referral_code: referralCode }),
+      };
+
+      if (intention === "buy") {
+        response = await createPayPalPurchaseCheckout(paymentData).unwrap();
+      } else if (intention === "rent") {
+        response = await createPayPalRentalCheckout({
+          ...paymentData,
+          rent_price: parseFloat(getRentPrice()),
+          rent_hour: parseInt(rentTime),
+        }).unwrap();
+      }
+
+      if (response?.approvalUrl) {
+        window.location.href = response.approvalUrl;
+      }
+    } catch (error) {
+      handlePaymentError(error);
+    }
+  };
+
+  const processReelBuxPayment = async () => {
+    try {
+      let response;
+      const paymentData = {
+        film_id: filmId,
+        ...(referralCode && { distro_code: referralCode }),
+      };
+
+      if (intention === "buy") {
+        response = await purchaseFilmWithReelBux(paymentData).unwrap();
+      } else if (intention === "rent") {
+        response = await rentFilmWithReelBux({
+          ...paymentData,
+          rent_price: parseFloat(getRentPrice()),
+          rent_hour: parseInt(rentTime),
+        }).unwrap();
+      }
+
+      if (response?.message) {
+        handlePaymentSuccess(response.message);
+      }
+    } catch (error) {
+      handlePaymentError(error);
+    }
+  };
+
+  const handleReelBuxConfirm = async () => {
+    setShowReelBuxConfirm(false);
+    setIsProcessing(true);
+    await processReelBuxPayment();
+  };
+
+  const handleReelBuxCancel = () => {
+    setShowReelBuxConfirm(false);
+    setIsProcessing(false);
+  };
+
   const handlePayment = async (e) => {
     e.preventDefault();
 
@@ -77,21 +226,43 @@ export default function PaymentDialog({
         return;
       }
 
-      // Call the onTransfer function passed from parent
       try {
         await onTransfer();
-        setIsDialogOpen(false); // Close dialog on success
+        setIsDialogOpen(false);
       } catch (error) {
         // Error is handled in the parent component
       }
-    } else {
-      // Handle other payment types
-      console.log("Payment made", {
-        amount: currentAmount,
-        rentTime,
-        paymentMethod,
-      });
-      setIsDialogOpen(false);
+      return;
+    }
+
+    // Validate rent time for rental
+    if (intention === "rent" && !rentTime) {
+      toast.error("Please select rental duration");
+      return;
+    }
+
+    setIsProcessing(true);
+
+    try {
+      switch (paymentMethod) {
+        case "card":
+          await processStripePayment();
+          break;
+        case "paypal":
+          await processPayPalPayment();
+          break;
+        case "reelbux":
+          // Show confirmation modal for ReelBux
+          setShowReelBuxConfirm(true);
+          setIsProcessing(false);
+          break;
+        default:
+          toast.error("Please select a payment method");
+          setIsProcessing(false);
+          break;
+      }
+    } catch (error) {
+      handlePaymentError(error);
     }
   };
 
@@ -137,8 +308,13 @@ export default function PaymentDialog({
                   min={intention === "transfer" ? 1 : 1}
                   max={intention === "transfer" ? maxAmount : undefined}
                   step="0.01"
-                  disabled={inputDisabled || isTransferring}
-                  value={currentAmount}
+                  disabled={
+                    inputDisabled ||
+                    isTransferring ||
+                    isProcessing ||
+                    intention === "rent"
+                  }
+                  value={intention === "rent" ? getRentPrice() : currentAmount}
                   onChange={(e) => setCurrentAmount(e.target.value)}
                   placeholder="Enter amount"
                 />
@@ -177,25 +353,22 @@ export default function PaymentDialog({
               <div>
                 <Label className="text-sm font-medium">Payment Method</Label>
                 <RadioGroup
-                  value={paymentMethod.toLowerCase()}
-                  onValueChange={(value) => setPaymentMethod(value)}
+                  value={paymentMethod}
+                  onValueChange={setPaymentMethod}
                   className="mt-2"
+                  disabled={isProcessing}
                 >
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="card" id="card" />
-                    <Label htmlFor="card">Card</Label>
+                    <Label htmlFor="card">Card (Stripe)</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="paypal" id="paypal" />
                     <Label htmlFor="paypal">PayPal</Label>
                   </div>
-                  {/* System Pay Option */}
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem
-                      value={systemPayOption.toLowerCase()}
-                      id={systemPayOption}
-                    />
-                    <Label htmlFor={systemPayOption}>{systemPayOption}</Label>
+                    <RadioGroupItem value="reelbux" id="reelbux" />
+                    <Label htmlFor="reelbux">ReelBux</Label>
                   </div>
                 </RadioGroup>
               </div>
@@ -213,12 +386,67 @@ export default function PaymentDialog({
             <Button
               type="submit"
               className="w-full my-3"
-              disabled={!!errorMessage || isTransferring}
+              disabled={!!errorMessage || isTransferring || isProcessing}
             >
-              {isTransferring ? "Processing..." : intentionBtnText}
+              {isProcessing
+                ? "Processing..."
+                : isTransferring
+                ? "Processing..."
+                : intentionBtnText}
             </Button>
           </DialogFooter>
         </form>
+
+        {/* ReelBux Confirmation Modal */}
+        {showReelBuxConfirm && (
+          <div className="fixed inset-0 bg-black flex items-center justify-center z-50">
+            <div className="bg-black rounded-lg p-6 max-w-md w-full mx-4">
+              <h3 className="text-lg font-semibold mb-4">
+                Confirm ReelBux Payment
+              </h3>
+              <div className="space-y-3 mb-6">
+                <p className="text-sm text-muted-foreground">
+                  You are about to {intention} "{filmTitle}" using ReelBux.
+                </p>
+                <div className="bg-muted p-3 rounded">
+                  <div className="flex justify-between">
+                    <span>Amount:</span>
+                    <span>
+                      ${intention === "rent" ? getRentPrice() : currentAmount}
+                    </span>
+                  </div>
+                  {intention === "rent" && (
+                    <div className="flex justify-between">
+                      <span>Duration:</span>
+                      <span>{rentTime} hours</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between font-medium mt-2 pt-2 border-t">
+                    <span>Payment Method:</span>
+                    <span>ReelBux</span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <Button
+                  onClick={handleReelBuxCancel}
+                  variant="outline"
+                  className="flex-1"
+                  disabled={isProcessing}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  onClick={handleReelBuxConfirm}
+                  className="flex-1"
+                  disabled={isProcessing}
+                >
+                  {isProcessing ? "Processing..." : "Confirm Payment"}
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
       </DialogContent>
     </Dialog>
   );

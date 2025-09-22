@@ -23,7 +23,7 @@ export default function QuickShareCard({ film }) {
   const { film_id, film_title, film_type } = film;
 
   // Generate distribution URL with same structure as MovieCard
-  const distributionUrl = `${process.env.NEXT_PUBLIC_LIVE_URL}/film/${film_id}?referral=${referralCode}`;
+  const distributionUrl = `${process.env.NEXT_PUBLIC_LIVE_URL}/watch/${film_id}?referral=${referralCode}`;
 
   const handleCopy = async () => {
     const success = await copyToClipboard(distributionUrl);

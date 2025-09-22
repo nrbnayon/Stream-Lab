@@ -1,4 +1,3 @@
-// components/movie-card.jsx
 "use client";
 import Image from "next/image";
 import {
@@ -167,7 +166,7 @@ export default function MovieCard({
           {rent_price && (
             <PaymentDialog
               dialogTitle={`Rent  –  ${title}`}
-              inputValue={``}
+              inputValue={rent_price}
               triggerBtn={
                 <Button className="w-full" asChild>
                   <span>Rent</span>
@@ -175,12 +174,15 @@ export default function MovieCard({
               }
               intention="rent"
               intentionBtnText="Pay"
+              filmId={id}
+              filmTitle={title}
+              maxRentPrice={rent_price}
             />
           )}
           {buy_price && (
             <PaymentDialog
               dialogTitle={`Buy – ${title}`}
-              inputValue={``}
+              inputValue={buy_price}
               triggerBtn={
                 <Button className="w-full" variant="outline" asChild>
                   <span>Buy</span>
@@ -188,6 +190,8 @@ export default function MovieCard({
               }
               intention="buy"
               intentionBtnText="Pay"
+              filmId={id}
+              filmTitle={title}
             />
           )}
         </div>

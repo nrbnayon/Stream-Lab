@@ -20,11 +20,18 @@ export const paymentApi = createApi({
     // Film Purchase - Stripe
     createStripePurchaseCheckout: builder.mutation({
       query: (data) => ({
-        url: "/flims/stripe/create-purchase-checkout-session",
+        url: "/payment/stripe/create-purchase-checkout-session",
         method: "POST",
         body: data,
       }),
       invalidatesTags: ["Payment"],
+      transformErrorResponse: (response, meta, arg) => {
+        return {
+          status: response.status,
+          data: response.data,
+          message: response.data?.message || "Payment failed",
+        };
+      },
     }),
 
     // Film Purchase - PayPal
@@ -35,6 +42,13 @@ export const paymentApi = createApi({
         body: data,
       }),
       invalidatesTags: ["Payment"],
+      transformErrorResponse: (response, meta, arg) => {
+        return {
+          status: response.status,
+          data: response.data,
+          message: response.data?.message || "Payment failed",
+        };
+      },
     }),
 
     // Film Purchase - ReelBux
@@ -45,16 +59,30 @@ export const paymentApi = createApi({
         body: data,
       }),
       invalidatesTags: ["Payment"],
+      transformErrorResponse: (response, meta, arg) => {
+        return {
+          status: response.status,
+          data: response.data,
+          message: response.data?.message || "Payment failed",
+        };
+      },
     }),
 
     // Film Rental - Stripe
     createStripeRentalCheckout: builder.mutation({
       query: (data) => ({
-        url: "/flims/stripe/create-rented-checkout-session",
+        url: "/payment/stripe/create-rented-checkout-session",
         method: "POST",
         body: data,
       }),
       invalidatesTags: ["Payment"],
+      transformErrorResponse: (response, meta, arg) => {
+        return {
+          status: response.status,
+          data: response.data,
+          message: response.data?.message || "Payment failed",
+        };
+      },
     }),
 
     // Film Rental - PayPal
@@ -65,6 +93,13 @@ export const paymentApi = createApi({
         body: data,
       }),
       invalidatesTags: ["Payment"],
+      transformErrorResponse: (response, meta, arg) => {
+        return {
+          status: response.status,
+          data: response.data,
+          message: response.data?.message || "Payment failed",
+        };
+      },
     }),
 
     // Film Rental - ReelBux
@@ -75,6 +110,13 @@ export const paymentApi = createApi({
         body: data,
       }),
       invalidatesTags: ["Payment"],
+      transformErrorResponse: (response, meta, arg) => {
+        return {
+          status: response.status,
+          data: response.data,
+          message: response.data?.message || "Payment failed",
+        };
+      },
     }),
 
     // AI Subscription - Stripe

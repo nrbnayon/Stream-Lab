@@ -187,6 +187,9 @@ export default function WatchFilm() {
                     }
                     intention="rent"
                     intentionBtnText="Rent Now"
+                    filmId={film_id}
+                    filmTitle={title}
+                    maxRentPrice={rent_price}
                   />
                 )}
                 {buy_price && (
@@ -200,6 +203,8 @@ export default function WatchFilm() {
                     }
                     intention="buy"
                     intentionBtnText="Buy Now"
+                    filmId={film_id}
+                    filmTitle={title}
                   />
                 )}
               </div>
@@ -298,9 +303,9 @@ export default function WatchFilm() {
             <div className="table-row">
               <div className="table-cell font-medium pr-12">Price:</div>
               <div className="table-cell">
-                {buy_price && `Buy: $${buy_price}`}
+                {buy_price && `Buy: ${buy_price}`}
                 {buy_price && rent_price && " | "}
-                {rent_price && `Rent: $${rent_price}`}
+                {rent_price && `Rent: ${rent_price}`}
               </div>
             </div>
           )}
