@@ -131,7 +131,7 @@ export default function PurchasedMovieCard({ movie }) {
             movieId={film_id}
             movieTitle={title}
             movie_pic={imageSrc}
-            distributionUrl={`${process.env.NEXT_PUBLIC_LIVE_URL}/film/${film_id}?referral=${referralCode}`}
+            distributionUrl={`${process.env.NEXT_PUBLIC_LIVE_URL}/watch/${film_id}?referral=${referralCode}`}
             isUserLogin={true}
           />
         </CardTitle>

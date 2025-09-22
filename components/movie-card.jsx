@@ -202,7 +202,7 @@ export default function MovieCard({
             movieId={id}
             movieTitle={title}
             movie_pic={thumbnailSrc}
-            distributionUrl={`${process.env.NEXT_PUBLIC_LIVE_URL}/film/${id}?referral=${referralCode}`}
+            distributionUrl={`${process.env.NEXT_PUBLIC_LIVE_URL}/watch/${id}?referral=${referralCode}`}
             isUserLogin={isUserLogin}
           />
         </div>

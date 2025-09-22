@@ -1,3 +1,4 @@
+// MonthlyRevenue.jsx
 "use client";
 import {
   Card,
@@ -11,7 +12,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { chartData } from "@/constants";
 import {
   Bar,
   BarChart,
@@ -31,7 +31,31 @@ const chartConfig = {
   },
 };
 
-export default function MonthlyRevenue() {
+export default function MonthlyRevenue({ dashboardResponse, isLoading }) {
+  // Transform API data to chart format
+  const chartData =
+    dashboardResponse?.monthly_revenue?.labels?.map((month, index) => ({
+      month,
+      last_year: dashboardResponse?.monthly_revenue?.last_year?.[index] || 0,
+      current: dashboardResponse?.monthly_revenue?.current_year?.[index] || 0,
+    })) || [];
+
+  if (isLoading) {
+    return (
+      <Card className="lg:col-span-3">
+        <CardHeader>
+          <CardTitle>Monthly Revenue</CardTitle>
+          <CardDescription>Earning over last month</CardDescription>
+        </CardHeader>
+        <CardContent className="overflow-x-auto h-80">
+          <div className="flex items-center justify-center h-full">
+            <div>Loading...</div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <Card className="lg:col-span-3">
       <CardHeader>
