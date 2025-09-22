@@ -1,3 +1,4 @@
+'use client'
 import {
   Card,
   CardContent,
@@ -6,8 +7,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import FilmApprovalTable from "./film-approval-table";
+import { useGetAdminFilmsQuery } from "@/redux/store/api/adminApi";
 
 export default function FilmApproval() {
+    const { data: filmsResponse, isLoading } = useGetAdminFilmsQuery();
+    const reviewFilms = filmsResponse?.review_films || [];
+
+    console.log("All the films::", filmsResponse);
   return (
     <Card className="my-5">
       <CardHeader>
@@ -16,7 +22,7 @@ export default function FilmApproval() {
       </CardHeader>
       <CardContent>
         {/* TODO: Pass users props  */}
-        <FilmApprovalTable />
+        <FilmApprovalTable reviewFilms={reviewFilms} isLoading={isLoading}  />
       </CardContent>
     </Card>
   );

@@ -1,847 +1,1002 @@
-import { CreditCardValidationIcon, CrownIcon, DashboardSquare03Icon, Dollar01Icon, File02Icon, Film01Icon, Film02Icon, Image03Icon, Link05Icon, MoneySend02Icon, PlayCircleIcon, PlayListIcon, Settings02Icon, StarIcon, TradeUpIcon, Upload01Icon, UserGroup02Icon, UserGroupIcon, Video01Icon, ViewIcon, ZapIcon, } from "@hugeicons/core-free-icons/index";
+import {
+  CreditCardValidationIcon,
+  CrownIcon,
+  DashboardSquare03Icon,
+  Dollar01Icon,
+  File02Icon,
+  Film01Icon,
+  Film02Icon,
+  Image03Icon,
+  Link05Icon,
+  MoneySend02Icon,
+  PlayCircleIcon,
+  PlayListIcon,
+  Settings02Icon,
+  StarIcon,
+  TradeUpIcon,
+  Upload01Icon,
+  UserGroup02Icon,
+  UserGroupIcon,
+  Video01Icon,
+  ViewIcon,
+  ZapIcon,
+} from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 
-
 const moviesData = [
-   {
-      id: 1,
-      title: "The Last Journey",
-      year: 2025,
-      logline:
-         "In a gripping tale of courage and discovery, a lone traveler embarks on his final expedition to unearth secrets hidden beneath layers of time and mystery. As he ventures deeper into uncharted lands, every step reveals ancient civilizations, forgotten histories, and dangers that threaten not only his life but the fate of humanity itself.",
-      type: "movie",
-      genre: ["Action"],
-      duration: 128,
-      thumbnail_url:
-         "https://i.pinimg.com/736x/a1/84/5a/a1845a62b076849b90f30b625b105f0d.jpg",
-      trailer_url:
-         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-      full_film_url:
-         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-      rent_price: 4.99,
-      buy_price: 14.99,
-   },
-   {
-      id: 2,
-      title: "Shadows Over Horizon",
-      year: 2024,
-      logline:
-         "In a futuristic metropolis plagued by corruption and shadowy conspiracies, one detective races against time to unravel the truth behind a mysterious force threatening the city’s fragile peace. Battling powerful enemies and his own demons, he must uncover secrets buried deep in the neon-lit streets before everything falls into chaos.",
-      type: "movie",
-      genre: ["Sci-Fi", "Thriller"],
-      duration: 115,
-      thumbnail_url:
-         "https://i.pinimg.com/736x/ba/d0/93/bad0936276a699608b5f8ff8e7ad7d14.jpg",
-      trailer_url:
-         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-      full_film_url:
-         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-      rent_price: 3.99,
-      buy_price: 12.99,
-   },
-   {
-      id: 3,
-      title: "Echoes of the Sea",
-      year: 2023,
-      logline:
-         "When a passionate marine biologist uncovers signs of a hidden civilization beneath the ocean’s surface, she embarks on a daring quest filled with peril and wonder. Facing the mysteries of the deep and unexpected alliances, she must protect her discovery from forces eager to exploit it and change the course of history forever.",
-      type: "movie",
-      genre: ["Adventure", "Fantasy"],
-      duration: 142,
-      thumbnail_url:
-         "https://i.pinimg.com/1200x/5e/a3/2d/5ea32d22203c77ac258aa62c98eef275.jpg",
-      trailer_url:
-         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-      full_film_url:
-         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-      rent_price: 5.49,
-      buy_price: 15.99,
-   },
-   {
-      id: 4,
-      title: "Rise of the Forgotten",
-      year: 2025,
-      logline:
-         "In a world teetering on the brink of darkness, a young hero discovers ancient warriors hidden away by time. With courage and determination, he must rally these forgotten champions to stand against the encroaching shadows and protect the fragile balance between light and dark, facing impossible odds and forging unbreakable bonds.",
-      type: "movie",
-      genre: ["Action", "Fantasy"],
-      duration: 130,
-      thumbnail_url:
-         "https://i.pinimg.com/736x/f1/80/9c/f1809cf269d723d0b1dc2aedf6d3e546.jpg",
-      trailer_url:
-         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-      full_film_url:
-         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-      rent_price: 4.49,
-      buy_price: 13.99,
-   },
-   {
-      id: 5,
-      title: "Whispers in the Wind",
-      year: 2022,
-      logline:
-         "A poet finds her life forever changed when the whispers carried by the wind reveal voices from another world. Navigating a delicate balance between reality and the mystical, she embarks on a soulful journey to understand these messages, confronting her past and unlocking truths that bind her to a destiny beyond imagination.",
-      type: "movie",
-      genre: ["Drama", "Romance"],
-      duration: 108,
-      thumbnail_url:
-         "https://i.pinimg.com/736x/c3/a4/1b/c3a41bf5f2e30e8bbe4b0f8a896613bb.jpg",
-      trailer_url:
-         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-      full_film_url:
-         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-      rent_price: 3.49,
-      buy_price: 11.99,
-   },
-   {
-      id: 6,
-      title: "Steel and Ash",
-      year: 2024,
-      logline:
-         "In a brutal dystopian wasteland ravaged by war and chaos, a lone warrior rises from the ashes. With relentless determination, he fights to defend the last bastion of hope and safety, navigating a world where trust is scarce and danger lurks at every turn, testing his strength and spirit to the limit.",
-      type: "movie",
-      genre: ["Action", "Sci-Fi"],
-      duration: 119,
-      thumbnail_url:
-         "https://i.pinimg.com/736x/25/88/10/2588108b631c8263ab51bb21bf04dbfd.jpg",
-      trailer_url:
-         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-      full_film_url:
-         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-      rent_price: 4.99,
-      buy_price: 14.49,
-   },
-   {
-      id: 7,
-      title: "City of Glass",
-      year: 2025,
-      logline:
-         "In a city where everyone hides behind mirrored masks, a sharp detective must solve a chilling murder mystery. As secrets unravel and illusions shatter, he delves deep into the underworld to expose truths that threaten the fragile facade of society, risking everything to bring justice to the glass city.",
-      type: "movie",
-      genre: ["Mystery", "Thriller"],
-      duration: 124,
-      thumbnail_url:
-         "https://i.pinimg.com/1200x/61/26/4c/61264ce8f02ac56c9cb7709c920eecbc.jpg",
-      trailer_url:
-         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-      full_film_url:
-         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-      rent_price: 4.29,
-      buy_price: 13.79,
-   },
-   {
-      id: 8,
-      title: "Veil of the Moon",
-      year: 2023,
-      logline:
-         "Bound by a mysterious lunar prophecy, a young woman discovers her destiny intertwines with celestial forces. As the veil between worlds thins, she embarks on a perilous journey filled with magic, secrets, and self-discovery that will change the fate of her family and the world forever.",
-      type: "movie",
-      genre: ["Fantasy", "Mystery"],
-      duration: 137,
-      thumbnail_url:
-         "https://i.pinimg.com/1200x/6f/65/46/6f654637d171089e3f1f4525212e8ac8.jpg",
-      trailer_url:
-         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-      full_film_url:
-         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-      rent_price: 5.19,
-      buy_price: 15.29,
-   },
-   {
-      id: 9,
-      title: "Ashes and Embers",
-      year: 2022,
-      logline:
-         "Two survivors navigate a world consumed by relentless fires and despair, clinging to hope amidst the ashes. Their journey is a testament to resilience and the human spirit’s power to overcome even the darkest of times, forging bonds that light the way through the embers of their shattered world.",
-      type: "movie",
-      genre: ["Drama", "Adventure"],
-      duration: 111,
-      thumbnail_url:
-         "https://i.pinimg.com/1200x/82/81/f2/8281f2139e4209f043e9409e8bcfdca1.jpg",
-      trailer_url:
-         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-      full_film_url:
-         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-      rent_price: 3.79,
-      buy_price: 12.59,
-   },
-   {
-      id: 10,
-      title: "The Silent Frontier",
-      year: 2024,
-      logline:
-         "On the edge of the cosmos, an isolated crew receives a mysterious signal from an unknown source. As they venture deeper into the silent frontier, they confront the vast unknown, testing their courage, unity, and the limits of human exploration in a quest that may redefine their existence forever.",
-      type: "movie",
-      genre: ["Sci-Fi", "Adventure"],
-      duration: 126,
-      thumbnail_url:
-         "https://i.pinimg.com/1200x/d4/99/4a/d4994ac3e2c3c7338f51513a74745f3a.jpg",
-      trailer_url:
-         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-      full_film_url:
-         "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-      rent_price: 4.69,
-      buy_price: 14.39,
-   },
+  {
+    id: 1,
+    title: "The Last Journey",
+    year: 2025,
+    logline:
+      "In a gripping tale of courage and discovery, a lone traveler embarks on his final expedition to unearth secrets hidden beneath layers of time and mystery. As he ventures deeper into uncharted lands, every step reveals ancient civilizations, forgotten histories, and dangers that threaten not only his life but the fate of humanity itself.",
+    type: "movie",
+    genre: ["Action"],
+    duration: 128,
+    thumbnail_url:
+      "https://i.pinimg.com/736x/a1/84/5a/a1845a62b076849b90f30b625b105f0d.jpg",
+    trailer_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    full_film_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    rent_price: 4.99,
+    buy_price: 14.99,
+  },
+  {
+    id: 2,
+    title: "Shadows Over Horizon",
+    year: 2024,
+    logline:
+      "In a futuristic metropolis plagued by corruption and shadowy conspiracies, one detective races against time to unravel the truth behind a mysterious force threatening the city’s fragile peace. Battling powerful enemies and his own demons, he must uncover secrets buried deep in the neon-lit streets before everything falls into chaos.",
+    type: "movie",
+    genre: ["Sci-Fi", "Thriller"],
+    duration: 115,
+    thumbnail_url:
+      "https://i.pinimg.com/736x/ba/d0/93/bad0936276a699608b5f8ff8e7ad7d14.jpg",
+    trailer_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    full_film_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    rent_price: 3.99,
+    buy_price: 12.99,
+  },
+  {
+    id: 3,
+    title: "Echoes of the Sea",
+    year: 2023,
+    logline:
+      "When a passionate marine biologist uncovers signs of a hidden civilization beneath the ocean’s surface, she embarks on a daring quest filled with peril and wonder. Facing the mysteries of the deep and unexpected alliances, she must protect her discovery from forces eager to exploit it and change the course of history forever.",
+    type: "movie",
+    genre: ["Adventure", "Fantasy"],
+    duration: 142,
+    thumbnail_url:
+      "https://i.pinimg.com/1200x/5e/a3/2d/5ea32d22203c77ac258aa62c98eef275.jpg",
+    trailer_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    full_film_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    rent_price: 5.49,
+    buy_price: 15.99,
+  },
+  {
+    id: 4,
+    title: "Rise of the Forgotten",
+    year: 2025,
+    logline:
+      "In a world teetering on the brink of darkness, a young hero discovers ancient warriors hidden away by time. With courage and determination, he must rally these forgotten champions to stand against the encroaching shadows and protect the fragile balance between light and dark, facing impossible odds and forging unbreakable bonds.",
+    type: "movie",
+    genre: ["Action", "Fantasy"],
+    duration: 130,
+    thumbnail_url:
+      "https://i.pinimg.com/736x/f1/80/9c/f1809cf269d723d0b1dc2aedf6d3e546.jpg",
+    trailer_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    full_film_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    rent_price: 4.49,
+    buy_price: 13.99,
+  },
+  {
+    id: 5,
+    title: "Whispers in the Wind",
+    year: 2022,
+    logline:
+      "A poet finds her life forever changed when the whispers carried by the wind reveal voices from another world. Navigating a delicate balance between reality and the mystical, she embarks on a soulful journey to understand these messages, confronting her past and unlocking truths that bind her to a destiny beyond imagination.",
+    type: "movie",
+    genre: ["Drama", "Romance"],
+    duration: 108,
+    thumbnail_url:
+      "https://i.pinimg.com/736x/c3/a4/1b/c3a41bf5f2e30e8bbe4b0f8a896613bb.jpg",
+    trailer_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    full_film_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    rent_price: 3.49,
+    buy_price: 11.99,
+  },
+  {
+    id: 6,
+    title: "Steel and Ash",
+    year: 2024,
+    logline:
+      "In a brutal dystopian wasteland ravaged by war and chaos, a lone warrior rises from the ashes. With relentless determination, he fights to defend the last bastion of hope and safety, navigating a world where trust is scarce and danger lurks at every turn, testing his strength and spirit to the limit.",
+    type: "movie",
+    genre: ["Action", "Sci-Fi"],
+    duration: 119,
+    thumbnail_url:
+      "https://i.pinimg.com/736x/25/88/10/2588108b631c8263ab51bb21bf04dbfd.jpg",
+    trailer_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    full_film_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    rent_price: 4.99,
+    buy_price: 14.49,
+  },
+  {
+    id: 7,
+    title: "City of Glass",
+    year: 2025,
+    logline:
+      "In a city where everyone hides behind mirrored masks, a sharp detective must solve a chilling murder mystery. As secrets unravel and illusions shatter, he delves deep into the underworld to expose truths that threaten the fragile facade of society, risking everything to bring justice to the glass city.",
+    type: "movie",
+    genre: ["Mystery", "Thriller"],
+    duration: 124,
+    thumbnail_url:
+      "https://i.pinimg.com/1200x/61/26/4c/61264ce8f02ac56c9cb7709c920eecbc.jpg",
+    trailer_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    full_film_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    rent_price: 4.29,
+    buy_price: 13.79,
+  },
+  {
+    id: 8,
+    title: "Veil of the Moon",
+    year: 2023,
+    logline:
+      "Bound by a mysterious lunar prophecy, a young woman discovers her destiny intertwines with celestial forces. As the veil between worlds thins, she embarks on a perilous journey filled with magic, secrets, and self-discovery that will change the fate of her family and the world forever.",
+    type: "movie",
+    genre: ["Fantasy", "Mystery"],
+    duration: 137,
+    thumbnail_url:
+      "https://i.pinimg.com/1200x/6f/65/46/6f654637d171089e3f1f4525212e8ac8.jpg",
+    trailer_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    full_film_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    rent_price: 5.19,
+    buy_price: 15.29,
+  },
+  {
+    id: 9,
+    title: "Ashes and Embers",
+    year: 2022,
+    logline:
+      "Two survivors navigate a world consumed by relentless fires and despair, clinging to hope amidst the ashes. Their journey is a testament to resilience and the human spirit’s power to overcome even the darkest of times, forging bonds that light the way through the embers of their shattered world.",
+    type: "movie",
+    genre: ["Drama", "Adventure"],
+    duration: 111,
+    thumbnail_url:
+      "https://i.pinimg.com/1200x/82/81/f2/8281f2139e4209f043e9409e8bcfdca1.jpg",
+    trailer_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    full_film_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    rent_price: 3.79,
+    buy_price: 12.59,
+  },
+  {
+    id: 10,
+    title: "The Silent Frontier",
+    year: 2024,
+    logline:
+      "On the edge of the cosmos, an isolated crew receives a mysterious signal from an unknown source. As they venture deeper into the silent frontier, they confront the vast unknown, testing their courage, unity, and the limits of human exploration in a quest that may redefine their existence forever.",
+    type: "movie",
+    genre: ["Sci-Fi", "Adventure"],
+    duration: 126,
+    thumbnail_url:
+      "https://i.pinimg.com/1200x/d4/99/4a/d4994ac3e2c3c7338f51513a74745f3a.jpg",
+    trailer_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    full_film_url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    rent_price: 4.69,
+    buy_price: 14.39,
+  },
 ];
 
 // sidebar-links
 const sidebarLinks = {
-   user: [
-      {
-         groupName: "User Tools",
-         links: [
-            { name: "Watch", href: "/watch", icon: <HugeiconsIcon icon={PlayCircleIcon} /> },
-            { name: "My Library", href: "/my-library", icon: <HugeiconsIcon icon={Film01Icon} /> },
-            {
-               name: "Reelbux", href: "/reelbux", icon: <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7.84248 0.51719C10.6383 -0.488606 13.9238 -0.00655492 16.3013 1.78158C17.6393 2.76255 18.6699 4.13094 19.3178 5.65345C20.0051 7.3493 20.1957 9.25642 19.7858 11.0446C19.4251 12.7629 18.5289 14.3486 17.3151 15.6083C16.3266 16.6338 15.0922 17.4194 13.7467 17.887C12.0705 18.4763 10.2148 18.5288 8.50303 18.0603C6.87414 17.6317 5.37595 16.7261 4.23193 15.4908C3.57653 14.8096 3.03075 14.0263 2.59929 13.1864C2.56274 13.1161 2.4728 13.0093 2.58055 12.9554C3.00686 12.6345 3.43552 12.3141 3.88666 12.0288C4.23052 12.8411 4.72851 13.586 5.32114 14.2381C6.3827 15.4472 7.86497 16.2717 9.44982 16.5448C10.3526 16.7046 11.2848 16.7144 12.1862 16.5392C13.7711 16.268 15.2416 15.421 16.3055 14.2198C17.338 13.0782 18.0319 11.6297 18.2422 10.1025C18.4975 8.43895 18.0834 6.70656 17.2134 5.27727C16.5088 4.10798 15.4838 3.13076 14.2723 2.49927C12.1314 1.38245 9.43436 1.39135 7.31919 2.56767C6.48577 3.03847 5.74183 3.66622 5.13093 4.40312C4.72664 4.9203 4.35935 5.47028 4.06656 6.05867C4.00846 6.16455 3.9916 6.29384 3.90634 6.38332C3.45098 6.05118 2.99468 5.72185 2.5426 5.38596C2.90942 4.56661 3.43083 3.8255 4.02158 3.15278C5.04989 1.97646 6.3635 1.03672 7.84248 0.51719Z" fill="#FEFEFE" />
-                  <path d="M10.437 3.1169C10.8961 3.00775 11.3885 3.0738 11.8148 3.27009C12.5002 3.59239 12.9874 4.29509 13.0469 5.05026C13.1293 6.06215 12.3999 7.07825 11.4077 7.30733C10.7729 7.4563 10.0608 7.31154 9.55999 6.88571C9.1201 6.52921 8.85072 5.98626 8.78982 5.42691C8.66661 4.3916 9.40352 3.31975 10.437 3.1169Z" fill="#FEFEFE" />
-                  <path d="M0.219208 5.02392C0.339606 4.96396 0.485302 4.99441 0.592115 5.06983C0.903183 5.27314 1.19598 5.50269 1.49955 5.71725C2.83706 6.65652 4.14973 7.63047 5.48723 8.56974C5.66431 8.6981 5.87981 8.81147 5.96695 9.02415C6.05315 9.20545 5.9796 9.4289 5.83484 9.55773C5.57343 9.80368 5.26377 9.98872 4.97706 10.2023C3.79978 11.0718 2.62718 11.9474 1.44709 12.8136C1.14773 13.0239 0.86711 13.2614 0.556041 13.4554C0.389263 13.5289 0.190631 13.4615 0.0889711 13.3125C-0.0117515 13.1883 0.00839223 13.0206 0.00323898 12.8721C0.00604984 10.3883 -0.00331918 7.90499 0.00230254 5.42118C-0.0154996 5.25909 0.0711689 5.09419 0.219208 5.02392Z" fill="#FEFEFE" />
-                  <path d="M5.83768 7.45098C6.17873 7.18395 6.5999 7.00781 7.03839 7.01249C7.57714 6.98345 8.11776 7.1877 8.50566 7.56294C8.95071 7.9855 9.22477 8.59872 9.20275 9.21616C9.19198 9.9465 8.77784 10.6609 8.14681 11.0305C7.39677 11.5004 6.35629 11.4128 5.68262 10.8431C5.76413 10.7223 5.91545 10.6867 6.02742 10.6023C6.33614 10.3859 6.65564 10.1498 6.82945 9.80502C6.95875 9.52347 7.02059 9.19554 6.93064 8.89338C6.82617 8.51908 6.54274 8.21786 6.21153 8.02719C6.02929 7.92272 5.85595 7.8042 5.69573 7.66835C5.70276 7.57559 5.76788 7.50579 5.83768 7.45098Z" fill="#FEFEFE" />
-                  <path d="M14.5858 7.02139C15.1663 6.94971 15.7678 7.11321 16.2255 7.47768C16.6312 7.80748 16.9277 8.27922 17.0144 8.79734C17.1451 9.43914 16.9245 10.1269 16.4897 10.6084C16.062 11.0881 15.415 11.3734 14.7699 11.328C13.6615 11.3289 12.6955 10.3133 12.6988 9.21522C12.6557 8.14852 13.5271 7.14319 14.5858 7.02139Z" fill="#FEFEFE" />
-                  <path d="M10.7122 7.98236C10.7609 7.89241 10.8003 7.76827 10.9258 7.77155C11.087 7.78326 11.1587 7.9491 11.2186 8.07699C11.3423 8.08964 11.4899 8.08495 11.5794 8.18801C11.7274 8.30747 11.6951 8.56044 11.5513 8.67147C11.4402 8.80124 11.2575 8.76844 11.1081 8.80264C11.1427 8.97597 11.3756 8.96473 11.4772 9.087C11.7771 9.33201 11.7372 9.83327 11.4304 10.053C11.3409 10.1237 11.1924 10.1129 11.1409 10.2282C11.0982 10.3191 11.0322 10.4114 10.9244 10.4263C10.783 10.4231 10.73 10.2769 10.6757 10.1715C10.5318 10.104 10.3267 10.1607 10.2372 9.99817C10.1805 9.86138 10.1636 9.66368 10.284 9.55547C10.4068 9.44631 10.6312 9.56858 10.7169 9.40743C10.5899 9.30437 10.425 9.24815 10.3276 9.10949C10.1037 8.84199 10.1575 8.40819 10.41 8.17771C10.5019 8.09994 10.6274 8.06949 10.7122 7.98236Z" fill="#FEFEFE" />
-                  <path d="M10.3845 11.0265C10.889 10.916 11.4287 10.9839 11.8911 11.2125C12.4303 11.488 12.8323 12.0061 12.9845 12.5898C13.1433 13.1613 13.0286 13.79 12.7189 14.2913C12.4317 14.7489 11.9693 15.097 11.4446 15.2324C10.9471 15.3608 10.4028 15.3031 9.94411 15.0698C9.30464 14.7583 8.86146 14.0959 8.78745 13.3913C8.70265 12.7463 8.92237 12.067 9.37257 11.5962C9.64898 11.3179 10.0022 11.1169 10.3845 11.0265Z" fill="#FEFEFE" />
-               </svg>
-            },
-            { name: "Settings", href: "/settings", icon: <HugeiconsIcon icon={Settings02Icon} /> },
-         ]
-      },
-      {
-         groupName: "Creator Tools",
-         links: [
-            { name: "My Titles", href: "/my-titles", icon: <HugeiconsIcon icon={PlayListIcon} /> },
-            {
-               name: "Distro", href: "/distro", icon: <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10.932 0.0410299C11.1176 -0.0305489 11.3558 -0.0142139 11.4996 0.135775C12.014 0.674249 12.5237 1.21718 13.0209 1.77169C13.1435 1.91812 13.1673 2.13849 13.0811 2.30868C13.02 2.44233 12.886 2.51629 12.7746 2.60242C12.2157 2.982 11.6671 3.37702 11.1161 3.76847C10.9474 3.89203 10.7092 3.89084 10.534 3.78154C10.2905 3.63927 10.188 3.2796 10.3781 3.05447C10.5994 2.81686 10.8699 2.63242 11.128 2.43758C10.4805 2.34254 9.81585 2.31462 9.16778 2.42481C8.00113 2.614 6.89686 3.1899 6.08603 4.05211C5.87931 4.27368 5.67854 4.50238 5.50954 4.75483C5.45251 4.83295 5.4041 4.92353 5.31738 4.97313C5.16293 5.06907 4.95829 5.08035 4.79464 5.00046C4.51783 4.87928 4.37913 4.49762 4.55704 4.24131C5.25025 3.20891 6.22889 2.36214 7.37237 1.86584C8.19894 1.50706 9.09739 1.30509 9.99999 1.31281C10.4105 1.30628 10.8203 1.33479 11.2284 1.37578C11.0918 1.21124 10.9427 1.05828 10.7936 0.905321C10.7039 0.813249 10.6261 0.698604 10.6181 0.566435C10.5896 0.346947 10.7253 0.120034 10.932 0.0410299Z" fill="#FEFEFE" />
-                  <path d="M3.02815 5.74453C3.06438 5.73532 3.10151 5.73116 3.13923 5.73146C7.65314 5.73146 12.1674 5.73205 16.6816 5.73235C16.7656 5.73413 16.8524 5.72582 16.9349 5.7472C17.0724 5.80363 17.1823 5.94026 17.1841 6.09203C17.1951 6.38963 17.1883 6.68723 17.19 6.98483C17.193 9.11378 17.1895 11.2424 17.1915 13.3714C17.1877 13.4955 17.2049 13.6274 17.1485 13.7432C17.0861 13.887 16.9218 13.9657 16.7701 13.9592C12.236 13.9574 7.70156 13.96 3.16744 13.9583C2.94261 13.9725 2.75104 13.772 2.7546 13.5511C2.75104 11.0755 2.75371 8.59966 2.75252 6.12381C2.74243 5.95451 2.86747 5.79205 3.02815 5.74453ZM4.12915 6.85058C4.03263 6.87464 3.96313 6.97503 3.96847 7.07304C3.96907 7.35193 3.96639 7.63082 3.97055 7.90971C3.96907 8.01634 4.06381 8.1289 4.17667 8.11554C4.46477 8.11554 4.75317 8.11643 5.04126 8.11494C5.15145 8.11851 5.24026 8.01248 5.23788 7.90615C5.23937 7.61954 5.23937 7.33263 5.23758 7.04601C5.24085 6.91117 5.10334 6.82653 4.97978 6.8393C4.69644 6.84702 4.41042 6.82296 4.12915 6.85058ZM14.9078 6.84643C14.8232 6.87019 14.7463 6.94889 14.7507 7.04097C14.7507 7.33025 14.7475 7.61954 14.7528 7.90882C14.7507 8.01663 14.8437 8.12474 14.9563 8.11494C15.2348 8.11524 15.5134 8.11673 15.7923 8.11494C15.901 8.1191 15.9934 8.01277 15.9934 7.90763C15.9993 7.63943 15.9937 7.37094 15.9958 7.10274C15.9982 7.0178 15.9723 6.92276 15.899 6.87286C15.8122 6.82148 15.708 6.84286 15.6129 6.8387C15.378 6.84524 15.1416 6.82742 14.9078 6.84643ZM6.59431 6.91058C6.48383 6.93731 6.4271 7.05611 6.4369 7.16274C6.43779 8.87528 6.43838 10.5881 6.43631 12.3007C6.43838 12.4147 6.41462 12.5418 6.48204 12.6428C6.5358 12.7245 6.63857 12.7551 6.73213 12.7509C8.89968 12.7506 11.0672 12.7521 13.2348 12.7509C13.3388 12.7527 13.4599 12.737 13.5262 12.6467C13.6067 12.5389 13.5817 12.3969 13.585 12.2713C13.5826 10.6083 13.585 8.94538 13.5823 7.28243C13.5814 7.19184 13.582 7.09561 13.5383 7.01334C13.4899 6.92751 13.3916 6.87999 13.2942 6.89068C11.1367 6.88712 8.97958 6.89216 6.82241 6.88919C6.74608 6.89038 6.66738 6.88474 6.59431 6.91058ZM4.13094 9.22516C4.0353 9.25426 3.95897 9.34752 3.96818 9.44999C3.96936 9.73809 3.9658 10.0262 3.97025 10.3143C3.96847 10.4361 4.09025 10.5278 4.20667 10.5198C4.48497 10.516 4.76326 10.5177 5.04156 10.5198C5.14937 10.5207 5.23966 10.42 5.23937 10.3146C5.23937 10.0256 5.23758 9.73631 5.24055 9.44761C5.24501 9.32376 5.13927 9.20823 5.01275 9.21535C4.71931 9.22337 4.4226 9.19961 4.13094 9.22516ZM14.9378 9.2213C14.8401 9.23318 14.7472 9.31634 14.7507 9.4197C14.7495 9.71789 14.7498 10.0164 14.751 10.3146C14.743 10.4266 14.847 10.5293 14.9595 10.5183C15.2375 10.516 15.5158 10.5204 15.7938 10.5183C15.9141 10.5186 15.9996 10.3974 15.9946 10.284C15.9985 10.0461 15.994 9.80789 15.9964 9.56969C15.9961 9.47672 16.0005 9.37544 15.9435 9.29614C15.8921 9.21803 15.7873 9.21446 15.7035 9.21565C15.4484 9.22159 15.1927 9.20585 14.9378 9.2213ZM4.12262 11.5988C4.03114 11.6321 3.95956 11.7251 3.96847 11.8246C3.96818 12.083 3.96758 12.3414 3.96996 12.5998C3.96134 12.7269 4.08044 12.8377 4.20489 12.8326C4.47368 12.8299 4.74277 12.8341 5.01156 12.832C5.12769 12.8362 5.23551 12.7441 5.23848 12.6256C5.24234 12.369 5.23729 12.1121 5.24085 11.8552C5.24412 11.7776 5.23135 11.6894 5.16452 11.6395C5.07215 11.5602 4.94236 11.5938 4.83158 11.587C4.59545 11.595 4.35666 11.5715 4.12262 11.5988ZM14.8802 11.5997C14.8057 11.6342 14.7403 11.709 14.7501 11.7958C14.7498 12.0539 14.7495 12.312 14.7504 12.5701C14.7486 12.6526 14.7724 12.75 14.8511 12.7919C14.9399 12.838 15.0427 12.8323 15.1395 12.8329C15.3569 12.8311 15.5743 12.8338 15.7917 12.8332C15.9114 12.8326 15.9996 12.7159 15.9961 12.6018C15.9979 12.3431 15.9973 12.0847 15.9949 11.8263C16.0038 11.7111 15.9141 11.5938 15.795 11.5905C15.5369 11.5825 15.2782 11.5896 15.0198 11.5867C14.9732 11.589 14.9239 11.5825 14.8802 11.5997Z" fill="#FEFEFE" />
-                  <path d="M9.67557 7.60816C9.6824 7.52143 9.76586 7.46263 9.84843 7.46114C9.95891 7.45461 10.07 7.45372 10.1805 7.46233C10.2482 7.46649 10.329 7.49946 10.3367 7.57668C10.3634 7.70736 10.3459 7.8422 10.3498 7.97496C10.6705 8.02397 10.9812 8.19594 11.1466 8.48225C11.2408 8.65778 11.3067 8.86212 11.269 9.0629C11.0537 9.12913 10.8232 9.09765 10.6019 9.09171C10.5458 8.95628 10.5021 8.80213 10.3723 8.71689C10.1324 8.56452 9.77388 8.5672 9.5731 8.78431C9.45816 8.89301 9.44747 9.09498 9.54607 9.21735C9.66131 9.34268 9.83566 9.38367 9.99396 9.42674C10.3608 9.52683 10.7694 9.57524 11.0605 9.84373C11.3106 10.0555 11.3961 10.4098 11.3424 10.7241C11.3064 11.0297 11.1134 11.302 10.8606 11.4704C10.7095 11.5806 10.5262 11.629 10.3507 11.6852C10.3412 11.8269 10.3774 11.9771 10.3204 12.1123C10.2749 12.1749 10.19 12.18 10.1196 12.1809C9.98297 12.1782 9.841 12.1963 9.7118 12.142C9.64409 11.9997 9.67676 11.8375 9.67141 11.6861C9.37173 11.6249 9.07621 11.4969 8.87217 11.2619C8.73138 11.0983 8.64674 10.8859 8.64258 10.6694C8.64258 10.6106 8.68416 10.545 8.74891 10.5485C8.95355 10.5447 9.16026 10.5274 9.36401 10.5524C9.42519 10.6103 9.42519 10.7054 9.47865 10.7701C9.54221 10.8803 9.6524 10.9545 9.77477 10.9857C9.96753 11.0493 10.1861 11.0368 10.3673 10.9436C10.4914 10.8782 10.5909 10.7529 10.5945 10.6085C10.6085 10.4413 10.462 10.3088 10.3129 10.2667C9.98386 10.1627 9.64052 10.1075 9.31797 9.98333C9.14927 9.90967 8.97938 9.81166 8.87662 9.65395C8.68089 9.38902 8.66961 9.02786 8.76019 8.72164C8.88969 8.32335 9.2752 8.06525 9.67201 7.98447C9.66993 7.85913 9.66369 7.7332 9.67557 7.60816Z" fill="#FEFEFE" />
-                  <path d="M18.2163 8.54999C18.4305 8.44336 18.7123 8.5093 18.8581 8.69879C19.2353 9.14846 19.5698 9.64713 19.7593 10.207C20.0447 10.9869 20.0649 11.8497 19.8807 12.6555C19.707 13.4268 19.3319 14.1432 18.8442 14.7616C18.3446 15.4008 17.7081 15.9262 17.0093 16.3342C16.4907 16.631 15.932 16.8522 15.3561 17.0093C15.5525 17.1531 15.7515 17.2945 15.9522 17.432C16.055 17.5048 16.1604 17.5882 16.2065 17.71C16.2697 17.8799 16.2403 18.0795 16.1387 18.2286C16.0333 18.3699 15.8498 18.448 15.6745 18.4255C15.5394 18.4204 15.4227 18.345 15.3178 18.2669C14.9394 17.9817 14.5462 17.7171 14.1684 17.4314C14.0048 17.3061 13.8304 17.195 13.6665 17.0699C13.5159 16.9574 13.4241 16.7569 13.4681 16.5701C13.4942 16.3993 13.621 16.2716 13.7345 16.1516C14.1945 15.6223 14.6689 15.1035 15.0865 14.5388C15.2566 14.3048 15.6389 14.3018 15.8177 14.527C15.9843 14.7066 15.9867 14.9918 15.8605 15.1943C15.6817 15.4649 15.4601 15.7031 15.2575 15.9553C15.5435 15.8864 15.8159 15.769 16.0853 15.652C16.5222 15.4361 16.9451 15.1836 17.3131 14.8623C18.0099 14.2617 18.579 13.4842 18.8377 12.5934C19.1353 11.5958 18.9707 10.4339 18.2909 9.62604C18.1851 9.49447 18.0521 9.38131 17.9754 9.22865C17.8593 8.98718 17.9653 8.65691 18.2163 8.54999Z" fill="#FEFEFE" />
-                  <path d="M0.461741 9.56783C0.592721 9.36468 0.867453 9.30735 1.0908 9.36052C1.30762 9.40418 1.4778 9.61327 1.47424 9.83514C1.49265 10.0234 1.3691 10.1791 1.2999 10.3436C0.933092 11.1877 1.00319 12.1761 1.36256 13.0104C1.59661 13.5655 1.95331 14.0654 2.37833 14.4898C3.22629 15.3146 4.32165 15.8884 5.49126 16.0806C5.84856 16.1382 6.21091 16.1893 6.57356 16.1537C6.31665 15.9683 6.03152 15.8234 5.77906 15.6309C5.66887 15.5228 5.59254 15.3705 5.60086 15.2133C5.59848 14.979 5.79035 14.7589 6.02231 14.7271C6.15745 14.701 6.29853 14.7426 6.41169 14.8177C6.93056 15.1715 7.45775 15.5136 7.97395 15.8715C8.13492 15.9862 8.3158 16.0794 8.44767 16.23C8.55073 16.3482 8.56974 16.5166 8.53707 16.6654C8.50232 16.7982 8.41055 16.9051 8.31461 16.999C7.90267 17.4097 7.49487 17.8252 7.06837 18.2208C6.91393 18.3572 6.79037 18.5416 6.58811 18.6114C6.4307 18.656 6.25457 18.626 6.12092 18.5312C5.95756 18.3946 5.87856 18.1605 5.94479 17.955C5.98637 17.8151 6.10934 17.7242 6.20854 17.6256C6.34011 17.5214 6.45416 17.3972 6.58603 17.293C6.63088 17.257 6.66949 17.2146 6.70424 17.1691C5.73659 17.187 4.76389 17.0141 3.86752 16.6464C2.96314 16.2805 2.13924 15.718 1.46741 15.0105C0.656578 14.17 0.0949373 13.0597 0.0186064 11.8848C-0.0217866 11.4503 0.00435007 11.0104 0.0895912 10.5827C0.169486 10.231 0.268093 9.87583 0.461741 9.56783Z" fill="#FEFEFE" />
-               </svg>
-            },
-            {
-               name: "AI Creator Lab", href: "/ai-creator-lab", icon: <svg width="14" height="21" viewBox="0 0 14 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6.29873 0.032875C7.52447 -0.0851854 8.78052 0.115265 9.90241 0.625703C10.7392 1.02061 11.5114 1.5645 12.1383 2.2473C12.9748 3.12486 13.556 4.23696 13.8221 5.4182C14.0588 6.45991 14.0601 7.55434 13.8211 8.59605C13.5872 9.54684 13.1683 10.4538 12.5809 11.2382C12.3536 11.563 12.0711 11.8437 11.8457 12.1697C11.2188 13.0006 10.8204 14.0142 10.7812 15.0584C10.7781 15.7311 10.7809 16.4041 10.779 17.0771C10.7623 17.478 10.6515 17.8887 10.3917 18.2025C10.1448 18.4894 9.79824 18.6908 9.42512 18.7571C9.40207 19.1618 9.22877 19.5447 8.99991 19.8743C8.57818 20.4513 7.89728 20.832 7.18197 20.8699C6.62671 20.9084 6.05061 20.7834 5.58847 20.4659C5.02942 20.0744 4.64178 19.4387 4.56759 18.7587C4.16922 18.7177 3.8103 18.4822 3.57102 18.1675C3.37562 17.8957 3.2623 17.568 3.2361 17.2353C3.21842 16.5825 3.23452 15.9297 3.22757 15.2769C3.20674 14.9145 3.1818 14.5496 3.08931 14.197C2.8857 13.3513 2.45261 12.5757 1.90713 11.9033C1.16467 11.0447 0.569952 10.0434 0.256176 8.9477C0.0588827 8.26775 -0.0124585 7.55591 0.00174662 6.84976C0.0228965 5.69788 0.34709 4.55547 0.917505 3.55543C2.01982 1.62164 4.07546 0.245005 6.29873 0.032875ZM5.60646 1.35932C4.55528 1.60554 3.58807 2.17627 2.84688 2.95882C2.22248 3.57059 1.77108 4.34524 1.49455 5.17198C1.16972 6.1878 1.11164 7.28917 1.34019 8.33183C1.56147 9.35018 2.06023 10.3038 2.75565 11.0788C3.39709 11.7894 3.90974 12.629 4.16511 13.5562C4.27844 13.9315 4.32832 14.321 4.37346 14.7093C6.12195 14.7144 7.87044 14.7093 9.61894 14.7118C9.64388 14.5543 9.65461 14.3955 9.67986 14.2383C9.86137 13.0681 10.4359 11.9841 11.2131 11.1006C11.3314 10.9541 11.4457 10.8045 11.5628 10.6571C11.9953 10.0743 12.3167 9.41237 12.5288 8.71916C12.96 7.30243 12.8145 5.72692 12.1512 4.40458C11.6241 3.32152 10.7307 2.43354 9.67576 1.8606C8.44181 1.19896 6.96416 1.04302 5.60646 1.35932ZM4.37851 15.8842C4.35957 16.1134 4.37977 16.3438 4.37314 16.5737C4.38166 16.8227 4.35515 17.0765 4.4186 17.3205C4.49499 17.5014 4.68218 17.6157 4.87695 17.6135C6.22454 17.6179 7.57245 17.6141 8.92005 17.6154C9.03526 17.6119 9.1549 17.628 9.26634 17.5895C9.45732 17.5311 9.61294 17.3474 9.60726 17.1425C9.606 16.723 9.60473 16.3034 9.60284 15.8842C9.54223 15.8798 9.48162 15.8744 9.42133 15.8789C7.74039 15.8842 6.05913 15.8741 4.37851 15.8842ZM5.69264 18.7638C5.81449 19.058 6.01652 19.3247 6.29778 19.4819C6.58662 19.6685 6.94679 19.7032 7.28077 19.6562C7.75838 19.5766 8.17254 19.2186 8.32596 18.7593C7.96672 18.7808 7.60655 18.771 7.24668 18.7745C6.72867 18.772 6.21065 18.7786 5.69264 18.7638Z" fill="#FEFEFE" />
-                  <path d="M7.6696 3.49067C7.78072 3.443 7.92687 3.47331 7.99316 3.57937C8.02473 3.6605 8.02568 3.7492 8.01305 3.83443C7.8931 4.69148 7.75483 5.54568 7.65571 6.40525C7.62604 6.52015 7.72611 6.63663 7.84385 6.62621C8.50834 6.62779 9.17282 6.62779 9.83731 6.62842C9.9399 6.62779 10.0444 6.69219 10.0813 6.78942C10.0943 6.87812 10.0854 6.97408 10.0311 7.04858C9.00078 8.429 7.98243 9.81921 6.95682 11.2037C6.83592 11.3556 6.7409 11.5314 6.58938 11.6564C6.44954 11.7457 6.21247 11.7202 6.1465 11.55C6.11588 11.3707 6.16702 11.1911 6.19164 11.014C6.2977 10.2653 6.40819 9.5168 6.51772 8.76866C6.53698 8.63103 6.40535 8.51013 6.27119 8.52181C5.65879 8.51992 5.0467 8.52086 4.43462 8.52244C4.34402 8.52402 4.24332 8.49498 4.19471 8.41291C4.12148 8.32231 4.15052 8.19225 4.21176 8.10355C4.35854 7.87721 4.5268 7.6654 4.68526 7.44696C5.5764 6.20543 6.47543 4.96926 7.38487 3.74099C7.45937 3.63809 7.54681 3.53612 7.6696 3.49067Z" fill="#FEFEFE" />
-               </svg>
-            },
-            { name: "Submit Film", href: "/submit-film", icon: <HugeiconsIcon icon={Upload01Icon} /> },
-         ]
-      },
-   ],
-   admin: [
-      {
-         groupName: "Admin Management",
-         links: [
-            { name: "Dashboard", href: "/admin/dashboard", icon: <HugeiconsIcon icon={DashboardSquare03Icon} /> },
-            { name: "Manage Users", href: "/admin/manage-users", icon: <HugeiconsIcon icon={UserGroupIcon} /> },
-            { name: "Films", href: "/admin/films", icon: <HugeiconsIcon icon={PlayListIcon} /> },
-            { name: "Payments", href: "/admin/payments", icon: <HugeiconsIcon icon={CreditCardValidationIcon} /> },
-            {
-               name: "Distro", href: "/admin/distro", icon: <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10.932 0.0410299C11.1176 -0.0305489 11.3558 -0.0142139 11.4996 0.135775C12.014 0.674249 12.5237 1.21718 13.0209 1.77169C13.1435 1.91812 13.1673 2.13849 13.0811 2.30868C13.02 2.44233 12.886 2.51629 12.7746 2.60242C12.2157 2.982 11.6671 3.37702 11.1161 3.76847C10.9474 3.89203 10.7092 3.89084 10.534 3.78154C10.2905 3.63927 10.188 3.2796 10.3781 3.05447C10.5994 2.81686 10.8699 2.63242 11.128 2.43758C10.4805 2.34254 9.81585 2.31462 9.16778 2.42481C8.00113 2.614 6.89686 3.1899 6.08603 4.05211C5.87931 4.27368 5.67854 4.50238 5.50954 4.75483C5.45251 4.83295 5.4041 4.92353 5.31738 4.97313C5.16293 5.06907 4.95829 5.08035 4.79464 5.00046C4.51783 4.87928 4.37913 4.49762 4.55704 4.24131C5.25025 3.20891 6.22889 2.36214 7.37237 1.86584C8.19894 1.50706 9.09739 1.30509 9.99999 1.31281C10.4105 1.30628 10.8203 1.33479 11.2284 1.37578C11.0918 1.21124 10.9427 1.05828 10.7936 0.905321C10.7039 0.813249 10.6261 0.698604 10.6181 0.566435C10.5896 0.346947 10.7253 0.120034 10.932 0.0410299Z" fill="#FEFEFE" />
-                  <path d="M3.02815 5.74453C3.06438 5.73532 3.10151 5.73116 3.13923 5.73146C7.65314 5.73146 12.1674 5.73205 16.6816 5.73235C16.7656 5.73413 16.8524 5.72582 16.9349 5.7472C17.0724 5.80363 17.1823 5.94026 17.1841 6.09203C17.1951 6.38963 17.1883 6.68723 17.19 6.98483C17.193 9.11378 17.1895 11.2424 17.1915 13.3714C17.1877 13.4955 17.2049 13.6274 17.1485 13.7432C17.0861 13.887 16.9218 13.9657 16.7701 13.9592C12.236 13.9574 7.70156 13.96 3.16744 13.9583C2.94261 13.9725 2.75104 13.772 2.7546 13.5511C2.75104 11.0755 2.75371 8.59966 2.75252 6.12381C2.74243 5.95451 2.86747 5.79205 3.02815 5.74453ZM4.12915 6.85058C4.03263 6.87464 3.96313 6.97503 3.96847 7.07304C3.96907 7.35193 3.96639 7.63082 3.97055 7.90971C3.96907 8.01634 4.06381 8.1289 4.17667 8.11554C4.46477 8.11554 4.75317 8.11643 5.04126 8.11494C5.15145 8.11851 5.24026 8.01248 5.23788 7.90615C5.23937 7.61954 5.23937 7.33263 5.23758 7.04601C5.24085 6.91117 5.10334 6.82653 4.97978 6.8393C4.69644 6.84702 4.41042 6.82296 4.12915 6.85058ZM14.9078 6.84643C14.8232 6.87019 14.7463 6.94889 14.7507 7.04097C14.7507 7.33025 14.7475 7.61954 14.7528 7.90882C14.7507 8.01663 14.8437 8.12474 14.9563 8.11494C15.2348 8.11524 15.5134 8.11673 15.7923 8.11494C15.901 8.1191 15.9934 8.01277 15.9934 7.90763C15.9993 7.63943 15.9937 7.37094 15.9958 7.10274C15.9982 7.0178 15.9723 6.92276 15.899 6.87286C15.8122 6.82148 15.708 6.84286 15.6129 6.8387C15.378 6.84524 15.1416 6.82742 14.9078 6.84643ZM6.59431 6.91058C6.48383 6.93731 6.4271 7.05611 6.4369 7.16274C6.43779 8.87528 6.43838 10.5881 6.43631 12.3007C6.43838 12.4147 6.41462 12.5418 6.48204 12.6428C6.5358 12.7245 6.63857 12.7551 6.73213 12.7509C8.89968 12.7506 11.0672 12.7521 13.2348 12.7509C13.3388 12.7527 13.4599 12.737 13.5262 12.6467C13.6067 12.5389 13.5817 12.3969 13.585 12.2713C13.5826 10.6083 13.585 8.94538 13.5823 7.28243C13.5814 7.19184 13.582 7.09561 13.5383 7.01334C13.4899 6.92751 13.3916 6.87999 13.2942 6.89068C11.1367 6.88712 8.97958 6.89216 6.82241 6.88919C6.74608 6.89038 6.66738 6.88474 6.59431 6.91058ZM4.13094 9.22516C4.0353 9.25426 3.95897 9.34752 3.96818 9.44999C3.96936 9.73809 3.9658 10.0262 3.97025 10.3143C3.96847 10.4361 4.09025 10.5278 4.20667 10.5198C4.48497 10.516 4.76326 10.5177 5.04156 10.5198C5.14937 10.5207 5.23966 10.42 5.23937 10.3146C5.23937 10.0256 5.23758 9.73631 5.24055 9.44761C5.24501 9.32376 5.13927 9.20823 5.01275 9.21535C4.71931 9.22337 4.4226 9.19961 4.13094 9.22516ZM14.9378 9.2213C14.8401 9.23318 14.7472 9.31634 14.7507 9.4197C14.7495 9.71789 14.7498 10.0164 14.751 10.3146C14.743 10.4266 14.847 10.5293 14.9595 10.5183C15.2375 10.516 15.5158 10.5204 15.7938 10.5183C15.9141 10.5186 15.9996 10.3974 15.9946 10.284C15.9985 10.0461 15.994 9.80789 15.9964 9.56969C15.9961 9.47672 16.0005 9.37544 15.9435 9.29614C15.8921 9.21803 15.7873 9.21446 15.7035 9.21565C15.4484 9.22159 15.1927 9.20585 14.9378 9.2213ZM4.12262 11.5988C4.03114 11.6321 3.95956 11.7251 3.96847 11.8246C3.96818 12.083 3.96758 12.3414 3.96996 12.5998C3.96134 12.7269 4.08044 12.8377 4.20489 12.8326C4.47368 12.8299 4.74277 12.8341 5.01156 12.832C5.12769 12.8362 5.23551 12.7441 5.23848 12.6256C5.24234 12.369 5.23729 12.1121 5.24085 11.8552C5.24412 11.7776 5.23135 11.6894 5.16452 11.6395C5.07215 11.5602 4.94236 11.5938 4.83158 11.587C4.59545 11.595 4.35666 11.5715 4.12262 11.5988ZM14.8802 11.5997C14.8057 11.6342 14.7403 11.709 14.7501 11.7958C14.7498 12.0539 14.7495 12.312 14.7504 12.5701C14.7486 12.6526 14.7724 12.75 14.8511 12.7919C14.9399 12.838 15.0427 12.8323 15.1395 12.8329C15.3569 12.8311 15.5743 12.8338 15.7917 12.8332C15.9114 12.8326 15.9996 12.7159 15.9961 12.6018C15.9979 12.3431 15.9973 12.0847 15.9949 11.8263C16.0038 11.7111 15.9141 11.5938 15.795 11.5905C15.5369 11.5825 15.2782 11.5896 15.0198 11.5867C14.9732 11.589 14.9239 11.5825 14.8802 11.5997Z" fill="#FEFEFE" />
-                  <path d="M9.67557 7.60816C9.6824 7.52143 9.76586 7.46263 9.84843 7.46114C9.95891 7.45461 10.07 7.45372 10.1805 7.46233C10.2482 7.46649 10.329 7.49946 10.3367 7.57668C10.3634 7.70736 10.3459 7.8422 10.3498 7.97496C10.6705 8.02397 10.9812 8.19594 11.1466 8.48225C11.2408 8.65778 11.3067 8.86212 11.269 9.0629C11.0537 9.12913 10.8232 9.09765 10.6019 9.09171C10.5458 8.95628 10.5021 8.80213 10.3723 8.71689C10.1324 8.56452 9.77388 8.5672 9.5731 8.78431C9.45816 8.89301 9.44747 9.09498 9.54607 9.21735C9.66131 9.34268 9.83566 9.38367 9.99396 9.42674C10.3608 9.52683 10.7694 9.57524 11.0605 9.84373C11.3106 10.0555 11.3961 10.4098 11.3424 10.7241C11.3064 11.0297 11.1134 11.302 10.8606 11.4704C10.7095 11.5806 10.5262 11.629 10.3507 11.6852C10.3412 11.8269 10.3774 11.9771 10.3204 12.1123C10.2749 12.1749 10.19 12.18 10.1196 12.1809C9.98297 12.1782 9.841 12.1963 9.7118 12.142C9.64409 11.9997 9.67676 11.8375 9.67141 11.6861C9.37173 11.6249 9.07621 11.4969 8.87217 11.2619C8.73138 11.0983 8.64674 10.8859 8.64258 10.6694C8.64258 10.6106 8.68416 10.545 8.74891 10.5485C8.95355 10.5447 9.16026 10.5274 9.36401 10.5524C9.42519 10.6103 9.42519 10.7054 9.47865 10.7701C9.54221 10.8803 9.6524 10.9545 9.77477 10.9857C9.96753 11.0493 10.1861 11.0368 10.3673 10.9436C10.4914 10.8782 10.5909 10.7529 10.5945 10.6085C10.6085 10.4413 10.462 10.3088 10.3129 10.2667C9.98386 10.1627 9.64052 10.1075 9.31797 9.98333C9.14927 9.90967 8.97938 9.81166 8.87662 9.65395C8.68089 9.38902 8.66961 9.02786 8.76019 8.72164C8.88969 8.32335 9.2752 8.06525 9.67201 7.98447C9.66993 7.85913 9.66369 7.7332 9.67557 7.60816Z" fill="#FEFEFE" />
-                  <path d="M18.2163 8.54999C18.4305 8.44336 18.7123 8.5093 18.8581 8.69879C19.2353 9.14846 19.5698 9.64713 19.7593 10.207C20.0447 10.9869 20.0649 11.8497 19.8807 12.6555C19.707 13.4268 19.3319 14.1432 18.8442 14.7616C18.3446 15.4008 17.7081 15.9262 17.0093 16.3342C16.4907 16.631 15.932 16.8522 15.3561 17.0093C15.5525 17.1531 15.7515 17.2945 15.9522 17.432C16.055 17.5048 16.1604 17.5882 16.2065 17.71C16.2697 17.8799 16.2403 18.0795 16.1387 18.2286C16.0333 18.3699 15.8498 18.448 15.6745 18.4255C15.5394 18.4204 15.4227 18.345 15.3178 18.2669C14.9394 17.9817 14.5462 17.7171 14.1684 17.4314C14.0048 17.3061 13.8304 17.195 13.6665 17.0699C13.5159 16.9574 13.4241 16.7569 13.4681 16.5701C13.4942 16.3993 13.621 16.2716 13.7345 16.1516C14.1945 15.6223 14.6689 15.1035 15.0865 14.5388C15.2566 14.3048 15.6389 14.3018 15.8177 14.527C15.9843 14.7066 15.9867 14.9918 15.8605 15.1943C15.6817 15.4649 15.4601 15.7031 15.2575 15.9553C15.5435 15.8864 15.8159 15.769 16.0853 15.652C16.5222 15.4361 16.9451 15.1836 17.3131 14.8623C18.0099 14.2617 18.579 13.4842 18.8377 12.5934C19.1353 11.5958 18.9707 10.4339 18.2909 9.62604C18.1851 9.49447 18.0521 9.38131 17.9754 9.22865C17.8593 8.98718 17.9653 8.65691 18.2163 8.54999Z" fill="#FEFEFE" />
-                  <path d="M0.461741 9.56783C0.592721 9.36468 0.867453 9.30735 1.0908 9.36052C1.30762 9.40418 1.4778 9.61327 1.47424 9.83514C1.49265 10.0234 1.3691 10.1791 1.2999 10.3436C0.933092 11.1877 1.00319 12.1761 1.36256 13.0104C1.59661 13.5655 1.95331 14.0654 2.37833 14.4898C3.22629 15.3146 4.32165 15.8884 5.49126 16.0806C5.84856 16.1382 6.21091 16.1893 6.57356 16.1537C6.31665 15.9683 6.03152 15.8234 5.77906 15.6309C5.66887 15.5228 5.59254 15.3705 5.60086 15.2133C5.59848 14.979 5.79035 14.7589 6.02231 14.7271C6.15745 14.701 6.29853 14.7426 6.41169 14.8177C6.93056 15.1715 7.45775 15.5136 7.97395 15.8715C8.13492 15.9862 8.3158 16.0794 8.44767 16.23C8.55073 16.3482 8.56974 16.5166 8.53707 16.6654C8.50232 16.7982 8.41055 16.9051 8.31461 16.999C7.90267 17.4097 7.49487 17.8252 7.06837 18.2208C6.91393 18.3572 6.79037 18.5416 6.58811 18.6114C6.4307 18.656 6.25457 18.626 6.12092 18.5312C5.95756 18.3946 5.87856 18.1605 5.94479 17.955C5.98637 17.8151 6.10934 17.7242 6.20854 17.6256C6.34011 17.5214 6.45416 17.3972 6.58603 17.293C6.63088 17.257 6.66949 17.2146 6.70424 17.1691C5.73659 17.187 4.76389 17.0141 3.86752 16.6464C2.96314 16.2805 2.13924 15.718 1.46741 15.0105C0.656578 14.17 0.0949373 13.0597 0.0186064 11.8848C-0.0217866 11.4503 0.00435007 11.0104 0.0895912 10.5827C0.169486 10.231 0.268093 9.87583 0.461741 9.56783Z" fill="#FEFEFE" />
-               </svg>
-
-            },
-            { name: "Subscribers", href: "/admin/subscribers", icon: <HugeiconsIcon icon={MoneySend02Icon} /> },
-            { name: "Settings", href: "/admin/settings", icon: <HugeiconsIcon icon={Settings02Icon} /> },
-         ]
-      }
-   ],
+  user: [
+    {
+      groupName: "User Tools",
+      links: [
+        {
+          name: "Watch",
+          href: "/watch",
+          icon: <HugeiconsIcon icon={PlayCircleIcon} />,
+        },
+        {
+          name: "My Library",
+          href: "/my-library",
+          icon: <HugeiconsIcon icon={Film01Icon} />,
+        },
+        {
+          name: "Reelbux",
+          href: "/reelbux",
+          icon: (
+            <svg
+              width="20"
+              height="19"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7.84248 0.51719C10.6383 -0.488606 13.9238 -0.00655492 16.3013 1.78158C17.6393 2.76255 18.6699 4.13094 19.3178 5.65345C20.0051 7.3493 20.1957 9.25642 19.7858 11.0446C19.4251 12.7629 18.5289 14.3486 17.3151 15.6083C16.3266 16.6338 15.0922 17.4194 13.7467 17.887C12.0705 18.4763 10.2148 18.5288 8.50303 18.0603C6.87414 17.6317 5.37595 16.7261 4.23193 15.4908C3.57653 14.8096 3.03075 14.0263 2.59929 13.1864C2.56274 13.1161 2.4728 13.0093 2.58055 12.9554C3.00686 12.6345 3.43552 12.3141 3.88666 12.0288C4.23052 12.8411 4.72851 13.586 5.32114 14.2381C6.3827 15.4472 7.86497 16.2717 9.44982 16.5448C10.3526 16.7046 11.2848 16.7144 12.1862 16.5392C13.7711 16.268 15.2416 15.421 16.3055 14.2198C17.338 13.0782 18.0319 11.6297 18.2422 10.1025C18.4975 8.43895 18.0834 6.70656 17.2134 5.27727C16.5088 4.10798 15.4838 3.13076 14.2723 2.49927C12.1314 1.38245 9.43436 1.39135 7.31919 2.56767C6.48577 3.03847 5.74183 3.66622 5.13093 4.40312C4.72664 4.9203 4.35935 5.47028 4.06656 6.05867C4.00846 6.16455 3.9916 6.29384 3.90634 6.38332C3.45098 6.05118 2.99468 5.72185 2.5426 5.38596C2.90942 4.56661 3.43083 3.8255 4.02158 3.15278C5.04989 1.97646 6.3635 1.03672 7.84248 0.51719Z"
+                fill="#FEFEFE"
+              />
+              <path
+                d="M10.437 3.1169C10.8961 3.00775 11.3885 3.0738 11.8148 3.27009C12.5002 3.59239 12.9874 4.29509 13.0469 5.05026C13.1293 6.06215 12.3999 7.07825 11.4077 7.30733C10.7729 7.4563 10.0608 7.31154 9.55999 6.88571C9.1201 6.52921 8.85072 5.98626 8.78982 5.42691C8.66661 4.3916 9.40352 3.31975 10.437 3.1169Z"
+                fill="#FEFEFE"
+              />
+              <path
+                d="M0.219208 5.02392C0.339606 4.96396 0.485302 4.99441 0.592115 5.06983C0.903183 5.27314 1.19598 5.50269 1.49955 5.71725C2.83706 6.65652 4.14973 7.63047 5.48723 8.56974C5.66431 8.6981 5.87981 8.81147 5.96695 9.02415C6.05315 9.20545 5.9796 9.4289 5.83484 9.55773C5.57343 9.80368 5.26377 9.98872 4.97706 10.2023C3.79978 11.0718 2.62718 11.9474 1.44709 12.8136C1.14773 13.0239 0.86711 13.2614 0.556041 13.4554C0.389263 13.5289 0.190631 13.4615 0.0889711 13.3125C-0.0117515 13.1883 0.00839223 13.0206 0.00323898 12.8721C0.00604984 10.3883 -0.00331918 7.90499 0.00230254 5.42118C-0.0154996 5.25909 0.0711689 5.09419 0.219208 5.02392Z"
+                fill="#FEFEFE"
+              />
+              <path
+                d="M5.83768 7.45098C6.17873 7.18395 6.5999 7.00781 7.03839 7.01249C7.57714 6.98345 8.11776 7.1877 8.50566 7.56294C8.95071 7.9855 9.22477 8.59872 9.20275 9.21616C9.19198 9.9465 8.77784 10.6609 8.14681 11.0305C7.39677 11.5004 6.35629 11.4128 5.68262 10.8431C5.76413 10.7223 5.91545 10.6867 6.02742 10.6023C6.33614 10.3859 6.65564 10.1498 6.82945 9.80502C6.95875 9.52347 7.02059 9.19554 6.93064 8.89338C6.82617 8.51908 6.54274 8.21786 6.21153 8.02719C6.02929 7.92272 5.85595 7.8042 5.69573 7.66835C5.70276 7.57559 5.76788 7.50579 5.83768 7.45098Z"
+                fill="#FEFEFE"
+              />
+              <path
+                d="M14.5858 7.02139C15.1663 6.94971 15.7678 7.11321 16.2255 7.47768C16.6312 7.80748 16.9277 8.27922 17.0144 8.79734C17.1451 9.43914 16.9245 10.1269 16.4897 10.6084C16.062 11.0881 15.415 11.3734 14.7699 11.328C13.6615 11.3289 12.6955 10.3133 12.6988 9.21522C12.6557 8.14852 13.5271 7.14319 14.5858 7.02139Z"
+                fill="#FEFEFE"
+              />
+              <path
+                d="M10.7122 7.98236C10.7609 7.89241 10.8003 7.76827 10.9258 7.77155C11.087 7.78326 11.1587 7.9491 11.2186 8.07699C11.3423 8.08964 11.4899 8.08495 11.5794 8.18801C11.7274 8.30747 11.6951 8.56044 11.5513 8.67147C11.4402 8.80124 11.2575 8.76844 11.1081 8.80264C11.1427 8.97597 11.3756 8.96473 11.4772 9.087C11.7771 9.33201 11.7372 9.83327 11.4304 10.053C11.3409 10.1237 11.1924 10.1129 11.1409 10.2282C11.0982 10.3191 11.0322 10.4114 10.9244 10.4263C10.783 10.4231 10.73 10.2769 10.6757 10.1715C10.5318 10.104 10.3267 10.1607 10.2372 9.99817C10.1805 9.86138 10.1636 9.66368 10.284 9.55547C10.4068 9.44631 10.6312 9.56858 10.7169 9.40743C10.5899 9.30437 10.425 9.24815 10.3276 9.10949C10.1037 8.84199 10.1575 8.40819 10.41 8.17771C10.5019 8.09994 10.6274 8.06949 10.7122 7.98236Z"
+                fill="#FEFEFE"
+              />
+              <path
+                d="M10.3845 11.0265C10.889 10.916 11.4287 10.9839 11.8911 11.2125C12.4303 11.488 12.8323 12.0061 12.9845 12.5898C13.1433 13.1613 13.0286 13.79 12.7189 14.2913C12.4317 14.7489 11.9693 15.097 11.4446 15.2324C10.9471 15.3608 10.4028 15.3031 9.94411 15.0698C9.30464 14.7583 8.86146 14.0959 8.78745 13.3913C8.70265 12.7463 8.92237 12.067 9.37257 11.5962C9.64898 11.3179 10.0022 11.1169 10.3845 11.0265Z"
+                fill="#FEFEFE"
+              />
+            </svg>
+          ),
+        },
+        {
+          name: "Settings",
+          href: "/settings",
+          icon: <HugeiconsIcon icon={Settings02Icon} />,
+        },
+      ],
+    },
+    {
+      groupName: "Creator Tools",
+      links: [
+        {
+          name: "My Titles",
+          href: "/my-titles",
+          icon: <HugeiconsIcon icon={PlayListIcon} />,
+        },
+        {
+          name: "Distro",
+          href: "/distro",
+          icon: (
+            <svg
+              width="20"
+              height="19"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10.932 0.0410299C11.1176 -0.0305489 11.3558 -0.0142139 11.4996 0.135775C12.014 0.674249 12.5237 1.21718 13.0209 1.77169C13.1435 1.91812 13.1673 2.13849 13.0811 2.30868C13.02 2.44233 12.886 2.51629 12.7746 2.60242C12.2157 2.982 11.6671 3.37702 11.1161 3.76847C10.9474 3.89203 10.7092 3.89084 10.534 3.78154C10.2905 3.63927 10.188 3.2796 10.3781 3.05447C10.5994 2.81686 10.8699 2.63242 11.128 2.43758C10.4805 2.34254 9.81585 2.31462 9.16778 2.42481C8.00113 2.614 6.89686 3.1899 6.08603 4.05211C5.87931 4.27368 5.67854 4.50238 5.50954 4.75483C5.45251 4.83295 5.4041 4.92353 5.31738 4.97313C5.16293 5.06907 4.95829 5.08035 4.79464 5.00046C4.51783 4.87928 4.37913 4.49762 4.55704 4.24131C5.25025 3.20891 6.22889 2.36214 7.37237 1.86584C8.19894 1.50706 9.09739 1.30509 9.99999 1.31281C10.4105 1.30628 10.8203 1.33479 11.2284 1.37578C11.0918 1.21124 10.9427 1.05828 10.7936 0.905321C10.7039 0.813249 10.6261 0.698604 10.6181 0.566435C10.5896 0.346947 10.7253 0.120034 10.932 0.0410299Z"
+                fill="#FEFEFE"
+              />
+              <path
+                d="M3.02815 5.74453C3.06438 5.73532 3.10151 5.73116 3.13923 5.73146C7.65314 5.73146 12.1674 5.73205 16.6816 5.73235C16.7656 5.73413 16.8524 5.72582 16.9349 5.7472C17.0724 5.80363 17.1823 5.94026 17.1841 6.09203C17.1951 6.38963 17.1883 6.68723 17.19 6.98483C17.193 9.11378 17.1895 11.2424 17.1915 13.3714C17.1877 13.4955 17.2049 13.6274 17.1485 13.7432C17.0861 13.887 16.9218 13.9657 16.7701 13.9592C12.236 13.9574 7.70156 13.96 3.16744 13.9583C2.94261 13.9725 2.75104 13.772 2.7546 13.5511C2.75104 11.0755 2.75371 8.59966 2.75252 6.12381C2.74243 5.95451 2.86747 5.79205 3.02815 5.74453ZM4.12915 6.85058C4.03263 6.87464 3.96313 6.97503 3.96847 7.07304C3.96907 7.35193 3.96639 7.63082 3.97055 7.90971C3.96907 8.01634 4.06381 8.1289 4.17667 8.11554C4.46477 8.11554 4.75317 8.11643 5.04126 8.11494C5.15145 8.11851 5.24026 8.01248 5.23788 7.90615C5.23937 7.61954 5.23937 7.33263 5.23758 7.04601C5.24085 6.91117 5.10334 6.82653 4.97978 6.8393C4.69644 6.84702 4.41042 6.82296 4.12915 6.85058ZM14.9078 6.84643C14.8232 6.87019 14.7463 6.94889 14.7507 7.04097C14.7507 7.33025 14.7475 7.61954 14.7528 7.90882C14.7507 8.01663 14.8437 8.12474 14.9563 8.11494C15.2348 8.11524 15.5134 8.11673 15.7923 8.11494C15.901 8.1191 15.9934 8.01277 15.9934 7.90763C15.9993 7.63943 15.9937 7.37094 15.9958 7.10274C15.9982 7.0178 15.9723 6.92276 15.899 6.87286C15.8122 6.82148 15.708 6.84286 15.6129 6.8387C15.378 6.84524 15.1416 6.82742 14.9078 6.84643ZM6.59431 6.91058C6.48383 6.93731 6.4271 7.05611 6.4369 7.16274C6.43779 8.87528 6.43838 10.5881 6.43631 12.3007C6.43838 12.4147 6.41462 12.5418 6.48204 12.6428C6.5358 12.7245 6.63857 12.7551 6.73213 12.7509C8.89968 12.7506 11.0672 12.7521 13.2348 12.7509C13.3388 12.7527 13.4599 12.737 13.5262 12.6467C13.6067 12.5389 13.5817 12.3969 13.585 12.2713C13.5826 10.6083 13.585 8.94538 13.5823 7.28243C13.5814 7.19184 13.582 7.09561 13.5383 7.01334C13.4899 6.92751 13.3916 6.87999 13.2942 6.89068C11.1367 6.88712 8.97958 6.89216 6.82241 6.88919C6.74608 6.89038 6.66738 6.88474 6.59431 6.91058ZM4.13094 9.22516C4.0353 9.25426 3.95897 9.34752 3.96818 9.44999C3.96936 9.73809 3.9658 10.0262 3.97025 10.3143C3.96847 10.4361 4.09025 10.5278 4.20667 10.5198C4.48497 10.516 4.76326 10.5177 5.04156 10.5198C5.14937 10.5207 5.23966 10.42 5.23937 10.3146C5.23937 10.0256 5.23758 9.73631 5.24055 9.44761C5.24501 9.32376 5.13927 9.20823 5.01275 9.21535C4.71931 9.22337 4.4226 9.19961 4.13094 9.22516ZM14.9378 9.2213C14.8401 9.23318 14.7472 9.31634 14.7507 9.4197C14.7495 9.71789 14.7498 10.0164 14.751 10.3146C14.743 10.4266 14.847 10.5293 14.9595 10.5183C15.2375 10.516 15.5158 10.5204 15.7938 10.5183C15.9141 10.5186 15.9996 10.3974 15.9946 10.284C15.9985 10.0461 15.994 9.80789 15.9964 9.56969C15.9961 9.47672 16.0005 9.37544 15.9435 9.29614C15.8921 9.21803 15.7873 9.21446 15.7035 9.21565C15.4484 9.22159 15.1927 9.20585 14.9378 9.2213ZM4.12262 11.5988C4.03114 11.6321 3.95956 11.7251 3.96847 11.8246C3.96818 12.083 3.96758 12.3414 3.96996 12.5998C3.96134 12.7269 4.08044 12.8377 4.20489 12.8326C4.47368 12.8299 4.74277 12.8341 5.01156 12.832C5.12769 12.8362 5.23551 12.7441 5.23848 12.6256C5.24234 12.369 5.23729 12.1121 5.24085 11.8552C5.24412 11.7776 5.23135 11.6894 5.16452 11.6395C5.07215 11.5602 4.94236 11.5938 4.83158 11.587C4.59545 11.595 4.35666 11.5715 4.12262 11.5988ZM14.8802 11.5997C14.8057 11.6342 14.7403 11.709 14.7501 11.7958C14.7498 12.0539 14.7495 12.312 14.7504 12.5701C14.7486 12.6526 14.7724 12.75 14.8511 12.7919C14.9399 12.838 15.0427 12.8323 15.1395 12.8329C15.3569 12.8311 15.5743 12.8338 15.7917 12.8332C15.9114 12.8326 15.9996 12.7159 15.9961 12.6018C15.9979 12.3431 15.9973 12.0847 15.9949 11.8263C16.0038 11.7111 15.9141 11.5938 15.795 11.5905C15.5369 11.5825 15.2782 11.5896 15.0198 11.5867C14.9732 11.589 14.9239 11.5825 14.8802 11.5997Z"
+                fill="#FEFEFE"
+              />
+              <path
+                d="M9.67557 7.60816C9.6824 7.52143 9.76586 7.46263 9.84843 7.46114C9.95891 7.45461 10.07 7.45372 10.1805 7.46233C10.2482 7.46649 10.329 7.49946 10.3367 7.57668C10.3634 7.70736 10.3459 7.8422 10.3498 7.97496C10.6705 8.02397 10.9812 8.19594 11.1466 8.48225C11.2408 8.65778 11.3067 8.86212 11.269 9.0629C11.0537 9.12913 10.8232 9.09765 10.6019 9.09171C10.5458 8.95628 10.5021 8.80213 10.3723 8.71689C10.1324 8.56452 9.77388 8.5672 9.5731 8.78431C9.45816 8.89301 9.44747 9.09498 9.54607 9.21735C9.66131 9.34268 9.83566 9.38367 9.99396 9.42674C10.3608 9.52683 10.7694 9.57524 11.0605 9.84373C11.3106 10.0555 11.3961 10.4098 11.3424 10.7241C11.3064 11.0297 11.1134 11.302 10.8606 11.4704C10.7095 11.5806 10.5262 11.629 10.3507 11.6852C10.3412 11.8269 10.3774 11.9771 10.3204 12.1123C10.2749 12.1749 10.19 12.18 10.1196 12.1809C9.98297 12.1782 9.841 12.1963 9.7118 12.142C9.64409 11.9997 9.67676 11.8375 9.67141 11.6861C9.37173 11.6249 9.07621 11.4969 8.87217 11.2619C8.73138 11.0983 8.64674 10.8859 8.64258 10.6694C8.64258 10.6106 8.68416 10.545 8.74891 10.5485C8.95355 10.5447 9.16026 10.5274 9.36401 10.5524C9.42519 10.6103 9.42519 10.7054 9.47865 10.7701C9.54221 10.8803 9.6524 10.9545 9.77477 10.9857C9.96753 11.0493 10.1861 11.0368 10.3673 10.9436C10.4914 10.8782 10.5909 10.7529 10.5945 10.6085C10.6085 10.4413 10.462 10.3088 10.3129 10.2667C9.98386 10.1627 9.64052 10.1075 9.31797 9.98333C9.14927 9.90967 8.97938 9.81166 8.87662 9.65395C8.68089 9.38902 8.66961 9.02786 8.76019 8.72164C8.88969 8.32335 9.2752 8.06525 9.67201 7.98447C9.66993 7.85913 9.66369 7.7332 9.67557 7.60816Z"
+                fill="#FEFEFE"
+              />
+              <path
+                d="M18.2163 8.54999C18.4305 8.44336 18.7123 8.5093 18.8581 8.69879C19.2353 9.14846 19.5698 9.64713 19.7593 10.207C20.0447 10.9869 20.0649 11.8497 19.8807 12.6555C19.707 13.4268 19.3319 14.1432 18.8442 14.7616C18.3446 15.4008 17.7081 15.9262 17.0093 16.3342C16.4907 16.631 15.932 16.8522 15.3561 17.0093C15.5525 17.1531 15.7515 17.2945 15.9522 17.432C16.055 17.5048 16.1604 17.5882 16.2065 17.71C16.2697 17.8799 16.2403 18.0795 16.1387 18.2286C16.0333 18.3699 15.8498 18.448 15.6745 18.4255C15.5394 18.4204 15.4227 18.345 15.3178 18.2669C14.9394 17.9817 14.5462 17.7171 14.1684 17.4314C14.0048 17.3061 13.8304 17.195 13.6665 17.0699C13.5159 16.9574 13.4241 16.7569 13.4681 16.5701C13.4942 16.3993 13.621 16.2716 13.7345 16.1516C14.1945 15.6223 14.6689 15.1035 15.0865 14.5388C15.2566 14.3048 15.6389 14.3018 15.8177 14.527C15.9843 14.7066 15.9867 14.9918 15.8605 15.1943C15.6817 15.4649 15.4601 15.7031 15.2575 15.9553C15.5435 15.8864 15.8159 15.769 16.0853 15.652C16.5222 15.4361 16.9451 15.1836 17.3131 14.8623C18.0099 14.2617 18.579 13.4842 18.8377 12.5934C19.1353 11.5958 18.9707 10.4339 18.2909 9.62604C18.1851 9.49447 18.0521 9.38131 17.9754 9.22865C17.8593 8.98718 17.9653 8.65691 18.2163 8.54999Z"
+                fill="#FEFEFE"
+              />
+              <path
+                d="M0.461741 9.56783C0.592721 9.36468 0.867453 9.30735 1.0908 9.36052C1.30762 9.40418 1.4778 9.61327 1.47424 9.83514C1.49265 10.0234 1.3691 10.1791 1.2999 10.3436C0.933092 11.1877 1.00319 12.1761 1.36256 13.0104C1.59661 13.5655 1.95331 14.0654 2.37833 14.4898C3.22629 15.3146 4.32165 15.8884 5.49126 16.0806C5.84856 16.1382 6.21091 16.1893 6.57356 16.1537C6.31665 15.9683 6.03152 15.8234 5.77906 15.6309C5.66887 15.5228 5.59254 15.3705 5.60086 15.2133C5.59848 14.979 5.79035 14.7589 6.02231 14.7271C6.15745 14.701 6.29853 14.7426 6.41169 14.8177C6.93056 15.1715 7.45775 15.5136 7.97395 15.8715C8.13492 15.9862 8.3158 16.0794 8.44767 16.23C8.55073 16.3482 8.56974 16.5166 8.53707 16.6654C8.50232 16.7982 8.41055 16.9051 8.31461 16.999C7.90267 17.4097 7.49487 17.8252 7.06837 18.2208C6.91393 18.3572 6.79037 18.5416 6.58811 18.6114C6.4307 18.656 6.25457 18.626 6.12092 18.5312C5.95756 18.3946 5.87856 18.1605 5.94479 17.955C5.98637 17.8151 6.10934 17.7242 6.20854 17.6256C6.34011 17.5214 6.45416 17.3972 6.58603 17.293C6.63088 17.257 6.66949 17.2146 6.70424 17.1691C5.73659 17.187 4.76389 17.0141 3.86752 16.6464C2.96314 16.2805 2.13924 15.718 1.46741 15.0105C0.656578 14.17 0.0949373 13.0597 0.0186064 11.8848C-0.0217866 11.4503 0.00435007 11.0104 0.0895912 10.5827C0.169486 10.231 0.268093 9.87583 0.461741 9.56783Z"
+                fill="#FEFEFE"
+              />
+            </svg>
+          ),
+        },
+        {
+          name: "AI Creator Lab",
+          href: "/ai-creator-lab",
+          icon: (
+            <svg
+              width="14"
+              height="21"
+              viewBox="0 0 14 21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6.29873 0.032875C7.52447 -0.0851854 8.78052 0.115265 9.90241 0.625703C10.7392 1.02061 11.5114 1.5645 12.1383 2.2473C12.9748 3.12486 13.556 4.23696 13.8221 5.4182C14.0588 6.45991 14.0601 7.55434 13.8211 8.59605C13.5872 9.54684 13.1683 10.4538 12.5809 11.2382C12.3536 11.563 12.0711 11.8437 11.8457 12.1697C11.2188 13.0006 10.8204 14.0142 10.7812 15.0584C10.7781 15.7311 10.7809 16.4041 10.779 17.0771C10.7623 17.478 10.6515 17.8887 10.3917 18.2025C10.1448 18.4894 9.79824 18.6908 9.42512 18.7571C9.40207 19.1618 9.22877 19.5447 8.99991 19.8743C8.57818 20.4513 7.89728 20.832 7.18197 20.8699C6.62671 20.9084 6.05061 20.7834 5.58847 20.4659C5.02942 20.0744 4.64178 19.4387 4.56759 18.7587C4.16922 18.7177 3.8103 18.4822 3.57102 18.1675C3.37562 17.8957 3.2623 17.568 3.2361 17.2353C3.21842 16.5825 3.23452 15.9297 3.22757 15.2769C3.20674 14.9145 3.1818 14.5496 3.08931 14.197C2.8857 13.3513 2.45261 12.5757 1.90713 11.9033C1.16467 11.0447 0.569952 10.0434 0.256176 8.9477C0.0588827 8.26775 -0.0124585 7.55591 0.00174662 6.84976C0.0228965 5.69788 0.34709 4.55547 0.917505 3.55543C2.01982 1.62164 4.07546 0.245005 6.29873 0.032875ZM5.60646 1.35932C4.55528 1.60554 3.58807 2.17627 2.84688 2.95882C2.22248 3.57059 1.77108 4.34524 1.49455 5.17198C1.16972 6.1878 1.11164 7.28917 1.34019 8.33183C1.56147 9.35018 2.06023 10.3038 2.75565 11.0788C3.39709 11.7894 3.90974 12.629 4.16511 13.5562C4.27844 13.9315 4.32832 14.321 4.37346 14.7093C6.12195 14.7144 7.87044 14.7093 9.61894 14.7118C9.64388 14.5543 9.65461 14.3955 9.67986 14.2383C9.86137 13.0681 10.4359 11.9841 11.2131 11.1006C11.3314 10.9541 11.4457 10.8045 11.5628 10.6571C11.9953 10.0743 12.3167 9.41237 12.5288 8.71916C12.96 7.30243 12.8145 5.72692 12.1512 4.40458C11.6241 3.32152 10.7307 2.43354 9.67576 1.8606C8.44181 1.19896 6.96416 1.04302 5.60646 1.35932ZM4.37851 15.8842C4.35957 16.1134 4.37977 16.3438 4.37314 16.5737C4.38166 16.8227 4.35515 17.0765 4.4186 17.3205C4.49499 17.5014 4.68218 17.6157 4.87695 17.6135C6.22454 17.6179 7.57245 17.6141 8.92005 17.6154C9.03526 17.6119 9.1549 17.628 9.26634 17.5895C9.45732 17.5311 9.61294 17.3474 9.60726 17.1425C9.606 16.723 9.60473 16.3034 9.60284 15.8842C9.54223 15.8798 9.48162 15.8744 9.42133 15.8789C7.74039 15.8842 6.05913 15.8741 4.37851 15.8842ZM5.69264 18.7638C5.81449 19.058 6.01652 19.3247 6.29778 19.4819C6.58662 19.6685 6.94679 19.7032 7.28077 19.6562C7.75838 19.5766 8.17254 19.2186 8.32596 18.7593C7.96672 18.7808 7.60655 18.771 7.24668 18.7745C6.72867 18.772 6.21065 18.7786 5.69264 18.7638Z"
+                fill="#FEFEFE"
+              />
+              <path
+                d="M7.6696 3.49067C7.78072 3.443 7.92687 3.47331 7.99316 3.57937C8.02473 3.6605 8.02568 3.7492 8.01305 3.83443C7.8931 4.69148 7.75483 5.54568 7.65571 6.40525C7.62604 6.52015 7.72611 6.63663 7.84385 6.62621C8.50834 6.62779 9.17282 6.62779 9.83731 6.62842C9.9399 6.62779 10.0444 6.69219 10.0813 6.78942C10.0943 6.87812 10.0854 6.97408 10.0311 7.04858C9.00078 8.429 7.98243 9.81921 6.95682 11.2037C6.83592 11.3556 6.7409 11.5314 6.58938 11.6564C6.44954 11.7457 6.21247 11.7202 6.1465 11.55C6.11588 11.3707 6.16702 11.1911 6.19164 11.014C6.2977 10.2653 6.40819 9.5168 6.51772 8.76866C6.53698 8.63103 6.40535 8.51013 6.27119 8.52181C5.65879 8.51992 5.0467 8.52086 4.43462 8.52244C4.34402 8.52402 4.24332 8.49498 4.19471 8.41291C4.12148 8.32231 4.15052 8.19225 4.21176 8.10355C4.35854 7.87721 4.5268 7.6654 4.68526 7.44696C5.5764 6.20543 6.47543 4.96926 7.38487 3.74099C7.45937 3.63809 7.54681 3.53612 7.6696 3.49067Z"
+                fill="#FEFEFE"
+              />
+            </svg>
+          ),
+        },
+        {
+          name: "Submit Film",
+          href: "/submit-film",
+          icon: <HugeiconsIcon icon={Upload01Icon} />,
+        },
+      ],
+    },
+  ],
+  admin: [
+    {
+      groupName: "Admin Management",
+      links: [
+        {
+          name: "Dashboard",
+          href: "/admin/dashboard",
+          icon: <HugeiconsIcon icon={DashboardSquare03Icon} />,
+        },
+        {
+          name: "Manage Users",
+          href: "/admin/manage-users",
+          icon: <HugeiconsIcon icon={UserGroupIcon} />,
+        },
+        {
+          name: "Films",
+          href: "/admin/films",
+          icon: <HugeiconsIcon icon={PlayListIcon} />,
+        },
+        {
+          name: "Payments",
+          href: "/admin/payments",
+          icon: <HugeiconsIcon icon={CreditCardValidationIcon} />,
+        },
+        {
+          name: "Distro",
+          href: "/admin/distro",
+          icon: (
+            <svg
+              width="20"
+              height="19"
+              viewBox="0 0 20 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10.932 0.0410299C11.1176 -0.0305489 11.3558 -0.0142139 11.4996 0.135775C12.014 0.674249 12.5237 1.21718 13.0209 1.77169C13.1435 1.91812 13.1673 2.13849 13.0811 2.30868C13.02 2.44233 12.886 2.51629 12.7746 2.60242C12.2157 2.982 11.6671 3.37702 11.1161 3.76847C10.9474 3.89203 10.7092 3.89084 10.534 3.78154C10.2905 3.63927 10.188 3.2796 10.3781 3.05447C10.5994 2.81686 10.8699 2.63242 11.128 2.43758C10.4805 2.34254 9.81585 2.31462 9.16778 2.42481C8.00113 2.614 6.89686 3.1899 6.08603 4.05211C5.87931 4.27368 5.67854 4.50238 5.50954 4.75483C5.45251 4.83295 5.4041 4.92353 5.31738 4.97313C5.16293 5.06907 4.95829 5.08035 4.79464 5.00046C4.51783 4.87928 4.37913 4.49762 4.55704 4.24131C5.25025 3.20891 6.22889 2.36214 7.37237 1.86584C8.19894 1.50706 9.09739 1.30509 9.99999 1.31281C10.4105 1.30628 10.8203 1.33479 11.2284 1.37578C11.0918 1.21124 10.9427 1.05828 10.7936 0.905321C10.7039 0.813249 10.6261 0.698604 10.6181 0.566435C10.5896 0.346947 10.7253 0.120034 10.932 0.0410299Z"
+                fill="#FEFEFE"
+              />
+              <path
+                d="M3.02815 5.74453C3.06438 5.73532 3.10151 5.73116 3.13923 5.73146C7.65314 5.73146 12.1674 5.73205 16.6816 5.73235C16.7656 5.73413 16.8524 5.72582 16.9349 5.7472C17.0724 5.80363 17.1823 5.94026 17.1841 6.09203C17.1951 6.38963 17.1883 6.68723 17.19 6.98483C17.193 9.11378 17.1895 11.2424 17.1915 13.3714C17.1877 13.4955 17.2049 13.6274 17.1485 13.7432C17.0861 13.887 16.9218 13.9657 16.7701 13.9592C12.236 13.9574 7.70156 13.96 3.16744 13.9583C2.94261 13.9725 2.75104 13.772 2.7546 13.5511C2.75104 11.0755 2.75371 8.59966 2.75252 6.12381C2.74243 5.95451 2.86747 5.79205 3.02815 5.74453ZM4.12915 6.85058C4.03263 6.87464 3.96313 6.97503 3.96847 7.07304C3.96907 7.35193 3.96639 7.63082 3.97055 7.90971C3.96907 8.01634 4.06381 8.1289 4.17667 8.11554C4.46477 8.11554 4.75317 8.11643 5.04126 8.11494C5.15145 8.11851 5.24026 8.01248 5.23788 7.90615C5.23937 7.61954 5.23937 7.33263 5.23758 7.04601C5.24085 6.91117 5.10334 6.82653 4.97978 6.8393C4.69644 6.84702 4.41042 6.82296 4.12915 6.85058ZM14.9078 6.84643C14.8232 6.87019 14.7463 6.94889 14.7507 7.04097C14.7507 7.33025 14.7475 7.61954 14.7528 7.90882C14.7507 8.01663 14.8437 8.12474 14.9563 8.11494C15.2348 8.11524 15.5134 8.11673 15.7923 8.11494C15.901 8.1191 15.9934 8.01277 15.9934 7.90763C15.9993 7.63943 15.9937 7.37094 15.9958 7.10274C15.9982 7.0178 15.9723 6.92276 15.899 6.87286C15.8122 6.82148 15.708 6.84286 15.6129 6.8387C15.378 6.84524 15.1416 6.82742 14.9078 6.84643ZM6.59431 6.91058C6.48383 6.93731 6.4271 7.05611 6.4369 7.16274C6.43779 8.87528 6.43838 10.5881 6.43631 12.3007C6.43838 12.4147 6.41462 12.5418 6.48204 12.6428C6.5358 12.7245 6.63857 12.7551 6.73213 12.7509C8.89968 12.7506 11.0672 12.7521 13.2348 12.7509C13.3388 12.7527 13.4599 12.737 13.5262 12.6467C13.6067 12.5389 13.5817 12.3969 13.585 12.2713C13.5826 10.6083 13.585 8.94538 13.5823 7.28243C13.5814 7.19184 13.582 7.09561 13.5383 7.01334C13.4899 6.92751 13.3916 6.87999 13.2942 6.89068C11.1367 6.88712 8.97958 6.89216 6.82241 6.88919C6.74608 6.89038 6.66738 6.88474 6.59431 6.91058ZM4.13094 9.22516C4.0353 9.25426 3.95897 9.34752 3.96818 9.44999C3.96936 9.73809 3.9658 10.0262 3.97025 10.3143C3.96847 10.4361 4.09025 10.5278 4.20667 10.5198C4.48497 10.516 4.76326 10.5177 5.04156 10.5198C5.14937 10.5207 5.23966 10.42 5.23937 10.3146C5.23937 10.0256 5.23758 9.73631 5.24055 9.44761C5.24501 9.32376 5.13927 9.20823 5.01275 9.21535C4.71931 9.22337 4.4226 9.19961 4.13094 9.22516ZM14.9378 9.2213C14.8401 9.23318 14.7472 9.31634 14.7507 9.4197C14.7495 9.71789 14.7498 10.0164 14.751 10.3146C14.743 10.4266 14.847 10.5293 14.9595 10.5183C15.2375 10.516 15.5158 10.5204 15.7938 10.5183C15.9141 10.5186 15.9996 10.3974 15.9946 10.284C15.9985 10.0461 15.994 9.80789 15.9964 9.56969C15.9961 9.47672 16.0005 9.37544 15.9435 9.29614C15.8921 9.21803 15.7873 9.21446 15.7035 9.21565C15.4484 9.22159 15.1927 9.20585 14.9378 9.2213ZM4.12262 11.5988C4.03114 11.6321 3.95956 11.7251 3.96847 11.8246C3.96818 12.083 3.96758 12.3414 3.96996 12.5998C3.96134 12.7269 4.08044 12.8377 4.20489 12.8326C4.47368 12.8299 4.74277 12.8341 5.01156 12.832C5.12769 12.8362 5.23551 12.7441 5.23848 12.6256C5.24234 12.369 5.23729 12.1121 5.24085 11.8552C5.24412 11.7776 5.23135 11.6894 5.16452 11.6395C5.07215 11.5602 4.94236 11.5938 4.83158 11.587C4.59545 11.595 4.35666 11.5715 4.12262 11.5988ZM14.8802 11.5997C14.8057 11.6342 14.7403 11.709 14.7501 11.7958C14.7498 12.0539 14.7495 12.312 14.7504 12.5701C14.7486 12.6526 14.7724 12.75 14.8511 12.7919C14.9399 12.838 15.0427 12.8323 15.1395 12.8329C15.3569 12.8311 15.5743 12.8338 15.7917 12.8332C15.9114 12.8326 15.9996 12.7159 15.9961 12.6018C15.9979 12.3431 15.9973 12.0847 15.9949 11.8263C16.0038 11.7111 15.9141 11.5938 15.795 11.5905C15.5369 11.5825 15.2782 11.5896 15.0198 11.5867C14.9732 11.589 14.9239 11.5825 14.8802 11.5997Z"
+                fill="#FEFEFE"
+              />
+              <path
+                d="M9.67557 7.60816C9.6824 7.52143 9.76586 7.46263 9.84843 7.46114C9.95891 7.45461 10.07 7.45372 10.1805 7.46233C10.2482 7.46649 10.329 7.49946 10.3367 7.57668C10.3634 7.70736 10.3459 7.8422 10.3498 7.97496C10.6705 8.02397 10.9812 8.19594 11.1466 8.48225C11.2408 8.65778 11.3067 8.86212 11.269 9.0629C11.0537 9.12913 10.8232 9.09765 10.6019 9.09171C10.5458 8.95628 10.5021 8.80213 10.3723 8.71689C10.1324 8.56452 9.77388 8.5672 9.5731 8.78431C9.45816 8.89301 9.44747 9.09498 9.54607 9.21735C9.66131 9.34268 9.83566 9.38367 9.99396 9.42674C10.3608 9.52683 10.7694 9.57524 11.0605 9.84373C11.3106 10.0555 11.3961 10.4098 11.3424 10.7241C11.3064 11.0297 11.1134 11.302 10.8606 11.4704C10.7095 11.5806 10.5262 11.629 10.3507 11.6852C10.3412 11.8269 10.3774 11.9771 10.3204 12.1123C10.2749 12.1749 10.19 12.18 10.1196 12.1809C9.98297 12.1782 9.841 12.1963 9.7118 12.142C9.64409 11.9997 9.67676 11.8375 9.67141 11.6861C9.37173 11.6249 9.07621 11.4969 8.87217 11.2619C8.73138 11.0983 8.64674 10.8859 8.64258 10.6694C8.64258 10.6106 8.68416 10.545 8.74891 10.5485C8.95355 10.5447 9.16026 10.5274 9.36401 10.5524C9.42519 10.6103 9.42519 10.7054 9.47865 10.7701C9.54221 10.8803 9.6524 10.9545 9.77477 10.9857C9.96753 11.0493 10.1861 11.0368 10.3673 10.9436C10.4914 10.8782 10.5909 10.7529 10.5945 10.6085C10.6085 10.4413 10.462 10.3088 10.3129 10.2667C9.98386 10.1627 9.64052 10.1075 9.31797 9.98333C9.14927 9.90967 8.97938 9.81166 8.87662 9.65395C8.68089 9.38902 8.66961 9.02786 8.76019 8.72164C8.88969 8.32335 9.2752 8.06525 9.67201 7.98447C9.66993 7.85913 9.66369 7.7332 9.67557 7.60816Z"
+                fill="#FEFEFE"
+              />
+              <path
+                d="M18.2163 8.54999C18.4305 8.44336 18.7123 8.5093 18.8581 8.69879C19.2353 9.14846 19.5698 9.64713 19.7593 10.207C20.0447 10.9869 20.0649 11.8497 19.8807 12.6555C19.707 13.4268 19.3319 14.1432 18.8442 14.7616C18.3446 15.4008 17.7081 15.9262 17.0093 16.3342C16.4907 16.631 15.932 16.8522 15.3561 17.0093C15.5525 17.1531 15.7515 17.2945 15.9522 17.432C16.055 17.5048 16.1604 17.5882 16.2065 17.71C16.2697 17.8799 16.2403 18.0795 16.1387 18.2286C16.0333 18.3699 15.8498 18.448 15.6745 18.4255C15.5394 18.4204 15.4227 18.345 15.3178 18.2669C14.9394 17.9817 14.5462 17.7171 14.1684 17.4314C14.0048 17.3061 13.8304 17.195 13.6665 17.0699C13.5159 16.9574 13.4241 16.7569 13.4681 16.5701C13.4942 16.3993 13.621 16.2716 13.7345 16.1516C14.1945 15.6223 14.6689 15.1035 15.0865 14.5388C15.2566 14.3048 15.6389 14.3018 15.8177 14.527C15.9843 14.7066 15.9867 14.9918 15.8605 15.1943C15.6817 15.4649 15.4601 15.7031 15.2575 15.9553C15.5435 15.8864 15.8159 15.769 16.0853 15.652C16.5222 15.4361 16.9451 15.1836 17.3131 14.8623C18.0099 14.2617 18.579 13.4842 18.8377 12.5934C19.1353 11.5958 18.9707 10.4339 18.2909 9.62604C18.1851 9.49447 18.0521 9.38131 17.9754 9.22865C17.8593 8.98718 17.9653 8.65691 18.2163 8.54999Z"
+                fill="#FEFEFE"
+              />
+              <path
+                d="M0.461741 9.56783C0.592721 9.36468 0.867453 9.30735 1.0908 9.36052C1.30762 9.40418 1.4778 9.61327 1.47424 9.83514C1.49265 10.0234 1.3691 10.1791 1.2999 10.3436C0.933092 11.1877 1.00319 12.1761 1.36256 13.0104C1.59661 13.5655 1.95331 14.0654 2.37833 14.4898C3.22629 15.3146 4.32165 15.8884 5.49126 16.0806C5.84856 16.1382 6.21091 16.1893 6.57356 16.1537C6.31665 15.9683 6.03152 15.8234 5.77906 15.6309C5.66887 15.5228 5.59254 15.3705 5.60086 15.2133C5.59848 14.979 5.79035 14.7589 6.02231 14.7271C6.15745 14.701 6.29853 14.7426 6.41169 14.8177C6.93056 15.1715 7.45775 15.5136 7.97395 15.8715C8.13492 15.9862 8.3158 16.0794 8.44767 16.23C8.55073 16.3482 8.56974 16.5166 8.53707 16.6654C8.50232 16.7982 8.41055 16.9051 8.31461 16.999C7.90267 17.4097 7.49487 17.8252 7.06837 18.2208C6.91393 18.3572 6.79037 18.5416 6.58811 18.6114C6.4307 18.656 6.25457 18.626 6.12092 18.5312C5.95756 18.3946 5.87856 18.1605 5.94479 17.955C5.98637 17.8151 6.10934 17.7242 6.20854 17.6256C6.34011 17.5214 6.45416 17.3972 6.58603 17.293C6.63088 17.257 6.66949 17.2146 6.70424 17.1691C5.73659 17.187 4.76389 17.0141 3.86752 16.6464C2.96314 16.2805 2.13924 15.718 1.46741 15.0105C0.656578 14.17 0.0949373 13.0597 0.0186064 11.8848C-0.0217866 11.4503 0.00435007 11.0104 0.0895912 10.5827C0.169486 10.231 0.268093 9.87583 0.461741 9.56783Z"
+                fill="#FEFEFE"
+              />
+            </svg>
+          ),
+        },
+        {
+          name: "Subscribers",
+          href: "/admin/subscribers",
+          icon: <HugeiconsIcon icon={MoneySend02Icon} />,
+        },
+        {
+          name: "Settings",
+          href: "/admin/settings",
+          icon: <HugeiconsIcon icon={Settings02Icon} />,
+        },
+      ],
+    },
+  ],
 };
 
-
 const aiGenerationCards = [
-   {
-      icon: <HugeiconsIcon icon={Video01Icon} />,
-      title: "Video Generate",
-      description: "Create videos from text description",
-      btnText: "Generate Video",
-      href: "/ai-creator-lab/generate-and-analyze?tab=video",
-   },
-   {
-      icon: <HugeiconsIcon icon={Image03Icon} />,
-      title: "Image Generate",
-      description: "Create image from text description",
-      btnText: "Generate Image",
-      href: "/ai-creator-lab/generate-and-analyze?tab=image",
-   },
-   {
-      icon: <HugeiconsIcon icon={File02Icon} />,
-      title: "Analyzing script",
-      description: "Create script for your movie",
-      btnText: "Analyze Script",
-      href: "/ai-creator-lab/generate-and-analyze?tab=script",
-   },
-]
+  {
+    icon: <HugeiconsIcon icon={Video01Icon} />,
+    title: "Video Generate",
+    description: "Create videos from text description",
+    btnText: "Generate Video",
+    href: "/ai-creator-lab/generate-and-analyze?tab=video",
+  },
+  {
+    icon: <HugeiconsIcon icon={Image03Icon} />,
+    title: "Image Generate",
+    description: "Create image from text description",
+    btnText: "Generate Image",
+    href: "/ai-creator-lab/generate-and-analyze?tab=image",
+  },
+  {
+    icon: <HugeiconsIcon icon={File02Icon} />,
+    title: "Analyzing script",
+    description: "Create script for your movie",
+    btnText: "Analyze Script",
+    href: "/ai-creator-lab/generate-and-analyze?tab=script",
+  },
+];
 
 const subscriptionPlans = [
-   {
-      name: "Basic",
-      icon: <HugeiconsIcon icon={StarIcon} />,
-      price: 9.99,
-      isHighlighted: false,
-      features: [
-         "200 AI generation per month",
-         "Video generation up to 2 minutes",
-         "Image generation up to 2048x2048",
-         "Advance script templets",
-         "Priority support",
-         "Commercial usage rights",
-      ],
-   },
-   {
-      name: "Pro",
-      icon: <HugeiconsIcon icon={ZapIcon} />,
-      price: 19.99,
-      isHighlighted: true,
-      features: [
-         "200 AI generation per month",
-         "Video generation up to 2 minutes",
-         "Image generation up to 2048x2048",
-         "Advance script templets",
-         "Priority support",
-         "Commercial usage rights",
-      ],
-   },
-   {
-      name: "Enterprise",
-      icon: <HugeiconsIcon icon={CrownIcon} />,
-      price: 49.99,
-      isHighlighted: false,
-      features: [
-         "200 AI generation per month",
-         "Video generation up to 2 minutes",
-         "Image generation up to 2048x2048",
-         "Advance script templets",
-         "Priority support",
-         "Commercial usage rights",
-      ],
-   },
+  {
+    name: "Basic",
+    icon: <HugeiconsIcon icon={StarIcon} />,
+    price: 9.99,
+    isHighlighted: false,
+    features: [
+      "200 AI generation per month",
+      "Video generation up to 2 minutes",
+      "Image generation up to 2048x2048",
+      "Advance script templets",
+      "Priority support",
+      "Commercial usage rights",
+    ],
+  },
+  {
+    name: "Pro",
+    icon: <HugeiconsIcon icon={ZapIcon} />,
+    price: 19.99,
+    isHighlighted: true,
+    features: [
+      "200 AI generation per month",
+      "Video generation up to 2 minutes",
+      "Image generation up to 2048x2048",
+      "Advance script templets",
+      "Priority support",
+      "Commercial usage rights",
+    ],
+  },
+  {
+    name: "Enterprise",
+    icon: <HugeiconsIcon icon={CrownIcon} />,
+    price: 49.99,
+    isHighlighted: false,
+    features: [
+      "200 AI generation per month",
+      "Video generation up to 2 minutes",
+      "Image generation up to 2048x2048",
+      "Advance script templets",
+      "Priority support",
+      "Commercial usage rights",
+    ],
+  },
 ];
 
 const genres = [
-   {
-      value: "mystery",
-      label: "Mystery",
-   },
-   {
-      value: "romance",
-      label: "Romance",
-   },
-   {
-      value: "fantasy",
-      label: "Fantasy",
-   },
-   {
-      value: "adventure",
-      label: "Adventure",
-   },
-   {
-      value: "sci-fi",
-      label: "Sci-Fi",
-   },
-   {
-      value: "thriller",
-      label: "Thriller",
-   },
-   {
-      value: "action",
-      label: "Action",
-   },
-]
-
+  {
+    value: "mystery",
+    label: "Mystery",
+  },
+  {
+    value: "romance",
+    label: "Romance",
+  },
+  {
+    value: "fantasy",
+    label: "Fantasy",
+  },
+  {
+    value: "adventure",
+    label: "Adventure",
+  },
+  {
+    value: "sci-fi",
+    label: "Sci-Fi",
+  },
+  {
+    value: "thriller",
+    label: "Thriller",
+  },
+  {
+    value: "action",
+    label: "Action",
+  },
+];
 
 // Admin --------------------------
 const adminDashboardStats = [
-   {
-      icon: UserGroup02Icon,
-      heading: "Total Users",
-      value: 2000,
-   },
-   {
-      icon: ViewIcon,
-      heading: "Total Views",
-      value: 15000,
-   },
-   {
-      icon: Dollar01Icon,
-      heading: "Total Earning",
-      value: 1425.50,
-      isDollar: true,
-      isGreen: true,
-   },
-   {
-      icon: TradeUpIcon,
-      heading: "Total Subscription",
-      value: 1500,
-      isDollar: true,
-   },
+  {
+    icon: UserGroup02Icon,
+    heading: "Total Users",
+    value: 2000,
+  },
+  {
+    icon: ViewIcon,
+    heading: "Total Views",
+    value: 15000,
+  },
+  {
+    icon: Dollar01Icon,
+    heading: "Total Earning",
+    value: 1425.5,
+    isDollar: true,
+    isGreen: true,
+  },
+  {
+    icon: TradeUpIcon,
+    heading: "Total Subscription",
+    value: 1500,
+    isDollar: true,
+  },
 ];
 
 const chartData = [
-   { month: "January", last_year: 0, current: 4234 },
-   { month: "February", last_year: 12345, current: 27890 },
-   { month: "March", last_year: 48723, current: 34987 },
-   { month: "April", last_year: 0, current: 19876 },
-   { month: "May", last_year: 45678, current: 2345 },
-   { month: "June", last_year: 1234, current: 48976 },
-   { month: "July", last_year: 34234, current: 23456 },
-   { month: "August", last_year: 27890, current: 19876 },
-   { month: "September", last_year: 0, current: 23456 },
-   { month: "October", last_year: 19876, current: 43210 },
-   { month: "November", last_year: 23456, current: 34567 },
-   { month: "December", last_year: 43210, current: 12345 }
+  { month: "January", last_year: 0, current: 4234 },
+  { month: "February", last_year: 12345, current: 27890 },
+  { month: "March", last_year: 48723, current: 34987 },
+  { month: "April", last_year: 0, current: 19876 },
+  { month: "May", last_year: 45678, current: 2345 },
+  { month: "June", last_year: 1234, current: 48976 },
+  { month: "July", last_year: 34234, current: 23456 },
+  { month: "August", last_year: 27890, current: 19876 },
+  { month: "September", last_year: 0, current: 23456 },
+  { month: "October", last_year: 19876, current: 43210 },
+  { month: "November", last_year: 23456, current: 34567 },
+  { month: "December", last_year: 43210, current: 12345 },
 ];
 
 const adminPaymentsStats = [
-   {
-      heading: "Total Payout",
-      value: 242,
-      isDollar: true,
-      isGreen: true,
-   },
-   {
-      heading: "Processing Fee",
-      value: 520,
-      isDollar: true,
-   },
-   {
-      heading: "Payout Failed",
-      value: 2000,
-      isDollar: true,
-   },
+  {
+    heading: "Total Payout",
+    value: 242,
+    isDollar: true,
+    isGreen: true,
+  },
+  {
+    heading: "Processing Fee",
+    value: 520,
+    isDollar: true,
+  },
+  {
+    heading: "Payout Failed",
+    value: 2000,
+    isDollar: true,
+  },
 ];
 
 const adminDistroStats = [
-   {
-      heading: "Total Commission",
-      icon: Dollar01Icon,
-      value: 2452,
-      isDollar: true,
-      isGreen: true,
-   },
-   {
-      heading: "Active Distro",
-      value: 10,
-      icon: UserGroupIcon,
-   },
-   {
-      heading: "Total Clicks",
-      value: 2000,
-      icon: Link05Icon,
-   },
+  {
+    heading: "Total Commission",
+    icon: Dollar01Icon,
+    value: 2452,
+    isDollar: true,
+    isGreen: true,
+  },
+  {
+    heading: "Active Distro",
+    value: 10,
+    icon: UserGroupIcon,
+    isGreen: true,
+  },
+  {
+    heading: "Total Clicks",
+    value: 2000,
+    icon: Link05Icon,
+    isGreen: true,
+  },
 ];
 
 const adminFilmsStats = [
-   {
-      heading: "Total Films",
-      icon: Film02Icon,
-      value: 242,
-      isGreen: true,
-   },
-   {
-      heading: "Total Purchase",
-      value: 5550,
-      isDollar: true,
-      icon: Dollar01Icon,
-   },
-   {
-      heading: "Total Rent",
-      value: 2000,
-      icon: Dollar01Icon,
-      isDollar: true,
-   },
+  {
+    heading: "Total Films",
+    icon: Film02Icon,
+    value: 242,
+    isGreen: true,
+  },
+  {
+    heading: "Total Purchase",
+    value: 5550,
+    isDollar: true,
+    icon: Dollar01Icon,
+    isGreen: true,
+  },
+  {
+    heading: "Total Rent",
+    value: 2000,
+    icon: Dollar01Icon,
+    isDollar: true,
+    isGreen: true,
+
+  },
 ];
 
 const transactions = [
-   {
-      type: "Film Buy",
-      user: "John Carter",
-      amount: 12.99,
-      payment_method: "Credit Card",
-      date: "2025-08-01",
-      status: "Completed",
-   },
-   {
-      type: "Film Rent",
-      user: "Emily Stone",
-      amount: 4.99,
-      payment_method: "PayPal",
-      date: "2025-08-02",
-      status: "Completed",
-   },
-   {
-      type: "Film Buy",
-      user: "Michael Johnson",
-      amount: 14.99,
-      payment_method: "Credit Card",
-      date: "2025-08-03",
-      status: "Failed",
-   },
-   {
-      type: "Film Rent",
-      user: "Sophia Lee",
-      amount: 3.99,
-      payment_method: "PayPal",
-      date: "2025-08-04",
-      status: "Completed",
-   },
-   {
-      type: "Film Buy",
-      user: "David Kim",
-      amount: 10.99,
-      payment_method: "Credit Card",
-      date: "2025-08-05",
-      status: "Pending",
-   },
-   {
-      type: "Film Rent",
-      user: "Olivia Brown",
-      amount: 5.49,
-      payment_method: "PayPal",
-      date: "2025-08-06",
-      status: "Failed",
-   },
-   {
-      type: "Film Buy",
-      user: "James Wilson",
-      amount: 19.99,
-      payment_method: "Credit Card",
-      date: "2025-08-07",
-      status: "Completed",
-   },
-   {
-      type: "Film Rent",
-      user: "Ava Martinez",
-      amount: 6.99,
-      payment_method: "Credit Card",
-      date: "2025-08-08",
-      status: "Pending",
-   },
-   {
-      type: "Film Buy",
-      user: "William Davis",
-      amount: 15.99,
-      payment_method: "PayPal",
-      date: "2025-08-09",
-      status: "Completed",
-   },
-   {
-      type: "Film Rent",
-      user: "Emma Thompson",
-      amount: 4.49,
-      payment_method: "Credit Card",
-      date: "2025-08-10",
-      status: "Completed",
-   },
+  {
+    type: "Film Buy",
+    user: "John Carter",
+    amount: 12.99,
+    payment_method: "Credit Card",
+    date: "2025-08-01",
+    status: "Completed",
+  },
+  {
+    type: "Film Rent",
+    user: "Emily Stone",
+    amount: 4.99,
+    payment_method: "PayPal",
+    date: "2025-08-02",
+    status: "Completed",
+  },
+  {
+    type: "Film Buy",
+    user: "Michael Johnson",
+    amount: 14.99,
+    payment_method: "Credit Card",
+    date: "2025-08-03",
+    status: "Failed",
+  },
+  {
+    type: "Film Rent",
+    user: "Sophia Lee",
+    amount: 3.99,
+    payment_method: "PayPal",
+    date: "2025-08-04",
+    status: "Completed",
+  },
+  {
+    type: "Film Buy",
+    user: "David Kim",
+    amount: 10.99,
+    payment_method: "Credit Card",
+    date: "2025-08-05",
+    status: "Pending",
+  },
+  {
+    type: "Film Rent",
+    user: "Olivia Brown",
+    amount: 5.49,
+    payment_method: "PayPal",
+    date: "2025-08-06",
+    status: "Failed",
+  },
+  {
+    type: "Film Buy",
+    user: "James Wilson",
+    amount: 19.99,
+    payment_method: "Credit Card",
+    date: "2025-08-07",
+    status: "Completed",
+  },
+  {
+    type: "Film Rent",
+    user: "Ava Martinez",
+    amount: 6.99,
+    payment_method: "Credit Card",
+    date: "2025-08-08",
+    status: "Pending",
+  },
+  {
+    type: "Film Buy",
+    user: "William Davis",
+    amount: 15.99,
+    payment_method: "PayPal",
+    date: "2025-08-09",
+    status: "Completed",
+  },
+  {
+    type: "Film Rent",
+    user: "Emma Thompson",
+    amount: 4.49,
+    payment_method: "Credit Card",
+    date: "2025-08-10",
+    status: "Completed",
+  },
 ];
 
 const distroTransactions = [
-   {
-      user: "Alice Johnson",
-      total_earning: 1200,
-      total_clicks: 340,
-      status: "completed",
-   },
-   {
-      user: "Mark Smith",
-      total_earning: 980,
-      total_clicks: 275,
-      status: "pending",
-   },
-   {
-      user: "Sophia Lee",
-      total_earning: 0,
-      total_clicks: 190,
-      status: "failed",
-   },
-   {
-      user: "David Brown",
-      total_earning: 1320,
-      total_clicks: 412,
-      status: "completed",
-   },
-   {
-      user: "Emily Davis",
-      total_earning: 800,
-      total_clicks: 250,
-      status: "pending",
-   },
-   {
-      user: "James Wilson",
-      total_earning: 600,
-      total_clicks: 180,
-      status: "completed",
-   },
-   {
-      user: "Olivia Martinez",
-      total_earning: 0,
-      total_clicks: 300,
-      status: "failed",
-   },
-   {
-      user: "Liam Anderson",
-      total_earning: 1100,
-      total_clicks: 350,
-      status: "completed",
-   },
-   {
-      user: "Sophia Thompson",
-      total_earning: 720,
-      total_clicks: 210,
-      status: "pending",
-   },
-   {
-      user: "Noah White",
-      total_earning: 1500,
-      total_clicks: 500,
-      status: "completed",
-   },
+  {
+    user: "Alice Johnson",
+    total_earning: 1200,
+    total_clicks: 340,
+    status: "completed",
+  },
+  {
+    user: "Mark Smith",
+    total_earning: 980,
+    total_clicks: 275,
+    status: "pending",
+  },
+  {
+    user: "Sophia Lee",
+    total_earning: 0,
+    total_clicks: 190,
+    status: "failed",
+  },
+  {
+    user: "David Brown",
+    total_earning: 1320,
+    total_clicks: 412,
+    status: "completed",
+  },
+  {
+    user: "Emily Davis",
+    total_earning: 800,
+    total_clicks: 250,
+    status: "pending",
+  },
+  {
+    user: "James Wilson",
+    total_earning: 600,
+    total_clicks: 180,
+    status: "completed",
+  },
+  {
+    user: "Olivia Martinez",
+    total_earning: 0,
+    total_clicks: 300,
+    status: "failed",
+  },
+  {
+    user: "Liam Anderson",
+    total_earning: 1100,
+    total_clicks: 350,
+    status: "completed",
+  },
+  {
+    user: "Sophia Thompson",
+    total_earning: 720,
+    total_clicks: 210,
+    status: "pending",
+  },
+  {
+    user: "Noah White",
+    total_earning: 1500,
+    total_clicks: 500,
+    status: "completed",
+  },
 ];
 
 const subscribersList = [
-   {
-      subscriber_name: "Alice Johnson",
-      subscription_type: "Enterprise",
-      activation_date: "2025-06-10",
-   },
-   {
-      subscriber_name: "Mark Smith",
-      subscription_type: "Basic",
-      activation_date: "2025-05-28",
-   },
-   {
-      subscriber_name: "Sophia Lee",
-      subscription_type: "Pro",
-      activation_date: "2025-07-01",
-   },
-   {
-      subscriber_name: "David Brown",
-      subscription_type: "Enterprise",
-      activation_date: "2025-06-15",
-   },
-   {
-      subscriber_name: "Emily Davis",
-      subscription_type: "Basic",
-      activation_date: "2025-07-20",
-   },
-   {
-      subscriber_name: "James Wilson",
-      subscription_type: "Pro",
-      activation_date: "2025-06-30",
-   },
-   {
-      subscriber_name: "Olivia Martinez",
-      subscription_type: "Enterprise",
-      activation_date: "2025-05-10",
-   },
-   {
-      subscriber_name: "Liam Anderson",
-      subscription_type: "Pro",
-      activation_date: "2025-06-25",
-   },
-   {
-      subscriber_name: "Sophia Thompson",
-      subscription_type: "Basic",
-      activation_date: "2025-07-05",
-   },
-   {
-      subscriber_name: "Noah White",
-      subscription_type: "Enterprise",
-      activation_date: "2025-06-18",
-   },
+  {
+    subscriber_name: "Alice Johnson",
+    subscription_type: "Enterprise",
+    activation_date: "2025-06-10",
+  },
+  {
+    subscriber_name: "Mark Smith",
+    subscription_type: "Basic",
+    activation_date: "2025-05-28",
+  },
+  {
+    subscriber_name: "Sophia Lee",
+    subscription_type: "Pro",
+    activation_date: "2025-07-01",
+  },
+  {
+    subscriber_name: "David Brown",
+    subscription_type: "Enterprise",
+    activation_date: "2025-06-15",
+  },
+  {
+    subscriber_name: "Emily Davis",
+    subscription_type: "Basic",
+    activation_date: "2025-07-20",
+  },
+  {
+    subscriber_name: "James Wilson",
+    subscription_type: "Pro",
+    activation_date: "2025-06-30",
+  },
+  {
+    subscriber_name: "Olivia Martinez",
+    subscription_type: "Enterprise",
+    activation_date: "2025-05-10",
+  },
+  {
+    subscriber_name: "Liam Anderson",
+    subscription_type: "Pro",
+    activation_date: "2025-06-25",
+  },
+  {
+    subscriber_name: "Sophia Thompson",
+    subscription_type: "Basic",
+    activation_date: "2025-07-05",
+  },
+  {
+    subscriber_name: "Noah White",
+    subscription_type: "Enterprise",
+    activation_date: "2025-06-18",
+  },
 ];
 
 const termsAndConditions = [
-   {
-      id: 1,
-      title: "Eligibility",
-      details: [
-         "You must be at least 18 years old to become a Distro.",
-         "JusB.io reserves the right to approve, deny, or terminate any account at its sole discretion."
-      ]
-   },
-   {
-      id: 2,
-      title: "Limited License to Distribute",
-      details: [
-         "Distros are granted a limited, revocable license to promote and sell films or series hosted on JusB.io.",
-         "You do not obtain any ownership or intellectual property rights in the films or related content."
-      ]
-   },
-   {
-      id: 3,
-      title: "Payouts",
-      details: [
-         "Your payout percentage is determined by your membership level at the time of sale.",
-         "All payouts are calculated on net sales (after processing fees and applicable taxes).",
-         "Payouts may be made in USD or ReelBux, subject to your account preferences.",
-         "Once converted to ReelBux, funds are non-refundable and cannot be exchanged for cash."
-      ]
-   },
-   {
-      id: 4,
-      title: "Marketing Conduct",
-      details: [
-         "You may only use official JusB.io marketing materials or materials approved by the platform.",
-         "False, misleading, or deceptive claims about films, JusB.io, or filmmakers are prohibited.",
-         "Spam, unauthorized paid ads, or use of bots is strictly forbidden."
-      ]
-   },
-   {
-      id: 5,
-      title: "Fraud & Abuse",
-      details: [
-         "Any fraudulent activity (including but not limited to fake clicks, bot traffic, or self-purchases intended to inflate earnings) will result in immediate account termination and forfeiture of unpaid earnings.",
-         "JusB.io reserves the right to audit accounts for suspected fraud."
-      ]
-   },
-   {
-      id: 6,
-      title: "Filmmaker Rights",
-      details: [
-         "Filmmakers retain all ownership of their works.",
-         "Distro activity does not create any rights, revenue entitlements, or creative control beyond the defined payout."
-      ]
-   },
-   {
-      id: 7,
-      title: "Termination",
-      details: [
-         "JusB.io may suspend or terminate your account at any time if you violate these terms or engage in harmful conduct.",
-         "Distros may close their account at any time."
-      ]
-   },
-   {
-      id: 8,
-      title: "Limitation of Liability",
-      details: [
-         "JusB.io provides the Distro program “as-is” and makes no guarantees regarding sales volume or earnings.",
-         "JusB.io is not liable for indirect, incidental, or consequential damages."
-      ]
-   },
-   {
-      id: 9,
-      title: "Governing Law",
-      details: [
-         "These terms are governed by the laws of California.",
-         "Any disputes will be resolved through binding arbitration in [Insert Jurisdiction]."
-      ]
-   }
+  {
+    id: 1,
+    title: "Eligibility",
+    details: [
+      "You must be at least 18 years old to become a Distro.",
+      "JusB.io reserves the right to approve, deny, or terminate any account at its sole discretion.",
+    ],
+  },
+  {
+    id: 2,
+    title: "Limited License to Distribute",
+    details: [
+      "Distros are granted a limited, revocable license to promote and sell films or series hosted on JusB.io.",
+      "You do not obtain any ownership or intellectual property rights in the films or related content.",
+    ],
+  },
+  {
+    id: 3,
+    title: "Payouts",
+    details: [
+      "Your payout percentage is determined by your membership level at the time of sale.",
+      "All payouts are calculated on net sales (after processing fees and applicable taxes).",
+      "Payouts may be made in USD or ReelBux, subject to your account preferences.",
+      "Once converted to ReelBux, funds are non-refundable and cannot be exchanged for cash.",
+    ],
+  },
+  {
+    id: 4,
+    title: "Marketing Conduct",
+    details: [
+      "You may only use official JusB.io marketing materials or materials approved by the platform.",
+      "False, misleading, or deceptive claims about films, JusB.io, or filmmakers are prohibited.",
+      "Spam, unauthorized paid ads, or use of bots is strictly forbidden.",
+    ],
+  },
+  {
+    id: 5,
+    title: "Fraud & Abuse",
+    details: [
+      "Any fraudulent activity (including but not limited to fake clicks, bot traffic, or self-purchases intended to inflate earnings) will result in immediate account termination and forfeiture of unpaid earnings.",
+      "JusB.io reserves the right to audit accounts for suspected fraud.",
+    ],
+  },
+  {
+    id: 6,
+    title: "Filmmaker Rights",
+    details: [
+      "Filmmakers retain all ownership of their works.",
+      "Distro activity does not create any rights, revenue entitlements, or creative control beyond the defined payout.",
+    ],
+  },
+  {
+    id: 7,
+    title: "Termination",
+    details: [
+      "JusB.io may suspend or terminate your account at any time if you violate these terms or engage in harmful conduct.",
+      "Distros may close their account at any time.",
+    ],
+  },
+  {
+    id: 8,
+    title: "Limitation of Liability",
+    details: [
+      "JusB.io provides the Distro program “as-is” and makes no guarantees regarding sales volume or earnings.",
+      "JusB.io is not liable for indirect, incidental, or consequential damages.",
+    ],
+  },
+  {
+    id: 9,
+    title: "Governing Law",
+    details: [
+      "These terms are governed by the laws of California.",
+      "Any disputes will be resolved through binding arbitration in [Insert Jurisdiction].",
+    ],
+  },
 ];
 
 const adminFilmsList = [
-   {
-      id: 1,
-      film_title: "Echoes of Tomorrow",
-      user: "Alice Johnson",
-      status: "published",
-      film_type: "movie",
-      upload_date: "2025-08-01",
-      views: 12500,
-      revenue: 3400
-   },
-   {
-      id: 2,
-      film_title: "Shadows in the Mist",
-      user: "Brian Carter",
-      status: "published",
-      film_type: "drama",
-      upload_date: "2025-08-05",
-      views: 8700,
-      revenue: 2150
-   },
-   {
-      id: 3,
-      film_title: "Silent Horizon",
-      user: "Clara Smith",
-      status: "rejected",
-      film_type: "movie",
-      upload_date: "2025-08-07",
-      views: 0,
-      revenue: 0
-   },
-   {
-      id: 4,
-      film_title: "Broken Strings",
-      user: "David Kim",
-      status: "published",
-      film_type: "drama",
-      upload_date: "2025-08-10",
-      views: 15230,
-      revenue: 4200
-   },
-   {
-      id: 5,
-      film_title: "The Last Melody",
-      user: "Ella Brown",
-      status: "rejected",
-      film_type: "movie",
-      upload_date: "2025-08-12",
-      views: 0,
-      revenue: 0
-   },
-   {
-      id: 6,
-      film_title: "City of Whispers",
-      user: "Franklin Lee",
-      status: "published",
-      film_type: "movie",
-      upload_date: "2025-08-14",
-      views: 9800,
-      revenue: 2800
-   },
-   {
-      id: 7,
-      film_title: "Beyond the Veil",
-      user: "Grace Wilson",
-      status: "published",
-      film_type: "drama",
-      upload_date: "2025-08-16",
-      views: 13400,
-      revenue: 3600
-   },
-   {
-      id: 8,
-      film_title: "Fragments of Time",
-      user: "Henry Adams",
-      status: "rejected",
-      film_type: "movie",
-      upload_date: "2025-08-18",
-      views: 0,
-      revenue: 0
-   },
-   {
-      id: 9,
-      film_title: "Fading Lights",
-      user: "Isabella Martinez",
-      status: "published",
-      film_type: "drama",
-      upload_date: "2025-08-20",
-      views: 11000,
-      revenue: 2950
-   },
-   {
-      id: 10,
-      film_title: "Crimson Dawn",
-      user: "Jack Thompson",
-      status: "published",
-      film_type: "movie",
-      upload_date: "2025-08-22",
-      views: 14350,
-      revenue: 4100
-   }
+  {
+    id: 1,
+    film_title: "Echoes of Tomorrow",
+    user: "Alice Johnson",
+    status: "published",
+    film_type: "movie",
+    upload_date: "2025-08-01",
+    views: 12500,
+    revenue: 3400,
+  },
+  {
+    id: 2,
+    film_title: "Shadows in the Mist",
+    user: "Brian Carter",
+    status: "published",
+    film_type: "drama",
+    upload_date: "2025-08-05",
+    views: 8700,
+    revenue: 2150,
+  },
+  {
+    id: 3,
+    film_title: "Silent Horizon",
+    user: "Clara Smith",
+    status: "rejected",
+    film_type: "movie",
+    upload_date: "2025-08-07",
+    views: 0,
+    revenue: 0,
+  },
+  {
+    id: 4,
+    film_title: "Broken Strings",
+    user: "David Kim",
+    status: "published",
+    film_type: "drama",
+    upload_date: "2025-08-10",
+    views: 15230,
+    revenue: 4200,
+  },
+  {
+    id: 5,
+    film_title: "The Last Melody",
+    user: "Ella Brown",
+    status: "rejected",
+    film_type: "movie",
+    upload_date: "2025-08-12",
+    views: 0,
+    revenue: 0,
+  },
+  {
+    id: 6,
+    film_title: "City of Whispers",
+    user: "Franklin Lee",
+    status: "published",
+    film_type: "movie",
+    upload_date: "2025-08-14",
+    views: 9800,
+    revenue: 2800,
+  },
+  {
+    id: 7,
+    film_title: "Beyond the Veil",
+    user: "Grace Wilson",
+    status: "published",
+    film_type: "drama",
+    upload_date: "2025-08-16",
+    views: 13400,
+    revenue: 3600,
+  },
+  {
+    id: 8,
+    film_title: "Fragments of Time",
+    user: "Henry Adams",
+    status: "rejected",
+    film_type: "movie",
+    upload_date: "2025-08-18",
+    views: 0,
+    revenue: 0,
+  },
+  {
+    id: 9,
+    film_title: "Fading Lights",
+    user: "Isabella Martinez",
+    status: "published",
+    film_type: "drama",
+    upload_date: "2025-08-20",
+    views: 11000,
+    revenue: 2950,
+  },
+  {
+    id: 10,
+    film_title: "Crimson Dawn",
+    user: "Jack Thompson",
+    status: "published",
+    film_type: "movie",
+    upload_date: "2025-08-22",
+    views: 14350,
+    revenue: 4100,
+  },
 ];
 
-
-
-
-
-
-export { moviesData, sidebarLinks, aiGenerationCards, subscriptionPlans, genres, adminDashboardStats, chartData, adminPaymentsStats, transactions, adminDistroStats, distroTransactions, subscribersList, termsAndConditions, adminFilmsStats, adminFilmsList };
+export {
+  moviesData,
+  sidebarLinks,
+  aiGenerationCards,
+  subscriptionPlans,
+  genres,
+  adminDashboardStats,
+  chartData,
+  adminPaymentsStats,
+  transactions,
+  adminDistroStats,
+  distroTransactions,
+  subscribersList,
+  termsAndConditions,
+  adminFilmsStats,
+  adminFilmsList,
+};

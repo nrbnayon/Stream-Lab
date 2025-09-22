@@ -13,13 +13,26 @@ import {
 import { Button } from "@/components/ui/button";
 import { Delete02Icon } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { useDeleteFilmMutation } from "@/redux/store/api/adminApi";
+import { useState } from "react";
+
 export default function FilmDeleteDialog({ film }) {
-  const handleDeleteFilm = (e) => {
+  const [deleteFilm, { isLoading }] = useDeleteFilmMutation();
+  const [open, setOpen] = useState(false);
+
+  const handleDeleteFilm = async (e) => {
     e.preventDefault();
-    console.log("Deleting film:", film.film_title);
+    try {
+      await deleteFilm(film.id).unwrap();
+      setOpen(false);
+      console.log("Film deleted successfully:", film.title);
+    } catch (error) {
+      console.error("Failed to delete film:", error);
+    }
   };
+
   return (
-    <AlertDialog>
+    <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
         <Button
           variant="ghost"
@@ -36,14 +49,18 @@ export default function FilmDeleteDialog({ film }) {
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
             This action cannot be undone. This will permanently delete{" "}
-            <span className="font-black">{film.film_title}</span> film and
-            remove film data from your server.
+            <span className="font-black">{film.title}</span> film and remove
+            film data from your server.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction variant="destructive" onClick={handleDeleteFilm}>
-            Remove
+          <AlertDialogAction
+            variant="destructive"
+            onClick={handleDeleteFilm}
+            disabled={isLoading}
+          >
+            {isLoading ? "Removing..." : "Remove"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

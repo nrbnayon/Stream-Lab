@@ -92,7 +92,7 @@ export default function DistroStats() {
   }
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3 lg:gap-5 my-5">
+    <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-3 lg:gap-5 my-5">
       {/* Total Earning */}
       <div className="bg-secondary px-3 md:px-5 py-5 md:py-10 rounded-md space-y-1 md:space-y-3 content-center">
         <h4 className="text-xl md:text-2xl text-secondary-foreground flex justify-between items-center">
@@ -105,14 +105,16 @@ export default function DistroStats() {
       </div>
       {/* Total Clicks */}
       <div className="bg-secondary px-3 md:px-5 py-5 md:py-10 rounded-md space-y-1 md:space-y-3 content-center">
-        <h4 className="text-xl md:text-2xl text-secondary-foreground flex justify-between items-center">
+        <h4 className="text-xl md:text-2xl text-secondary-foreground flex justify-between items-center ">
           Total Clicks
           <HugeiconsIcon icon={MouseLeftClick06Icon} />
         </h4>
-        <h2 className="text-3xl md:text-4xl font-black">{total_clicks}</h2>
+        <h2 className="text-3xl md:text-4xl font-black text-green-500">
+          {total_clicks}
+        </h2>
       </div>
       {/* Distro balance */}
-      <div className="col-span-2 bg-secondary px-3 md:px-5 py-5 md:py-10 rounded-md space-y-1 md:space-y-3">
+      <div className="bg-secondary px-3 md:px-5 py-5 md:py-10 rounded-md space-y-1 md:space-y-3">
         <h4 className="text-xl md:text-2xl text-secondary-foreground flex justify-between items-center">
           Distro Balance
           <HugeiconsIcon icon={CreditCardIcon} />
