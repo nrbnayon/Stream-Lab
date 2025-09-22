@@ -23,8 +23,8 @@ export default function FilmDetails() {
 
   // Tracking states
   const [hasIncrementedView, setHasIncrementedView] = useState(false);
-  const [lastWatchTime, setLastWatchTime] = useState(0);
-  const watchTimeInterval = useRef(null);
+  const [hasTriggeredViewCount, setHasTriggeredViewCount] = useState(false);
+  const watchTimeTimeout = useRef(null);
 
   // First try to get from user's library
   const {
@@ -69,60 +69,119 @@ export default function FilmDetails() {
   console.log("Has library access:", hasLibraryAccess);
   console.log("Is rental expired:", isRentalExpired);
 
-  // Increment view count when user starts watching full film
+  // Increment view count - only once per session when user has full access
   useEffect(() => {
-    if (canWatchFullFilm && !hasIncrementedView && filmData?.id) {
+    if (
+      canWatchFullFilm &&
+      !hasIncrementedView &&
+      !hasTriggeredViewCount &&
+      filmData?.id
+    ) {
       console.log("Incrementing view count for film:", filmData.id);
+      setHasTriggeredViewCount(true);
+
       incrementViewCount(filmData.id)
         .unwrap()
-        .then(() => {
-          console.log("View count incremented successfully");
+        .then((response) => {
+          console.log("View count incremented successfully:", response);
           setHasIncrementedView(true);
         })
         .catch((error) => {
           console.error("Failed to increment view count:", error);
+          setHasTriggeredViewCount(false); // Allow retry on error
         });
     }
-  }, [canWatchFullFilm, hasIncrementedView, filmData?.id, incrementViewCount]);
+  }, [
+    canWatchFullFilm,
+    hasIncrementedView,
+    hasTriggeredViewCount,
+    filmData?.id,
+    incrementViewCount,
+  ]);
 
-  // Handle watch time tracking
+  // Handle watch time tracking with better debouncing and validation
   const handleTimeUpdate = (currentTime) => {
-    if (canWatchFullFilm && filmData?.id) {
-      const watchTimeMinutes = Math.floor(currentTime / 60);
+    if (!canWatchFullFilm || !filmData?.id || currentTime <= 5) {
+      return; // Only track if more than 5 seconds
+    }
 
-      // Only update if watch time has increased by at least 1 minute
-      if (watchTimeMinutes > lastWatchTime) {
-        setLastWatchTime(watchTimeMinutes);
+    const watchTimeMinutes = Math.floor(currentTime / 60);
 
-        // Clear previous timeout
-        if (watchTimeInterval.current) {
-          clearTimeout(watchTimeInterval.current);
-        }
+    // Don't update if time hasn't progressed meaningfully (at least 1 minute)
+    if (watchTimeMinutes === 0) {
+      return;
+    }
 
-        // Debounce API calls - update after 2 seconds of no change
-        watchTimeInterval.current = setTimeout(() => {
-          console.log("Updating watch time:", watchTimeMinutes, "minutes");
-          updateWatchTime({
-            filmId: filmData.id,
-            watchTime: watchTimeMinutes,
-          })
-            .unwrap()
-            .then(() => {
-              console.log("Watch time updated successfully");
-            })
-            .catch((error) => {
-              console.error("Failed to update watch time:", error);
-            });
-        }, 2000);
-      }
+    // Clear any existing timeout
+    if (watchTimeTimeout.current) {
+      clearTimeout(watchTimeTimeout.current);
+    }
+
+    // Debounce the API call - wait 5 seconds after last update (increased from 2)
+    watchTimeTimeout.current = setTimeout(() => {
+      console.log(
+        "Updating watch time:",
+        watchTimeMinutes,
+        "minutes for film:",
+        filmData.id
+      );
+
+      updateWatchTime({
+        filmId: filmData.id,
+        watchTime: watchTimeMinutes,
+      })
+        .unwrap()
+        .then((response) => {
+          console.log("Watch time updated successfully:", response);
+        })
+        .catch((error) => {
+          console.error("Failed to update watch time:", error);
+        });
+    }, 5000); // Increased debounce time
+  };
+
+  // Handle immediate watch time update (on pause, seek, or component unmount)
+  const handleImmediateTimeUpdate = (currentTime) => {
+    if (!canWatchFullFilm || !filmData?.id || currentTime <= 0) {
+      return;
+    }
+
+    const watchTimeMinutes = Math.floor(currentTime / 60);
+
+    // Clear any pending timeout
+    if (watchTimeTimeout.current) {
+      clearTimeout(watchTimeTimeout.current);
+      watchTimeTimeout.current = null;
+    }
+
+    // Update immediately
+    if (watchTimeMinutes > 0) {
+      console.log(
+        "Immediate watch time update:",
+        watchTimeMinutes,
+        "minutes for film:",
+        filmData.id
+      );
+
+      updateWatchTime({
+        filmId: filmData.id,
+        watchTime: watchTimeMinutes,
+      })
+        .unwrap()
+        .then((response) => {
+          console.log("Immediate watch time updated successfully:", response);
+        })
+        .catch((error) => {
+          console.error("Failed to update immediate watch time:", error);
+        });
     }
   };
 
-  // Clean up interval on component unmount
+  // Clean up timeout on component unmount
   useEffect(() => {
     return () => {
-      if (watchTimeInterval.current) {
-        clearTimeout(watchTimeInterval.current);
+      if (watchTimeTimeout.current) {
+        clearTimeout(watchTimeTimeout.current);
       }
     };
   }, []);
@@ -260,15 +319,18 @@ export default function FilmDetails() {
   return (
     <div className="grid gap-5">
       {/* Video Player */}
-      <VideoPlayer
-        src={videoSrc}
-        poster={thumbnail}
-        title={title}
-        startTime={parseInt(startTime)}
-        filmId={film_id}
-        onTimeUpdate={handleTimeUpdate}
-        isFullFilm={canWatchFullFilm}
-      />
+      {videoSrc && (
+        <VideoPlayer
+          src={videoSrc}
+          poster={thumbnail}
+          title={title}
+          startTime={parseInt(startTime)}
+          filmId={film_id}
+          onTimeUpdate={handleTimeUpdate}
+          onClose={handleImmediateTimeUpdate}
+          isFullFilm={canWatchFullFilm}
+        />
+      )}
 
       {/* Details section */}
       <section className="my-5 space-y-5">

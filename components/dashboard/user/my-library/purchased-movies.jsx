@@ -45,6 +45,9 @@ export default function PurchasedMovies() {
   } = useGetMyLibraryQuery(queryParams);
 
   const movies = libraryResponse?.data || [];
+
+  // console.log("All purchase and rented movie:: ", libraryResponse);
+
   const totalCount = libraryResponse?.count || 0;
   const hasNext = libraryResponse?.next !== null;
   const hasPrevious = libraryResponse?.previous !== null;
