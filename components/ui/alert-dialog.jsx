@@ -38,7 +38,7 @@ function AlertDialogOverlay({ className, ...props }) {
 function AlertDialogContent({ className, ...props }) {
   return (
     <AlertDialogPortal>
-      <AlertDialogOverlay />
+      <AlertDialogOverlay className="bg-black/10 backdrop-blur-xs" />
       <AlertDialogPrimitive.Content
         data-slot="alert-dialog-content"
         className={cn(

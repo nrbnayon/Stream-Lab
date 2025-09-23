@@ -188,7 +188,7 @@ export default function DistroPopup({
         </Button>
       </DialogTrigger>
       {/* <DialogOverlay className="bg-black/10 backdrop-blur-xs" /> */}
-      <DialogContent className="sm:max-w-md backdrop-blur-md bg-white border border-white/20 text-black">
+      <DialogContent className="sm:max-w-md backdrop-blur-xs bg-white border border-white/20 text-black">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             {isUserLogin ? (
