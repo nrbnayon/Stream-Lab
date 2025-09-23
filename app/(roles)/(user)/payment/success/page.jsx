@@ -1,21 +1,28 @@
 "use client";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { toast } from "sonner";
-import { CheckCircleIcon } from "lucide-react";
+import { CheckCircleIcon, Loader2 } from "lucide-react";
 
-export default function PaymentSuccessPage() {
+// Create a separate component for the content that uses useSearchParams
+function PaymentSuccessContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const status = searchParams.get('status');
+  const status = searchParams.get("status");
 
   useEffect(() => {
     // Verify the status parameter
-    if (status === 'success') {
+    if (status === "success") {
       toast.success("Payment successful! Redirecting to your library...");
-      
+
       // Redirect to library after 3 seconds
       const timeout = setTimeout(() => {
         router.push("/my-library");
@@ -34,7 +41,7 @@ export default function PaymentSuccessPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black-50 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
@@ -44,23 +51,52 @@ export default function PaymentSuccessPage() {
             Payment Successful!
           </CardTitle>
           <CardDescription>
-            Your payment has been processed successfully. You now have access to your purchased content.
+            Your payment has been processed successfully. You now have access to
+            your purchased content.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="text-center text-sm text-gray-600">
-            You will be automatically redirected to your library in a few seconds...
+          <div className="text-center text-sm text-muted-foreground">
+            You will be automatically redirected to your library in a few
+            seconds...
           </div>
           <div className="space-y-2">
             <Button onClick={handleGoToLibrary} className="w-full">
               Go to My Library
             </Button>
-            <Button onClick={handleGoToWatch} variant="outline" className="w-full">
+            <Button
+              onClick={handleGoToWatch}
+              variant="outline"
+              className="w-full"
+            >
               Continue Browsing
             </Button>
           </div>
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+// Loading fallback component
+function PaymentSuccessLoading() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-background p-4">
+      <Card className="w-full max-w-md">
+        <CardContent className="flex flex-col items-center justify-center py-12">
+          <Loader2 className="w-8 h-8 animate-spin mb-4" />
+          <p className="text-muted-foreground">Loading payment status...</p>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
+// Main component wrapped with Suspense
+export default function PaymentSuccessPage() {
+  return (
+    <Suspense fallback={<PaymentSuccessLoading />}>
+      <PaymentSuccessContent />
+    </Suspense>
   );
 }

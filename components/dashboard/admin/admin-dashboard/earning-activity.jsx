@@ -16,7 +16,7 @@ import { PieChart, Pie, Cell, Legend, ResponsiveContainer } from "recharts";
 import { TrendingUp, DollarSign, Users, ShoppingCart } from "lucide-react";
 
 export default function EarningActivity({ dashboardResponse, isLoading }) {
-  console.log("dashboardResponse EarningActivity::", dashboardResponse);
+  // console.log("dashboardResponse EarningActivity::", dashboardResponse);
 
   // Get the actual values
   const totalBuy =
