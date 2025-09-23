@@ -12,7 +12,7 @@ export default function AdminPaymentsStats() {
   const { data: paymentsResponse, isLoading } = useGetAdminPaymentsQuery();
   const stats = paymentsResponse?.stats || {};
 
-  console.log("Payment section data:: ", paymentsResponse, "Stats::", stats);
+  // console.log("Payment section data:: ", paymentsResponse, "Stats::", stats);
 
   const adminPaymentsStats = [
     {

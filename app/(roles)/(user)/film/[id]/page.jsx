@@ -64,10 +64,10 @@ export default function FilmDetails() {
   // Final access check (not expired)
   const canWatchFullFilm = hasFullAccess && !isRentalExpired;
 
-  console.log("Library response:", libraryResponse);
-  console.log("Can watch full film:", canWatchFullFilm);
-  console.log("Has library access:", hasLibraryAccess);
-  console.log("Is rental expired:", isRentalExpired);
+  // console.log("Library response:", libraryResponse);
+  // console.log("Can watch full film:", canWatchFullFilm);
+  // console.log("Has library access:", hasLibraryAccess);
+  // console.log("Is rental expired:", isRentalExpired);
 
   // Increment view count - only once per session when user has full access
   useEffect(() => {

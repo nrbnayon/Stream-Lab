@@ -32,7 +32,7 @@ export default function WatchFilm() {
   const hasFullAccess =
     filmData?.access_type === "Owned" || filmData?.access_type === "Rented";
 
-  console.log("General response:", generalResponse);
+  // console.log("General response:", generalResponse);
 
   if (isLoading) {
     return (

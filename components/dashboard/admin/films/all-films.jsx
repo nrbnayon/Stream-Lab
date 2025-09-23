@@ -13,7 +13,7 @@ export default function AllFilms() {
   const { data: filmsResponse, isLoading } = useGetAdminFilmsQuery();
   const films = filmsResponse?.track_all_films || [];
 
-  console.log("All the films::", filmsResponse)
+  // console.log("All the films::", filmsResponse)
 
   return (
     <Card className="my-5">

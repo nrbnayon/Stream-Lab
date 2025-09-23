@@ -13,7 +13,7 @@ export default function FilmApproval() {
     const { data: filmsResponse, isLoading } = useGetAdminFilmsQuery();
     const reviewFilms = filmsResponse?.review_films || [];
 
-    console.log("All the films::", filmsResponse);
+    // console.log("All the films::", filmsResponse);
   return (
     <Card className="my-5">
       <CardHeader>

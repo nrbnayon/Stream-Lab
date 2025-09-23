@@ -1,3 +1,4 @@
+// components/dashboard/admin/subscribers/subscriber-delete-alert.jsx
 "use client";
 import {
   AlertDialog,
@@ -14,34 +15,59 @@ import { Button } from "@/components/ui/button";
 import { Delete02Icon } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { useState } from "react";
+import { useDeleteSubscriberMutation } from "@/redux/store/api/adminApi";
+import { toast } from "sonner";
+
 export default function SubscriberDeleteAlert({ subscriber = {} }) {
-  const {} = subscriber;
+  const { subscriber_id, full_name, email } = subscriber;
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const [deleteSubscriber] = useDeleteSubscriberMutation();
+
   const handleDelete = async () => {
+    if (!subscriber_id) {
+      toast({
+        title: "Error",
+        description: "No subscriber ID found",
+        variant: "destructive",
+      });
+      return;
+    }
+
     try {
       setLoading(true);
 
-      // if (!res.ok) {
-      //   throw new Error("Failed to delete user");
-      // }
-    } catch (err) {
-      console.error(err);
+      const result = await deleteSubscriber(subscriber_id).unwrap();
+
+      toast({
+        title: "Success",
+        description: result.message || "Subscriber deleted successfully",
+        variant: "default",
+      });
+
+      setOpen(false);
+    } catch (error) {
+      console.error("Delete error:", error);
+      toast({
+        title: "Error",
+        description: error?.data?.message || "Failed to delete subscriber",
+        variant: "destructive",
+      });
     } finally {
       setLoading(false);
     }
   };
+
   return (
-    <AlertDialog>
-      <AlertDialogTrigger>
+    <AlertDialog open={open} onOpenChange={setOpen}>
+      <AlertDialogTrigger asChild>
         <Button
           variant="ghost"
           size="icon"
-          className="bg-transparent text-red-500"
-          asChild
+          className="bg-transparent text-red-500 hover:bg-red-100 hover:text-red-600"
         >
-          <span>
-            <HugeiconsIcon icon={Delete02Icon} />
-          </span>
+          <HugeiconsIcon icon={Delete02Icon} />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -49,18 +75,20 @@ export default function SubscriberDeleteAlert({ subscriber = {} }) {
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
             This action cannot be undone. This will permanently remove{" "}
-            <span className="font-black text-primary">{`This User`}</span>{" "}
-            subscription and remove data from your database.
+            <span className="font-black text-primary">
+              {full_name || "this subscriber"}
+            </span>{" "}
+            ({email}) subscription and remove data from your database.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel disabled={loading}>Cancel</AlertDialogCancel>
           <AlertDialogAction
-            variant="destructive"
+            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             onClick={handleDelete}
             disabled={loading}
           >
-            Delete
+            {loading ? "Deleting..." : "Delete"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

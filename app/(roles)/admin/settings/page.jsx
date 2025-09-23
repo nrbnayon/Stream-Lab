@@ -12,12 +12,12 @@ export default function AdminSettingsPage() {
   const { data: userResponse, isLoading } = useGetMeQuery();
   const userInfo = userResponse?.data || {};
 
-  console.log(
-    "Admin info::",
-    userResponse,
-    "Admin::",
-    getFullImageUrl(userInfo.avatar)
-  );
+  // console.log(
+  //   "Admin info::",
+  //   userResponse,
+  //   "Admin::",
+  //   getFullImageUrl(userInfo.avatar)
+  // );
 
   if (isLoading) {
     return (

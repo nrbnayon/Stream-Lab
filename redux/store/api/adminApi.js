@@ -22,6 +22,7 @@ export const adminApi = createApi({
     "AdminPayments",
     "AdminDistro",
     "AdminSubscribers",
+    "FilmDetails",
   ],
   endpoints: (builder) => ({
     // Dashboard
@@ -62,6 +63,30 @@ export const adminApi = createApi({
         return `/films${params.toString() ? `?${params.toString()}` : ""}`;
       },
       providesTags: ["AdminFilms"],
+    }),
+
+    // Film Details - Single film for admin review
+    getFilmDetails: builder.query({
+      query: (filmId) => `/film-details?film_id=${filmId}`,
+      providesTags: (result, error, filmId) => [
+        { type: "FilmDetails", id: filmId },
+        "FilmDetails",
+      ],
+      keepUnusedDataFor: 300, // Keep cache for 5 minutes
+      transformResponse: (response) => {
+        // Transform the response to ensure consistent data structure
+        if (response.status === "success") {
+          return response;
+        }
+        throw new Error(response.message || "Failed to fetch film details");
+      },
+      transformErrorResponse: (response) => {
+        return {
+          status: response.status,
+          message: response.data?.message || "Failed to fetch film details",
+          data: response.data,
+        };
+      },
     }),
 
     deleteFilm: builder.mutation({
@@ -118,7 +143,11 @@ export const adminApi = createApi({
           params.toString() ? `?${params.toString()}` : ""
         }`;
       },
-      providesTags: ["AdminSubscribers"],
+      providesTags: (result, error, arg) => [
+        { type: "AdminSubscribers", id: `page-${arg?.page || 1}` },
+        "AdminSubscribers",
+      ],
+      keepUnusedDataFor: 300,
     }),
 
     deleteSubscriber: builder.mutation({
@@ -127,6 +156,23 @@ export const adminApi = createApi({
         method: "DELETE",
       }),
       invalidatesTags: ["AdminSubscribers"],
+      // Optimistic update - remove from cache immediately
+      async onQueryStarted(subscriberId, { dispatch, queryFulfilled }) {
+        // Update all subscriber queries optimistically
+        const patchResults = [];
+
+        // Find all cached subscriber queries and update them
+        const subscriberQueries = dispatch(
+          adminApi.util.selectInvalidatedBy(["AdminSubscribers"])
+        );
+
+        try {
+          await queryFulfilled;
+        } catch {
+          // Revert optimistic updates on failure
+          patchResults.forEach(({ undo }) => undo());
+        }
+      },
     }),
   }),
 });
@@ -136,6 +182,7 @@ export const {
   useGetAdminUsersQuery,
   useDeleteUserMutation,
   useGetAdminFilmsQuery,
+  useGetFilmDetailsQuery,
   useDeleteFilmMutation,
   useApproveOrRejectFilmMutation,
   useGetAdminPaymentsQuery,

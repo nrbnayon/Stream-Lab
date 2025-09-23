@@ -34,7 +34,7 @@ export default function SignOutBtn() {
       setOpen(false);
 
       router.push("/");
-      console.log("Successfully logged out");
+      // console.log("Successfully logged out");
     } catch (error) {
       console.error("Logout error:", error);
     } finally {

@@ -38,7 +38,7 @@ export default function SignInForm() {
         password,
       }).unwrap();
 
-      console.log("Login response:", response);
+      // console.log("Login response:", response);
       // Dispatch credentials to Redux store
       dispatch(setCredentials(response));
 
