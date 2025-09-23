@@ -94,8 +94,18 @@ export const adminApi = createApi({
 
     // Distro Reports
     getAdminDistroReport: builder.query({
-      query: () => "/distro-report",
-      providesTags: ["AdminDistro"],
+      query: ({ page = 1 } = {}) => {
+        const params = new URLSearchParams();
+        if (page) params.append("page", page);
+        return `/distro-report${
+          params.toString() ? `?${params.toString()}` : ""
+        }`;
+      },
+      providesTags: (result, error, arg) => [
+        { type: "AdminDistro", id: `page-${arg?.page || 1}` },
+        "AdminDistro",
+      ],
+      keepUnusedDataFor: 300,
     }),
 
     // Subscribers Management
