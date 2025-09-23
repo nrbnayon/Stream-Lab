@@ -32,10 +32,11 @@ export const adminApi = createApi({
 
     // User Management
     getAdminUsers: builder.query({
-      query: ({ user_id, search } = {}) => {
+      query: ({ user_id, search, page = 1 } = {}) => {
         const params = new URLSearchParams();
         if (user_id) params.append("user_id", user_id);
         if (search) params.append("search", search);
+        if (page) params.append("page", page);
         return `/manage-users${
           params.toString() ? `?${params.toString()}` : ""
         }`;
@@ -48,15 +49,16 @@ export const adminApi = createApi({
         url: `/manage-users?user_id=${userId}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["AdminUsers"],
+      invalidatesTags: ["AdminUsers", "AdminPayments"],
     }),
 
     // Films Management
     getAdminFilms: builder.query({
-      query: ({ user_id, search } = {}) => {
+      query: ({ user_id, search, page = 1 } = {}) => {
         const params = new URLSearchParams();
         if (user_id) params.append("user_id", user_id);
         if (search) params.append("search", search);
+        if (page) params.append("page", page);
         return `/films${params.toString() ? `?${params.toString()}` : ""}`;
       },
       providesTags: ["AdminFilms"],
@@ -67,7 +69,7 @@ export const adminApi = createApi({
         url: `/films-delete?film_id=${filmId}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["AdminFilms"],
+      invalidatesTags: ["AdminFilms", "AdminPayments"],
     }),
 
     approveOrRejectFilm: builder.mutation({
@@ -79,10 +81,15 @@ export const adminApi = createApi({
       invalidatesTags: ["AdminFilms"],
     }),
 
-    // Payments Overview
+    // Payments Overview - Enhanced with better caching
     getAdminPayments: builder.query({
       query: ({ page = 1 } = {}) => `/payments-overview?page=${page}`,
-      providesTags: ["AdminPayments"],
+      providesTags: (result, error, arg) => [
+        { type: "AdminPayments", id: `page-${arg?.page || 1}` },
+        "AdminPayments",
+      ],
+      // Keep cache for 5 minutes
+      keepUnusedDataFor: 300,
     }),
 
     // Distro Reports
@@ -93,9 +100,10 @@ export const adminApi = createApi({
 
     // Subscribers Management
     getAdminSubscribers: builder.query({
-      query: ({ search } = {}) => {
+      query: ({ search, page = 1 } = {}) => {
         const params = new URLSearchParams();
         if (search) params.append("search", search);
+        if (page) params.append("page", page);
         return `/subscribers${
           params.toString() ? `?${params.toString()}` : ""
         }`;

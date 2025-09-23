@@ -1,3 +1,4 @@
+// AdminPaymentsPage.jsx
 import PaymentMethods from "@/components/dashboard/admin/payment/payment-methods";
 import RecentTransactionsTable from "@/components/dashboard/admin/payment/recent-transactions-table";
 import AdminPaymentsStats from "@/components/dashboard/admin/payment/stats";

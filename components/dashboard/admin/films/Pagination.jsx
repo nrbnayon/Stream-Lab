@@ -1,3 +1,4 @@
+// components/dashboard/admin/films/Pagination.jsx
 "use client";
 import { Button } from "@/components/ui/button";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
@@ -7,7 +8,7 @@ export default function Pagination({
   totalPages,
   onPageChange,
   totalItems,
-  itemsPerPage = 20,
+  itemsPerPage = 10,
 }) {
   const startItem = (currentPage - 1) * itemsPerPage + 1;
   const endItem = Math.min(currentPage * itemsPerPage, totalItems);
@@ -58,7 +59,7 @@ export default function Pagination({
 
   return (
     <div className="flex items-center justify-between px-2 py-4">
-      <div className="text-sm text-gray-700">
+      <div className="text-sm text-muted-foreground">
         Showing {startItem} to {endItem} of {totalItems} results
       </div>
 
@@ -78,7 +79,7 @@ export default function Pagination({
           {getVisiblePages().map((page, index) => (
             <div key={index}>
               {page === "..." ? (
-                <span className="px-3 py-2 text-gray-500">...</span>
+                <span className="px-3 py-2 text-muted-foreground">...</span>
               ) : (
                 <Button
                   variant={page === currentPage ? "default" : "outline"}
