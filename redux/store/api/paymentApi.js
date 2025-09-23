@@ -122,7 +122,7 @@ export const paymentApi = createApi({
     // AI Subscription - Stripe
     createStripeSubscriptionCheckout: builder.mutation({
       query: (data) => ({
-        url: "/payment/stripe/create-checkout-session",
+        url: "/payment/stripe/create-subscriptions-checkout-session",
         method: "POST",
         body: data,
       }),

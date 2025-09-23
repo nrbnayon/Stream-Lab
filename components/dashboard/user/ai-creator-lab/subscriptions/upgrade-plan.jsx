@@ -19,7 +19,7 @@ import { useState } from "react";
 
 export default function UpgradePlan() {
   const [open, setOpen] = useState(false);
-  // TODO: Call API here
+
   return (
     <Drawer direction="bottom" open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>

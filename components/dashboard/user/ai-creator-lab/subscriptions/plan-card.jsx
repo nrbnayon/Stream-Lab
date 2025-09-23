@@ -1,3 +1,4 @@
+// components\dashboard\user\ai-creator-lab\subscriptions\plan-card.jsx
 "use client";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,8 +24,18 @@ import {
 import { Loading03Icon, Tick01Icon } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { useState } from "react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import {
+  useCreateStripeSubscriptionCheckoutMutation,
+  useCreatePayPalSubscriptionCheckoutMutation,
+  useCreateReelBuxSubscriptionCheckoutMutation,
+} from "@/redux/store/api/paymentApi";
+
 export default function PlanCard({ subscriptionPlan }) {
   const { isHighlighted, icon, name, price, features } = subscriptionPlan;
+  const router = useRouter();
+
   const [paymentData, setPaymentData] = useState({
     payment_method: "",
     plan_name: name,
@@ -32,18 +43,117 @@ export default function PlanCard({ subscriptionPlan }) {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
-  // TODO: Pay here
+  // Subscription mutations
+  const [createStripeSubscriptionCheckout] =
+    useCreateStripeSubscriptionCheckoutMutation();
+  const [createPayPalSubscriptionCheckout] =
+    useCreatePayPalSubscriptionCheckoutMutation();
+  const [createReelBuxSubscriptionCheckout] =
+    useCreateReelBuxSubscriptionCheckoutMutation();
+
+  // Handle payment processing
   const handlePayment = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    console.log(paymentData);
 
-    setTimeout(() => {
+    if (!paymentData.payment_method) {
+      toast.error("Please select a payment method");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const subscriptionData = {
+        payment_type: "subscribe",
+        plan: name,
+        duration_days: "30",
+        limit_value: getLimitValue(name),
+      };
+
+      let response;
+
+      switch (paymentData.payment_method) {
+        case "card":
+          response = await createStripeSubscriptionCheckout(
+            subscriptionData
+          ).unwrap();
+          if (response?.checkoutUrl) {
+            window.location.href = response.checkoutUrl;
+          }
+          break;
+
+        case "paypal":
+          const paypalData = {
+            plan: name,
+            duration_days: 30,
+            limit_value: getLimitValue(name),
+          };
+          response = await createPayPalSubscriptionCheckout(
+            paypalData
+          ).unwrap();
+          if (response?.approvalUrl) {
+            window.location.href = response.approvalUrl;
+          }
+          break;
+
+        case "wallet":
+          const reelBuxData = {
+            plan: name,
+            duration_days: 30,
+            limit_value: getLimitValue(name),
+          };
+          response = await createReelBuxSubscriptionCheckout(
+            reelBuxData
+          ).unwrap();
+          if (response?.message) {
+            toast.success(response.message);
+            // Refresh the page or redirect to subscription page
+            setTimeout(() => {
+              router.refresh();
+            }, 1500);
+          }
+          break;
+
+        default:
+          toast.error("Invalid payment method selected");
+          break;
+      }
+    } catch (error) {
+      console.error("Subscription error:", error);
+
+      // Handle specific error messages
+      if (error?.data?.message) {
+        if (
+          error.data.message.includes("already have an active subscription")
+        ) {
+          toast.info("You already have an active subscription.");
+        } else {
+          toast.error(error.data.message);
+        }
+      } else {
+        toast.error("Subscription failed. Please try again.");
+      }
+    } finally {
       setLoading(false);
-    }, 2000);
-    setOpen(false);
-    setPaymentData({ payment_method: "", plan_name: name });
+      setOpen(false);
+      setPaymentData({ payment_method: "", plan_name: name });
+    }
   };
+
+  // Get limit value based on plan name
+  const getLimitValue = (planName) => {
+    switch (planName.toLowerCase()) {
+      case "starter":
+        return "5";
+      case "pro":
+        return "10";
+      case "enterprise":
+        return "50";
+      default:
+        return "10";
+    }
+  };
+
   return (
     <Card
       className={`${
@@ -104,13 +214,18 @@ export default function PlanCard({ subscriptionPlan }) {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    <SelectItem value="card">card</SelectItem>
-                    <SelectItem value="paypal">paypal</SelectItem>
-                    <SelectItem value="wallet">wallet</SelectItem>
+                    <SelectItem value="card">Card (Stripe)</SelectItem>
+                    <SelectItem value="paypal">PayPal</SelectItem>
+                    <SelectItem value="wallet">ReelBux Wallet</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>
-              <Button disabled={!paymentData.payment_method}>Pay Now</Button>
+              <Button
+                type="submit"
+                disabled={!paymentData.payment_method || loading}
+              >
+                {loading ? "Processing..." : "Pay Now"}
+              </Button>
             </form>
           </PopoverContent>
         </Popover>

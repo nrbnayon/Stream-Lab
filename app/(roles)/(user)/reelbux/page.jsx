@@ -1,3 +1,4 @@
+// app\(roles)\(user)\reelbux\page.jsx
 import ReelbuxBalanceStats from "@/components/dashboard/user/reelbux/stats";
 import TransactionHistory from "@/components/dashboard/user/reelbux/transaction-history";
 import Image from "next/image";

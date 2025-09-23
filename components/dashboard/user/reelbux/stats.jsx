@@ -1,4 +1,5 @@
-'use client'
+// components\dashboard\user\reelbux\stats.jsx
+"use client";
 import { CreditCardIcon, PlusSignIcon } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 import PaymentDialog from "../../payment-dialog";
@@ -33,10 +34,9 @@ export default function ReelbuxBalanceStats() {
         <PaymentDialog
           inputDisabled={false}
           intention="add"
-          dialogDescription="Add funds to your Reelbux wallet to purchase films."
-          dialogTitle="Add Fund"
-          intentionBtnText="Add"
-          apiEndPoint=""
+          dialogDescription="Add funds to your ReelBux wallet. You can pay with card, PayPal, or transfer from your Distro balance."
+          dialogTitle="Add Funds to ReelBux"
+          intentionBtnText="Add Funds"
           triggerBtn={
             <Button variant="ghost" asChild>
               <span>
