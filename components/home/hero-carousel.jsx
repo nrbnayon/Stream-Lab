@@ -96,7 +96,10 @@ export default function HeroCarousel({ renderFor = "home" }) {
         } flex items-center justify-center bg-gray-900`}
       >
         {renderFor === "home" && <NavBar />}
-        <div className="text-white text-lg">Error loading films</div>
+        <div className="text-white text-lg">
+          The server is temporarily down. We’re working on a fix and will
+          restore service soon.
+        </div>
       </div>
     );
   }
