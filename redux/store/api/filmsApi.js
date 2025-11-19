@@ -131,6 +131,14 @@ export const filmsApi = createApi({
       providesTags: ["FilmDetails"],
     }),
 
+    getMyTitleFilmDetails: builder.query({
+      query: (filmId) => ({
+        url: `/my-titles/edit?film_id=${filmId}`,
+        method: "get",
+      }),
+      providesTags: ["FilmDetails"],
+    }),
+
     // Film upload
     uploadFilm: builder.mutation({
       query: (formData) => {
@@ -219,6 +227,7 @@ export const {
   useGetMyTitlesQuery,
   useGetMyTitlesAnalyticsQuery,
   useGetFilmDetailsQuery,
+  useGetMyTitleFilmDetailsQuery,
   useUploadFilmMutation,
   useEditFilmMutation,
   useIncrementViewCountMutation,

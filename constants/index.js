@@ -255,7 +255,7 @@ const sidebarLinks = {
       groupName: "Creator Tools",
       links: [
         {
-          name: "My Titles",
+          name: " Users Projects",
           href: "/my-titles",
           icon: <HugeiconsIcon icon={PlayListIcon} />,
         },
@@ -599,7 +599,6 @@ const adminFilmsStats = [
     icon: Dollar01Icon,
     isDollar: true,
     isGreen: true,
-
   },
 ];
 

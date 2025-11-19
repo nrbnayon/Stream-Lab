@@ -9,6 +9,7 @@ import {
 import GeneratedVideos from "./generated-videos";
 import GeneratedImages from "./generated-images";
 import AnalyzedScripts from "./analyzed-scripts";
+import { Loader2 } from "lucide-react";
 
 export default function RecentGeneration({
   activeTab = "video",
@@ -22,7 +23,8 @@ export default function RecentGeneration({
   const renderContent = () => {
     if (isLoading) {
       return (
-        <p className="text-center text-secondary-foreground my-5">
+        <p className="text-center text-secondary-foreground my-5 flex flex-col justify-between items-center">
+          <Loader2 className="w-8 h-8 animate-spin mb-4" />
           Loading your latest creations...
         </p>
       );
