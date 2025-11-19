@@ -4,13 +4,14 @@ import InputField from "../input-field";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { useSignupMutation } from "@/redux/store/api/authApi"; 
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useSignupMutation } from "@/redux/store/api/authApi";
 import { toast } from "sonner";
 
 export default function SignUpForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [signup, { isLoading }] = useSignupMutation();
 
   const [fullName, setFullName] = useState("");
@@ -19,6 +20,15 @@ export default function SignUpForm() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isAgreed, setIsAgreed] = useState(false);
   const [error, setError] = useState(null);
+  const [redirectUrl, setRedirectUrl] = useState(null);
+
+  // Get redirect URL from query params on component mount
+  useEffect(() => {
+    const redirect = searchParams.get("redirect");
+    if (redirect) {
+      setRedirectUrl(redirect);
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,7 +70,12 @@ export default function SignUpForm() {
         );
         // Small delay to let user see the toast before redirecting
         setTimeout(() => {
-          router.push("/signin");
+          // Redirect to signin with the original redirect URL if it exists
+          if (redirectUrl) {
+            router.push(`/signin?redirect=${encodeURIComponent(redirectUrl)}`);
+          } else {
+            router.push("/signin");
+          }
         }, 1500);
       }
     } catch (err) {
@@ -151,7 +166,14 @@ export default function SignUpForm() {
       {/* If already have an account */}
       <p className="text-center">
         Already have an account? &nbsp;
-        <Link href="/signin" className="text-primary hover:underline">
+        <Link
+          href={
+            redirectUrl
+              ? `/signin?redirect=${encodeURIComponent(redirectUrl)}`
+              : "/signin"
+          }
+          className="text-primary hover:underline"
+        >
           Sign In
         </Link>
       </p>

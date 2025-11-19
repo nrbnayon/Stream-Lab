@@ -251,12 +251,12 @@ function createNextResponse() {
 // =====================================================================
 
 export function middleware(request) {
-  const { pathname } = request.nextUrl;
+  const { pathname, search } = request.nextUrl;
   const method = request.method;
   const isDev = process.env.NEXT_PUBLIC_NODE_ENV === "development";
 
   if (isDev) {
-    console.log(`\n🚀 [MIDDLEWARE] ${method} ${pathname}`);
+    console.log(`\n🚀 [MIDDLEWARE] ${method} ${pathname}${search}`);
   }
 
   // Skip middleware for Next.js internals, static files, and API routes
@@ -318,7 +318,8 @@ export function middleware(request) {
             `🚫 [MIDDLEWARE] Not authenticated → Redirecting to signin`
           );
         const signinUrl = new URL("/signin", request.url);
-        signinUrl.searchParams.set("redirect", pathname);
+        // Store the full original URL including query params
+        signinUrl.searchParams.set("redirect", pathname + search);
         return NextResponse.redirect(signinUrl);
       }
 
@@ -342,7 +343,8 @@ export function middleware(request) {
         if (isDev)
           console.log(`🚫 [MIDDLEWARE] Access denied → Redirecting to signin`);
         const signinUrl = new URL("/signin", request.url);
-        signinUrl.searchParams.set("redirect", pathname);
+        // Store the full original URL including query params
+        signinUrl.searchParams.set("redirect", pathname + search);
         return NextResponse.redirect(signinUrl);
       }
 
@@ -355,7 +357,19 @@ export function middleware(request) {
       if (isDev) console.log(`🚪 [MIDDLEWARE] Auth route: ${pathname}`);
 
       if (isAuthenticated) {
-        // Redirect based on role
+        // Check if there's a redirect parameter
+        const redirectParam = request.nextUrl.searchParams.get("redirect");
+
+        if (redirectParam) {
+          // User is already authenticated and there's a redirect, send them there
+          if (isDev)
+            console.log(
+              `↩️  [MIDDLEWARE] Already authenticated → Redirecting to: ${redirectParam}`
+            );
+          return createRedirectResponse(request, redirectParam);
+        }
+
+        // No redirect param, redirect based on role
         if (role === "admin") {
           if (isDev)
             console.log(
@@ -387,7 +401,8 @@ export function middleware(request) {
     if (!isAuthenticated) {
       if (isDev) console.log(`🚫 [MIDDLEWARE] Unknown route blocked`);
       const signinUrl = new URL("/signin", request.url);
-      signinUrl.searchParams.set("redirect", pathname);
+      // Store the full original URL including query params
+      signinUrl.searchParams.set("redirect", pathname + search);
       return NextResponse.redirect(signinUrl);
     }
 

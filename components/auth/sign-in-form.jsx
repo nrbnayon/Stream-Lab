@@ -3,8 +3,8 @@
 import Link from "next/link";
 import InputField from "../input-field";
 import { Button } from "../ui/button";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "@/redux/store/slices/authSlice";
 import { useLoginMutation } from "@/redux/store/api/authApi";
@@ -12,6 +12,7 @@ import { toast } from "sonner";
 
 export default function SignInForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const dispatch = useDispatch();
   const [login, { isLoading }] = useLoginMutation();
 
@@ -19,6 +20,15 @@ export default function SignInForm() {
   const [password, setPassword] = useState("");
   const [keepMeSignedIn, setKeepMeSignedIn] = useState(false);
   const [error, setError] = useState(null);
+  const [redirectUrl, setRedirectUrl] = useState(null);
+
+  // Get redirect URL from query params on component mount
+  useEffect(() => {
+    const redirect = searchParams.get("redirect");
+    if (redirect) {
+      setRedirectUrl(redirect);
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,15 +48,17 @@ export default function SignInForm() {
         password,
       }).unwrap();
 
-      // console.log("Login response:", response);
       // Dispatch credentials to Redux store
       dispatch(setCredentials(response));
 
       toast.success(
         `Successfully signed in! Welcome ${response?.full_name} 🎉🎞️.`
       );
-      // Redirect based on role
-      if (response.role === "admin") {
+
+      // Redirect to the original URL if it exists, otherwise redirect based on role
+      if (redirectUrl) {
+        router.push(redirectUrl);
+      } else if (response.role === "admin") {
         router.push("/admin/dashboard");
       } else {
         router.push("/watch");
@@ -125,7 +137,14 @@ export default function SignInForm() {
       {/* If Not an existing user */}
       <p className="text-center">
         Don&apos;t have an account? &nbsp;
-        <Link href="/signup" className="text-primary hover:underline">
+        <Link
+          href={
+            redirectUrl
+              ? `/signup?redirect=${encodeURIComponent(redirectUrl)}`
+              : "/signup"
+          }
+          className="text-primary hover:underline"
+        >
           Sign Up
         </Link>
       </p>

@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -7,17 +6,39 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useEffect, useState } from "react";
 import GeneratedVideos from "./generated-videos";
 import GeneratedImages from "./generated-images";
 import AnalyzedScripts from "./analyzed-scripts";
 
-export default function RecentGeneration() {
-  const [activeTab, setActiveTab] = useState("video");
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    //
-  }, [activeTab]);
+export default function RecentGeneration({
+  activeTab = "video",
+  recentGenerations = {},
+  isLoading = false,
+}) {
+  const videos = recentGenerations.video ?? [];
+  const images = recentGenerations.image ?? [];
+  const scripts = recentGenerations.script ?? [];
+
+  const renderContent = () => {
+    if (isLoading) {
+      return (
+        <p className="text-center text-secondary-foreground my-5">
+          Loading your latest creations...
+        </p>
+      );
+    }
+
+    if (activeTab === "video") {
+      return <GeneratedVideos videos={videos} />;
+    }
+
+    if (activeTab === "image") {
+      return <GeneratedImages images={images} />;
+    }
+
+    return <AnalyzedScripts scripts={scripts} />;
+  };
+
   return (
     <Card className="my-5">
       <CardHeader>
@@ -25,34 +46,8 @@ export default function RecentGeneration() {
         <CardDescription>Recently generated content</CardDescription>
       </CardHeader>
       <CardContent>
-        {/* Tab Buttons */}
-        <div className="flex gap-2 md:gap-3 *:grow">
-          <Button
-            variant={activeTab === "video" ? "default" : "secondary"}
-            onClick={() => setActiveTab("video")}
-          >
-            Video
-          </Button>
-          <Button
-            variant={activeTab === "image" ? "default" : "secondary"}
-            onClick={() => setActiveTab("image")}
-          >
-            Image
-          </Button>
-          <Button
-            variant={activeTab === "script" ? "default" : "secondary"}
-            onClick={() => setActiveTab("script")}
-          >
-            Script
-          </Button>
-        </div>
-
         {/* conditionally showing tabs */}
-        <div>
-          {activeTab === "video" && <GeneratedVideos />}
-          {activeTab === "image" && <GeneratedImages />}
-          {activeTab === "script" && <AnalyzedScripts />}
-        </div>
+        <div>{renderContent()}</div>
       </CardContent>
     </Card>
   );

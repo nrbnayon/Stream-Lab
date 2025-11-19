@@ -8,6 +8,7 @@ import { reelbuxApi } from "./api/reelbuxApi";
 import { distroApi } from "./api/distroApi";
 import { paymentApi } from "./api/paymentApi";
 import { adminApi } from "./api/adminApi";
+import { aiCreatorApi } from "./api/aiCreatorApi";
 
 export const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ export const store = configureStore({
     [distroApi.reducerPath]: distroApi.reducer,
     [paymentApi.reducerPath]: paymentApi.reducer,
     [adminApi.reducerPath]: adminApi.reducer,
+    [aiCreatorApi.reducerPath]: aiCreatorApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -36,6 +38,7 @@ export const store = configureStore({
       reelbuxApi.middleware,
       distroApi.middleware,
       paymentApi.middleware,
-      adminApi.middleware
+      adminApi.middleware,
+      aiCreatorApi.middleware
     ),
 });

@@ -1,10 +1,10 @@
 import VideoCard from "./video-card";
 
-export default function GeneratedVideos({ videos = [0, 1, 2] }) {
+export default function GeneratedVideos({ videos = [] }) {
   return videos.length ? (
     <div className="my-5 flex gap-5 flex-wrap">
       {videos.map((video, i) => (
-        <VideoCard key={i} />
+        <VideoCard key={video?.id ?? i} video={video} />
       ))}
     </div>
   ) : (

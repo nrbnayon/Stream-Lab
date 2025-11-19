@@ -1,7 +1,7 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 // Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -22,6 +22,7 @@ import Link from "next/link";
 import TrailerPopup from "../trailer-popup";
 import { useGetLatestFilmsQuery } from "../../redux/store/api/filmsApi";
 import CircularLoader from "../ui/CircularLoader";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function HeroCarousel({ renderFor = "home" }) {
   const swiperRef = useRef(null);
@@ -61,6 +62,18 @@ export default function HeroCarousel({ renderFor = "home" }) {
     { scope: swiperRef, dependencies: [moviesData] }
   );
 
+  const handlePrev = () => {
+    if (swiperRef.current?.swiper) {
+      swiperRef.current.swiper.slidePrev();
+    }
+  };
+
+  const handleNext = () => {
+    if (swiperRef.current?.swiper) {
+      swiperRef.current.swiper.slideNext();
+    }
+  };
+
   // Loading state
   if (isLoading) {
     return (
@@ -97,7 +110,7 @@ export default function HeroCarousel({ renderFor = "home" }) {
       >
         {renderFor === "home" && <NavBar />}
         <div className="text-white text-lg">
-          The server is temporarily down. We’re working on a fix and will
+          The server is temporarily down. We're working on a fix and will
           restore service soon.
         </div>
       </div>
@@ -134,7 +147,7 @@ export default function HeroCarousel({ renderFor = "home" }) {
         }}
         allowTouchMove={false}
         loop={true}
-        modules={[Autoplay, Pagination]}
+        modules={[Autoplay, Pagination, Navigation]}
         className="h-full"
         pagination={{
           clickable: true,
@@ -211,6 +224,23 @@ export default function HeroCarousel({ renderFor = "home" }) {
           </SwiperSlide>
         ))}
       </Swiper>
+
+      {/* Navigation Buttons */}
+      <button
+        onClick={handlePrev}
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/30 active:bg-white/40 text-white rounded-full p-1 md:p-3 transition-all duration-300 backdrop-blur-md cursor-pointer hover:scale-110 active:scale-95 shadow-lg"
+        aria-label="Previous slide"
+      >
+        <ChevronLeft className="w-5 h-5" strokeWidth={2} />
+      </button>
+
+      <button
+        onClick={handleNext}
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/30 active:bg-white/40 text-white rounded-full p-1 md:p-3 transition-all duration-300 backdrop-blur-md cursor-pointer hover:scale-110 active:scale-95 shadow-lg"
+        aria-label="Next slide"
+      >
+        <ChevronRight className="w-5 h-5" strokeWidth={2} />
+      </button>
     </div>
   );
 }

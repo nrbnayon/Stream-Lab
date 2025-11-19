@@ -15,7 +15,7 @@ export const paymentApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Payment", "Distro"],
+  tagTypes: ["Payment", "Distro", "Subscription"],
   endpoints: (builder) => ({
     // Film Purchase - Stripe
     createStripePurchaseCheckout: builder.mutation({
@@ -178,6 +178,29 @@ export const paymentApi = createApi({
       }),
       invalidatesTags: ["Payment", "Distro"],
     }),
+
+    // Current AI subscription
+    getMySubscription: builder.query({
+      query: () => ({
+        url: "/payment/my-subscription",
+        method: "GET",
+      }),
+      transformResponse: (response) => response?.data ?? response,
+      transformErrorResponse: (response) => ({
+        status: response.status,
+        message: response.data?.message,
+      }),
+      providesTags: ["Subscription"],
+    }),
+
+    cancelSubscription: builder.mutation({
+      query: ({ cancel_now = false } = {}) => ({
+        url: "/payment/subscription/cancel",
+        method: "POST",
+        body: cancel_now ? { cancel_now } : {},
+      }),
+      invalidatesTags: ["Subscription"],
+    }),
   }),
 });
 
@@ -194,4 +217,6 @@ export const {
   useCreateStripeAddFundsCheckoutMutation,
   useCreatePayPalAddFundsCheckoutMutation,
   useTransferDistroToReelBuxMutation,
+  useGetMySubscriptionQuery,
+  useCancelSubscriptionMutation,
 } = paymentApi;
