@@ -4,12 +4,12 @@ import InputField from "../input-field";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useSignupMutation } from "@/redux/store/api/authApi";
 import { toast } from "sonner";
 
-export default function SignUpForm() {
+function SignUpFormContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [signup, { isLoading }] = useSignupMutation();
@@ -178,5 +178,13 @@ export default function SignUpForm() {
         </Link>
       </p>
     </form>
+  );
+}
+
+export default function SignUpForm() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SignUpFormContent />
+    </Suspense>
   );
 }

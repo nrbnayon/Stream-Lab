@@ -1,3 +1,4 @@
+// components/dashboard/user/ai-creator-lab/recent-generation.jsx
 "use client";
 import {
   Card,
@@ -15,10 +16,27 @@ export default function RecentGeneration({
   activeTab = "video",
   recentGenerations = {},
   isLoading = false,
+  showAllTypes = false,
 }) {
-  const videos = recentGenerations.video ?? [];
-  const images = recentGenerations.image ?? [];
-  const scripts = recentGenerations.script ?? [];
+  // If showAllTypes is true, display all generations without filtering
+  // Otherwise, filter by activeTab
+  const videos = showAllTypes
+    ? Array.isArray(recentGenerations)
+      ? recentGenerations.filter((gen) => gen.task_type === "video")
+      : recentGenerations.video ?? []
+    : recentGenerations.video ?? [];
+
+  const images = showAllTypes
+    ? Array.isArray(recentGenerations)
+      ? recentGenerations.filter((gen) => gen.task_type === "image")
+      : recentGenerations.image ?? []
+    : recentGenerations.image ?? [];
+
+  const scripts = showAllTypes
+    ? Array.isArray(recentGenerations)
+      ? recentGenerations.filter((gen) => gen.task_type === "script")
+      : recentGenerations.script ?? []
+    : recentGenerations.script ?? [];
 
   const renderContent = () => {
     if (isLoading) {
@@ -27,6 +45,42 @@ export default function RecentGeneration({
           <Loader2 className="w-8 h-8 animate-spin mb-4" />
           Loading your latest creations...
         </p>
+      );
+    }
+
+    if (showAllTypes) {
+      const hasAnyContent =
+        videos.length > 0 || images.length > 0 || scripts.length > 0;
+
+      if (!hasAnyContent) {
+        return (
+          <p className="text-destructive text-center my-5">
+            You haven&apos;t generated any content yet
+          </p>
+        );
+      }
+
+      return (
+        <div className="space-y-8">
+          {videos.length > 0 && (
+            <div>
+              <h3 className="text-xl font-semibold mb-4">Videos</h3>
+              <GeneratedVideos videos={videos} />
+            </div>
+          )}
+          {images.length > 0 && (
+            <div>
+              <h3 className="text-xl font-semibold mb-4">Images</h3>
+              <GeneratedImages images={images} />
+            </div>
+          )}
+          {scripts.length > 0 && (
+            <div>
+              <h3 className="text-xl font-semibold mb-4">Scripts</h3>
+              <AnalyzedScripts scripts={scripts} />
+            </div>
+          )}
+        </div>
       );
     }
 
@@ -48,7 +102,6 @@ export default function RecentGeneration({
         <CardDescription>Recently generated content</CardDescription>
       </CardHeader>
       <CardContent>
-        {/* conditionally showing tabs */}
         <div>{renderContent()}</div>
       </CardContent>
     </Card>

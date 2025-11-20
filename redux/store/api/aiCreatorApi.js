@@ -3,7 +3,6 @@ import Cookies from "js-cookie";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const extractPayload = (response = {}) => {
-  // If response has a data property, use it, otherwise use response directly
   if (response?.data) return response.data;
   return response;
 };
@@ -91,6 +90,8 @@ const normalizeUsage = (response = {}) => {
     ? recentSource.map(normalizeGeneration)
     : [];
 
+  const pagination = payload?.pagination ?? null;
+
   return {
     free: {
       used: freeUsed,
@@ -109,6 +110,7 @@ const normalizeUsage = (response = {}) => {
       limit: subscriptionLimit,
     },
     recent,
+    pagination,
   };
 };
 
@@ -147,9 +149,11 @@ export const aiCreatorApi = createApi({
       providesTags: ["AiUsage"],
     }),
     getRecentGenerations: builder.query({
-      query: ({ taskType } = {}) => {
+      query: ({ taskType, page = 1, pageSize = 20 } = {}) => {
         const params = new URLSearchParams();
         if (taskType) params.append("task_type", taskType);
+        params.append("page", page.toString());
+        params.append("page_size", pageSize.toString());
 
         const queryString = params.toString();
 
@@ -160,9 +164,16 @@ export const aiCreatorApi = createApi({
       },
       transformResponse: (response) => {
         console.log("Raw API response (getRecentGenerations):", response);
-        const normalized = normalizeUsage(response).recent;
+        const normalized = normalizeUsage(response);
         console.log("Normalized recent generations:", normalized);
-        return normalized;
+        return {
+          data: normalized.recent,
+          pagination: normalized.pagination,
+          usage: {
+            free: normalized.free,
+            subscription: normalized.subscription,
+          },
+        };
       },
       providesTags: (result, error, arg) => [
         {
@@ -210,6 +221,20 @@ export const aiCreatorApi = createApi({
         { type: "AiGenerations", id: "all" },
       ],
     }),
+    deleteAiGeneration: builder.mutation({
+      query: ({ id }) => ({
+        url: "/ai-generation",
+        method: "DELETE",
+        body: { id },
+      }),
+      invalidatesTags: (result, error, arg) => [
+        "AiUsage",
+        { type: "AiGenerations", id: "all" },
+        { type: "AiGenerations", id: "video" },
+        { type: "AiGenerations", id: "image" },
+        { type: "AiGenerations", id: "script" },
+      ],
+    }),
   }),
 });
 
@@ -217,4 +242,5 @@ export const {
   useGetAiUsageQuery,
   useGetRecentGenerationsQuery,
   useGenerateAiContentMutation,
+  useDeleteAiGenerationMutation,
 } = aiCreatorApi;

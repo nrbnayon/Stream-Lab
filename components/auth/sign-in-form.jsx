@@ -3,14 +3,14 @@
 import Link from "next/link";
 import InputField from "../input-field";
 import { Button } from "../ui/button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "@/redux/store/slices/authSlice";
 import { useLoginMutation } from "@/redux/store/api/authApi";
 import { toast } from "sonner";
 
-export default function SignInForm() {
+function SignInFormContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
@@ -149,5 +149,44 @@ export default function SignInForm() {
         </Link>
       </p>
     </form>
+  );
+}
+
+export default function SignInForm() {
+  return (
+    <Suspense fallback={<SignInFormSkeleton />}>
+      <SignInFormContent />
+    </Suspense>
+  );
+}
+
+// Loading skeleton component
+function SignInFormSkeleton() {
+  return (
+    <div className="mt-8 space-y-3 animate-pulse">
+      {/* Email skeleton */}
+      <div className="space-y-2">
+        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+        <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded"></div>
+      </div>
+
+      {/* Password skeleton */}
+      <div className="space-y-2">
+        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
+        <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded"></div>
+      </div>
+
+      {/* Checkbox and forgot password skeleton */}
+      <div className="flex items-center justify-between">
+        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-32"></div>
+        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-28"></div>
+      </div>
+
+      {/* Button skeleton */}
+      <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded"></div>
+
+      {/* Sign up link skeleton */}
+      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-48 mx-auto"></div>
+    </div>
   );
 }

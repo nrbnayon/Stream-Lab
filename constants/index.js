@@ -255,7 +255,7 @@ const sidebarLinks = {
       groupName: "Creator Tools",
       links: [
         {
-          name: " Users Projects",
+          name: " My Titles",
           href: "/my-titles",
           icon: <HugeiconsIcon icon={PlayListIcon} />,
         },

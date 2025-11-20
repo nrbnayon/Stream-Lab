@@ -112,6 +112,9 @@ function SidebarProvider({
     [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
   );
 
+  // Filter out aria-hidden to prevent accessibility violations
+  const { "aria-hidden": _, ...restProps } = props;
+
   return (
     <SidebarContext.Provider value={contextValue}>
       <TooltipProvider delayDuration={0}>
@@ -126,7 +129,7 @@ function SidebarProvider({
             "group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex gap-3 min-h-svh w-full",
             className
           )}
-          {...props}
+          {...restProps}
         >
           {children}
         </div>

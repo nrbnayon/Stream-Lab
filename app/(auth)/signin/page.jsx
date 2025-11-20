@@ -15,14 +15,12 @@ export default function SignIn() {
         className="mx-auto w-auto h-auto"
         alt="brand-logo"
       />
-
       <div className="mt-5 text-center">
         <h5 className="text-2xl font-medium">Welcome Back</h5>
         <p className="text-lg text-secondary-foreground font-light">
           Sign in on your account
         </p>
       </div>
-
       {/* Signin form */}
       <SignInForm />
     </>

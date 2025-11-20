@@ -56,13 +56,15 @@ export default function AiInput({ activeTab = "video", onGenerationComplete }) {
 
       toast.success(
         response?.message ||
-          `Your ${currentTab === "script" ? "analysis" : "generation"} is ready`
+          `Your ${currentTab === "script" ? "analysis" : "generation"} is ${
+            response?.status === "processing" ? "processing" : "ready"
+          }`
       );
 
       const body = response?.data ?? response ?? {};
 
       const normalizedResult = {
-        id: body?.id ?? `${currentTab}-${Date.now()}`,
+        id: body?.id ?? response?.id ?? `${currentTab}-${Date.now()}`,
         task_type: currentTab,
         prompt: payload.inputData || uploadedFile?.name || "Uploaded file",
         file_name: body?.file_name ?? uploadedFile?.name,
@@ -85,7 +87,7 @@ export default function AiInput({ activeTab = "video", onGenerationComplete }) {
           "",
         summary: body?.summary ?? body?.description ?? response?.message ?? "",
         metadata: body?.metadata ?? body?.meta ?? {},
-        status: body?.status ?? "completed",
+        status: body?.status ?? response?.status ?? "processing",
         created_at: body?.created_at ?? new Date().toISOString(),
         raw: body,
       };
@@ -104,7 +106,6 @@ export default function AiInput({ activeTab = "video", onGenerationComplete }) {
     }
   };
 
-  // Remove files when leave from script tab
   useEffect(() => {
     if (currentTab !== "script") {
       setUploadedFile(null);
@@ -124,7 +125,6 @@ export default function AiInput({ activeTab = "video", onGenerationComplete }) {
       />
 
       <div className="grid md:grid-cols-2 mt-2">
-        {/* Preview section */}
         <div>
           {uploadedFile ? (
             <p className="relative inline-block">
@@ -142,7 +142,6 @@ export default function AiInput({ activeTab = "video", onGenerationComplete }) {
           ) : null}
         </div>
 
-        {/* Upload file and generate button */}
         <div className="flex gap-3 justify-end">
           {!uploadedFile && currentTab === "script" ? (
             <Button variant="secondary" className="p-0">
