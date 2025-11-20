@@ -57,7 +57,7 @@ export default function VideoCard({ video }) {
             <Button
               size="icon"
               variant="ghost"
-              className="h-8 w-8 bg-destructive/70 hover:bg-destructive/90 rounded-full backdrop-blur-sm"
+              className="h-8 w-8 bg-primary/70 hover:bg-primary/90 rounded-full backdrop-blur-sm"
               onClick={handleDelete}
             >
               <Trash2 className="w-4 h-4 text-white" />
@@ -133,7 +133,7 @@ export default function VideoCard({ video }) {
           <Button
             size="icon"
             variant="ghost"
-            className="h-8 w-8 bg-destructive/70 hover:bg-destructive/90 rounded-full backdrop-blur-sm"
+            className="h-8 w-8 bg-primary/70 hover:bg-primary/90 rounded-full backdrop-blur-sm"
             onClick={handleDelete}
           >
             <Trash2 className="w-4 h-4 text-white" />

@@ -196,7 +196,7 @@ export default function FilmEditDialog({ trigger, filmID }) {
                     <button
                       type="button"
                       onClick={removeThumbnail}
-                      className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full p-1.5 transition-all shadow-lg"
+                      className="absolute -top-2 -right-2 bg-primary/500 hover:bg-primary text-white rounded-full p-1.5 transition-all shadow-lg"
                     >
                       <X size={16} />
                     </button>

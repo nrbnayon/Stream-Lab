@@ -198,7 +198,7 @@ export default function SubscriptionStatus({
               <AlertDialogAction
                 onClick={handleCancel}
                 disabled={isCancelling}
-                className="bg-destructive text-white hover:bg-destructive/90"
+                className="bg-primary text-white hover:bg-primary/90"
               >
                 {isCancelling ? "Canceling..." : "Confirm Cancellation"}
               </AlertDialogAction>

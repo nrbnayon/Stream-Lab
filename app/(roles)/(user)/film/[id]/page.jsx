@@ -384,7 +384,7 @@ export default function FilmDetails() {
                     ? "bg-purple-100 text-purple-800"
                     : access_type === "Rented" || access_type === "Rent"
                     ? isRentalExpired
-                      ? "bg-red-100 text-red-800"
+                      ? "bg-primary/70 text-red-800"
                       : "bg-blue-100 text-blue-800"
                     : "bg-gray-100 text-gray-800"
                 }`}
@@ -406,7 +406,7 @@ export default function FilmDetails() {
 
         {/* Show rental expired message */}
         {isRentalExpired && (
-          <div className="bg-red-50 border border-red-200 rounded-md p-3">
+          <div className="bg-primary/50 border border-red-200 rounded-md p-3">
             <p className="text-sm text-red-800">
               <strong>Rental Expired:</strong> This rental has expired. You'll
               need to rent again to watch the full film.

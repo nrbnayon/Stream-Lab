@@ -48,7 +48,7 @@ export default function ImageCard({ image }) {
             <Button
               size="icon"
               variant="ghost"
-              className="bg-destructive/50 hover:bg-destructive/70 rounded-full"
+              className="bg-primary/50 hover:bg-primary/70 rounded-full"
               onClick={handleDelete}
             >
               <Trash2 className="w-4 h-4" />
@@ -111,7 +111,7 @@ export default function ImageCard({ image }) {
           <Button
             size="icon"
             variant="ghost"
-            className="bg-destructive/50 hover:bg-destructive/70 rounded-full"
+            className="bg-primary/50 hover:bg-primary/70 rounded-full"
             onClick={handleDelete}
           >
             <Trash2 className="w-4 h-4" />

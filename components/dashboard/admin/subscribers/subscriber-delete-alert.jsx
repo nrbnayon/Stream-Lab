@@ -65,7 +65,7 @@ export default function SubscriberDeleteAlert({ subscriber = {} }) {
         <Button
           variant="ghost"
           size="icon"
-          className="bg-transparent text-red-500 hover:bg-red-100 hover:text-red-600"
+          className="bg-transparent text-red-500 hover:bg-primary/70 hover:text-red-600"
         >
           <HugeiconsIcon icon={Delete02Icon} />
         </Button>
@@ -84,7 +84,7 @@ export default function SubscriberDeleteAlert({ subscriber = {} }) {
         <AlertDialogFooter>
           <AlertDialogCancel disabled={loading}>Cancel</AlertDialogCancel>
           <AlertDialogAction
-            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            className="bg-primary text-destructive-foreground hover:bg-primary/90"
             onClick={handleDelete}
             disabled={loading}
           >

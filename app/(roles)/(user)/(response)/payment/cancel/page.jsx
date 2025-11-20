@@ -35,7 +35,7 @@ export default function PaymentCancelPage() {
     <div className="min-h-screen flex items-center justify-center bg-black-50 p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
+          <div className="mx-auto w-16 h-16 bg-primary/70 rounded-full flex items-center justify-center mb-4">
             <XCircleIcon className="w-10 h-10 text-red-600" />
           </div>
           <CardTitle className="text-2xl text-red-600">

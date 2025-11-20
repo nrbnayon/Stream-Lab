@@ -45,7 +45,7 @@ export default function TransferStatus() {
     {
       label: "Failed",
       count: transferStatus.failed_count || 0,
-      color: "bg-destructive",
+      color: "bg-primary",
     },
   ];
 

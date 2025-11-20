@@ -265,7 +265,7 @@ export default function AdminWatchPage() {
               )
             }
             disabled={isDeleting}
-            className="border-red-200 text-red-600 hover:bg-red-50"
+            className="border-red-200 text-red-600 hover:bg-primary/50"
           >
             <Trash2Icon className="w-4 h-4 mr-2" />
             {isDeleting ? "Deleting..." : "Delete"}
@@ -549,7 +549,7 @@ export default function AdminWatchPage() {
               className={
                 confirmationDialog.type === "delete" ||
                 confirmationDialog.type === "reject"
-                  ? "bg-destructive hover:bg-destructive/90"
+                  ? "bg-primary hover:bg-primary/90"
                   : confirmationDialog.type === "approve"
                   ? "bg-green-600 hover:bg-green-700"
                   : ""

@@ -84,7 +84,7 @@ export default function DistroStats() {
   if (error) {
     return (
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3 lg:gap-5 my-5">
-        <div className="col-span-full bg-destructive/10 px-3 md:px-5 py-5 md:py-10 rounded-md text-center">
+        <div className="col-span-full bg-primary/10 px-3 md:px-5 py-5 md:py-10 rounded-md text-center">
           <p className="text-destructive">Failed to load distro stats</p>
         </div>
       </div>

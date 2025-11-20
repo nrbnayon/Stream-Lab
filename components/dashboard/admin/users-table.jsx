@@ -70,7 +70,7 @@ export default function UsersTable({ users, onDeleteUser, isDeleting }) {
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
                       <AlertDialogAction
                         onClick={() => onDeleteUser(user.id)}
-                        className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                        className="bg-primary text-destructive-foreground hover:bg-primary/90"
                       >
                         {isDeleting ? "Deleting..." : "Delete User"}
                       </AlertDialogAction>

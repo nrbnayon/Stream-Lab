@@ -62,7 +62,7 @@ export default function DeleteConfirmationModal({
           <AlertDialogAction
             onClick={handleDelete}
             disabled={isLoading}
-            className="bg-destructive hover:bg-destructive/90"
+            className="bg-primary hover:bg-primary/90"
           >
             {isLoading ? (
               <>

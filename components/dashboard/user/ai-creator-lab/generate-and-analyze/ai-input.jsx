@@ -136,7 +136,7 @@ export default function AiInput({ activeTab = "video", onGenerationComplete }) {
                 icon={Cancel01Icon}
                 size={15}
                 onClick={() => setUploadedFile(null)}
-                className="absolute -right-2 -top-1 text-red-500 bg-red-100/25 rounded-full cursor-pointer"
+                className="absolute -right-2 -top-1 text-red-500 bg-primary/70/25 rounded-full cursor-pointer"
               />
             </p>
           ) : null}

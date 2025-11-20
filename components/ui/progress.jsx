@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 const colorMap = {
   primary: ["bg-primary", "bg-primary/20"],
-  red: ["bg-red-500", "bg-red-500/20"],
+  red: ["bg-primary/500", "bg-primary/500/20"],
   green: ["bg-green-500", "bg-green-500/20"],
   blue: ["bg-blue-500", "bg-blue-500/20"],
 };

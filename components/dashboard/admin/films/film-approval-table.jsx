@@ -189,7 +189,7 @@ export default function FilmApprovalTable({ reviewFilms, isLoading }) {
               disabled={isSubmitting}
               className={
                 pendingAction?.action === "Reject"
-                  ? "bg-destructive hover:bg-destructive/90"
+                  ? "bg-primary hover:bg-primary/90"
                   : ""
               }
             >

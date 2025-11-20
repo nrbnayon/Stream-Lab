@@ -48,7 +48,7 @@ export default function UpgradePlan() {
               <DrawerClose asChild>
                 <Button
                   size="icon"
-                  className="mx-auto my-5 lg:my-10 rounded-full scale-150 bg-destructive/25 hover:bg-destructive/50"
+                  className="mx-auto my-5 lg:my-10 rounded-full scale-150 bg-primary/25 hover:bg-primary/50"
                 >
                   <HugeiconsIcon icon={Cancel01Icon} />
                 </Button>

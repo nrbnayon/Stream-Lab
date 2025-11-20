@@ -107,7 +107,7 @@ export default function UploadContent({
             variant="ghost"
             size="sm"
             onClick={removeFile}
-            className="ml-2 h-8 w-8 p-0 hover:bg-red-100"
+            className="ml-2 h-8 w-8 p-0 hover:bg-primary/70"
           >
             <X className="h-4 w-4 text-red-500" />
           </Button>

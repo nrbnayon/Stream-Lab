@@ -86,7 +86,7 @@ export default function AnalyzedScripts({ scripts = [] }) {
                   <Button
                     size="icon"
                     variant="ghost"
-                    className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                    className="text-destructive hover:text-destructive hover:bg-primary/10"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleDelete(script);
