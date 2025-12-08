@@ -179,6 +179,16 @@ export const paymentApi = createApi({
       invalidatesTags: ["Payment", "Distro"],
     }),
 
+    // Withdraw ReelBux
+    withdrawReelBux: builder.mutation({
+      query: (data) => ({
+        url: "/payment/withdraw/reelbux",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Payment", "ReelBux"],
+    }),
+
     // Current AI subscription
     getMySubscription: builder.query({
       query: () => ({
@@ -217,6 +227,7 @@ export const {
   useCreateStripeAddFundsCheckoutMutation,
   useCreatePayPalAddFundsCheckoutMutation,
   useTransferDistroToReelBuxMutation,
+  useWithdrawReelBuxMutation,
   useGetMySubscriptionQuery,
   useCancelSubscriptionMutation,
 } = paymentApi;

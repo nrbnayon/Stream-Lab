@@ -1,16 +1,30 @@
 // components\dashboard\user\reelbux\stats.jsx
 "use client";
-import { CreditCardIcon, PlusSignIcon } from "@hugeicons/core-free-icons/index";
+import {
+  CreditCardIcon,
+  PlusSignIcon,
+  ArrowDownIcon,
+} from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 import PaymentDialog from "../../payment-dialog";
+import WithdrawDialog from "../../withdraw-dialog";
 import { Button } from "@/components/ui/button";
 import { useGetReelBuxBalanceQuery } from "@/redux/store/api/reelbuxApi";
 
 export default function ReelbuxBalanceStats() {
-  const { data: reelBuxResponse, isLoading } = useGetReelBuxBalanceQuery();
+  const {
+    data: reelBuxResponse,
+    isLoading,
+    refetch,
+  } = useGetReelBuxBalanceQuery();
   const balance = reelBuxResponse?.reel_bux_balance || 0;
 
   console.log("Balance::", balance, "reelBuxResponse", reelBuxResponse);
+
+  const handleWithdrawSuccess = () => {
+    // Refetch balance after successful withdrawal
+    refetch();
+  };
 
   if (isLoading) {
     return (
@@ -31,21 +45,37 @@ export default function ReelbuxBalanceStats() {
         <h2 className="text-3xl md:text-4xl font-black grow w-full">
           ${balance.toFixed(2)}
         </h2>
-        <PaymentDialog
-          inputDisabled={false}
-          intention="add"
-          dialogDescription="Add funds to your ReelBux wallet. You can pay with card, PayPal, or transfer from your Distro balance."
-          dialogTitle="Add Funds to ReelBux"
-          intentionBtnText="Add Funds"
-          triggerBtn={
-            <Button variant="ghost" asChild>
-              <span>
-                <HugeiconsIcon icon={PlusSignIcon} />
-                Add Funds
-              </span>
-            </Button>
-          }
-        />
+        <div className="shrink-0 flex items-center gap-4">
+          <PaymentDialog
+            inputDisabled={false}
+            intention="add"
+            dialogDescription="Add funds to your ReelBux wallet. You can pay with card, PayPal, or transfer from your Distro balance."
+            dialogTitle="Add Funds to ReelBux"
+            intentionBtnText="Add Funds"
+            triggerBtn={
+              <Button variant="ghost" asChild>
+                <span>
+                  <HugeiconsIcon icon={PlusSignIcon} />
+                  Add Funds
+                </span>
+              </Button>
+            }
+          />
+          <WithdrawDialog
+            maxAmount={balance}
+            dialogDescription="Withdraw your ReelBux balance to your bank account. Your funds will be transferred within 1-3 business days."
+            dialogTitle="Withdraw ReelBux"
+            onWithdrawSuccess={handleWithdrawSuccess}
+            triggerBtn={
+              <Button variant="ghost" asChild disabled={balance <= 0}>
+                <span>
+                  <HugeiconsIcon icon={ArrowDownIcon} />
+                  Withdraw
+                </span>
+              </Button>
+            }
+          />
+        </div>
       </div>
     </div>
   );
