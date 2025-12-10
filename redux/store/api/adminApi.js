@@ -182,9 +182,12 @@ export const adminApi = createApi({
         const params = new URLSearchParams();
         if (page) params.append("page", page);
         if (page_size) params.append("page_size", page_size);
-        return `/payment/admin/withdraw/approve${
-          params.toString() ? `?${params.toString()}` : ""
-        }`;
+        // Use absolute URL to bypass /admin prefix since endpoint is at /payment/admin/...
+        return {
+          url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/admin/withdraw/approve${
+            params.toString() ? `?${params.toString()}` : ""
+          }`,
+        };
       },
       providesTags: (result, error, arg) => [
         { type: "AdminWithdrawals", id: `page-${arg?.page || 1}` },
@@ -195,7 +198,8 @@ export const adminApi = createApi({
 
     approveOrRejectWithdrawal: builder.mutation({
       query: (data) => ({
-        url: "/payment/admin/withdraw/approve",
+        // Use absolute URL to bypass /admin prefix since endpoint is at /payment/admin/...
+        url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/admin/withdraw/approve`,
         method: "POST",
         body: data,
       }),

@@ -8,6 +8,7 @@ import {
   Film02Icon,
   Image03Icon,
   Link05Icon,
+  MoneyReceive02Icon,
   MoneySend02Icon,
   PlayCircleIcon,
   PlayListIcon,
@@ -346,6 +347,11 @@ const sidebarLinks = {
           name: "Payments",
           href: "/admin/payments",
           icon: <HugeiconsIcon icon={CreditCardValidationIcon} />,
+        },
+        {
+          name: "Withdrawals",
+          href: "/admin/withdrawals",
+          icon: <HugeiconsIcon icon={MoneyReceive02Icon} />,
         },
         {
           name: "Distro",
