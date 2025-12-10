@@ -23,6 +23,7 @@ export const adminApi = createApi({
     "AdminDistro",
     "AdminSubscribers",
     "FilmDetails",
+    "AdminWithdrawals",
   ],
   endpoints: (builder) => ({
     // Dashboard
@@ -174,6 +175,32 @@ export const adminApi = createApi({
         }
       },
     }),
+
+    // Withdrawal Management
+    getAdminWithdrawals: builder.query({
+      query: ({ page = 1, page_size = 10 } = {}) => {
+        const params = new URLSearchParams();
+        if (page) params.append("page", page);
+        if (page_size) params.append("page_size", page_size);
+        return `/payment/admin/withdraw/approve${
+          params.toString() ? `?${params.toString()}` : ""
+        }`;
+      },
+      providesTags: (result, error, arg) => [
+        { type: "AdminWithdrawals", id: `page-${arg?.page || 1}` },
+        "AdminWithdrawals",
+      ],
+      keepUnusedDataFor: 300,
+    }),
+
+    approveOrRejectWithdrawal: builder.mutation({
+      query: (data) => ({
+        url: "/payment/admin/withdraw/approve",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["AdminWithdrawals"],
+    }),
   }),
 });
 
@@ -189,4 +216,6 @@ export const {
   useGetAdminDistroReportQuery,
   useGetAdminSubscribersQuery,
   useDeleteSubscriberMutation,
+  useGetAdminWithdrawalsQuery,
+  useApproveOrRejectWithdrawalMutation,
 } = adminApi;
