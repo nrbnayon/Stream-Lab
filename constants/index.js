@@ -400,6 +400,18 @@ const sidebarLinks = {
       ],
     },
   ],
+  manager: [
+    {
+      groupName: "Manager Tools",
+      links: [
+        {
+          name: "Films",
+          href: "/manager/films",
+          icon: <HugeiconsIcon icon={PlayListIcon} />,
+        },
+      ],
+    },
+  ],
 };
 
 const aiGenerationCards = [
