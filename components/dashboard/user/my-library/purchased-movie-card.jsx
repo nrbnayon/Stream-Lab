@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { minutesToHours } from "@/lib/utils";
+import { secondsToHMS } from "@/lib/utils";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { PlayIcon, Time04Icon } from "@hugeicons/core-free-icons/index";
 import { Button } from "@/components/ui/button";
@@ -141,7 +141,7 @@ export default function PurchasedMovieCard({ movie }) {
           <Badge variant="secondary">{film_type || "Movie"}</Badge>
           <span className="text-secondary-foreground text-sm flex gap-2 items-center">
             <HugeiconsIcon icon={Time04Icon} className="size-4" />
-            {minutesToHours(full_film_duration || 0)}
+            {secondsToHMS(full_film_duration || 0)}
           </span>
         </div>
       </CardHeader>
@@ -168,8 +168,8 @@ export default function PurchasedMovieCard({ movie }) {
         <Progress value={progressPercentage} />
         {current_watch_time > 0 && (
           <p className="text-xs text-muted-foreground mt-1">
-            Watched {minutesToHours(current_watch_time)} of{" "}
-            {minutesToHours(full_film_duration)}
+            Watched {secondsToHMS(current_watch_time)} of{" "}
+            {secondsToHMS(full_film_duration)}
           </p>
         )}
       </CardFooter>
