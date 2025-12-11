@@ -106,8 +106,8 @@ export default function WithdrawalsTable() {
                 <TableHead>ID</TableHead>
                 <TableHead>User Email</TableHead>
                 <TableHead>User ID</TableHead>
-                <TableHead>Amount</TableHead>
                 <TableHead>Prev. Balance</TableHead>
+                <TableHead>Withdrawal Amount</TableHead>
                 <TableHead>Curr. Balance</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Requested At</TableHead>
@@ -125,11 +125,11 @@ export default function WithdrawalsTable() {
                     <TableCell className="font-mono text-sm">
                       {withdrawal.user_id}
                     </TableCell>
-                    <TableCell className="text-green-500 font-medium">
-                      ${Number(withdrawal.withdraw_amount).toFixed(2)}
-                    </TableCell>
                     <TableCell>
                       ${Number(withdrawal.previous_balance).toFixed(2)}
+                    </TableCell>
+                    <TableCell className="text-green-500 font-medium">
+                      ${Number(withdrawal.withdraw_amount).toFixed(2)}
                     </TableCell>
                     <TableCell
                       className={
@@ -156,7 +156,7 @@ export default function WithdrawalsTable() {
                     <TableCell className="text-sm">
                       {formatDate(withdrawal.requested_at)}
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="flex items-center justify-center gap-2">
                       {withdrawal.status === "pending" ? (
                         <div className="flex gap-2">
                           <Button

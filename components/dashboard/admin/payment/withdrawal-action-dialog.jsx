@@ -1,6 +1,5 @@
 // components/dashboard/admin/payment/withdrawal-action-dialog.jsx
 "use client";
-import { useState } from "react";
 import { useApproveOrRejectWithdrawalMutation } from "@/redux/store/api/adminApi";
 import {
   Dialog,
@@ -12,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { Separator } from "@/components/ui/separator";
 
 export default function WithdrawalActionDialog({
   isOpen,
@@ -30,7 +30,7 @@ export default function WithdrawalActionDialog({
 
       toast.success(
         action === "approved"
-          ? `Withdrawal approved successfully! Transfer ID: ${result.transfer_id || "N/A"}`
+          ? `Withdrawal approved successfully!`
           : "Withdrawal rejected successfully!"
       );
       onClose();
@@ -55,30 +55,32 @@ export default function WithdrawalActionDialog({
 
         <div className="space-y-3">
           <div className="bg-secondary p-3 rounded-md space-y-2">
+            
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">User Name:</span>
+              <span className="font-medium">{withdrawal?.user_name}</span>
+            </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">User Email:</span>
-              <span className="font-medium">{withdrawal.user_email}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">User ID:</span>
-              <span className="font-medium">{withdrawal.user_id}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Withdrawal Amount:</span>
-              <span className="font-medium text-green-500">
-                ${Number(withdrawal.withdraw_amount).toFixed(2)}
-              </span>
+              <span className="font-medium">{withdrawal?.user_email}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Previous Balance:</span>
               <span className="font-medium">
-                ${Number(withdrawal.previous_balance).toFixed(2)}
+                ${Number(withdrawal?.previous_balance).toFixed(2)}
               </span>
             </div>
             <div className="flex justify-between">
+              <span className="text-muted-foreground">Withdrawal Amount:</span>
+              <span className="font-medium text-green-500">
+                ${Number(withdrawal?.withdraw_amount).toFixed(2)}
+              </span>
+            </div>
+            <Separator />
+            <div className="flex justify-between">
               <span className="text-muted-foreground">Current Balance:</span>
               <span className="font-medium">
-                ${Number(withdrawal.current_balance).toFixed(2)}
+                ${Number(withdrawal?.current_balance).toFixed(2)}
               </span>
             </div>
           </div>
