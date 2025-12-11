@@ -56,7 +56,7 @@ export default function QuickShare() {
       <CardHeader>
         <CardTitle>Quick Share</CardTitle>
         <CardDescription>
-          Generate Distro links for popular films
+          Generate Distro links for your popular films
         </CardDescription>
       </CardHeader>
       <CardContent className="grid grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-5">

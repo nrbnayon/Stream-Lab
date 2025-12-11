@@ -32,6 +32,7 @@ export default function DistroPopup({
   distributionUrl,
   className,
   isUserLogin = true,
+  textDescription,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -213,9 +214,9 @@ export default function DistroPopup({
                   isUserLogin ? "text-green-800" : "text-blue-800"
                 )}
               >
-                {isUserLogin
+                {textDescription || (isUserLogin
                   ? "Share this film and earn 30% commission when someone purchases from your link."
-                  : "Login to share this film and earn 30% commission on purchases!"}
+                  : "Login to share this film and earn 30% commission on purchases!")}
               </span>
             </div>
           </DialogDescription>

@@ -113,9 +113,9 @@ export default function FilmApprovalTable({ reviewFilms, isLoading }) {
                   />
                 </Link>
                 <div className="min-w-0">
-                  <h3 className="text-lg md:text-xl font-medium truncate">
+                  <Link href={`/admin/watch/${film.id}`} className="">
                     {film.title}
-                  </h3>
+                  </Link>
                   <p className="text-left text-secondary-foreground">
                     {film.film_type}
                   </p>

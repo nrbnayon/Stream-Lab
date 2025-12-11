@@ -56,6 +56,7 @@ export default function QuickShareCard({ film }) {
           movieTitle={film_title}
           distributionUrl={distributionUrl}
           className="flex-shrink-0"
+          textDescription="Share this film and earn 70% commission when someone purchases from your link."
         />
       </CardFooter>
     </Card>
