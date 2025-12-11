@@ -124,18 +124,20 @@ export default function WithdrawDialog({
       }).unwrap();
 
       if (result?.message) {
-        toast.success(result.message || "Withdrawal request submitted successfully!");
 
-        // Show withdrawal details
-        if (result?.withdrawal_id) {
-          toast.info(`Withdrawal ID: ${result.withdrawal_id}`);
-        }
-        if (result?.amount) {
-          toast.info(`Amount: $${result.amount}`);
-        }
         if (result?.stripe_account) {
           toast.info(`Stripe Account: ${result.stripe_account}`);
         }
+
+        toast.success(result.message || "Withdrawal request submitted successfully!");
+
+        // Show withdrawal details
+        // if (result?.withdrawal_id) {
+        //   toast.info(`Withdrawal amount: ${result.amount}`);
+        // }
+        // if (result?.amount) {
+        //   toast.info(`Amount: $${result.amount}`);
+        // }
 
         // Reset form
         setWithdrawAmount("");
