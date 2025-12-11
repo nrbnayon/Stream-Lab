@@ -28,10 +28,10 @@ export default function AICreatorLab() {
   const currentServerGenerations = response?.data || [];
   const pagination = response?.pagination || null;
 
-  console.log("serverGenerations from API:", currentServerGenerations);
-  console.log("Pagination info:", pagination);
-  console.log("Is loading:", isRecentLoading);
-  console.log("Is error:", isError);
+  // console.log("serverGenerations from API:", currentServerGenerations);
+  // console.log("Pagination info:", pagination);
+  // console.log("Is loading:", isRecentLoading);
+  // console.log("Is error:", isError);
 
   const hasProcessingItems = useMemo(
     () => currentServerGenerations.some((gen) => gen?.status === "processing"),

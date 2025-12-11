@@ -144,11 +144,11 @@ export default function PlanCard({ subscriptionPlan }) {
   const getLimitValue = (planName) => {
     switch (planName.toLowerCase()) {
       case "starter":
-        return "5";
-      case "pro":
-        return "10";
-      case "enterprise":
         return "50";
+      case "pro":
+        return "100";
+      case "enterprise":
+        return "200";
       default:
         return "10";
     }
