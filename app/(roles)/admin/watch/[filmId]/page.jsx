@@ -44,6 +44,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import CircularLoader from "@/components/ui/CircularLoader";
+import { secondsToHMS } from "@/lib/utils";
 
 export default function AdminWatchPage() {
   const params = useParams();
@@ -75,6 +76,7 @@ export default function AdminWatchPage() {
 
   const filmDetails = filmResponse?.film_details;
 
+  console.log(filmDetails);
 
   const handleApproveOrReject = async (action) => {
     try {
@@ -216,7 +218,7 @@ export default function AdminWatchPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
+    <div className="container mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-6">
         <Button
           variant="outline"
@@ -314,7 +316,7 @@ export default function AdminWatchPage() {
                       Duration
                     </h4>
                     <p className="font-semibold">
-                      {formatDuration(filmDetails.full_film_duration)}
+                      {secondsToHMS(filmDetails.full_film_duration)}
                     </p>
                   </div>
                   <div>

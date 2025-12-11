@@ -179,10 +179,19 @@ export const paymentApi = createApi({
       invalidatesTags: ["Payment", "Distro"],
     }),
 
-    // Withdraw ReelBux
-    withdrawReelBux: builder.mutation({
+    // Connect Stripe Account for Withdrawals
+    connectStripeAccount: builder.mutation({
+      query: () => ({
+        url: "/payment/connect-account",
+        method: "POST",
+      }),
+      invalidatesTags: ["Payment"],
+    }),
+
+    // Request Withdrawal via Stripe
+    requestWithdrawal: builder.mutation({
       query: (data) => ({
-        url: "/payment/withdraw/reelbux",
+        url: "/payment/withdraw",
         method: "POST",
         body: data,
       }),
@@ -227,7 +236,8 @@ export const {
   useCreateStripeAddFundsCheckoutMutation,
   useCreatePayPalAddFundsCheckoutMutation,
   useTransferDistroToReelBuxMutation,
-  useWithdrawReelBuxMutation,
+  useConnectStripeAccountMutation,
+  useRequestWithdrawalMutation,
   useGetMySubscriptionQuery,
   useCancelSubscriptionMutation,
 } = paymentApi;
