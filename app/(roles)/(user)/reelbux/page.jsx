@@ -1,9 +1,13 @@
 // app\(roles)\(user)\reelbux\page.jsx
+"use client";
+import { useState } from "react";
 import ReelbuxBalanceStats from "@/components/dashboard/user/reelbux/stats";
 import TransactionHistory from "@/components/dashboard/user/reelbux/transaction-history";
 import Image from "next/image";
 
 export default function Reelbux() {
+  const [showTransactions, setShowTransactions] = useState(false);
+
   return (
     <>
       <Image
@@ -19,8 +23,11 @@ export default function Reelbux() {
         transfer your Distro sales into ReelBux and keep your funds ready for
         what you want next.
       </p>
-      <ReelbuxBalanceStats />
-      <TransactionHistory />
+      <ReelbuxBalanceStats 
+        onToggleTransactions={() => setShowTransactions(!showTransactions)}
+        showTransactions={showTransactions}
+      />
+      {showTransactions && <TransactionHistory />}
     </>
   );
 }

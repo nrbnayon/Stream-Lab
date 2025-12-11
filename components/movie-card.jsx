@@ -147,17 +147,17 @@ export default function MovieCard({
       </CardHeader>
 
       {/* Content | prices */}
-      <CardContent className="text-muted-foreground">
+      <CardContent className="text-muted-foreground flex gap-2 justify-between items-center p-0">
         {rent_price && (
-          <p className="flex justify-between">
+          <p className="flex justify-between gap-2">
             <span>Rent</span>
-            <span>${rent_price}</span>
+            <span className="font-semibold">${rent_price}</span>
           </p>
         )}
         {buy_price && (
-          <p className="flex justify-between">
+          <p className="flex justify-between gap-2">
             <span>Buy</span>
-            <span>${buy_price}</span>
+            <span className="font-semibold">${buy_price}</span>
           </p>
         )}
       </CardContent>

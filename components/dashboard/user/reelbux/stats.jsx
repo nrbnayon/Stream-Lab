@@ -11,7 +11,7 @@ import WithdrawDialog from "../../withdraw-dialog";
 import { Button } from "@/components/ui/button";
 import { useGetReelBuxBalanceQuery } from "@/redux/store/api/reelbuxApi";
 
-export default function ReelbuxBalanceStats() {
+export default function ReelbuxBalanceStats({ onToggleTransactions, showTransactions }) {
   const {
     data: reelBuxResponse,
     isLoading,
@@ -75,6 +75,21 @@ export default function ReelbuxBalanceStats() {
               </Button>
             }
           />
+          <Button
+            onClick={onToggleTransactions}
+            className="flex items-center gap-2 cursor-pointer hover:bg-secondary/80 transition-all bg-transparent text-sm text-muted-foreground underline"
+          >            {showTransactions ? (
+              <>
+                Hide History
+                {/* <ChevronUp className="w-4 h-4" /> */}
+              </>
+            ) : (
+              <>
+                Transactions History
+                {/* <ChevronDown className="w-4 h-4" /> */}
+              </>
+            )}
+          </Button>
         </div>
       </div>
     </div>

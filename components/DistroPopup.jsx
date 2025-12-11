@@ -184,7 +184,7 @@ export default function DistroPopup({
           className={cn("bg-transparent hover:bg-primary/10", className)}
         >
           {/* <HugeiconsIcon icon={Share01Icon} /> */}
-          <CustomIcon width={24} height={24} fill="#fff" />
+          <CustomIcon width={32} height={32} fill="#00a0fe" />
         </Button>
       </DialogTrigger>
       {/* <DialogOverlay className="bg-black/10 backdrop-blur-xs" /> */}
