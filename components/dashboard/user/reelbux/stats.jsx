@@ -19,7 +19,7 @@ export default function ReelbuxBalanceStats({ onToggleTransactions, showTransact
   } = useGetReelBuxBalanceQuery();
   const balance = reelBuxResponse?.reel_bux_balance || 0;
 
-  console.log("Balance::", balance, "reelBuxResponse", reelBuxResponse);
+  // console.log("Balance::", balance, "reelBuxResponse", reelBuxResponse);
 
   const handleWithdrawSuccess = () => {
     // Refetch balance after successful withdrawal
