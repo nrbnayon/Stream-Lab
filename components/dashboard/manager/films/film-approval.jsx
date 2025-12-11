@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import FilmApprovalTable from "../../admin/films/film-approval-table";
+import FilmApprovalTable from "./film-approval-table";
 import { useGetAdminFilmsQuery } from "@/redux/store/api/adminApi";
 
 export default function FilmApproval() {

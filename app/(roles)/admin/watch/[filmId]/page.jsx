@@ -1,6 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
@@ -50,6 +51,14 @@ export default function AdminWatchPage() {
   const params = useParams();
   const router = useRouter();
   const filmId = params.filmId;
+  const { role } = useSelector((state) => state.auth);
+
+  // Redirect managers to their own watch page
+  useEffect(() => {
+    if (role === "manager" && filmId) {
+      router.replace(`/manager/watch/${filmId}`);
+    }
+  }, [role, filmId, router]);
 
   const [trailerOpen, setTrailerOpen] = useState(false);
   const [fullFilmOpen, setFullFilmOpen] = useState(false);
@@ -258,21 +267,24 @@ export default function AdminWatchPage() {
               <XCircleIcon className="w-4 h-4 mr-2" />
               {isActionLoading ? "Processing..." : "Reject"}
             </Button>
-            <Button
-              variant="outline"
-              onClick={() =>
-                openConfirmationDialog(
-                  "delete",
-                  "Delete Film",
-                  `Are you sure you want to permanently delete "${filmDetails.title}"? This action cannot be undone and will remove all film data from the server.`
-                )
-              }
-              disabled={isDeleting}
-              className="border-red-200 text-red-600 hover:bg-primary/50"
-            >
-              <Trash2Icon className="w-4 h-4 mr-2" />
-              {isDeleting ? "Deleting..." : "Delete"}
-            </Button>
+            {/* Only show delete button for admin role, not manager */}
+            {role === "admin" && (
+              <Button
+                variant="outline"
+                onClick={() =>
+                  openConfirmationDialog(
+                    "delete",
+                    "Delete Film",
+                    `Are you sure you want to permanently delete "${filmDetails.title}"? This action cannot be undone and will remove all film data from the server.`
+                  )
+                }
+                disabled={isDeleting}
+                className="border-red-200 text-red-600 hover:bg-primary/50"
+              >
+                <Trash2Icon className="w-4 h-4 mr-2" />
+                {isDeleting ? "Deleting..." : "Delete"}
+              </Button>
+            )}
           </div>
         )}
       </div>
