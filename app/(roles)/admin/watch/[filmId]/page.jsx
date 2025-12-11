@@ -20,7 +20,6 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import {
   Dialog,
@@ -75,6 +74,7 @@ export default function AdminWatchPage() {
   const [deleteFilm, { isLoading: isDeleting }] = useDeleteFilmMutation();
 
   const filmDetails = filmResponse?.film_details;
+
 
   const handleApproveOrReject = async (action) => {
     try {
@@ -217,7 +217,6 @@ export default function AdminWatchPage() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
-      {/* Header Section */}
       <div className="flex items-center justify-between mb-6">
         <Button
           variant="outline"
@@ -226,51 +225,54 @@ export default function AdminWatchPage() {
         >
           ← Back to Films
         </Button>
-        <div className="flex gap-3">
-          <Button
-            onClick={() =>
-              openConfirmationDialog(
-                "approve",
-                "Approve Film",
-                `Are you sure you want to approve "${filmDetails.title}"? This will make it available to users.`
-              )
-            }
-            disabled={isActionLoading}
-            className="bg-green-600 hover:bg-green-700"
-          >
-            <CheckCircleIcon className="w-4 h-4 mr-2" />
-            {isActionLoading ? "Processing..." : "Approve"}
-          </Button>
-          <Button
-            variant="destructive"
-            onClick={() =>
-              openConfirmationDialog(
-                "reject",
-                "Reject Film",
-                `Are you sure you want to reject "${filmDetails.title}"? This action will prevent it from being published.`
-              )
-            }
-            disabled={isActionLoading}
-          >
-            <XCircleIcon className="w-4 h-4 mr-2" />
-            {isActionLoading ? "Processing..." : "Reject"}
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() =>
-              openConfirmationDialog(
-                "delete",
-                "Delete Film",
-                `Are you sure you want to permanently delete "${filmDetails.title}"? This action cannot be undone and will remove all film data from the server.`
-              )
-            }
-            disabled={isDeleting}
-            className="border-red-200 text-red-600 hover:bg-primary/50"
-          >
-            <Trash2Icon className="w-4 h-4 mr-2" />
-            {isDeleting ? "Deleting..." : "Delete"}
-          </Button>
-        </div>
+        {/* Only show action buttons if film is not published */}
+        {filmDetails.status?.toLowerCase() !== "published" && (
+          <div className="flex gap-3">
+            <Button
+              onClick={() =>
+                openConfirmationDialog(
+                  "approve",
+                  "Approve Film",
+                  `Are you sure you want to approve "${filmDetails.title}"? This will make it available to users.`
+                )
+              }
+              disabled={isActionLoading}
+              className="bg-green-600 hover:bg-green-700"
+            >
+              <CheckCircleIcon className="w-4 h-4 mr-2" />
+              {isActionLoading ? "Processing..." : "Approve"}
+            </Button>
+            <Button
+              variant="destructive"
+              onClick={() =>
+                openConfirmationDialog(
+                  "reject",
+                  "Reject Film",
+                  `Are you sure you want to reject "${filmDetails.title}"? This action will prevent it from being published.`
+                )
+              }
+              disabled={isActionLoading}
+            >
+              <XCircleIcon className="w-4 h-4 mr-2" />
+              {isActionLoading ? "Processing..." : "Reject"}
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() =>
+                openConfirmationDialog(
+                  "delete",
+                  "Delete Film",
+                  `Are you sure you want to permanently delete "${filmDetails.title}"? This action cannot be undone and will remove all film data from the server.`
+                )
+              }
+              disabled={isDeleting}
+              className="border-red-200 text-red-600 hover:bg-primary/50"
+            >
+              <Trash2Icon className="w-4 h-4 mr-2" />
+              {isDeleting ? "Deleting..." : "Delete"}
+            </Button>
+          </div>
+        )}
       </div>
 
       {/* Main Content */}

@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { minutesToHours, truncateText } from "@/lib/utils";
+import { minutesToHours, secondsToHMS, truncateText } from "@/lib/utils";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { PlayIcon, Time04Icon } from "@hugeicons/core-free-icons/index";
 import { Button } from "./ui/button";
@@ -51,7 +51,9 @@ export default function MovieCard({
 
   // Use the correct field names based on API structure
   const thumbnailSrc = thumbnail_url || thumbnail;
-  const movieDuration = duration || full_film_duration;
+  // full_film_duration comes in seconds, duration in minutes
+  const movieDuration = full_film_duration || duration;
+  const isDurationInSeconds = !!full_film_duration;
   const movieType = type || film_type;
   const trailerUrl = trailer_url || trailer_hls_url;
 
@@ -131,7 +133,7 @@ export default function MovieCard({
           {movieDuration && (
             <span className="text-secondary-foreground text-sm flex gap-2 items-center">
               <HugeiconsIcon icon={Time04Icon} size={18} />
-              {minutesToHours(movieDuration)}
+              {isDurationInSeconds ? secondsToHMS(movieDuration) : minutesToHours(movieDuration)}
             </span>
           )}
         </div>
