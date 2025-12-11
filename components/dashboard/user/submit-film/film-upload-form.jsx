@@ -340,7 +340,7 @@ export default function FilmUploadForm() {
           {/* Upload full film */}
           <UploadContent
             content={fullFilm}
-            maxSize={5000}
+            maxSize={20000}
             accept={{ "video/*": [] }}
             label="Full Film *"
             title="Upload your full film"

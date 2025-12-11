@@ -36,6 +36,8 @@ import {
   useCreatePayPalAddFundsCheckoutMutation,
   useTransferDistroToReelBuxMutation,
 } from "@/redux/store/api/paymentApi";
+import { useDispatch } from "react-redux";
+import { filmsApi } from "@/redux/store/api/filmsApi";
 
 export default function PaymentDialog({
   intention = "",
@@ -57,6 +59,7 @@ export default function PaymentDialog({
   const router = useRouter();
   const searchParams = useSearchParams();
   const referralCode = searchParams.get("referral") || "";
+  const dispatch = useDispatch();
 
   const systemPayOption = intention === "add" ? "Distro" : "ReelBux";
 
@@ -131,6 +134,8 @@ export default function PaymentDialog({
     if (intention === "add") {
       router.push("/add-funds/success?status=success");
     } else {
+      // Invalidate library cache before navigation
+      dispatch(filmsApi.util.invalidateTags(["MyLibrary"]));
       router.push("/my-library");
     }
   };

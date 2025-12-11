@@ -11,17 +11,23 @@ import {
 } from "@/components/ui/card";
 import { toast } from "sonner";
 import { CheckCircleIcon, Loader2 } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { filmsApi } from "@/redux/store/api/filmsApi";
 
 // Create a separate component for the content that uses useSearchParams
 function PaymentSuccessContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const status = searchParams.get("status");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // Verify the status parameter
     if (status === "success") {
       toast.success("Payment successful! Redirecting to your library...");
+      
+      // Invalidate library cache
+      dispatch(filmsApi.util.invalidateTags(["MyLibrary"]));
 
       // Redirect to library after 3 seconds
       const timeout = setTimeout(() => {
