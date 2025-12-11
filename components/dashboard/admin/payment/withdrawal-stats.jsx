@@ -6,6 +6,8 @@ import {
   DollarCircleIcon,
   CheckmarkCircle02Icon,
   Invoice01Icon,
+  CancelCircleHalfDotIcon,
+  Loading03Icon,
 } from "@hugeicons/core-free-icons/index";
 
 export default function WithdrawalStats() {
@@ -14,13 +16,6 @@ export default function WithdrawalStats() {
 
   const withdrawalStats = [
     {
-      heading: "Total Pending Amount",
-      value: summary.total_pending_amount || 0,
-      icon: DollarCircleIcon,
-      isDollar: true,
-      isGreen: false,
-    },
-    {
       heading: "Total Approved Amount",
       value: summary.total_approved_amount || 0,
       icon: CheckmarkCircle02Icon,
@@ -28,9 +23,38 @@ export default function WithdrawalStats() {
       isGreen: true,
     },
     {
-      heading: "Total Withdrawals",
+      heading: "Total Pending Amount",
+      value: summary.total_pending_amount || 0,
+      icon: DollarCircleIcon,
+      isDollar: true,
+      isGreen: true,
+    },
+
+    {
+      heading: "Total Withdrawals Requested",
       value: summary.total_withdrawals || 0,
       icon: Invoice01Icon,
+      isDollar: false,
+      isGreen: true,
+    },
+    {
+      heading: "Total Approved Count",
+      value: summary.total_approved_count || 0,
+      icon: CheckmarkCircle02Icon,
+      isDollar: false,
+      isGreen: false,
+    },
+    {
+      heading: "Total Pending Count",
+      value: summary.total_pending_count || 0,
+      icon: Loading03Icon,
+      isDollar: false,
+      isGreen: false,
+    },
+    {
+      heading: "Total Rejected Count",
+      value: summary.total_rejected_count || 0,
+      icon: CancelCircleHalfDotIcon,
       isDollar: false,
       isGreen: false,
     },

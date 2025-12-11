@@ -3,7 +3,7 @@
 import {
   CreditCardIcon,
   PlusSignIcon,
-  ArrowDownIcon,
+  MoneySendSquareIcon,
 } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 import PaymentDialog from "../../payment-dialog";
@@ -69,7 +69,7 @@ export default function ReelbuxBalanceStats() {
             triggerBtn={
               <Button variant="ghost" asChild disabled={balance <= 0}>
                 <span>
-                  <HugeiconsIcon icon={ArrowDownIcon} />
+                  <HugeiconsIcon icon={MoneySendSquareIcon} />
                   Withdraw
                 </span>
               </Button>

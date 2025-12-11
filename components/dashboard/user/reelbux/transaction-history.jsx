@@ -50,7 +50,12 @@ export default function TransactionHistory() {
     }
   };
 
-  const getAmountColor = (txType) => {
+  const getAmountColor = (txType, status) => {
+    // Failed transactions should have neutral color
+    if (status?.toLowerCase() === "failed") {
+      return "text-muted-foreground";
+    }
+
     // Transactions that increase the balance (positive/green)
     const creditTransactions = ["add fund", "refund"];
 
@@ -61,7 +66,12 @@ export default function TransactionHistory() {
     return isCredit ? "text-green-500" : "text-destructive";
   };
 
-  const formatAmount = (amount, txType) => {
+  const formatAmount = (amount, txType, status) => {
+    // Failed transactions should not have +/- prefix
+    if (status?.toLowerCase() === "failed") {
+      return `$${amount.toFixed(2)}`;
+    }
+
     const creditTransactions = ["add fund", "refund"];
 
     const isCredit = creditTransactions.some((creditType) =>
@@ -110,8 +120,8 @@ export default function TransactionHistory() {
               <TableRow key={startIndex + index}>
                 <TableCell>{transaction.source}</TableCell>
                 <TableCell>{transaction.tx_type}</TableCell>
-                <TableCell className={getAmountColor(transaction.tx_type)}>
-                  {formatAmount(transaction.amount, transaction.tx_type)}
+                <TableCell className={getAmountColor(transaction.tx_type, transaction.status)}>
+                  {formatAmount(transaction.amount, transaction.tx_type, transaction.status)}
                 </TableCell>
                 <TableCell>{transaction.date}</TableCell>
                 <TableCell>
