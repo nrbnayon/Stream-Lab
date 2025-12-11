@@ -445,7 +445,7 @@ const subscriptionPlans = [
     price: 9.99,
     isHighlighted: false,
     features: [
-      "200 AI generation per month",
+      "50 AI generation per month",
       "Video generation up to 2 minutes",
       "Image generation up to 2048x2048",
       "Advance script templets",
@@ -459,7 +459,7 @@ const subscriptionPlans = [
     price: 19.99,
     isHighlighted: true,
     features: [
-      "200 AI generation per month",
+      "100 AI generation per month",
       "Video generation up to 2 minutes",
       "Image generation up to 2048x2048",
       "Advance script templets",
