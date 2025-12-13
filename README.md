@@ -26,7 +26,7 @@ Stream Lab is a modern web application designed for video streaming and AI conte
 
 ### Prerequisites
 
-- Node.js (Latest LTS recommended)
+- Node.js (Latest LTS recommended) 
 - npm or yarn
 
 ### Installation
