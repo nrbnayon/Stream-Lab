@@ -46,12 +46,12 @@ export default function UploadContent({
         return;
       }
 
-      console.log("File selected:", {
-        name: file.name,
-        size: file.size,
-        type: file.type,
-        lastModified: file.lastModified,
-      });
+      // console.log("File selected:", {
+      //   name: file.name,
+      //   size: file.size,
+      //   type: file.type,
+      //   lastModified: file.lastModified,
+      // });
 
       setContent(file);
       toast.success(`${file.name} uploaded successfully`);

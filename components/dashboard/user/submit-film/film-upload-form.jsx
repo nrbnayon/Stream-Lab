@@ -166,20 +166,20 @@ export default function FilmUploadForm() {
       }
 
       // Debug log
-      console.log("Upload FormData entries:");
-      for (let [key, value] of uploadFormData.entries()) {
-        console.log(key, value);
-        if (value instanceof File) {
-          console.log(
-            `File: ${value.name}, Size: ${value.size}, Type: ${value.type}`
-          );
-        }
-      }
+      // console.log("Upload FormData entries:");
+      // for (let [key, value] of uploadFormData.entries()) {
+      //   console.log(key, value);
+      //   if (value instanceof File) {
+      //     console.log(
+      //       `File: ${value.name}, Size: ${value.size}, Type: ${value.type}`
+      //     );
+      //   }
+      // }
 
       // Upload film
       const result = await uploadFilm(uploadFormData).unwrap();
 
-      toast.success("Film uploaded successfully! It's now under review.");
+      // toast.success("Film uploaded successfully! It's now under review.");
 
       // Reset form
       setFormData({

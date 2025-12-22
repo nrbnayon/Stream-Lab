@@ -38,7 +38,7 @@ export default function AICreatorLab() {
     [currentServerGenerations]
   );
 
-  console.log("Has processing items:", hasProcessingItems);
+  // console.log("Has processing items:", hasProcessingItems);
 
   // Auto-refetch when there are processing items
   useEffect(() => {

@@ -58,7 +58,7 @@ export default function AllUsersTable() {
   const filteredUsers = users.filter((user) => !deletedUsers.has(user.id));
 
   useEffect(() => {
-    console.log(filter);
+    // console.log(filter);
   }, [filter]);
 
   // Clear deleted users set when search changes to avoid filtering issues

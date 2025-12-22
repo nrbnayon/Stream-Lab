@@ -22,7 +22,7 @@ export default function GenerateAndAnalyzePage() {
   const pageSize = 20;
   const router = useRouter();
 
-  console.log("Local recentGenerations:", recentGenerations);
+  // console.log("Local recentGenerations:", recentGenerations);
 
   // Get tab from query params manually
   useEffect(() => {
@@ -61,10 +61,10 @@ export default function GenerateAndAnalyzePage() {
   const serverGenerations = response?.data || [];
   const pagination = response?.pagination || null;
 
-  console.log("Server generations from API:", serverGenerations);
-  console.log("Pagination info:", pagination);
-  console.log("Is loading:", isRecentLoading);
-  console.log("Is error:", isError);
+  // console.log("Server generations from API:", serverGenerations);
+  // console.log("Pagination info:", pagination);
+  // console.log("Is loading:", isRecentLoading);
+  // console.log("Is error:", isError);
 
   // Check if there are any processing items
   const hasProcessingItems = useMemo(
@@ -86,7 +86,7 @@ export default function GenerateAndAnalyzePage() {
   const handleGenerationComplete = useCallback(
     (generation) => {
       if (!generation) return;
-      console.log("New generation completed:", generation);
+      // console.log("New generation completed:", generation);
 
       // Immediately refetch to get the latest data from server
       refetch();
@@ -123,7 +123,7 @@ export default function GenerateAndAnalyzePage() {
     };
   }, [recentGenerations, serverGenerations]);
 
-  console.log("Merged generations:", mergedGenerations);
+  // console.log("Merged generations:", mergedGenerations);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);

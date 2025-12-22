@@ -141,9 +141,9 @@ export const aiCreatorApi = createApi({
         };
       },
       transformResponse: (response) => {
-        console.log("Raw API response (getAiUsage):", response);
+        // console.log("Raw API response (getAiUsage):", response);
         const normalized = normalizeUsage(response);
-        console.log("Normalized usage data:", normalized);
+        // console.log("Normalized usage data:", normalized);
         return normalized;
       },
       providesTags: ["AiUsage"],
@@ -163,9 +163,9 @@ export const aiCreatorApi = createApi({
         };
       },
       transformResponse: (response) => {
-        console.log("Raw API response (getRecentGenerations):", response);
+        // console.log("Raw API response (getRecentGenerations):", response);
         const normalized = normalizeUsage(response);
-        console.log("Normalized recent generations:", normalized);
+        // console.log("Normalized recent generations:", normalized);
         return {
           data: normalized.recent,
           pagination: normalized.pagination,
@@ -212,7 +212,7 @@ export const aiCreatorApi = createApi({
         };
       },
       transformResponse: (response) => {
-        console.log("Generate AI Content response:", response);
+        // console.log("Generate AI Content response:", response);
         return response;
       },
       invalidatesTags: (result, error, arg) => [

@@ -52,7 +52,7 @@ export default function AiInput({ activeTab = "video", onGenerationComplete }) {
 
       const response = await generateAiContent(payload).unwrap();
 
-      console.log("Generation response:", response);
+      // console.log("Generation response:", response);
 
       toast.success(
         response?.message ||
@@ -92,7 +92,7 @@ export default function AiInput({ activeTab = "video", onGenerationComplete }) {
         raw: body,
       };
 
-      console.log("Normalized result:", normalizedResult);
+      // console.log("Normalized result:", normalizedResult);
 
       onGenerationComplete?.(normalizedResult);
       resetInputs();

@@ -42,10 +42,10 @@ export default function MoviesTable() {
   const hasNext = titlesResponse?.next !== null;
   const hasPrevious = titlesResponse?.previous !== null;
 
-  console.log("Get all response::", titlesResponse);
+  // console.log("Get all response::", titlesResponse);
 
   useEffect(() => {
-    console.log(filter);
+    // console.log(filter);
     // Reset to page 1 when filter changes
     setCurrentPage(1);
   }, [filter]);

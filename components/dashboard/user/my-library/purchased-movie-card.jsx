@@ -42,7 +42,7 @@ export default function PurchasedMovieCard({ movie }) {
     const { data: userData, isLoading: userLoading } = useGetMeQuery();
   const referralCode = userData?.data?.referral_code || "user123";
 
-  console.log("status::", status);
+  // console.log("status::", status);
 
   // Calculate progress percentage
   const progressPercentage = watch_progress || 0;

@@ -25,7 +25,7 @@ export default function FilmDeleteDialog({ film }) {
     try {
       await deleteFilm(film.id).unwrap();
       setOpen(false);
-      console.log("Film deleted successfully:", film.title);
+      // console.log("Film deleted successfully:", film.title);
     } catch (error) {
       console.error("Failed to delete film:", error);
     }

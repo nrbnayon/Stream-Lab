@@ -85,7 +85,7 @@ export default function AdminWatchPage() {
 
   const filmDetails = filmResponse?.film_details;
 
-  console.log(filmDetails);
+  // console.log(filmDetails);
 
   const handleApproveOrReject = async (action) => {
     try {
@@ -102,7 +102,7 @@ export default function AdminWatchPage() {
       });
 
       // Show success message or redirect
-      console.log(`Film ${action.toLowerCase()}d successfully`);
+      // console.log(`Film ${action.toLowerCase()}d successfully`);
 
       // Optionally redirect back to films list
       router.push("/admin/films");
@@ -120,7 +120,7 @@ export default function AdminWatchPage() {
         title: "",
         description: "",
       });
-      console.log("Film deleted successfully");
+      // console.log("Film deleted successfully");
       router.push("/admin/films");
     } catch (error) {
       console.error("Failed to delete film:", error);

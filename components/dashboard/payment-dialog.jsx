@@ -472,12 +472,12 @@ export default function PaymentDialog({
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectItem value="4">4 hours</SelectItem>
-                        <SelectItem value="6">6 hours</SelectItem>
-                        <SelectItem value="12">12 hours</SelectItem>
+                        {/* <SelectItem value="4">4 hours</SelectItem>
+                        <SelectItem value="6">6 hours</SelectItem> */}
+                        {/* <SelectItem value="12">12 hours</SelectItem> */}
                         <SelectItem value="24">24 hours</SelectItem>
                         <SelectItem value="48">48 hours</SelectItem>
-                        <SelectItem value="72">72 hours</SelectItem>
+                        {/* <SelectItem value="72">72 hours</SelectItem> */}
                       </SelectGroup>
                     </SelectContent>
                   </Select>

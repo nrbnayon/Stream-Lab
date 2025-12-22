@@ -33,7 +33,7 @@ export default function VideoPlayer({
       if (timeInSeconds > lastReportedTime.current + 10) {
         lastReportedTime.current = timeInSeconds;
         onTimeUpdate(currentTime);
-        console.log("Reporting watch time:", timeInSeconds, "seconds");
+        // console.log("Reporting watch time:", timeInSeconds, "seconds");
       }
     }
   };
@@ -108,7 +108,7 @@ export default function VideoPlayer({
     playerRef.current = player;
 
     player.ready(() => {
-      console.log("Player is ready");
+      // console.log("Player is ready");
       setIsPlayerReady(true);
 
       // ✅ Enable resolution selector
@@ -127,17 +127,17 @@ export default function VideoPlayer({
 
     // Event listeners
     player.on("play", () => {
-      console.log("Video started playing");
+      // console.log("Video started playing");
       startTimeTracking(player);
     });
 
     player.on("pause", () => {
-      console.log("Video paused");
+      // console.log("Video paused");
       stopTimeTracking(player);
     });
 
     player.on("seeked", () => {
-      console.log("Video seeked");
+      // console.log("Video seeked");
       if (isFullFilm && onTimeUpdate) {
         const currentTime = player.currentTime();
         reportWatchTime(currentTime);
@@ -145,7 +145,7 @@ export default function VideoPlayer({
     });
 
     player.on("ended", () => {
-      console.log("Video ended");
+      // console.log("Video ended");
       stopTimeTracking(player);
     });
 
@@ -154,12 +154,12 @@ export default function VideoPlayer({
     });
 
     player.on("waiting", () => {
-      console.log("player is waiting");
+      // console.log("player is waiting");
     });
 
     // Cleanup function
     return () => {
-      console.log("Cleaning up video player");
+      // console.log("Cleaning up video player");
 
       // Clear interval
       if (timeUpdateInterval.current) {

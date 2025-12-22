@@ -51,7 +51,7 @@ export default function FilmApprovalTable({ reviewFilms, isLoading }) {
         film_id: filmId,
         action: action,
       }).unwrap();
-      console.log(`Film ${action.toLowerCase()}d successfully`);
+      // console.log(`Film ${action.toLowerCase()}d successfully`);
       setPendingAction(null);
     } catch (error) {
       console.error(`Failed to ${action.toLowerCase()} film:`, error);

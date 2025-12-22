@@ -15,7 +15,7 @@ export default function PerformanceTable() {
   const { data: distroResponse, isLoading, error } = useGetDistroBalanceQuery();
   const performanceData = distroResponse?.per_film || [];
 
-  console.log(distroResponse);
+  // console.log(distroResponse);
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString("en-US", {

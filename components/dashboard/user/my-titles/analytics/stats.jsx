@@ -12,7 +12,7 @@ export default function AnalyticsStats({ filmId }) {
   const { data: analyticsData, isLoading } =
     useGetMyTitlesAnalyticsQuery(filmId);
   
-  console.log("analyticsData Stats::", analyticsData);
+  // console.log("analyticsData Stats::", analyticsData);
 
   if (isLoading) {
     return (

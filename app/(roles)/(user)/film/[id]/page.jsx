@@ -77,13 +77,13 @@ export default function FilmDetails() {
       !hasTriggeredViewCount &&
       filmData?.id
     ) {
-      console.log("Incrementing view count for film:", filmData.id);
+      // console.log("Incrementing view count for film:", filmData.id);
       setHasTriggeredViewCount(true);
 
       incrementViewCount(filmData.id)
         .unwrap()
         .then((response) => {
-          console.log("View count incremented successfully:", response);
+          // console.log("View count incremented successfully:", response);
           setHasIncrementedView(true);
         })
         .catch((error) => {
@@ -119,12 +119,12 @@ export default function FilmDetails() {
 
     // Debounce the API call - wait 5 seconds after last update (increased from 2)
     watchTimeTimeout.current = setTimeout(() => {
-      console.log(
-        "Updating watch time:",
-        watchTimeMinutes,
-        "minutes for film:",
-        filmData.id
-      );
+      // console.log(
+      //   "Updating watch time:",
+      //   watchTimeMinutes,
+      //   "minutes for film:",
+      //   filmData.id
+      // );
 
       updateWatchTime({
         filmId: filmData.id,
@@ -132,7 +132,7 @@ export default function FilmDetails() {
       })
         .unwrap()
         .then((response) => {
-          console.log("Watch time updated successfully:", response);
+          // console.log("Watch time updated successfully:", response);
         })
         .catch((error) => {
           console.error("Failed to update watch time:", error);
@@ -156,12 +156,12 @@ export default function FilmDetails() {
 
     // Update immediately
     if (watchTimeMinutes > 0) {
-      console.log(
-        "Immediate watch time update:",
-        watchTimeMinutes,
-        "minutes for film:",
-        filmData.id
-      );
+      // console.log(
+      //   "Immediate watch time update:",
+      //   watchTimeMinutes,
+      //   "minutes for film:",
+      //   filmData.id
+      // );
 
       updateWatchTime({
         filmId: filmData.id,
@@ -169,7 +169,7 @@ export default function FilmDetails() {
       })
         .unwrap()
         .then((response) => {
-          console.log("Immediate watch time updated successfully:", response);
+          // console.log("Immediate watch time updated successfully:", response);
         })
         .catch((error) => {
           console.error("Failed to update immediate watch time:", error);

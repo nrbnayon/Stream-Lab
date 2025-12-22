@@ -143,13 +143,13 @@ export const filmsApi = createApi({
     uploadFilm: builder.mutation({
       query: (formData) => {
         // Debug log to verify FormData contents
-        console.log("Upload FormData entries:");
+        // console.log("Upload FormData entries:");
         for (let [key, value] of formData.entries()) {
-          console.log(key, value);
+          // console.log(key, value);
           if (value instanceof File) {
-            console.log(
-              `File: ${value.name}, Size: ${value.size}, Type: ${value.type}`
-            );
+            // console.log(
+            //   `File: ${value.name}, Size: ${value.size}, Type: ${value.type}`
+            // );
           }
         }
 
@@ -165,7 +165,7 @@ export const filmsApi = createApi({
       onQueryStarted: async (formData, { queryFulfilled, dispatch }) => {
         try {
           const result = await queryFulfilled;
-          console.log("Upload successful:", result);
+          // console.log("Upload successful:", result);
         } catch (error) {
           console.error("Upload failed:", error);
         }
@@ -176,13 +176,13 @@ export const filmsApi = createApi({
     editFilm: builder.mutation({
       query: (formData) => {
         // Debug log to verify FormData contents
-        console.log("FormData entries:");
+        // console.log("FormData entries:");
         for (let [key, value] of formData.entries()) {
-          console.log(key, value);
+          // console.log(key, value);
           if (value instanceof File) {
-            console.log(
-              `File: ${value.name}, Size: ${value.size}, Type: ${value.type}`
-            );
+            // console.log(
+            //   `File: ${value.name}, Size: ${value.size}, Type: ${value.type}`
+            // );
           }
         }
 

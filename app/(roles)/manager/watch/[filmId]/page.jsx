@@ -87,7 +87,7 @@ export default function ManagerWatchPage() {
         description: "",
       });
 
-      console.log(`Film ${action.toLowerCase()}d successfully`);
+      // console.log(`Film ${action.toLowerCase()}d successfully`);
       router.push("/manager/films");
     } catch (error) {
       console.error(`Failed to ${action.toLowerCase()} film:`, error);
