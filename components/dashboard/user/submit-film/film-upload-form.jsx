@@ -22,10 +22,13 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { genres } from "@/constants";
 import UploadContent from "./upload-content";
-import { useUploadFilmMutation } from "@/redux/store/api/filmsApi";
+// import { useUploadFilmMutation } from "@/redux/store/api/filmsApi";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useGetMeQuery } from "@/redux/store/api/usersApi";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { Progress } from "@/components/ui/progress";
 
 const filmTypes = [
   { value: "MOVIE", label: "Movie" },
@@ -41,6 +44,12 @@ export default function FilmUploadForm() {
   const [trailer, setTrailer] = useState(null);
   const [fullFilm, setFullFilm] = useState(null);
   const [thumbnail, setThumbnail] = useState(null);
+
+  // Upload Progress State
+  const [uploadStatus, setUploadStatus] = useState("IDLE"); // IDLE, UPLOADING, PROCESSING, COMPLETED, ERROR
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [processingProgress, setProcessingProgress] = useState(0);
+
   const [formData, setFormData] = useState({
     user_name: "",
     user_email: "",
@@ -51,7 +60,7 @@ export default function FilmUploadForm() {
     buy_price: "",
   });
 
-  const [uploadFilm, { isLoading: isUploading }] = useUploadFilmMutation();
+  // const [uploadFilm, { isLoading: isUploading }] = useUploadFilmMutation();
   const { data: userResponse } = useGetMeQuery();
   const router = useRouter();
 
@@ -64,6 +73,67 @@ export default function FilmUploadForm() {
       }));
     }
   }, [userResponse]);
+
+  // Check for ongoing upload task on component mount
+  useEffect(() => {
+    let pollInterval;
+    
+    const checkOngoingTask = async () => {
+      const storedTaskId = localStorage.getItem("film_upload_task_id");
+      if (storedTaskId) {
+        const token = Cookies.get("accessToken");
+        if (token) {
+          // Resume polling for the stored task
+          setUploadStatus("PROCESSING");
+          setProcessingProgress(0);
+          
+          // Start polling immediately
+          pollInterval = setInterval(async () => {
+            try {
+              const statusResponse = await axios.get(
+                `${process.env.NEXT_PUBLIC_API_BASE_URL}/flims/task-status?task_id=${storedTaskId}`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
+              );
+
+              const { status, progress } = statusResponse.data;
+              setProcessingProgress(progress || 0);
+
+              if (status === "SUCCESS" || status === "COMPLETED") {
+                clearInterval(pollInterval);
+                setProcessingProgress(100);
+                localStorage.removeItem("film_upload_task_id");
+                handleUploadSuccess();
+              } else if (status === "FAILURE" || status === "REVOKED") {
+                clearInterval(pollInterval);
+                setUploadStatus("ERROR");
+                localStorage.removeItem("film_upload_task_id");
+                toast.error("Processing failed. Please try again.");
+              }
+            } catch (error) {
+              clearInterval(pollInterval);
+              setUploadStatus("ERROR");
+              localStorage.removeItem("film_upload_task_id");
+              console.error("Polling error:", error);
+              toast.error("Error checking upload status.");
+            }
+          }, 2000);
+        }
+      }
+    };
+
+    checkOngoingTask();
+    
+    // Cleanup on unmount
+    return () => {
+      if (pollInterval) {
+        clearInterval(pollInterval);
+      }
+    };
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -200,15 +270,113 @@ export default function FilmUploadForm() {
       //   }
       // }
 
-      // Upload film
-      const result = await uploadFilm(uploadFormData).unwrap();
+    // Upload film
+      // const result = await uploadFilm(uploadFormData).unwrap();
 
-      // toast.success("Film uploaded successfully! It's now under review.");
+      try {
+        setUploadStatus("UPLOADING");
+        const token = Cookies.get("accessToken");
 
-      // Reset form
+        const response = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/flims/upload`,
+          uploadFormData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+            onUploadProgress: (progressEvent) => {
+              const percentCompleted = Math.round(
+                (progressEvent.loaded * 100) / progressEvent.total
+              );
+              setUploadProgress(percentCompleted);
+            },
+          }
+        );
+
+        // Brief delay to show 100% completion, then transition
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        // Check for task_id for background processing
+        const taskId = response.data?.task_id;
+
+        if (taskId) {
+          setUploadStatus("PROCESSING");
+          // Poll for task status
+          await pollTaskStatus(taskId, token);
+        } else {
+          handleUploadSuccess();
+        }
+      } catch (error) {
+        setUploadStatus("ERROR");
+        console.error("Error uploading film:", error);
+        if (error.response?.data?.message) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error("Failed to upload film. Please try again.");
+        }
+      }
+    } catch (error) {
+       // Validation error catch or other synchronous errors
+       console.error("Form error:", error);
+    }
+  };
+
+  const pollTaskStatus = async (taskId, token) => {
+    // Store task_id in localStorage for persistence
+    localStorage.setItem("film_upload_task_id", taskId);
+    
+    // Set status to processing and stay on the page
+    setUploadStatus("PROCESSING");
+    setProcessingProgress(0);
+
+    const pollInterval = setInterval(async () => {
+      try {
+        const statusResponse = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/flims/task-status?task_id=${taskId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const { status, progress } = statusResponse.data;
+        setProcessingProgress(progress || 0);
+
+        if (status === "SUCCESS" || status === "COMPLETED") {
+          clearInterval(pollInterval);
+          setProcessingProgress(100);
+          // Clear task_id from localStorage
+          localStorage.removeItem("film_upload_task_id");
+          handleUploadSuccess();
+        } else if (status === "FAILURE" || status === "REVOKED") {
+          clearInterval(pollInterval);
+          setUploadStatus("ERROR");
+          // Clear task_id from localStorage
+          localStorage.removeItem("film_upload_task_id");
+          toast.error("Processing failed. Please try again.");
+        }
+      } catch (error) {
+        clearInterval(pollInterval);
+        setUploadStatus("ERROR");
+        // Clear task_id from localStorage
+        localStorage.removeItem("film_upload_task_id");
+        console.error("Polling error:", error);
+        toast.error("Error checking upload status.");
+      }
+    }, 2000); // Check every 2 seconds
+  };
+
+  const handleUploadSuccess = () => {
+    setUploadStatus("COMPLETED");
+    toast.success("Film uploaded successfully! It's now under review.");
+
+    // Reset form after a short delay
+    setTimeout(() => {
       setFormData({
-        user_name: "",
-        user_email: "",
+        user_name: userResponse?.data?.full_name || "",
+        user_email: userResponse?.data?.email || "",
         title: "",
         logline: "",
         year: new Date().getFullYear(),
@@ -220,27 +388,89 @@ export default function FilmUploadForm() {
       setTrailer(null);
       setFullFilm(null);
       setThumbnail(null);
-
-      // Redirect to my titles page
-      router.push("/my-titles");
-    } catch (error) {
-      console.error("Error uploading film:", error);
-
-      if (error?.data?.message) {
-        toast.error(error.data.message);
-      } else if (error?.data?.errors) {
-        Object.values(error.data.errors)
-          .flat()
-          .forEach((err) => {
-            toast.error(err);
-          });
-      } else {
-        toast.error("Failed to upload film. Please try again.");
-      }
-    }
+      setUploadStatus("IDLE");
+      setProcessingProgress(0);
+      setUploadProgress(0);
+    }, 2000);
   };
 
   return (
+    <>
+      {/* Processing Progress Banner - Shows on this page only */}
+      {uploadStatus === "PROCESSING" && (
+        <Card className="mb-5 border-primary/50 bg-primary/5">
+          <CardContent className="pt-6">
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-lg font-semibold">Processing Your Film</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Please wait while we optimize and process your video. This may take several minutes.
+                  </p>
+                </div>
+                <div className="text-2xl font-bold text-primary">
+                  {processingProgress}%
+                </div>
+              </div>
+              <Progress value={processingProgress} className="h-2" />
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Upload Progress Overlay - Only show during actual file upload */}
+      {uploadStatus === "UPLOADING" && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+          <Card className="w-full max-w-md p-6 shadow-lg border-primary/20">
+             <div className="flex flex-col items-center gap-4 text-center">
+              <div className="relative">
+                 <div className="absolute inset-0 flex items-center justify-center">
+                   <span className="text-xl font-bold">{uploadProgress}%</span>
+                 </div>
+                 <svg className="w-24 h-24 transform -rotate-90">
+                   <circle
+                     className="text-muted"
+                     strokeWidth="8"
+                     stroke="currentColor"
+                     fill="transparent"
+                     r="44"
+                     cx="48"
+                     cy="48"
+                   />
+                   <circle
+                     className="text-primary transition-all duration-300 ease-in-out"
+                     strokeWidth="8"
+                     strokeDasharray={276}
+                     strokeDashoffset={276 - (uploadProgress / 100) * 276}
+                     strokeLinecap="round"
+                     stroke="currentColor"
+                     fill="transparent"
+                     r="44"
+                     cx="48"
+                     cy="48"
+                   />
+                 </svg>
+              </div>
+              
+              <div className="space-y-2">
+                 <h3 className="text-xl font-semibold">Uploading Files...</h3>
+                 <p className="text-sm text-muted-foreground">
+                   Please wait while we upload your film content to our servers.
+                 </p>
+              </div>
+
+              <div className="w-full space-y-1">
+                <Progress value={uploadProgress} className="h-2" />
+                <div className="flex justify-between text-xs text-muted-foreground">
+                  <span>0%</span>
+                  <span>100%</span>
+                </div>
+              </div>
+             </div>
+          </Card>
+        </div>
+      )}
+
     <form className="my-5 space-y-5" onSubmit={handleFilmUpload}>
       {/* User Information Card */}
       <Card>
@@ -256,6 +486,7 @@ export default function FilmUploadForm() {
             onChange={handleInputChange}
             placeholder="Enter your name"
             required
+            inputDisabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
           />
           <InputField
             label="User Email"
@@ -265,6 +496,7 @@ export default function FilmUploadForm() {
             placeholder="Enter your email"
             type="email"
             required
+            inputDisabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
           />
         </CardContent>
       </Card>
@@ -285,6 +517,7 @@ export default function FilmUploadForm() {
             onChange={handleInputChange}
             placeholder="Enter film title"
             required
+            inputDisabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
           />
 
           {/* logline */}
@@ -298,6 +531,7 @@ export default function FilmUploadForm() {
               placeholder="Enter film logline"
               className="min-h-[100px]"
               required
+              disabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
             />
           </div>
 
@@ -314,12 +548,13 @@ export default function FilmUploadForm() {
               min="1900"
               max={new Date().getFullYear() + 5}
               required
+              inputDisabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
             />
 
             {/* type */}
             <div>
               <Label>Film Type *</Label>
-              <Select value={selectedType} onValueChange={setSelectedType}>
+              <Select value={selectedType} onValueChange={setSelectedType} disabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select your film type" />
                 </SelectTrigger>
@@ -351,6 +586,7 @@ export default function FilmUploadForm() {
                 placeholder="Select or type genre"
                 hideClearAllButton
                 hidePlaceholderWhenSelected
+                disabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
                 emptyIndicator={
                   <p className="text-center text-sm">Not found</p>
                 }
@@ -378,6 +614,7 @@ export default function FilmUploadForm() {
             label="Thumbnail *"
             title="Upload your thumbnail"
             setContent={setThumbnail}
+            disabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
           />
 
           {/* Upload Trailer */}
@@ -388,6 +625,7 @@ export default function FilmUploadForm() {
             label="Trailer *"
             title="Upload your film trailer"
             setContent={setTrailer}
+            disabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
           />
 
           {/* Upload full film */}
@@ -398,6 +636,7 @@ export default function FilmUploadForm() {
             label="Full Film *"
             title="Upload your full film"
             setContent={setFullFilm}
+            disabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
           />
         </CardContent>
       </Card>
@@ -419,6 +658,7 @@ export default function FilmUploadForm() {
             step="0.01"
             min="0.01"
             required
+            inputDisabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
           />
           <InputField
             label="Buy Price ($) *"
@@ -430,6 +670,7 @@ export default function FilmUploadForm() {
             step="0.01"
             min="0.01"
             required
+            inputDisabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
           />
         </CardContent>
       </Card>
@@ -438,12 +679,17 @@ export default function FilmUploadForm() {
       <div className="text-center">
         <Button
           type="submit"
-          disabled={isUploading}
+          disabled={uploadStatus === "UPLOADING" || uploadStatus === "PROCESSING"}
           className="w-full active:scale-[0.99]"
         >
-          {isUploading ? "Uploading..." : "Submit for review"}
+          {uploadStatus === "UPLOADING"
+            ? "Uploading..."
+            : uploadStatus === "PROCESSING"
+            ? "Processing..."
+            : "Submit for review"}
         </Button>
       </div>
     </form>
+    </>
   );
 }

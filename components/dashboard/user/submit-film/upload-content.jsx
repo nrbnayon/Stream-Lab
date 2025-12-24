@@ -15,8 +15,11 @@ export default function UploadContent({
   setContent,
   maxSize,
   accept = { "video/*": [] },
+  disabled = false,
 }) {
   const handleDrop = (acceptedFiles) => {
+    if (disabled) return;
+    
     if (acceptedFiles && acceptedFiles.length > 0) {
       const file = acceptedFiles[0];
 
@@ -75,6 +78,7 @@ export default function UploadContent({
   };
 
   const removeFile = () => {
+    if (disabled) return;
     setContent(null);
     toast.success("File removed");
   };
@@ -107,6 +111,7 @@ export default function UploadContent({
             variant="ghost"
             size="sm"
             onClick={removeFile}
+            disabled={disabled}
             className="ml-2 h-8 w-8 p-0 hover:bg-primary/70"
           >
             <X className="h-4 w-4 text-red-500" />
@@ -121,6 +126,7 @@ export default function UploadContent({
         onDrop={handleDrop}
         onError={handleError}
         multiple={false}
+        disabled={disabled}
         className="min-h-[120px]"
       >
         <DropzoneEmptyState
