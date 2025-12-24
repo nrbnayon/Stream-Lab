@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InputField from "@/components/input-field";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,6 +25,7 @@ import UploadContent from "./upload-content";
 import { useUploadFilmMutation } from "@/redux/store/api/filmsApi";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { useGetMeQuery } from "@/redux/store/api/usersApi";
 
 const filmTypes = [
   { value: "MOVIE", label: "Movie" },
@@ -41,6 +42,8 @@ export default function FilmUploadForm() {
   const [fullFilm, setFullFilm] = useState(null);
   const [thumbnail, setThumbnail] = useState(null);
   const [formData, setFormData] = useState({
+    user_name: "",
+    user_email: "",
     title: "",
     logline: "",
     year: new Date().getFullYear(),
@@ -49,7 +52,18 @@ export default function FilmUploadForm() {
   });
 
   const [uploadFilm, { isLoading: isUploading }] = useUploadFilmMutation();
+  const { data: userResponse } = useGetMeQuery();
   const router = useRouter();
+
+  useEffect(() => {
+    if (userResponse?.data) {
+      setFormData((prev) => ({
+        ...prev,
+        user_name: userResponse.data.full_name || "",
+        user_email: userResponse.data.email || "",
+      }));
+    }
+  }, [userResponse]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -83,6 +97,14 @@ export default function FilmUploadForm() {
 
   const validateForm = () => {
     const errors = [];
+
+    if (!formData.user_name?.trim()) {
+      errors.push("User name is required");
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.user_email?.trim() || !emailRegex.test(formData.user_email)) {
+      errors.push("Please enter a valid email address");
+    }
 
     if (!formData.title?.trim()) {
       errors.push("Film title is required");
@@ -137,6 +159,8 @@ export default function FilmUploadForm() {
       const uploadFormData = new FormData();
 
       // Add text fields
+      uploadFormData.append("user_name", formData.user_name.trim());
+      uploadFormData.append("user_email", formData.user_email.trim());
       uploadFormData.append("title", formData.title.trim());
       uploadFormData.append("logline", formData.logline.trim());
       uploadFormData.append("year", formData.year.toString());
@@ -183,6 +207,8 @@ export default function FilmUploadForm() {
 
       // Reset form
       setFormData({
+        user_name: "",
+        user_email: "",
         title: "",
         logline: "",
         year: new Date().getFullYear(),
@@ -216,6 +242,33 @@ export default function FilmUploadForm() {
 
   return (
     <form className="my-5 space-y-5" onSubmit={handleFilmUpload}>
+      {/* User Information Card */}
+      <Card>
+        <CardHeader>
+          <CardTitle>User Information</CardTitle>
+          <CardDescription>Enter your personal details</CardDescription>
+        </CardHeader>
+        <CardContent className="grid md:grid-cols-2 gap-5">
+          <InputField
+            label="User Name"
+            name="user_name"
+            value={formData.user_name}
+            onChange={handleInputChange}
+            placeholder="Enter your name"
+            required
+          />
+          <InputField
+            label="User Email"
+            name="user_email"
+            value={formData.user_email}
+            onChange={handleInputChange}
+            placeholder="Enter your email"
+            type="email"
+            required
+          />
+        </CardContent>
+      </Card>
+
       {/* Film Information Card */}
       <Card>
         <CardHeader>
