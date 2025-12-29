@@ -38,6 +38,7 @@ import {
 } from "@/redux/store/api/paymentApi";
 import { useDispatch } from "react-redux";
 import { filmsApi } from "@/redux/store/api/filmsApi";
+import { useGetMeQuery } from "@/redux/store/api/usersApi";
 
 export default function PaymentDialog({
   intention = "",
@@ -60,6 +61,7 @@ export default function PaymentDialog({
   const searchParams = useSearchParams();
   const referralCode = searchParams.get("referral") || "";
   const dispatch = useDispatch();
+  const { data: currentUser } = useGetMeQuery();
 
   const systemPayOption = intention === "add" ? "Distro" : "ReelBux";
 
@@ -293,6 +295,12 @@ export default function PaymentDialog({
 
   const handlePayment = async (e) => {
     e.preventDefault();
+
+    // Check authentication for buy and rent
+    if ((intention === "buy" || intention === "rent") && !currentUser) {
+      router.push("/signin");
+      return;
+    }
 
     if (intention === "transfer") {
       if (!isValidAmount()) {
