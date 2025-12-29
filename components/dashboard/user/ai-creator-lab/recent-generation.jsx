@@ -39,7 +39,11 @@ export default function RecentGeneration({
     : recentGenerations.script ?? [];
 
   const renderContent = () => {
-    if (isLoading) {
+    const hasAnyContent =
+      videos.length > 0 || images.length > 0 || scripts.length > 0;
+
+    // Only show loading when there's no data yet and isLoading is true
+    if (isLoading && !hasAnyContent) {
       return (
         <p className="text-center text-secondary-foreground my-5 flex flex-col justify-between items-center">
           <Loader2 className="w-8 h-8 animate-spin mb-4" />
@@ -49,9 +53,6 @@ export default function RecentGeneration({
     }
 
     if (showAllTypes) {
-      const hasAnyContent =
-        videos.length > 0 || images.length > 0 || scripts.length > 0;
-
       if (!hasAnyContent) {
         return (
           <p className="text-destructive text-center my-5">
