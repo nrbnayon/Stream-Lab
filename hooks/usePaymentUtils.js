@@ -21,7 +21,7 @@ export const usePaymentUtils = () => {
     const errorMessage =
       error?.data?.message ||
       error?.message ||
-      "Payment failed. Please try again.";
+      "Before payment signin or signup first.";
     console.error("Payment error:", error);
     toast.error(errorMessage);
   };

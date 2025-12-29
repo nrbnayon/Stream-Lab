@@ -147,7 +147,11 @@ export default function PaymentDialog({
 
   const handlePaymentError = (error) => {
     console.error("Payment error:", error);
-    toast.error(error?.data?.message || "Payment failed. Please try again.");
+    toast.error(
+      error?.data?.message ||
+        error?.message ||
+        "Before payment signin or signup first."
+    );
     setIsProcessing(false);
   };
 
