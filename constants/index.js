@@ -442,7 +442,7 @@ const subscriptionPlans = [
   {
     name: "Basic",
     icon: <HugeiconsIcon icon={StarIcon} />,
-    price: 9.99,
+    price: 9.00,
     isHighlighted: false,
     features: [
       "Script coverage: 20 prompts",
@@ -454,7 +454,7 @@ const subscriptionPlans = [
   {
     name: "Pro",
     icon: <HugeiconsIcon icon={ZapIcon} />,
-    price: 19.99,
+    price: 29.00,
     isHighlighted: true,
     features: [
       "Script coverage: 50 prompts",
@@ -466,7 +466,7 @@ const subscriptionPlans = [
   {
     name: "Enterprise",
     icon: <HugeiconsIcon icon={CrownIcon} />,
-    price: 49.99,
+    price: 59.00,
     isHighlighted: false,
     features: [
       "Script coverage: 100 prompts",
