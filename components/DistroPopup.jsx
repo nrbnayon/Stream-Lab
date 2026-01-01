@@ -214,9 +214,10 @@ export default function DistroPopup({
                   isUserLogin ? "text-green-800" : "text-blue-800"
                 )}
               >
-                {textDescription || (isUserLogin
-                  ? "Share this film and earn 30% commission when someone purchases from your link."
-                  : "Login to share this film and earn 30% commission on purchases!")}
+                {textDescription ||
+                  (isUserLogin
+                    ? "Share this film and earn 30% commission when someone purchases from your link."
+                    : "Login to share this film and earn 30% commission on purchases!")}
               </span>
             </div>
           </DialogDescription>
@@ -346,7 +347,7 @@ export default function DistroPopup({
                 Close
               </Button>
               <Button asChild className="flex-1">
-                <Link href="/login">
+                <Link href="/signin">
                   <HugeiconsIcon icon={UserIcon} size={16} className="mr-1" />
                   Login to Share
                 </Link>
