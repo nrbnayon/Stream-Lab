@@ -67,8 +67,10 @@ export default function TransactionHistory() {
   };
 
   const formatAmount = (amount, txType, status) => {
-    // Failed transactions should not have +/- prefix
-    if (status?.toLowerCase() === "failed") {
+    const normalizedStatus = status?.toLowerCase();
+
+    // Failed or Rejected → no +/- prefix
+    if (normalizedStatus === "failed" || normalizedStatus === "rejected") {
       return `$${amount.toFixed(2)}`;
     }
 
@@ -81,6 +83,7 @@ export default function TransactionHistory() {
     const prefix = isCredit ? "+" : "-";
     return `${prefix}$${amount.toFixed(2)}`;
   };
+
 
   if (isLoading) {
     return (
