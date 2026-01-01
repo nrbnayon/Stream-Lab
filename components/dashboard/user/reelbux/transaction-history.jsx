@@ -51,8 +51,10 @@ export default function TransactionHistory() {
   };
 
   const getAmountColor = (txType, status) => {
-    // Failed transactions should have neutral color
-    if (status?.toLowerCase() === "failed") {
+    const normalizedStatus = status?.toLowerCase();
+
+    // Failed or Rejected → neutral color
+    if (normalizedStatus === "failed" || normalizedStatus === "rejected") {
       return "text-muted-foreground";
     }
 
@@ -84,7 +86,6 @@ export default function TransactionHistory() {
     return `${prefix}$${amount.toFixed(2)}`;
   };
 
-
   if (isLoading) {
     return (
       <div className="my-5 bg-secondary py-5 md:py-10 px-5 rounded-md">
@@ -109,74 +110,83 @@ export default function TransactionHistory() {
       </div>
 
       {/* rendering Table */}
-          <Table className="mt-5">
-            <TableHeader>
-              <TableRow>
-                <TableHead>Source</TableHead>
-                <TableHead>Transaction Type</TableHead>
-                <TableHead>Amount</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Status</TableHead>
+      <Table className="mt-5">
+        <TableHeader>
+          <TableRow>
+            <TableHead>Source</TableHead>
+            <TableHead>Transaction Type</TableHead>
+            <TableHead>Amount</TableHead>
+            <TableHead>Date</TableHead>
+            <TableHead>Status</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {currentTransactions.length > 0 ? (
+            currentTransactions.map((transaction, index) => (
+              <TableRow key={startIndex + index}>
+                <TableCell>{transaction.source}</TableCell>
+                <TableCell>{transaction.tx_type}</TableCell>
+                <TableCell
+                  className={getAmountColor(
+                    transaction.tx_type,
+                    transaction.status
+                  )}
+                >
+                  {formatAmount(
+                    transaction.amount,
+                    transaction.tx_type,
+                    transaction.status
+                  )}
+                </TableCell>
+                <TableCell>{transaction.date}</TableCell>
+                <TableCell>
+                  <Badge variant={getStatusVariant(transaction.status)}>
+                    {transaction.status}
+                  </Badge>
+                </TableCell>
               </TableRow>
-            </TableHeader>
-            <TableBody>
-              {currentTransactions.length > 0 ? (
-                currentTransactions.map((transaction, index) => (
-                  <TableRow key={startIndex + index}>
-                    <TableCell>{transaction.source}</TableCell>
-                    <TableCell>{transaction.tx_type}</TableCell>
-                    <TableCell className={getAmountColor(transaction.tx_type, transaction.status)}>
-                      {formatAmount(transaction.amount, transaction.tx_type, transaction.status)}
-                    </TableCell>
-                    <TableCell>{transaction.date}</TableCell>
-                    <TableCell>
-                      <Badge variant={getStatusVariant(transaction.status)}>
-                        {transaction.status}
-                      </Badge>
-                    </TableCell>
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell colSpan={5} className="text-center py-8">
-                    No transactions found
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-
-          {/* Pagination */}
-          {transactions.length > itemsPerPage && (
-            <div className="flex items-center justify-between mt-6">
-              <div className="text-sm text-secondary-foreground">
-                Showing {startIndex + 1} to{" "}
-                {Math.min(endIndex, transactions.length)} of {transactions.length}{" "}
-                transactions
-              </div>
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handlePreviousPage}
-                  disabled={currentPage === 1}
-                >
-                  Previous
-                </Button>
-                <span className="text-sm px-3">
-                  Page {currentPage} of {totalPages}
-                </span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleNextPage}
-                  disabled={currentPage === totalPages}
-                >
-                  Next
-                </Button>
-              </div>
-            </div>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={5} className="text-center py-8">
+                No transactions found
+              </TableCell>
+            </TableRow>
           )}
+        </TableBody>
+      </Table>
+
+      {/* Pagination */}
+      {transactions.length > itemsPerPage && (
+        <div className="flex items-center justify-between mt-6">
+          <div className="text-sm text-secondary-foreground">
+            Showing {startIndex + 1} to{" "}
+            {Math.min(endIndex, transactions.length)} of {transactions.length}{" "}
+            transactions
+          </div>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handlePreviousPage}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </Button>
+            <span className="text-sm px-3">
+              Page {currentPage} of {totalPages}
+            </span>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
