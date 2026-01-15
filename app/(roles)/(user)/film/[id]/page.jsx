@@ -418,8 +418,8 @@ export default function FilmDetails() {
         {!canWatchFullFilm && trailer_hls_url && (
           <div className="bg-yellow-50 border border-yellow-200 rounded-md p-3">
             <p className="text-sm text-yellow-800">
-              <strong>Trailer Preview:</strong> You're currently watching the
-              trailer.
+              {/* <strong>Trailer Preview:</strong> You're currently watching the
+              trailer. */}
               {showPaymentButtons && " Rent or buy to watch the full film."}
               {isRentalExpired &&
                 " Your rental has expired - rent again to watch the full film."}

@@ -98,7 +98,7 @@ export default function SubscriptionStatus({
         <CardHeader>
           <CardTitle>Checking your subscription...</CardTitle>
           <CardDescription>
-            We&apos;re loading your current AI Creator Lab plan details.
+            We&apos;re loading your current Creator Lab plan details.
           </CardDescription>
         </CardHeader>
       </Card>
@@ -109,7 +109,7 @@ export default function SubscriptionStatus({
     return (
       <Card className={cn("my-4", className)}>
         <CardHeader>
-          <CardTitle>No Active AI Subscription</CardTitle>
+          <CardTitle>No Active Subscription</CardTitle>
           <CardDescription>
             Upgrade to unlock more generations, higher limits, and faster
             processing times.

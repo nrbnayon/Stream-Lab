@@ -295,7 +295,7 @@ const sidebarLinks = {
           ),
         },
         {
-          name: "AI Creator Lab",
+          name: "Creator Lab",
           href: "/ai-creator-lab",
           icon: (
             <svg
@@ -442,7 +442,7 @@ const subscriptionPlans = [
   {
     name: "Basic",
     icon: <HugeiconsIcon icon={StarIcon} />,
-    price: 9.00,
+    price: 9.0,
     isHighlighted: false,
     features: [
       "Script coverage: 20 prompts",
@@ -454,7 +454,7 @@ const subscriptionPlans = [
   {
     name: "Pro",
     icon: <HugeiconsIcon icon={ZapIcon} />,
-    price: 29.00,
+    price: 29.0,
     isHighlighted: true,
     features: [
       "Script coverage: 50 prompts",
@@ -466,7 +466,7 @@ const subscriptionPlans = [
   {
     name: "Enterprise",
     icon: <HugeiconsIcon icon={CrownIcon} />,
-    price: 59.00,
+    price: 59.0,
     isHighlighted: false,
     features: [
       "Script coverage: 100 prompts",

@@ -36,15 +36,18 @@ export function DashboardSidebar({ ...props }) {
       </SidebarHeader>
       <SidebarContent>
         <RenderSidebarLinks />
-        
+
         <SidebarGroup>
           {/* <SidebarGroupLabel>Third Party</SidebarGroupLabel> */}
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild className="h-auto py-2 hover:bg-transparent">
+              <SidebarMenuButton
+                asChild
+                className="h-auto py-2 hover:bg-transparent"
+              >
                 <Link href="https://www.scrippyhub.com/" target="_blank">
                   <Image
-                    src="/scrippy.png"
+                    src="/scrippyee.png"
                     width={100}
                     height={40}
                     alt="Scrippy Hub"

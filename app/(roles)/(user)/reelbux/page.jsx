@@ -18,12 +18,9 @@ export default function Reelbux() {
         className="w-40 md:w-52 lg:w-60 mb-2"
       />
       <p className="text-secondary-foreground">
-        Your ReelBux digital wallet is dollar-for-dollar credit you can use on
-        films, series, upgrades, and AI Creator tools. <br /> You can even
-        transfer your Distro sales into ReelBux and keep your funds ready for
-        what you want next.
+        ReelBux is JusB’s built-in wallet for use across the platform
       </p>
-      <ReelbuxBalanceStats 
+      <ReelbuxBalanceStats
         onToggleTransactions={() => setShowTransactions(!showTransactions)}
         showTransactions={showTransactions}
       />

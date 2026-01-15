@@ -158,14 +158,18 @@ export default function WatchFilm() {
 
   return (
     <div className="grid gap-5">
-      {/* Video Player - Fixed to use trailer_hls_url */}
-      <VideoPlayer
-        src={filmData?.trailer_hls_url}
-        poster={thumbnail}
-        title={title}
-        startTime={parseInt(startTime)}
-        filmId={film_id}
-      />
+      {/* Video Player - Centered container */}
+      <div className="flex justify-center">
+        <div className="w-full">
+          <VideoPlayer
+            src={filmData?.trailer_hls_url}
+            poster={thumbnail}
+            title={title}
+            startTime={parseInt(startTime)}
+            filmId={film_id}
+          />
+        </div>
+      </div>
 
       {/* Details section */}
       <section className="my-5 space-y-5">
@@ -238,8 +242,8 @@ export default function WatchFilm() {
         {!hasFullAccess && trailer_hls_url && (
           <div className="bg-yellow-50 border border-yellow-200 rounded-md p-3">
             <p className="text-sm text-yellow-800">
-              <strong>Trailer Preview:</strong> You're currently watching the
-              trailer.
+              {/* <strong>Trailer Preview:</strong> You're currently watching the
+              trailer. */}
               {showPaymentButtons && " Rent or buy to watch the full film."}
             </p>
           </div>

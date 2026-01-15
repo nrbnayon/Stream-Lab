@@ -32,9 +32,10 @@ export default function UpgradePlan() {
         <div className="grid place-items-center h-full overflow-y-auto">
           <div className="w-full max-w-7xl">
             <DrawerHeader>
-              <DrawerTitle>Choose Your AI Plan</DrawerTitle>
+              <DrawerTitle>Choose Your Plan</DrawerTitle>
               <DrawerDescription>
-                Unlock unlimited creativity with our AI tools
+                Unlock advanced creative tools to develop, visualize, and
+                package your projects.
               </DrawerDescription>
             </DrawerHeader>
             <div className="p-4 pb-0">

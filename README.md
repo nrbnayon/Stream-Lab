@@ -1,11 +1,11 @@
 # Stream Lab
 
-Stream Lab is a modern web application designed for video streaming and AI content creation. It features a robust role-based system (User, Admin, Manager), an AI Creator Lab, and subscription management.
+Stream Lab is a modern web application designed for video streaming and AI content creation. It features a robust role-based system (User, Admin, Manager), an Creator Lab, and subscription management.
 
 ## 🚀 Features
 
 - **Role-Based Access Control (RBAC)**: Secure access for Users, Admins, and Managers.
-- **AI Creator Lab**: Tools for AI-driven content creation.
+- **Creator Lab**: Tools for AI-driven content creation.
 - **Video Streaming**: High-quality video playback powered by Video.js.
 - **Subscription Management**: Plan selection and management.
 - **Responsive Design**: Built with Tailwind CSS for a seamless mobile and desktop experience.
@@ -26,7 +26,7 @@ Stream Lab is a modern web application designed for video streaming and AI conte
 
 ### Prerequisites
 
-- Node.js (Latest LTS recommended) 
+- Node.js (Latest LTS recommended)
 - npm or yarn
 
 ### Installation

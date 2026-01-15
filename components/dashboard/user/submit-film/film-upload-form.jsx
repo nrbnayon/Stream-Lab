@@ -30,8 +30,10 @@ import Cookies from "js-cookie";
 import { Progress } from "@/components/ui/progress";
 
 const filmTypes = [
+  { value: "SHORT", label: "Short Film" },
   { value: "MOVIE", label: "Movie" },
   { value: "DRAMA", label: "Drama" },
+  { value: "DOCUMENTARY", label: "Documentary" },
 ];
 
 export default function FilmUploadForm() {

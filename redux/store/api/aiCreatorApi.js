@@ -212,7 +212,7 @@ export const aiCreatorApi = createApi({
         };
       },
       transformResponse: (response) => {
-        // console.log("Generate AI Content response:", response);
+        // console.log("Generate Content response:", response);
         return response;
       },
       invalidatesTags: (result, error, arg) => [

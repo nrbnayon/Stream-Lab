@@ -64,11 +64,8 @@ export default function AICreatorLab() {
             Bring Your Story to Life
           </h2>
           <p className="text-secondary-foreground max-w-3xl">
-            CreatorLab is JusB's AI-powered toolkit for filmmakers and
-            creators—featuring image generation, video generation, and script
-            analysis. Use these tools to create pitch decks, social media
-            content, get detailed notes on your script or create whatever
-            content you may need for your project!
+            Creator Lab. JusB’s toolkit for building pitch materials, visuals,
+            and development assets.
           </p>
         </span>
         <UpgradePlan />
