@@ -27,18 +27,27 @@ export default function VideoPlayer({
     Number(searchParams.get("time")) || startTime
   );
 
+  // ✅ Use refs for callbacks to prevent effect re-execution
+  const onTimeUpdateRef = useRef(onTimeUpdate);
+  const onCloseRef = useRef(onClose);
+
+  useEffect(() => {
+    onTimeUpdateRef.current = onTimeUpdate;
+    onCloseRef.current = onClose;
+  }, [onTimeUpdate, onClose]);
+
   const reportWatchTime = (currentTime) => {
-    if (isFullFilm && onTimeUpdate && currentTime > 5) {
+    if (isFullFilm && onTimeUpdateRef.current && currentTime > 5) {
       const timeInSeconds = Math.floor(currentTime);
       if (timeInSeconds > lastReportedTime.current + 10) {
         lastReportedTime.current = timeInSeconds;
-        onTimeUpdate(currentTime);
+        onTimeUpdateRef.current(currentTime);
       }
     }
   };
 
   const startTimeTracking = (player) => {
-    if (isFullFilm && onTimeUpdate) {
+    if (isFullFilm) {
       if (timeUpdateInterval.current) {
         clearInterval(timeUpdateInterval.current);
       }
@@ -58,7 +67,7 @@ export default function VideoPlayer({
       timeUpdateInterval.current = null;
     }
 
-    if (isFullFilm && onTimeUpdate && player) {
+    if (isFullFilm && player) {
       const currentTime = player.currentTime();
       reportWatchTime(currentTime);
     }
@@ -130,7 +139,7 @@ export default function VideoPlayer({
     });
 
     player.on("seeked", () => {
-      if (isFullFilm && onTimeUpdate) {
+      if (isFullFilm) {
         const currentTime = player.currentTime();
         reportWatchTime(currentTime);
       }
@@ -154,11 +163,11 @@ export default function VideoPlayer({
       if (player && !player.isDisposed()) {
         const lastTime = player.currentTime();
 
-        if (isFullFilm && onTimeUpdate && lastTime > 0) {
+        if (isFullFilm && lastTime > 0) {
           reportWatchTime(lastTime);
         }
 
-        if (onClose) onClose(lastTime);
+        if (onCloseRef.current) onCloseRef.current(lastTime);
 
         player.dispose();
       }
@@ -166,7 +175,7 @@ export default function VideoPlayer({
       playerRef.current = null;
       setIsPlayerReady(false);
     };
-  }, [src, isFullFilm, onTimeUpdate, onClose]); // ✅ Removed initialStartTime from dependencies
+  }, [src, isFullFilm]); // ✅ Removed callbacks from dependencies to prevent re-initialization
 
   return (
     <div data-vjs-player className="video-js-container">

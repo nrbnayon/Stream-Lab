@@ -13,7 +13,7 @@ import {
 import { useParams, useSearchParams } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { minutesToHours } from "@/lib/utils";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import DistroPopup from "@/components/DistroPopup";
 
 export default function FilmDetails() {
@@ -100,82 +100,88 @@ export default function FilmDetails() {
   ]);
 
   // Handle watch time tracking with better debouncing and validation
-  const handleTimeUpdate = (currentTime) => {
-    if (!canWatchFullFilm || !filmData?.id || currentTime <= 5) {
-      return; // Only track if more than 5 seconds
-    }
+  const handleTimeUpdate = useCallback(
+    (currentTime) => {
+      if (!canWatchFullFilm || !filmData?.id || currentTime <= 5) {
+        return; // Only track if more than 5 seconds
+      }
 
-    const watchTimeMinutes = Math.floor(currentTime / 60);
+      const watchTimeMinutes = Math.floor(currentTime / 60);
 
-    // Don't update if time hasn't progressed meaningfully (at least 1 minute)
-    if (watchTimeMinutes === 0) {
-      return;
-    }
+      // Don't update if time hasn't progressed meaningfully (at least 1 minute)
+      if (watchTimeMinutes === 0) {
+        return;
+      }
 
-    // Clear any existing timeout
-    if (watchTimeTimeout.current) {
-      clearTimeout(watchTimeTimeout.current);
-    }
+      // Clear any existing timeout
+      if (watchTimeTimeout.current) {
+        clearTimeout(watchTimeTimeout.current);
+      }
 
-    // Debounce the API call - wait 5 seconds after last update (increased from 2)
-    watchTimeTimeout.current = setTimeout(() => {
-      // console.log(
-      //   "Updating watch time:",
-      //   watchTimeMinutes,
-      //   "minutes for film:",
-      //   filmData.id
-      // );
+      // Debounce the API call - wait 5 seconds after last update (increased from 2)
+      watchTimeTimeout.current = setTimeout(() => {
+        // console.log(
+        //   "Updating watch time:",
+        //   watchTimeMinutes,
+        //   "minutes for film:",
+        //   filmData.id
+        // );
 
-      updateWatchTime({
-        filmId: filmData.id,
-        watchTime: watchTimeMinutes,
-      })
-        .unwrap()
-        .then((response) => {
-          // console.log("Watch time updated successfully:", response);
+        updateWatchTime({
+          filmId: filmData.id,
+          watchTime: watchTimeMinutes,
         })
-        .catch((error) => {
-          console.error("Failed to update watch time:", error);
-        });
-    }, 5000); // Increased debounce time
-  };
+          .unwrap()
+          .then((response) => {
+            // console.log("Watch time updated successfully:", response);
+          })
+          .catch((error) => {
+            console.error("Failed to update watch time:", error);
+          });
+      }, 5000); // Increased debounce time
+    },
+    [canWatchFullFilm, filmData?.id, updateWatchTime]
+  );
 
   // Handle immediate watch time update (on pause, seek, or component unmount)
-  const handleImmediateTimeUpdate = (currentTime) => {
-    if (!canWatchFullFilm || !filmData?.id || currentTime <= 0) {
-      return;
-    }
+  const handleImmediateTimeUpdate = useCallback(
+    (currentTime) => {
+      if (!canWatchFullFilm || !filmData?.id || currentTime <= 0) {
+        return;
+      }
 
-    const watchTimeMinutes = Math.floor(currentTime / 60);
+      const watchTimeMinutes = Math.floor(currentTime / 60);
 
-    // Clear any pending timeout
-    if (watchTimeTimeout.current) {
-      clearTimeout(watchTimeTimeout.current);
-      watchTimeTimeout.current = null;
-    }
+      // Clear any pending timeout
+      if (watchTimeTimeout.current) {
+        clearTimeout(watchTimeTimeout.current);
+        watchTimeTimeout.current = null;
+      }
 
-    // Update immediately
-    if (watchTimeMinutes > 0) {
-      // console.log(
-      //   "Immediate watch time update:",
-      //   watchTimeMinutes,
-      //   "minutes for film:",
-      //   filmData.id
-      // );
+      // Update immediately
+      if (watchTimeMinutes > 0) {
+        // console.log(
+        //   "Immediate watch time update:",
+        //   watchTimeMinutes,
+        //   "minutes for film:",
+        //   filmData.id
+        // );
 
-      updateWatchTime({
-        filmId: filmData.id,
-        watchTime: watchTimeMinutes,
-      })
-        .unwrap()
-        .then((response) => {
-          // console.log("Immediate watch time updated successfully:", response);
+        updateWatchTime({
+          filmId: filmData.id,
+          watchTime: watchTimeMinutes,
         })
-        .catch((error) => {
-          console.error("Failed to update immediate watch time:", error);
-        });
-    }
-  };
+          .unwrap()
+          .then((response) => {
+            // console.log("Immediate watch time updated successfully:", response);
+          })
+          .catch((error) => {
+            console.error("Failed to update immediate watch time:", error);
+          });
+      }
+    },
+    [canWatchFullFilm, filmData?.id, updateWatchTime]
+  );
 
   // Clean up timeout on component unmount
   useEffect(() => {
