@@ -99,20 +99,6 @@ export default function PaymentDialog({
   const setCurrentAmount =
     intention === "transfer" ? setTransferAmount : setAmount;
 
-  // Calculate rent price based on selected hours
-  const calculateRentPrice = (basePrice, hours) => {
-    const maxHours = 72; // Maximum rent hours
-    const hourlyRate = basePrice / maxHours;
-    return (hourlyRate * hours).toFixed(2);
-  };
-
-  const getRentPrice = () => {
-    if (intention === "rent" && maxRentPrice) {
-      return calculateRentPrice(maxRentPrice, parseInt(rentTime));
-    }
-    return currentAmount;
-  };
-
   // Validation for transfer and add funds
   const isValidAmount = () => {
     if (intention !== "transfer" && intention !== "add") return true;
@@ -179,7 +165,7 @@ export default function PaymentDialog({
         } else if (intention === "rent") {
           response = await createStripeRentalCheckout({
             ...paymentData,
-            rent_price: parseFloat(getRentPrice()),
+            rent_price: parseFloat(maxRentPrice), // UPDATED: Use maxRentPrice directly
             rent_hour: parseInt(rentTime),
           }).unwrap();
         }
@@ -215,7 +201,7 @@ export default function PaymentDialog({
         } else if (intention === "rent") {
           response = await createPayPalRentalCheckout({
             ...paymentData,
-            rent_price: parseFloat(getRentPrice()),
+            rent_price: parseFloat(maxRentPrice), // UPDATED: Use maxRentPrice directly
             rent_hour: parseInt(rentTime),
           }).unwrap();
         }
@@ -243,7 +229,7 @@ export default function PaymentDialog({
       } else if (intention === "rent") {
         response = await rentFilmWithReelBux({
           ...paymentData,
-          rent_price: parseFloat(getRentPrice()),
+          rent_price: parseFloat(maxRentPrice), // UPDATED: Use maxRentPrice directly
           rent_hour: parseInt(rentTime),
         }).unwrap();
       }
@@ -458,7 +444,7 @@ export default function PaymentDialog({
                     isProcessing ||
                     intention === "rent"
                   }
-                  value={intention === "rent" ? getRentPrice() : currentAmount}
+                  value={intention === "rent" ? maxRentPrice : currentAmount} // UPDATED
                   onChange={(e) => setCurrentAmount(e.target.value)}
                   placeholder="Enter amount"
                 />
@@ -484,12 +470,8 @@ export default function PaymentDialog({
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        {/* <SelectItem value="4">4 hours</SelectItem>
-                        <SelectItem value="6">6 hours</SelectItem> */}
-                        {/* <SelectItem value="12">12 hours</SelectItem> */}
                         <SelectItem value="24">24 hours</SelectItem>
                         <SelectItem value="48">48 hours</SelectItem>
-                        {/* <SelectItem value="72">72 hours</SelectItem> */}
                       </SelectGroup>
                     </SelectContent>
                   </Select>
@@ -543,7 +525,8 @@ export default function PaymentDialog({
                   <div className="flex justify-between">
                     <span>Amount:</span>
                     <span>
-                      ${intention === "rent" ? getRentPrice() : currentAmount}
+                      ${intention === "rent" ? maxRentPrice : currentAmount}{" "}
+                      {/* UPDATED */}
                     </span>
                   </div>
                   {intention === "rent" && (

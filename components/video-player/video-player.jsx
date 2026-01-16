@@ -22,36 +22,33 @@ export default function VideoPlayer({
   const timeUpdateInterval = useRef(null);
   const lastReportedTime = useRef(0);
 
-  // ✅ take from query first, fallback to prop
-  const initialStartTime = Number(searchParams.get("time")) || startTime;
+  // ✅ Store initial start time in a ref to prevent re-initialization
+  const initialStartTimeRef = useRef(
+    Number(searchParams.get("time")) || startTime
+  );
 
   const reportWatchTime = (currentTime) => {
     if (isFullFilm && onTimeUpdate && currentTime > 5) {
-      // Only report if more than 5 seconds
       const timeInSeconds = Math.floor(currentTime);
-      // Only report if time has progressed by at least 10 seconds
       if (timeInSeconds > lastReportedTime.current + 10) {
         lastReportedTime.current = timeInSeconds;
         onTimeUpdate(currentTime);
-        // console.log("Reporting watch time:", timeInSeconds, "seconds");
       }
     }
   };
 
   const startTimeTracking = (player) => {
     if (isFullFilm && onTimeUpdate) {
-      // Clear any existing interval
       if (timeUpdateInterval.current) {
         clearInterval(timeUpdateInterval.current);
       }
 
-      // Start reporting time every 30 seconds during playback (reduced frequency)
       timeUpdateInterval.current = setInterval(() => {
         if (player && !player.paused() && !player.ended()) {
           const currentTime = player.currentTime();
           reportWatchTime(currentTime);
         }
-      }, 30000); // Report every 30 seconds instead of 10
+      }, 30000);
     }
   };
 
@@ -61,7 +58,6 @@ export default function VideoPlayer({
       timeUpdateInterval.current = null;
     }
 
-    // Report current time immediately
     if (isFullFilm && onTimeUpdate && player) {
       const currentTime = player.currentTime();
       reportWatchTime(currentTime);
@@ -108,7 +104,6 @@ export default function VideoPlayer({
     playerRef.current = player;
 
     player.ready(() => {
-      // console.log("Player is ready");
       setIsPlayerReady(true);
 
       // ✅ Enable resolution selector
@@ -119,25 +114,22 @@ export default function VideoPlayer({
         });
       }
 
-      // Seek to startTime if provided
-      if (initialStartTime > 0) {
-        player.currentTime(initialStartTime);
+      // ✅ Use ref value instead of state/prop
+      if (initialStartTimeRef.current > 0) {
+        player.currentTime(initialStartTimeRef.current);
       }
     });
 
     // Event listeners
     player.on("play", () => {
-      // console.log("Video started playing");
       startTimeTracking(player);
     });
 
     player.on("pause", () => {
-      // console.log("Video paused");
       stopTimeTracking(player);
     });
 
     player.on("seeked", () => {
-      // console.log("Video seeked");
       if (isFullFilm && onTimeUpdate) {
         const currentTime = player.currentTime();
         reportWatchTime(currentTime);
@@ -145,7 +137,6 @@ export default function VideoPlayer({
     });
 
     player.on("ended", () => {
-      // console.log("Video ended");
       stopTimeTracking(player);
     });
 
@@ -153,15 +144,8 @@ export default function VideoPlayer({
       console.error("Video player error:", error);
     });
 
-    player.on("waiting", () => {
-      // console.log("player is waiting");
-    });
-
     // Cleanup function
     return () => {
-      // console.log("Cleaning up video player");
-
-      // Clear interval
       if (timeUpdateInterval.current) {
         clearInterval(timeUpdateInterval.current);
         timeUpdateInterval.current = null;
@@ -170,7 +154,6 @@ export default function VideoPlayer({
       if (player && !player.isDisposed()) {
         const lastTime = player.currentTime();
 
-        // Final time update on component unmount
         if (isFullFilm && onTimeUpdate && lastTime > 0) {
           reportWatchTime(lastTime);
         }
@@ -183,7 +166,7 @@ export default function VideoPlayer({
       playerRef.current = null;
       setIsPlayerReady(false);
     };
-  }, [src, initialStartTime, isFullFilm, onTimeUpdate, onClose]);
+  }, [src, isFullFilm, onTimeUpdate, onClose]); // ✅ Removed initialStartTime from dependencies
 
   return (
     <div data-vjs-player className="video-js-container">

@@ -31,17 +31,17 @@ export const usePaymentUtils = () => {
     router.push("/watch");
   };
 
-  const calculateRentPrice = (basePrice, hours) => {
-    const maxHours = 72; // Maximum rent hours as per API
-    const hourlyRate = basePrice / maxHours;
-    return (hourlyRate * hours).toFixed(2);
-  };
+  // const calculateRentPrice = (basePrice, hours) => {
+  //   const maxHours = 72; // Maximum rent hours as per API
+  //   const hourlyRate = basePrice / maxHours;
+  //   return (hourlyRate * hours).toFixed(2);
+  // };
 
   return {
     handlePaymentRedirect,
     handlePaymentSuccess,
     handlePaymentError,
     handlePaymentCancel,
-    calculateRentPrice,
+    // calculateRentPrice,
   };
 };
