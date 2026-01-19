@@ -3,11 +3,11 @@
 import {
   CreditCardIcon,
   PlusSignIcon,
-  MoneySendSquareIcon,
+
 } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 import PaymentDialog from "../../payment-dialog";
-import WithdrawDialog from "../../withdraw-dialog";
+
 import { Button } from "@/components/ui/button";
 import { useGetReelBuxBalanceQuery } from "@/redux/store/api/reelbuxApi";
 
@@ -21,10 +21,7 @@ export default function ReelbuxBalanceStats({ onToggleTransactions, showTransact
 
   // console.log("Balance::", balance, "reelBuxResponse", reelBuxResponse);
 
-  const handleWithdrawSuccess = () => {
-    // Refetch balance after successful withdrawal
-    refetch();
-  };
+
 
   if (isLoading) {
     return (
@@ -61,20 +58,7 @@ export default function ReelbuxBalanceStats({ onToggleTransactions, showTransact
               </Button>
             }
           />
-          <WithdrawDialog
-            maxAmount={balance}
-            dialogDescription="Withdraw your ReelBux balance to your bank account. Your funds will be transferred within 1-3 business days."
-            dialogTitle="Withdraw ReelBux"
-            onWithdrawSuccess={handleWithdrawSuccess}
-            triggerBtn={
-              <Button variant="ghost" asChild disabled={balance <= 0}>
-                <span>
-                  <HugeiconsIcon icon={MoneySendSquareIcon} />
-                  Withdraw
-                </span>
-              </Button>
-            }
-          />
+
           <Button
             onClick={onToggleTransactions}
             className="flex items-center gap-2 cursor-pointer hover:bg-secondary/80 transition-all bg-transparent text-sm text-muted-foreground underline"

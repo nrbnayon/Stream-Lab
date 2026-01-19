@@ -5,9 +5,11 @@ import {
   CreditCardIcon,
   Dollar02Icon,
   MouseLeftClick06Icon,
+  MoneySendSquareIcon,
 } from "@hugeicons/core-free-icons/index";
 import { HugeiconsIcon } from "@hugeicons/react";
 import PaymentDialog from "../../payment-dialog";
+import WithdrawDialog from "../../withdraw-dialog";
 import { useGetDistroBalanceQuery } from "@/redux/store/api/distroApi";
 import { useTransferDistroToReelBuxMutation } from "@/redux/store/api/paymentApi";
 import { useState } from "react";
@@ -145,6 +147,25 @@ export default function DistroStats() {
             setTransferAmount={setTransferAmount}
             onTransfer={handleTransfer}
             isTransferring={isTransferring}
+          />
+          <WithdrawDialog
+            maxAmount={distro_balance}
+            dialogDescription="Withdraw your Distro balance to your bank account."
+            dialogTitle="Withdraw Distro Funds"
+            onWithdrawSuccess={() => refetch()}
+            triggerBtn={
+              <Button
+                variant="ghost"
+                className="w-full h-full"
+                asChild
+                disabled={distro_balance <= 0}
+              >
+                <span>
+                  <HugeiconsIcon icon={MoneySendSquareIcon} />
+                  Withdraw
+                </span>
+              </Button>
+            }
           />
         </div>
       </div>
