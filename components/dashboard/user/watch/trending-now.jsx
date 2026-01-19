@@ -15,7 +15,7 @@ export default function TrendingNow() {
 
   if (isLoading) {
     return (
-      <div className="my-5 md:my-10" id="trending-movie">
+      <div className="my-5 md:my-10 hidden" id="trending-movie">
         <h2 className="text-2xl md:text-4xl font-medium leading-relaxed">
           Trending Now
         </h2>
@@ -39,7 +39,7 @@ export default function TrendingNow() {
     trendingFilms.length > 0 ? trendingFilms : moviesData.slice(0, 8);
 
   return (
-    <div className="my-5 md:my-10" id="trending-movie">
+    <div className="my-5 md:my-10 hidden" id="trending-movie">
       <h2 className="text-2xl md:text-4xl font-medium leading-relaxed">
         Trending Now
       </h2>
