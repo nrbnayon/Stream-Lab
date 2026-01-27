@@ -40,6 +40,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/credentials.txt
 credentials.txt
-/.credentials.txt
