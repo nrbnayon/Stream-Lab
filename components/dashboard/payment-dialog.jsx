@@ -432,31 +432,41 @@ export default function PaymentDialog({
               {/* Amount Field */}
               <div className="grow">
                 <Label htmlFor="amount">Amount ($)</Label>
-                <Input
-                  id="amount"
-                  type="number"
-                  min={intention === "transfer" || intention === "add" ? 1 : 1}
-                  max={intention === "transfer" ? maxAmount : undefined}
-                  step="0.01"
-                  disabled={
-                    inputDisabled ||
-                    isTransferring ||
-                    isProcessing ||
-                    intention === "rent"
-                  }
-                  value={intention === "rent" ? maxRentPrice : currentAmount} // UPDATED
-                  onChange={(e) => setCurrentAmount(e.target.value)}
-                  placeholder="Enter amount"
-                />
-                {intention === "transfer" && (
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Available: ${parseFloat(maxAmount).toFixed(2)}
-                  </p>
-                )}
-                {intention === "add" && (
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Minimum: $1.00
-                  </p>
+                {/* Show as plain text for buy/rent, input for transfer/add */}
+                {intention === "buy" || intention === "rent" ? (
+                  <div className="flex items-center h-10 px-3 py-2 rounded-md border border-input bg-muted">
+                    <span className="text-lg font-semibold">
+                      ${intention === "rent" ? maxRentPrice : inputValue}
+                    </span>
+                  </div>
+                ) : (
+                  <>
+                    <Input
+                      id="amount"
+                      type="number"
+                      min={intention === "transfer" || intention === "add" ? 1 : 1}
+                      max={intention === "transfer" ? maxAmount : undefined}
+                      step="0.01"
+                      disabled={
+                        inputDisabled ||
+                        isTransferring ||
+                        isProcessing
+                      }
+                      value={currentAmount}
+                      onChange={(e) => setCurrentAmount(e.target.value)}
+                      placeholder="Enter amount"
+                    />
+                    {intention === "transfer" && (
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Available: ${parseFloat(maxAmount).toFixed(2)}
+                      </p>
+                    )}
+                    {intention === "add" && (
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Minimum: $1.00
+                      </p>
+                    )}
+                  </>
                 )}
               </div>
 

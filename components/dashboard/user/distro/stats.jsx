@@ -130,11 +130,14 @@ export default function DistroStats() {
             triggerBtn={
               <Button
                 variant="ghost"
-                className="w-full h-full"
+                className="w-full h-full text-xs md:text-sm px-1 md:px-4"
                 asChild
                 disabled={distro_balance <= 0}
               >
-                <span>Move to Reelbux</span>
+                <span className="flex items-center justify-center gap-1">
+                  <span className="hidden sm:inline">Move to Reelbux</span>
+                  <span className="sm:hidden">To Reelbux</span>
+                </span>
               </Button>
             }
             dialogTitle="Transfer money to ReelBux"
@@ -156,13 +159,13 @@ export default function DistroStats() {
             triggerBtn={
               <Button
                 variant="ghost"
-                className="w-full h-full"
+                className="w-full h-full text-xs md:text-sm px-1 md:px-4"
                 asChild
                 disabled={distro_balance <= 0}
               >
-                <span>
-                  <HugeiconsIcon icon={MoneySendSquareIcon} />
-                  Withdraw
+                <span className="flex items-center justify-center gap-1">
+                  <HugeiconsIcon icon={MoneySendSquareIcon} className="w-4 h-4" />
+                  <span>Withdraw</span>
                 </span>
               </Button>
             }

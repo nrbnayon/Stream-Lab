@@ -144,12 +144,12 @@ function SignUpFormContent() {
           disabled={isLoading}
         />
         <Label htmlFor="terms">
-          I agree to the
-          <Link href="" className="text-primary hover:underline">
+          I agree to the{" "}
+          <Link href="/terms" target="_blank" className="text-primary hover:underline">
             Terms of Service
           </Link>
-          and
-          <Link href="" className="text-primary hover:underline">
+          {" "}and{" "}
+          <Link href="/privacy" target="_blank" className="text-primary hover:underline">
             Privacy Policy
           </Link>
         </Label>

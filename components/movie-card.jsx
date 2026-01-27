@@ -16,7 +16,6 @@ import { Button } from "./ui/button";
 import TrailerPopup from "./trailer-popup";
 import PaymentDialog from "./dashboard/payment-dialog";
 import Link from "next/link";
-import WebShare from "./web-share";
 import DistroPopup from "./DistroPopup";
 import { useGetMeQuery } from "@/redux/store/api/usersApi";
 import { useState } from "react";
@@ -86,16 +85,16 @@ export default function MovieCard({
   return (
     <Card className="w-full">
       <CardHeader>
-        <div className="relative">
+        <div className="relative aspect-video w-full overflow-hidden rounded-md">
           {useLink ? (
             <Link href={`/film/${id}`}>
               <Image
                 src={thumbnailSrc}
                 alt={title}
                 width={800}
-                height={400}
+                height={450}
                 quality={100}
-                className="w-full rounded-md h-44 object-cover"
+                className="w-full h-full object-cover"
                 priority={true}
               />
             </Link>
@@ -103,9 +102,9 @@ export default function MovieCard({
             <Image
               src={thumbnailSrc}
               alt={title}
-              width={200}
-              height={80}
-              className="w-full rounded-md h-44 object-cover"
+              width={800}
+              height={450}
+              className="w-full h-full object-cover"
             />
           )}
           {/* Trailer button with hover/click functionality */}
@@ -147,19 +146,21 @@ export default function MovieCard({
       </CardHeader>
 
       {/* Content | prices */}
-      <CardContent className="text-muted-foreground flex gap-2 justify-between items-center p-0">
-        {rent_price && (
-          <p className="flex justify-between gap-2">
-            <span>Rent</span>
-            <span className="font-semibold">${rent_price}</span>
-          </p>
-        )}
-        {buy_price && (
-          <p className="flex justify-between gap-2">
-            <span>Buy</span>
-            <span className="font-semibold">${buy_price}</span>
-          </p>
-        )}
+      <CardContent className="text-muted-foreground p-0">
+        <div className="grid grid-cols-2 gap-2">
+          {rent_price && (
+            <p className="flex justify-center gap-2">
+              <span>Rent</span>
+              <span className="font-semibold">${rent_price}</span>
+            </p>
+          )}
+          {buy_price && (
+            <p className="flex justify-center gap-2">
+              <span>Buy</span>
+              <span className="font-semibold">${buy_price}</span>
+            </p>
+          )}
+        </div>
       </CardContent>
 
       {/* Footer | button & share */}
@@ -170,7 +171,7 @@ export default function MovieCard({
               dialogTitle={`Rent  –  ${title}`}
               inputValue={rent_price}
               triggerBtn={
-                <Button className="w-full" asChild>
+                <Button className="w-full" variant="outline" asChild>
                   <span>Rent</span>
                 </Button>
               }
@@ -186,7 +187,7 @@ export default function MovieCard({
               dialogTitle={`Buy – ${title}`}
               inputValue={buy_price}
               triggerBtn={
-                <Button className="w-full" variant="outline" asChild>
+                <Button className="w-full" asChild>
                   <span>Buy</span>
                 </Button>
               }

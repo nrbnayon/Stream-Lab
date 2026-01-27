@@ -18,7 +18,7 @@ export default function QuickShare() {
     return (
       <Card className="my-5">
         <CardHeader>
-          <CardTitle>Quick Share</CardTitle>
+          <CardTitle>Distro Hub</CardTitle>
           <CardDescription>Loading popular films...</CardDescription>
         </CardHeader>
         <CardContent className="grid grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-5">
@@ -37,7 +37,7 @@ export default function QuickShare() {
     return (
       <Card className="my-5">
         <CardHeader>
-          <CardTitle>Quick Share</CardTitle>
+          <CardTitle>Distro Hub</CardTitle>
           <CardDescription>Failed to load films</CardDescription>
         </CardHeader>
         <CardContent>
@@ -54,9 +54,9 @@ export default function QuickShare() {
   return (
     <Card className="my-5">
       <CardHeader>
-        <CardTitle>Quick Share</CardTitle>
+        <CardTitle>Distro Hub</CardTitle>
         <CardDescription>
-          Generate Distro links for your popular films
+          Generate Distro links to earn 70% per purchase
         </CardDescription>
       </CardHeader>
       <CardContent className="grid grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-5">
