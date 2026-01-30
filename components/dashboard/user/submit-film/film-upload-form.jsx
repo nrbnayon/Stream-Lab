@@ -44,15 +44,14 @@ export default function FilmUploadForm() {
   const [thumbnail, setThumbnail] = useState(null);
 
   // Upload Progress State
-  const [uploadStatus, setUploadStatus] = useState("IDLE"); // IDLE, UPLOADING, PROCESSING, COMPLETED, ERROR
+  const [uploadStatus, setUploadStatus] = useState("IDLE"); // IDLE, UPLOADING, COMPLETED, ERROR
   const [uploadProgress, setUploadProgress] = useState({
     thumbnail: 0,
     trailer: 0,
     fullFilm: 0,
-    overall: 0
+    overall: 0,
   });
   const [currentUploading, setCurrentUploading] = useState(""); // Which file is currently uploading
-  const [processingProgress, setProcessingProgress] = useState(0);
 
   const [formData, setFormData] = useState({
     user_name: "",
@@ -77,64 +76,6 @@ export default function FilmUploadForm() {
     }
   }, [userResponse]);
 
-  // Check for ongoing upload task on component mount
-  useEffect(() => {
-    let pollInterval;
-    
-    const checkOngoingTask = async () => {
-      const storedTaskId = localStorage.getItem("film_upload_task_id");
-      if (storedTaskId) {
-        const token = Cookies.get("accessToken");
-        if (token) {
-          setUploadStatus("PROCESSING");
-          setProcessingProgress(0);
-          
-          pollInterval = setInterval(async () => {
-            try {
-              const statusResponse = await axios.get(
-                `${process.env.NEXT_PUBLIC_API_BASE_URL}/flims/task-status?task_id=${storedTaskId}`,
-                {
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                  },
-                }
-              );
-
-              const { status, progress } = statusResponse.data;
-              setProcessingProgress(progress || 0);
-
-              if (status === "SUCCESS" || status === "COMPLETED") {
-                clearInterval(pollInterval);
-                setProcessingProgress(100);
-                localStorage.removeItem("film_upload_task_id");
-                handleUploadSuccess();
-              } else if (status === "FAILURE" || status === "REVOKED") {
-                clearInterval(pollInterval);
-                setUploadStatus("ERROR");
-                localStorage.removeItem("film_upload_task_id");
-                toast.error("Processing failed. Please try again.");
-              }
-            } catch (error) {
-              clearInterval(pollInterval);
-              setUploadStatus("ERROR");
-              localStorage.removeItem("film_upload_task_id");
-              console.error("Polling error:", error);
-              toast.error("Error checking upload status.");
-            }
-          }, 2000);
-        }
-      }
-    };
-
-    checkOngoingTask();
-    
-    return () => {
-      if (pollInterval) {
-        clearInterval(pollInterval);
-      }
-    };
-  }, []);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -152,7 +93,7 @@ export default function FilmUploadForm() {
     if (
       trimmedValue &&
       !selectedGenre.find(
-        (genre) => (genre.value || genre.label || genre) === trimmedValue
+        (genre) => (genre.value || genre.label || genre) === trimmedValue,
       )
     ) {
       return {
@@ -216,29 +157,29 @@ export default function FilmUploadForm() {
   const uploadToS3 = async (file, presignedData, fileType) => {
     return new Promise((resolve, reject) => {
       const formData = new FormData();
-      
+
       // Add all fields from presigned data
-      Object.keys(presignedData.fields).forEach(key => {
+      Object.keys(presignedData.fields).forEach((key) => {
         formData.append(key, presignedData.fields[key]);
       });
-      
+
       // Add the file last
-      formData.append('file', file);
+      formData.append("file", file);
 
       const xhr = new XMLHttpRequest();
 
       // Track upload progress
-      xhr.upload.addEventListener('progress', (e) => {
+      xhr.upload.addEventListener("progress", (e) => {
         if (e.lengthComputable) {
           const percentComplete = Math.round((e.loaded / e.total) * 100);
-          setUploadProgress(prev => ({
+          setUploadProgress((prev) => ({
             ...prev,
-            [fileType]: percentComplete
+            [fileType]: percentComplete,
           }));
         }
       });
 
-      xhr.addEventListener('load', () => {
+      xhr.addEventListener("load", () => {
         if (xhr.status === 204 || xhr.status === 200) {
           resolve(presignedData.key);
         } else {
@@ -246,15 +187,15 @@ export default function FilmUploadForm() {
         }
       });
 
-      xhr.addEventListener('error', () => {
+      xhr.addEventListener("error", () => {
         reject(new Error(`Network error uploading ${fileType}`));
       });
 
-      xhr.addEventListener('abort', () => {
+      xhr.addEventListener("abort", () => {
         reject(new Error(`Upload aborted for ${fileType}`));
       });
 
-      xhr.open('POST', presignedData.url);
+      xhr.open("POST", presignedData.url);
       xhr.send(formData);
     });
   };
@@ -272,54 +213,67 @@ export default function FilmUploadForm() {
     try {
       setUploadStatus("UPLOADING");
       setUploadProgress({ thumbnail: 0, trailer: 0, fullFilm: 0, overall: 0 });
-      
+
       const token = Cookies.get("accessToken");
 
       // Step 1: Get presigned URLs from backend
       toast.info("Preparing upload...");
+
+      // Extract file names with extensions
+      const trailerName = trailer?.name || "trailer.mp4";
+      const fullFilmName = fullFilm?.name || "full_film.mp4";
+      const thumbnailName = thumbnail?.name || "thumbnail.jpg";
+
       const presignedResponse = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/flims/get-upload-urls`,
-        { title: formData.title.trim() },
+        {
+          title: formData.title.trim(),
+          trailer_name: trailerName,
+          full_film_name: fullFilmName,
+          thumbnail_name: thumbnailName,
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-        }
+        },
       );
 
-      const { unique_folder, thumbnail: thumbData, trailer: trailerData, full_film: filmData } = presignedResponse.data;
+      const {
+        unique_folder,
+        thumbnail: thumbData,
+        trailer: trailerData,
+        full_film: filmData,
+      } = presignedResponse.data;
 
       // Step 2: Upload files directly to S3
       toast.info("Uploading files to S3...");
-      
+
       try {
         // Upload thumbnail
         setCurrentUploading("thumbnail");
-        await uploadToS3(thumbnail, thumbData, 'thumbnail');
+        await uploadToS3(thumbnail, thumbData, "thumbnail");
         toast.success("Thumbnail uploaded!");
 
         // Upload trailer
         setCurrentUploading("trailer");
-        await uploadToS3(trailer, trailerData, 'trailer');
+        await uploadToS3(trailer, trailerData, "trailer");
         toast.success("Trailer uploaded!");
 
         // Upload full film
         setCurrentUploading("fullFilm");
-        await uploadToS3(fullFilm, filmData, 'fullFilm');
+        await uploadToS3(fullFilm, filmData, "fullFilm");
         toast.success("Full film uploaded!");
 
-        setUploadProgress(prev => ({ ...prev, overall: 100 }));
-        
-        // Brief delay to show completion
-        await new Promise(resolve => setTimeout(resolve, 500));
+        setUploadProgress((prev) => ({ ...prev, overall: 100 }));
 
-        // Step 3: Notify backend to start processing
-        toast.info("Starting video processing...");
-        
+        // Step 3: Notify backend to confirm upload
+        toast.info("Confirming upload...");
+
         const genreValues = selectedGenre.map((genre) => genre.value || genre);
-        
-        const confirmResponse = await axios.post(
+
+        await axios.post(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/flims/confirm-upload`,
           {
             user_name: formData.user_name.trim(),
@@ -341,24 +295,15 @@ export default function FilmUploadForm() {
               Authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
             },
-          }
+          },
         );
 
-        const taskId = confirmResponse.data?.task_id;
-
-        if (taskId) {
-          setUploadStatus("PROCESSING");
-          await pollTaskStatus(taskId, token);
-        } else {
-          handleUploadSuccess();
-        }
-
+        handleUploadSuccess();
       } catch (uploadError) {
         console.error("S3 Upload Error:", uploadError);
         setUploadStatus("ERROR");
         toast.error(`Failed to upload ${currentUploading}. Please try again.`);
       }
-
     } catch (error) {
       setUploadStatus("ERROR");
       console.error("Error:", error);
@@ -368,47 +313,6 @@ export default function FilmUploadForm() {
         toast.error("Failed to upload film. Please try again.");
       }
     }
-  };
-
-  const pollTaskStatus = async (taskId, token) => {
-    localStorage.setItem("film_upload_task_id", taskId);
-    
-    setUploadStatus("PROCESSING");
-    setProcessingProgress(0);
-
-    const pollInterval = setInterval(async () => {
-      try {
-        const statusResponse = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/flims/task-status?task_id=${taskId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        const { status, progress } = statusResponse.data;
-        setProcessingProgress(progress || 0);
-
-        if (status === "SUCCESS" || status === "COMPLETED") {
-          clearInterval(pollInterval);
-          setProcessingProgress(100);
-          localStorage.removeItem("film_upload_task_id");
-          handleUploadSuccess();
-        } else if (status === "FAILURE" || status === "REVOKED") {
-          clearInterval(pollInterval);
-          setUploadStatus("ERROR");
-          localStorage.removeItem("film_upload_task_id");
-          toast.error("Processing failed. Please try again.");
-        }
-      } catch (error) {
-        clearInterval(pollInterval);
-        setUploadStatus("ERROR");
-        localStorage.removeItem("film_upload_task_id");
-        console.error("Polling error:", error);
-        toast.error("Error checking upload status.");
-      }
-    }, 2000);
   };
 
   const handleUploadSuccess = () => {
@@ -431,7 +335,6 @@ export default function FilmUploadForm() {
       setFullFilm(null);
       setThumbnail(null);
       setUploadStatus("IDLE");
-      setProcessingProgress(0);
       setUploadProgress({ thumbnail: 0, trailer: 0, fullFilm: 0, overall: 0 });
       setCurrentUploading("");
     }, 2000);
@@ -439,28 +342,6 @@ export default function FilmUploadForm() {
 
   return (
     <>
-      {/* Processing Progress Banner */}
-      {uploadStatus === "PROCESSING" && (
-        <Card className="mb-5 border-primary/50 bg-primary/5">
-          <CardContent className="pt-6">
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-lg font-semibold">Processing Your Film</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Please wait while we optimize and process your video. This may take several minutes.
-                  </p>
-                </div>
-                <div className="text-2xl font-bold text-primary">
-                  {processingProgress}%
-                </div>
-              </div>
-              <Progress value={processingProgress} className="h-2" />
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
       {/* Upload Progress Overlay */}
       {uploadStatus === "UPLOADING" && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
@@ -469,7 +350,13 @@ export default function FilmUploadForm() {
               <div className="relative">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-xl font-bold">
-                    {Math.round((uploadProgress.thumbnail + uploadProgress.trailer + uploadProgress.fullFilm) / 3)}%
+                    {Math.round(
+                      (uploadProgress.thumbnail +
+                        uploadProgress.trailer +
+                        uploadProgress.fullFilm) /
+                        3,
+                    )}
+                    %
                   </span>
                 </div>
                 <svg className="w-24 h-24 transform -rotate-90">
@@ -486,7 +373,15 @@ export default function FilmUploadForm() {
                     className="text-primary transition-all duration-300 ease-in-out"
                     strokeWidth="8"
                     strokeDasharray={276}
-                    strokeDashoffset={276 - ((uploadProgress.thumbnail + uploadProgress.trailer + uploadProgress.fullFilm) / 3 / 100) * 276}
+                    strokeDashoffset={
+                      276 -
+                      ((uploadProgress.thumbnail +
+                        uploadProgress.trailer +
+                        uploadProgress.fullFilm) /
+                        3 /
+                        100) *
+                        276
+                    }
                     strokeLinecap="round"
                     stroke="currentColor"
                     fill="transparent"
@@ -496,9 +391,11 @@ export default function FilmUploadForm() {
                   />
                 </svg>
               </div>
-              
+
               <div className="space-y-2 w-full">
-                <h3 className="text-xl font-semibold">Uploading to Server...</h3>
+                <h3 className="text-xl font-semibold">
+                  Uploading to Server...
+                </h3>
                 {/* <p className="text-sm text-muted-foreground">
                   Direct upload - bypassing server for faster speeds
                 </p> */}
@@ -509,15 +406,22 @@ export default function FilmUploadForm() {
                 <div className="space-y-2 text-left">
                   <div className="flex justify-between text-xs">
                     <span>Thumbnail</span>
-                    <span className="font-semibold">{uploadProgress.thumbnail}%</span>
+                    <span className="font-semibold">
+                      {uploadProgress.thumbnail}%
+                    </span>
                   </div>
-                  <Progress value={uploadProgress.thumbnail} className="h-1.5" />
+                  <Progress
+                    value={uploadProgress.thumbnail}
+                    className="h-1.5"
+                  />
                 </div>
 
                 <div className="space-y-2 text-left">
                   <div className="flex justify-between text-xs">
                     <span>Trailer</span>
-                    <span className="font-semibold">{uploadProgress.trailer}%</span>
+                    <span className="font-semibold">
+                      {uploadProgress.trailer}%
+                    </span>
                   </div>
                   <Progress value={uploadProgress.trailer} className="h-1.5" />
                 </div>
@@ -525,14 +429,19 @@ export default function FilmUploadForm() {
                 <div className="space-y-2 text-left">
                   <div className="flex justify-between text-xs">
                     <span>Full Film</span>
-                    <span className="font-semibold">{uploadProgress.fullFilm}%</span>
+                    <span className="font-semibold">
+                      {uploadProgress.fullFilm}%
+                    </span>
                   </div>
                   <Progress value={uploadProgress.fullFilm} className="h-1.5" />
                 </div>
               </div>
 
               <p className="text-xs text-muted-foreground">
-                Currently uploading: <span className="font-semibold capitalize">{currentUploading || "Preparing..."}</span>
+                Currently uploading:{" "}
+                <span className="font-semibold capitalize">
+                  {currentUploading || "Preparing..."}
+                </span>
               </p>
             </div>
           </Card>
@@ -554,7 +463,9 @@ export default function FilmUploadForm() {
               onChange={handleInputChange}
               placeholder="Enter your name"
               required
-              inputDisabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
+              inputDisabled={
+                uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+              }
             />
             <InputField
               label="User Email"
@@ -564,7 +475,9 @@ export default function FilmUploadForm() {
               placeholder="Enter your email"
               type="email"
               required
-              inputDisabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
+              inputDisabled={
+                uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+              }
             />
           </CardContent>
         </Card>
@@ -584,7 +497,9 @@ export default function FilmUploadForm() {
               onChange={handleInputChange}
               placeholder="Enter film title"
               required
-              inputDisabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
+              inputDisabled={
+                uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+              }
             />
 
             <div>
@@ -597,7 +512,9 @@ export default function FilmUploadForm() {
                 placeholder="Enter film logline"
                 className="min-h-[100px]"
                 required
-                disabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
+                disabled={
+                  uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+                }
               />
             </div>
 
@@ -612,12 +529,21 @@ export default function FilmUploadForm() {
                 min="1900"
                 max={new Date().getFullYear() + 5}
                 required
-                inputDisabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
+                inputDisabled={
+                  uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+                }
               />
 
               <div>
                 <Label>Film Type *</Label>
-                <Select value={selectedType} onValueChange={setSelectedType} disabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}>
+                <Select
+                  value={selectedType}
+                  onValueChange={setSelectedType}
+                  disabled={
+                    uploadStatus === "PROCESSING" ||
+                    uploadStatus === "UPLOADING"
+                  }
+                >
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Select your film type" />
                   </SelectTrigger>
@@ -648,7 +574,10 @@ export default function FilmUploadForm() {
                   placeholder="Select or type genre"
                   hideClearAllButton
                   hidePlaceholderWhenSelected
-                  disabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
+                  disabled={
+                    uploadStatus === "PROCESSING" ||
+                    uploadStatus === "UPLOADING"
+                  }
                   emptyIndicator={
                     <p className="text-center text-sm">Not found</p>
                   }
@@ -675,7 +604,9 @@ export default function FilmUploadForm() {
               label="Thumbnail *"
               title="Upload your thumbnail"
               setContent={setThumbnail}
-              disabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
+              disabled={
+                uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+              }
             />
 
             <UploadContent
@@ -685,7 +616,9 @@ export default function FilmUploadForm() {
               label="Trailer *"
               title="Upload your film trailer"
               setContent={setTrailer}
-              disabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
+              disabled={
+                uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+              }
             />
 
             <UploadContent
@@ -695,7 +628,9 @@ export default function FilmUploadForm() {
               label="Full Film *"
               title="Upload your full film"
               setContent={setFullFilm}
-              disabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
+              disabled={
+                uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+              }
             />
           </CardContent>
         </Card>
@@ -717,7 +652,9 @@ export default function FilmUploadForm() {
               step="0.01"
               min="0.01"
               required
-              inputDisabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
+              inputDisabled={
+                uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+              }
             />
             <InputField
               label="Buy Price ($) *"
@@ -729,7 +666,9 @@ export default function FilmUploadForm() {
               step="0.01"
               min="0.01"
               required
-              inputDisabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
+              inputDisabled={
+                uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+              }
             />
           </CardContent>
         </Card>
@@ -738,13 +677,13 @@ export default function FilmUploadForm() {
         <div className="text-center">
           <Button
             type="submit"
-            disabled={uploadStatus === "UPLOADING" || uploadStatus === "PROCESSING"}
+            disabled={
+              uploadStatus === "UPLOADING" || uploadStatus === "PROCESSING"
+            }
             className="w-full active:scale-[0.99]"
           >
             {uploadStatus === "UPLOADING"
               ? "Uploading to Server..."
-              : uploadStatus === "PROCESSING"
-              ? "Processing..."
               : "Submit for review"}
           </Button>
         </div>
