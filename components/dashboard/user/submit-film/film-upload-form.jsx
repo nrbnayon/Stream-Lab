@@ -219,10 +219,39 @@ export default function FilmUploadForm() {
       // Step 1: Get presigned URLs from backend
       toast.info("Preparing upload...");
 
+      // Helper to ensure file has extension
+      const getFileNameWithExtension = (file, defaultName) => {
+        if (!file?.name) return defaultName;
+        if (file.name.includes(".")) return file.name;
+        
+        // Map common mime types if extension is missing
+        const mimeMap = {
+          "video/mp4": ".mp4",
+          "video/quicktime": ".mov",
+          "video/x-matroska": ".mkv",
+          "image/jpeg": ".jpg",
+          "image/png": ".png",
+          "image/webp": ".webp"
+        };
+        return file.name + (mimeMap[file.type] || "");
+      };
+
       // Extract file names with extensions
-      const trailerName = trailer?.name || "trailer.mp4";
-      const fullFilmName = fullFilm?.name || "full_film.mp4";
-      const thumbnailName = thumbnail?.name || "thumbnail.jpg";
+      const trailerName = getFileNameWithExtension(trailer, "trailer.mp4");
+      const fullFilmName = getFileNameWithExtension(fullFilm, "full_film.mp4");
+      const thumbnailName = getFileNameWithExtension(thumbnail, "thumbnail.jpg");
+
+      //  const trailerName = trailer?.name || "trailer.mp4";
+      // const fullFilmName = fullFilm?.name || "full_film.mp4";
+      // const thumbnailName = thumbnail?.name || "thumbnail.jpg";
+
+      // Check for S3 single upload limit (5GB)
+      const MAX_S3_SIZE = 5 * 1024 * 1024 * 1024; // 5GB in bytes
+      if (fullFilm?.size > MAX_S3_SIZE) {
+        toast.error("File too large. Maximum upload size is 5GB.");
+        setUploadStatus("ERROR");
+        return;
+      }
 
       const presignedResponse = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/flims/get-upload-urls`,

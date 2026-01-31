@@ -6,6 +6,29 @@ import { useEffect, useRef, useState } from "react";
 import videojs from "video.js";
 import "./videojs-plugins";
 
+const getVideoType = (src) => {
+  if (!src) return "";
+  const match = src.match(/\.([a-zA-Z0-9]+)($|\?)/);
+  const ext = match ? match[1].toLowerCase() : "";
+
+  const typeMap = {
+    m3u8: "application/x-mpegURL",
+    mp4: "video/mp4",
+    mov: "video/quicktime",
+    webm: "video/webm",
+    mkv: "video/x-matroska",
+    "3gp": "video/3gpp",
+    ogg: "video/ogg",
+    ogv: "video/ogg",
+    avi: "video/x-msvideo",
+    wmv: "video/x-ms-wmv",
+    flv: "video/x-flv",
+    ts: "video/mp2t",
+  };
+
+  return typeMap[ext] || "";
+};
+
 export default function VideoPlayer({
   src = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
   className,
@@ -96,7 +119,7 @@ export default function VideoPlayer({
       sources: [
         {
           src,
-          type: "application/x-mpegURL",
+          ...(getVideoType(src) ? { type: getVideoType(src) } : {}),
         },
       ],
       plugins: {
