@@ -12,7 +12,7 @@ export default function YourPerformance() {
   return (
     <Card className="my-5">
       <CardHeader>
-        <CardTitle>Your Performance</CardTitle>
+        <CardTitle>Performance</CardTitle>
         <CardDescription>Track your Distro sharing results</CardDescription>
       </CardHeader>
       <CardContent>

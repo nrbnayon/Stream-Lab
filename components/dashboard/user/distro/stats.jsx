@@ -96,7 +96,7 @@ export default function DistroStats() {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-3 lg:gap-5 my-5">
       {/* Total Earning */}
-      <div className="bg-secondary px-3 md:px-5 py-5 md:py-10 rounded-md space-y-1 md:space-y-3 content-center">
+      {/* <div className="bg-secondary px-3 md:px-5 py-5 md:py-10 rounded-md space-y-1 md:space-y-3 content-center">
         <h4 className="text-xl md:text-2xl text-secondary-foreground flex justify-between items-center">
           Total Earnings
           <HugeiconsIcon icon={Dollar02Icon} />
@@ -104,7 +104,7 @@ export default function DistroStats() {
         <h2 className="text-3xl md:text-4xl font-black text-green-500">
           ${parseFloat(total_earning).toFixed(2)}
         </h2>
-      </div>
+      </div> */}
       {/* Total Clicks */}
       <div className="bg-secondary px-3 md:px-5 py-5 md:py-10 rounded-md space-y-1 md:space-y-3 content-center">
         <h4 className="text-xl md:text-2xl text-secondary-foreground flex justify-between items-center ">
