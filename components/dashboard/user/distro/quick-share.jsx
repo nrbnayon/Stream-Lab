@@ -36,7 +36,7 @@ export default function QuickShare() {
           <CardTitle>Distro Hub</CardTitle>
           <CardDescription>Loading popular films...</CardDescription>
         </CardHeader>
-        <CardContent className="grid grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-5">
+        <CardContent className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 md:gap-5">
           {Array.from({ length: 3 }).map((_, i) => (
             <div
               key={i}
@@ -74,7 +74,7 @@ export default function QuickShare() {
           Generate Distro links to earn 70% per purchase
         </CardDescription>
       </CardHeader>
-      <CardContent className="grid grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-5">
+      <CardContent className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 md:gap-5">
         {randomFilms.length > 0 ? (
           randomFilms.map((film) => (
             <QuickShareCard key={film.film_id} film={film} />

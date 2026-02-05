@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -8,7 +8,6 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogOverlay,
 } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
@@ -33,6 +32,7 @@ export default function DistroPopup({
   className,
   isUserLogin = true,
   textDescription,
+  iconSize = 32,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -185,7 +185,7 @@ export default function DistroPopup({
           className={cn("bg-transparent hover:bg-primary/10", className)}
         >
           {/* <HugeiconsIcon icon={Share01Icon} /> */}
-          <CustomIcon width={32} height={32} fill="#00a0fe" />
+          <CustomIcon width={iconSize} height={iconSize} fill="#00a0fe" />
         </Button>
       </DialogTrigger>
       {/* <DialogOverlay className="bg-black/10 backdrop-blur-xs" /> */}
