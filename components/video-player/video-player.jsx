@@ -14,8 +14,9 @@ const getVideoType = (src) => {
   const typeMap = {
     m3u8: "application/x-mpegURL",
     mp4: "video/mp4",
-    mov: "video/quicktime",
+    mov: "video/mp4",
     webm: "video/webm",
+    mov: "video/quicktime",
     mkv: "video/x-matroska",
     "3gp": "video/3gpp",
     ogg: "video/ogg",

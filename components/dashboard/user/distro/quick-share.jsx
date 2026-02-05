@@ -10,9 +10,24 @@ import {
 import QuickShareCard from "./quick-share-card";
 import { useGetDistroBalanceQuery } from "@/redux/store/api/distroApi";
 
+// Function to decode and format thumbnail URL
+function formatThumbnailUrl(encodedUrl) {
+  if (!encodedUrl) return "";
+  // The URL comes as: /media/https%3A/project-titles-prod.s3.us-west-1.amazonaws.com/...
+  // We need to extract and decode it
+  const decodedUrl = decodeURIComponent(encodedUrl);
+  // Remove /media/ prefix if it exists
+  return decodedUrl.replace(/^\/media\//, "");
+}
+
 export default function QuickShare() {
   const { data: distroResponse, isLoading, error } = useGetDistroBalanceQuery();
-  const randomFilms = distroResponse?.random_popular_films || [];
+  const randomFilms = (distroResponse?.random_popular_films || []).map(
+    (film) => ({
+      ...film,
+      thumbnail: formatThumbnailUrl(film.thumbnail),
+    }),
+  );
 
   if (isLoading) {
     return (
