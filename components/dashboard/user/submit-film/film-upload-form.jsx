@@ -23,7 +23,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { genres } from "@/constants";
 import UploadContent from "./upload-content";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import { useGetMeQuery } from "@/redux/store/api/usersApi";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -61,10 +60,16 @@ export default function FilmUploadForm() {
     year: new Date().getFullYear(),
     rent_price: "",
     buy_price: "",
+    // Dummy fields
+    format: "Traditional",
+    accolades: "",
+    website_link: "",
+    instagram_link: "",
+    trailer_link: "",
+    private_screener: "",
   });
 
   const { data: userResponse } = useGetMeQuery();
-  const router = useRouter();
 
   useEffect(() => {
     if (userResponse?.data) {
@@ -486,7 +491,7 @@ export default function FilmUploadForm() {
           </CardHeader>
           <CardContent className="grid md:grid-cols-2 gap-5">
             <InputField
-              label="User Name"
+              label="Name"
               name="user_name"
               value={formData.user_name}
               onChange={handleInputChange}
@@ -497,7 +502,7 @@ export default function FilmUploadForm() {
               }
             />
             <InputField
-              label="User Email"
+              label="Email"
               name="user_email"
               value={formData.user_email}
               onChange={handleInputChange}
@@ -520,7 +525,7 @@ export default function FilmUploadForm() {
 
           <CardContent className="space-y-3">
             <InputField
-              label="Film Title"
+              label="Film/ Series Title"
               name="title"
               value={formData.title}
               onChange={handleInputChange}
@@ -545,6 +550,125 @@ export default function FilmUploadForm() {
                   uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
                 }
               />
+            </div>
+
+            {/* Format Field */}
+            <div className="space-y-3">
+              <Label>Format *</Label>
+              <div className="grid grid-cols-2 gap-4">
+                <div
+                  className={`cursor-pointer rounded-lg border-2 p-4 text-center transition-all ${
+                    formData.format === "Traditional"
+                      ? "border-primary bg-primary/10"
+                      : "border-muted hover:border-primary/50"
+                  }`}
+                  onClick={() =>
+                    setFormData((prev) => ({ ...prev, format: "Traditional" }))
+                  }
+                >
+                  <p className="font-semibold">Traditional</p>
+                </div>
+                <div
+                  className={`cursor-pointer rounded-lg border-2 p-4 text-center transition-all ${
+                    formData.format === "Vertical"
+                      ? "border-primary bg-primary/10"
+                      : "border-muted hover:border-primary/50"
+                  }`}
+                  onClick={() =>
+                    setFormData((prev) => ({ ...prev, format: "Vertical" }))
+                  }
+                >
+                  <p className="font-semibold">Vertical</p>
+                </div>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Is this title meant to be watched horizontal (traditional film)
+                or vertical (like social media)?
+              </p>
+            </div>
+
+            {/* Accolades */}
+            <div>
+              <Label htmlFor="accolades">Accolades</Label>
+              <Textarea
+                id="accolades"
+                name="accolades"
+                value={formData.accolades}
+                onChange={handleInputChange}
+                placeholder="Enter accolades"
+                className="mt-2 min-h-[100px]"
+                disabled={
+                  uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+                }
+              />
+              <p className="text-xs text-muted-foreground mt-2">
+                Any notable film festival selections or awards, viral Youtube
+                viewership or large social media followings
+              </p>
+            </div>
+
+            {/* Website / IMDB Link */}
+            <div>
+              <InputField
+                label="Website / IMDB Link"
+                name="website_link"
+                value={formData.website_link}
+                onChange={handleInputChange}
+                placeholder="Enter website or IMDB link"
+                inputDisabled={
+                  uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+                }
+              />
+              <p className="text-xs text-muted-foreground mt-1">
+                Does the title have a website or an IMDb page?
+              </p>
+            </div>
+
+            {/* Film/Series Instagram Link */}
+            <div>
+              <InputField
+                label="Film/Series Instagram Link"
+                name="instagram_link"
+                value={formData.instagram_link}
+                onChange={handleInputChange}
+                placeholder="Enter Instagram link"
+                inputDisabled={
+                  uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+                }
+              />
+              <p className="text-xs text-muted-foreground mt-1">
+                Does the title have a social media page?
+              </p>
+            </div>
+
+            {/* Trailer Link */}
+            <InputField
+              label="Trailer"
+              name="trailer_link"
+              value={formData.trailer_link}
+              onChange={handleInputChange}
+              placeholder="Enter trailer link"
+              inputDisabled={
+                uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+              }
+            />
+
+            {/* Private Screener */}
+            <div>
+              <InputField
+                label="Private Screener *"
+                name="private_screener"
+                value={formData.private_screener}
+                onChange={handleInputChange}
+                placeholder="Enter private screener link"
+                required
+                inputDisabled={
+                  uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+                }
+              />
+              <p className="text-xs text-muted-foreground mt-1">
+                Please make the link private, not password protected.
+              </p>
             </div>
 
             <div className="grid lg:grid-cols-3 gap-3 my-3">
