@@ -132,7 +132,9 @@ export default function MovieCard({
           {movieDuration && (
             <span className="text-secondary-foreground text-sm flex gap-2 items-center">
               <HugeiconsIcon icon={Time04Icon} size={18} />
-              {isDurationInSeconds ? secondsToHMS(movieDuration) : minutesToHours(movieDuration)}
+              {isDurationInSeconds
+                ? secondsToHMS(movieDuration)
+                : minutesToHours(movieDuration)}
             </span>
           )}
         </div>
@@ -149,13 +151,13 @@ export default function MovieCard({
       <CardContent className="text-muted-foreground p-0">
         <div className="grid grid-cols-2 gap-2">
           {rent_price && (
-            <p className="flex justify-center gap-2">
+            <p className="flex justify-center gap-2 mr-8">
               <span>Rent</span>
               <span className="font-semibold">${rent_price}</span>
             </p>
           )}
           {buy_price && (
-            <p className="flex justify-center gap-2 mr-5">
+            <p className="flex justify-center gap-2 mr-22">
               <span>Buy</span>
               <span className="font-semibold">${buy_price}</span>
             </p>
