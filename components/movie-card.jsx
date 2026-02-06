@@ -155,7 +155,7 @@ export default function MovieCard({
             </p>
           )}
           {buy_price && (
-            <p className="flex justify-center gap-2">
+            <p className="flex justify-center gap-2 mr-5">
               <span>Buy</span>
               <span className="font-semibold">${buy_price}</span>
             </p>

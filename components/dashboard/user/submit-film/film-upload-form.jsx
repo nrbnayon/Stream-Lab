@@ -65,8 +65,10 @@ export default function FilmUploadForm() {
     accolades: "",
     website_link: "",
     instagram_link: "",
-    trailer_link: "",
-    private_screener: "",
+    directed_by: "",
+    screenplay_by: "",
+    produced_by: "",
+    notable_cast: "",
   });
 
   const { data: userResponse } = useGetMeQuery();
@@ -228,7 +230,7 @@ export default function FilmUploadForm() {
       const getFileNameWithExtension = (file, defaultName) => {
         if (!file?.name) return defaultName;
         if (file.name.includes(".")) return file.name;
-        
+
         // Map common mime types if extension is missing
         const mimeMap = {
           "video/mp4": ".mp4",
@@ -236,7 +238,7 @@ export default function FilmUploadForm() {
           "video/x-matroska": ".mkv",
           "image/jpeg": ".jpg",
           "image/png": ".png",
-          "image/webp": ".webp"
+          "image/webp": ".webp",
         };
         return file.name + (mimeMap[file.type] || "");
       };
@@ -244,7 +246,10 @@ export default function FilmUploadForm() {
       // Extract file names with extensions
       const trailerName = getFileNameWithExtension(trailer, "trailer.mp4");
       const fullFilmName = getFileNameWithExtension(fullFilm, "full_film.mp4");
-      const thumbnailName = getFileNameWithExtension(thumbnail, "thumbnail.jpg");
+      const thumbnailName = getFileNameWithExtension(
+        thumbnail,
+        "thumbnail.jpg",
+      );
 
       //  const trailerName = trailer?.name || "trailer.mp4";
       // const fullFilmName = fullFilm?.name || "full_film.mp4";
@@ -362,6 +367,14 @@ export default function FilmUploadForm() {
         year: new Date().getFullYear(),
         rent_price: "",
         buy_price: "",
+        format: "Traditional",
+        accolades: "",
+        website_link: "",
+        instagram_link: "",
+        directed_by: "",
+        screenplay_by: "",
+        produced_by: "",
+        notable_cast: "",
       });
       setSelectedGenre([]);
       setSelectedType("");
@@ -641,35 +654,52 @@ export default function FilmUploadForm() {
               </p>
             </div>
 
-            {/* Trailer Link */}
-            <InputField
-              label="Trailer"
-              name="trailer_link"
-              value={formData.trailer_link}
-              onChange={handleInputChange}
-              placeholder="Enter trailer link"
-              inputDisabled={
-                uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
-              }
-            />
-
-            {/* Private Screener */}
-            <div>
+            {/* Credits */}
+            <div className="grid md:grid-cols-2 gap-3">
               <InputField
-                label="Private Screener *"
-                name="private_screener"
-                value={formData.private_screener}
+                label="Directed by"
+                name="directed_by"
+                value={formData.directed_by}
                 onChange={handleInputChange}
-                placeholder="Enter private screener link"
-                required
+                placeholder="Enter director name(s)"
                 inputDisabled={
                   uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
                 }
               />
-              <p className="text-xs text-muted-foreground mt-1">
-                Please make the link private, not password protected.
-              </p>
+              <InputField
+                label="Screenplay by"
+                name="screenplay_by"
+                value={formData.screenplay_by}
+                onChange={handleInputChange}
+                placeholder="Enter screenplay writer(s)"
+                inputDisabled={
+                  uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+                }
+              />
+              <InputField
+                label="Produced by"
+                name="produced_by"
+                value={formData.produced_by}
+                onChange={handleInputChange}
+                placeholder="Enter producer(s)"
+                inputDisabled={
+                  uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+                }
+              />
+              <InputField
+                label="Notable Cast"
+                name="notable_cast"
+                value={formData.notable_cast}
+                onChange={handleInputChange}
+                placeholder="Enter cast member(s)"
+                inputDisabled={
+                  uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+                }
+              />
             </div>
+            {/* <p className="text-xs text-muted-foreground">
+              Credits are optional
+            </p> */}
 
             <div className="grid lg:grid-cols-3 gap-3 my-3">
               <InputField
