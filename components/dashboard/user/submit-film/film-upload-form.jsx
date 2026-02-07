@@ -77,24 +77,35 @@ export default function FilmUploadForm() {
   };
 
   const startDrawing = (e) => {
+    // Prevent scrolling when touching the canvas
+    if (e.cancelable) e.preventDefault();
+    
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d");
     const rect = canvas.getBoundingClientRect();
     const coords = getCoordinates(e);
-    const x = coords.clientX - rect.left;
-    const y = coords.clientY - rect.top;
+    
+    // Calculate scale factors
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    
+    const x = (coords.clientX - rect.left) * scaleX;
+    const y = (coords.clientY - rect.top) * scaleY;
 
     ctx.beginPath();
     ctx.moveTo(x, y);
     ctx.lineWidth = 2;
     ctx.lineCap = "round";
-    ctx.strokeStyle = "#000"; // Or theme color if needed
+    ctx.strokeStyle = "#000"; 
     setIsDrawing(true);
   };
 
   const draw = (e) => {
+    // Prevent scrolling when touching the canvas
+    if (e.cancelable) e.preventDefault();
+
     if (!isDrawing) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -102,8 +113,13 @@ export default function FilmUploadForm() {
     const ctx = canvas.getContext("2d");
     const rect = canvas.getBoundingClientRect();
     const coords = getCoordinates(e);
-    const x = coords.clientX - rect.left;
-    const y = coords.clientY - rect.top;
+    
+    // Calculate scale factors
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+
+    const x = (coords.clientX - rect.left) * scaleX;
+    const y = (coords.clientY - rect.top) * scaleY;
 
     ctx.lineTo(x, y);
     ctx.stroke();

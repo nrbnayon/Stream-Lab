@@ -205,7 +205,7 @@ export default function VideoPlayer({
     <div data-vjs-player className="video-js-container">
       <div
         ref={videoRef}
-        className={cn("rounded-md overflow-hidden max-w-7xl mx-auto", className)}
+        className={cn("rounded-md overflow-hidden max-w-4xl mx-auto", className)}
         style={{ minHeight: "400px", backgroundColor: "#000" }}
       />
       {!isPlayerReady && (
