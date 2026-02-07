@@ -160,7 +160,7 @@ export default function WatchFilm() {
     <div className="grid gap-5">
       {/* Video Player - Centered container */}
       <div className="flex justify-center">
-        <div className="w-full">
+        <div className="w-full max-w-6xl">
           <VideoPlayer
             src={filmData?.trailer_hls_url}
             poster={thumbnail}
@@ -170,6 +170,7 @@ export default function WatchFilm() {
           />
         </div>
       </div>
+
 
       {/* Details section */}
       <section className="my-5 space-y-5">

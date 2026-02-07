@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { minutesToHours, secondsToHMS, truncateText } from "@/lib/utils";
+import { minutesToHours, secondsToMinutes, truncateText } from "@/lib/utils";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { PlayIcon, Time04Icon } from "@hugeicons/core-free-icons/index";
 import { Button } from "./ui/button";
@@ -133,7 +133,7 @@ export default function MovieCard({
             <span className="text-secondary-foreground text-sm flex gap-2 items-center">
               <HugeiconsIcon icon={Time04Icon} size={18} />
               {isDurationInSeconds
-                ? secondsToHMS(movieDuration)
+                ? secondsToMinutes(movieDuration)
                 : minutesToHours(movieDuration)}
             </span>
           )}

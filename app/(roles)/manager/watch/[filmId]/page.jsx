@@ -42,7 +42,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import CircularLoader from "@/components/ui/CircularLoader";
-import { secondsToHMS } from "@/lib/utils";
+import { secondsToMinutes } from "@/lib/utils";
 
 export default function ManagerWatchPage() {
   const params = useParams();
@@ -201,7 +201,7 @@ export default function ManagerWatchPage() {
                 openConfirmationDialog(
                   "approve",
                   "Approve Film",
-                  `Are you sure you want to approve "${filmDetails.title}"? This will make it available to users.`
+                  `Are you sure you want to approve "${filmDetails.title}"? This will make it available to users.`,
                 )
               }
               disabled={isActionLoading}
@@ -216,7 +216,7 @@ export default function ManagerWatchPage() {
                 openConfirmationDialog(
                   "reject",
                   "Reject Film",
-                  `Are you sure you want to reject "${filmDetails.title}"? This action will prevent it from being published.`
+                  `Are you sure you want to reject "${filmDetails.title}"? This action will prevent it from being published.`,
                 )
               }
               disabled={isActionLoading}
@@ -267,7 +267,7 @@ export default function ManagerWatchPage() {
                       Duration
                     </h4>
                     <p className="font-semibold">
-                      {secondsToHMS(filmDetails.full_film_duration)}
+                      {secondsToMinutes(filmDetails.full_film_duration)}
                     </p>
                   </div>
                   <div>
@@ -505,8 +505,8 @@ export default function ManagerWatchPage() {
                 confirmationDialog.type === "reject"
                   ? "bg-primary hover:bg-primary/90"
                   : confirmationDialog.type === "approve"
-                  ? "bg-green-600 hover:bg-green-700"
-                  : ""
+                    ? "bg-green-600 hover:bg-green-700"
+                    : ""
               }
             >
               {isActionLoading ? "Processing..." : "Confirm"}

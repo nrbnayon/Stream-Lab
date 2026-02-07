@@ -503,6 +503,14 @@ const genres = [
     label: "Thriller",
   },
   {
+    value: "drama",
+    label: "Drama",
+  },
+  {
+    value: "comedy",
+    label: "Comedy",
+  },
+  {
     value: "action",
     label: "Action",
   },

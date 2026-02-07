@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import MultipleSelector from "@/components/ui/multiselect";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -41,6 +42,14 @@ export default function FilmUploadForm() {
   const [trailer, setTrailer] = useState(null);
   const [fullFilm, setFullFilm] = useState(null);
   const [thumbnail, setThumbnail] = useState(null);
+
+  // Agreements & Signature State
+  const [agreements, setAgreements] = useState({
+    owner: false,
+    rights: false,
+    authority: false,
+  });
+  const [signature, setSignature] = useState("");
 
   // Upload Progress State
   const [uploadStatus, setUploadStatus] = useState("IDLE"); // IDLE, UPLOADING, COMPLETED, ERROR
@@ -155,6 +164,19 @@ export default function FilmUploadForm() {
     }
     if (!formData.buy_price || parseFloat(formData.buy_price) <= 0) {
       errors.push("Please enter a valid buy price");
+    }
+
+    if (!agreements.owner) {
+      errors.push("You must declare ownership of the work");
+    }
+    if (!agreements.rights) {
+      errors.push("You must accept the terms regarding content removal");
+    }
+    if (!agreements.authority) {
+      errors.push("You must confirm authority to license the work");
+    }
+    if (!signature.trim()) {
+      errors.push("Signature is required");
     }
 
     return errors;
@@ -384,6 +406,8 @@ export default function FilmUploadForm() {
       setUploadStatus("IDLE");
       setUploadProgress({ thumbnail: 0, trailer: 0, fullFilm: 0, overall: 0 });
       setCurrentUploading("");
+      setAgreements({ owner: false, rights: false, authority: false });
+      setSignature("");
     }, 2000);
   };
 
@@ -814,6 +838,12 @@ export default function FilmUploadForm() {
               disabled={
                 uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
               }
+              description={
+                <div className="flex flex-col gap-1 items-center">
+                  <span className="text-center">1080p H.264, 15–20 Mbps bitrate, Stereo AAC audio</span>
+                  <span className="text-center font-medium">Optimized HD upload (recommended under 5GB)</span>
+                </div>
+              }
             />
           </CardContent>
         </Card>
@@ -853,6 +883,103 @@ export default function FilmUploadForm() {
                 uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
               }
             />
+          </CardContent>
+        </Card>
+
+        {/* Agreements & Signature Card */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Agreements & Signature</CardTitle>
+            <CardDescription>
+              Please confirm the following statements to proceed
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="flex items-start space-x-3">
+              <Checkbox
+                id="agreement-owner"
+                checked={agreements.owner}
+                onCheckedChange={(c) =>
+                  setAgreements((prev) => ({ ...prev, owner: c }))
+                }
+                disabled={
+                  uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+                }
+              />
+              <Label
+                htmlFor="agreement-owner"
+                className="font-normal leading-tight cursor-pointer"
+              >
+                I hereby declare that I am the rightful owner of, or have been
+                granted legal authorization to distribute, the uploaded work. *
+              </Label>
+            </div>
+
+            <div className="flex items-start space-x-3">
+              <Checkbox
+                id="agreement-rights"
+                checked={agreements.rights}
+                onCheckedChange={(c) =>
+                  setAgreements((prev) => ({ ...prev, rights: c }))
+                }
+                disabled={
+                  uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+                }
+              />
+              <Label
+                htmlFor="agreement-rights"
+                className="font-normal leading-tight cursor-pointer"
+              >
+                I understand that JusB.io reserves the right to suspend or
+                remove the content and withhold pay deposits if ownership cannot
+                be verified. *
+              </Label>
+            </div>
+
+            <div className="flex items-start space-x-3">
+              <Checkbox
+                id="agreement-authority"
+                checked={agreements.authority}
+                onCheckedChange={(c) =>
+                  setAgreements((prev) => ({ ...prev, authority: c }))
+                }
+                disabled={
+                  uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
+                }
+              />
+              <Label
+                htmlFor="agreement-authority"
+                className="font-normal leading-tight cursor-pointer"
+              >
+                I confirm that the work does not infringe on any copyright,
+                trademark, or other intellectual property rights, and that I
+                have full authority to license and monetize it on JusB.io. *
+              </Label>
+            </div>
+
+            <div className="space-y-3 pt-4 border-t">
+              <Label htmlFor="signature" className="text-primary font-semibold">
+                Signature *
+              </Label>
+              <div className="border rounded-md p-4 bg-muted/30">
+                <InputField
+                  id="signature"
+                  name="signature"
+                  value={signature}
+                  onChange={(e) => setSignature(e.target.value)}
+                  placeholder="Type or sign your signature"
+                  label="" // No label inside the wrapper
+                  className="font-dancing-script text-lg"
+                  inputDisabled={
+                    uploadStatus === "PROCESSING" ||
+                    uploadStatus === "UPLOADING"
+                  }
+                />
+                <p className="text-xs text-muted-foreground mt-2">
+                  Type your full name as your digital signature.
+                </p>
+              </div>
+            </div>
           </CardContent>
         </Card>
 

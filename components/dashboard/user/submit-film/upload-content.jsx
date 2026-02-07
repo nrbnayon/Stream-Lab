@@ -16,6 +16,7 @@ export default function UploadContent({
   maxSize,
   accept = { "video/*": [] },
   disabled = false,
+  description,
 }) {
   const handleDrop = (acceptedFiles) => {
     if (disabled) return;
@@ -131,7 +132,7 @@ export default function UploadContent({
       >
         <DropzoneEmptyState
           title={content ? "Replace file" : title}
-          description={`Max size: ${maxSize}MB`}
+          description={description || `Max size: ${maxSize}MB`}
         />
         <DropzoneContent />
       </Dropzone>

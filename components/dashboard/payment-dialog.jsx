@@ -66,11 +66,12 @@ export default function PaymentDialog({
   const systemPayOption = intention === "add" ? "Distro" : "ReelBux";
 
   const [amount, setAmount] = useState(
-    inputValue || (intention === "transfer" ? 10 : intention === "add" ? 10 : 1)
+    inputValue ||
+      (intention === "transfer" ? 10 : intention === "add" ? 10 : 1),
   );
   const [rentTime, setRentTime] = useState("24");
   const [paymentMethod, setPaymentMethod] = useState(
-    intention === "add" ? "card" : "card"
+    intention === "add" ? "card" : "card",
   );
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -138,7 +139,7 @@ export default function PaymentDialog({
     toast.error(
       error?.data?.message ||
         error?.message ||
-        "Before payment signin or signup first."
+        "Before payment signin or signup first.",
     );
     setIsProcessing(false);
   };
@@ -431,27 +432,23 @@ export default function PaymentDialog({
             <div className="flex gap-3">
               {/* Amount Field */}
               <div className="grow">
-                <Label htmlFor="amount">Amount ($)</Label>
+                <Label htmlFor="amount">Amount ($): </Label>
                 {/* Show as plain text for buy/rent, input for transfer/add */}
                 {intention === "buy" || intention === "rent" ? (
-                  <div className="flex items-center h-10 px-3 py-2 rounded-md border border-input bg-muted">
-                    <span className="text-lg font-semibold">
-                      ${intention === "rent" ? maxRentPrice : inputValue}
-                    </span>
+                  <div className="text-lg font-semibold text-primary">
+                    ${intention === "rent" ? maxRentPrice : inputValue}
                   </div>
                 ) : (
                   <>
                     <Input
                       id="amount"
                       type="number"
-                      min={intention === "transfer" || intention === "add" ? 1 : 1}
+                      min={
+                        intention === "transfer" || intention === "add" ? 1 : 1
+                      }
                       max={intention === "transfer" ? maxAmount : undefined}
                       step="0.01"
-                      disabled={
-                        inputDisabled ||
-                        isTransferring ||
-                        isProcessing
-                      }
+                      disabled={inputDisabled || isTransferring || isProcessing}
                       value={currentAmount}
                       onChange={(e) => setCurrentAmount(e.target.value)}
                       placeholder="Enter amount"
@@ -514,8 +511,8 @@ export default function PaymentDialog({
               {isProcessing
                 ? "Processing..."
                 : isTransferring
-                ? "Processing..."
-                : intentionBtnText}
+                  ? "Processing..."
+                  : intentionBtnText}
             </Button>
           </DialogFooter>
         </form>
