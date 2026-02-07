@@ -28,6 +28,7 @@ import { useGetMeQuery } from "@/redux/store/api/usersApi";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { Progress } from "@/components/ui/progress";
+import { Type, PenTool, Upload, Eraser, Check, X } from "lucide-react";
 
 const filmTypes = [
   { value: "SHORT", label: "Short Film" },
@@ -50,6 +51,93 @@ export default function FilmUploadForm() {
     authority: false,
   });
   const [signature, setSignature] = useState("");
+  const [signatureTab, setSignatureTab] = useState("type"); // "type", "draw", "upload"
+  const canvasRef = useRef(null);
+  const [isDrawing, setIsDrawing] = useState(false);
+
+  // Handle signature tab change
+  const handleSignatureTabChange = (tab) => {
+    setSignatureTab(tab);
+    setSignature("");
+  };
+
+  // Canvas drawing functions
+  const getCoordinates = (e) => {
+     if (e.touches && e.touches.length > 0) {
+       return {
+         clientX: e.touches[0].clientX,
+         clientY: e.touches[0].clientY
+       };
+     }
+     return {
+       clientX: e.clientX,
+       clientY: e.clientY
+     };
+  };
+
+  const startDrawing = (e) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    const rect = canvas.getBoundingClientRect();
+    const coords = getCoordinates(e);
+    const x = coords.clientX - rect.left;
+    const y = coords.clientY - rect.top;
+
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineWidth = 2;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "#000"; // Or theme color if needed
+    setIsDrawing(true);
+  };
+
+  const draw = (e) => {
+    if (!isDrawing) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    const rect = canvas.getBoundingClientRect();
+    const coords = getCoordinates(e);
+    const x = coords.clientX - rect.left;
+    const y = coords.clientY - rect.top;
+
+    ctx.lineTo(x, y);
+    ctx.stroke();
+  };
+
+  const stopDrawing = () => {
+    if (!isDrawing) return;
+    setIsDrawing(false);
+    const canvas = canvasRef.current;
+    if (canvas) {
+      setSignature(canvas.toDataURL());
+    }
+  };
+
+  const clearCanvas = () => {
+    const canvas = canvasRef.current;
+    if (canvas) {
+      const ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      setSignature("");
+    }
+  };
+
+  // Handle file upload for signature
+  const handleSignatureUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setSignature(event.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
 
   // Upload Progress State
   const [uploadStatus, setUploadStatus] = useState("IDLE"); // IDLE, UPLOADING, COMPLETED, ERROR
@@ -908,7 +996,7 @@ export default function FilmUploadForm() {
               />
               <Label
                 htmlFor="agreement-owner"
-                className="font-normal leading-tight cursor-pointer"
+                className="font-normal leading-tight cursor-pointer mb-0.5"
               >
                 I hereby declare that I am the rightful owner of, or have been
                 granted legal authorization to distribute, the uploaded work. *
@@ -928,9 +1016,9 @@ export default function FilmUploadForm() {
               />
               <Label
                 htmlFor="agreement-rights"
-                className="font-normal leading-tight cursor-pointer"
+                className="font-normal leading-tight cursor-pointer mb-1"
               >
-                I understand that JusB.io reserves the right to suspend or
+                I understand that <span className="font-bold text-primary">JusB.io</span> reserves the right to suspend or
                 remove the content and withhold pay deposits if ownership cannot
                 be verified. *
               </Label>
@@ -949,11 +1037,11 @@ export default function FilmUploadForm() {
               />
               <Label
                 htmlFor="agreement-authority"
-                className="font-normal leading-tight cursor-pointer"
+                className="font-normal leading-tight cursor-pointer mb-0.5"
               >
                 I confirm that the work does not infringe on any copyright,
                 trademark, or other intellectual property rights, and that I
-                have full authority to license and monetize it on JusB.io. *
+                have full authority to license and monetize it on <span className="font-bold text-primary">JusB.io</span>. *
               </Label>
             </div>
 
@@ -961,23 +1049,151 @@ export default function FilmUploadForm() {
               <Label htmlFor="signature" className="text-primary font-semibold">
                 Signature *
               </Label>
+              
               <div className="border rounded-md p-4 bg-muted/30">
-                <InputField
-                  id="signature"
-                  name="signature"
-                  value={signature}
-                  onChange={(e) => setSignature(e.target.value)}
-                  placeholder="Type or sign your signature"
-                  label="" // No label inside the wrapper
-                  className="font-dancing-script text-lg"
-                  inputDisabled={
-                    uploadStatus === "PROCESSING" ||
-                    uploadStatus === "UPLOADING"
-                  }
-                />
-                <p className="text-xs text-muted-foreground mt-2">
-                  Type your full name as your digital signature.
-                </p>
+                {/* Signature Tabs */}
+                <div className="flex space-x-2 mb-4">
+                  <Button
+                    type="button"
+                    variant={signatureTab === "type" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => handleSignatureTabChange("type")}
+                    className="flex-1 sm:flex-none"
+                    disabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
+
+                  >
+                    <Type className="w-4 h-4 mr-2" /> Type
+                  </Button>
+                  <Button
+                    type="button"
+                    variant={signatureTab === "draw" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => handleSignatureTabChange("draw")}
+                    className="flex-1 sm:flex-none"
+                    disabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
+                  >
+                    <PenTool className="w-4 h-4 mr-2" /> Draw
+                  </Button>
+                  <Button
+                    type="button"
+                    variant={signatureTab === "upload" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => handleSignatureTabChange("upload")}
+                    className="flex-1 sm:flex-none"
+                    disabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
+                  >
+                    <Upload className="w-4 h-4 mr-2" /> Upload
+                  </Button>
+                </div>
+
+                {/* Type Mode */}
+                {signatureTab === "type" && (
+                  <div className="space-y-2">
+                    <InputField
+                      id="signature"
+                      name="signature"
+                      value={signature}
+                      onChange={(e) => setSignature(e.target.value)}
+                      placeholder="Type your full name"
+                      label=""
+                      className="font-dancing-script text-lg"
+                      inputDisabled={
+                        uploadStatus === "PROCESSING" ||
+                        uploadStatus === "UPLOADING"
+                      }
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Type your full name as your digital signature.
+                    </p>
+                  </div>
+                )}
+
+                {/* Draw Mode */}
+                {signatureTab === "draw" && (
+                  <div className="space-y-2">
+                    <div className="relative border-2 border-dashed border-input rounded-md bg-white overflow-hidden h-40 touch-none">
+                      <canvas
+                        ref={canvasRef}
+                        width={600}
+                        height={200}
+                        className="w-full h-full cursor-crosshair block"
+                        onMouseDown={startDrawing}
+                        onMouseMove={draw}
+                        onMouseUp={stopDrawing}
+                        onMouseLeave={stopDrawing}
+                        onTouchStart={startDrawing}
+                        onTouchMove={draw}
+                        onTouchEnd={stopDrawing}
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        className="absolute top-2 right-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+                        onClick={clearCanvas}
+                        disabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
+                      >
+                        <Eraser className="w-4 h-4" />
+                      </Button>
+                      {!signature && !isDrawing && (
+                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none text-muted-foreground/30 text-2xl font-dancing-script">
+                            Sign Here
+                         </div>
+                      )}
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      Use your mouse or finger to draw your signature in the box.
+                    </p>
+                  </div>
+                )}
+
+                {/* Upload Mode */}
+                {signatureTab === "upload" && (
+                  <div className="space-y-2">
+                    <div className="flex flex-col items-center justify-center border-2 border-dashed border-input rounded-md p-6 bg-background hover:bg-accent/5 transition-colors">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleSignatureUpload}
+                        className="hidden"
+                        id="signature-upload"
+                        disabled={uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"}
+                      />
+                      <Label
+                        htmlFor="signature-upload"
+                        className="cursor-pointer flex flex-col items-center gap-3 w-full h-full"
+                      >
+                         {signature && signature.startsWith("data:image") ? (
+                            <div className="relative group">
+                              <img 
+                                src={signature} 
+                                alt="Signature Preview" 
+                                className="h-20 max-w-full object-contain border rounded-md p-1 bg-white" 
+                              />
+                              <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded-md text-white text-xs font-medium">
+                                Change
+                              </div>
+                            </div>
+                         ) : (
+                            <>
+                              <div className="p-3 bg-primary/10 rounded-full text-primary">
+                                <Upload className="w-6 h-6" />
+                              </div>
+                              <div className="text-center">
+                                <span className="text-sm font-medium text-primary">Click to upload</span>
+                                <span className="text-sm text-muted-foreground block mt-1">
+                                  or drag and drop your signature image
+                                </span>
+                              </div>
+                            </>
+                         )}
+                      </Label>
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      Upload an image of your signature (PNG, JPG).
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </CardContent>
