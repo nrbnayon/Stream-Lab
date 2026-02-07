@@ -1,5 +1,6 @@
+// components\dashboard\user\submit-film\film-upload-form.jsx
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import InputField from "@/components/input-field";
 import { Button } from "@/components/ui/button";
 import {
