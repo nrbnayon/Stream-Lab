@@ -1012,7 +1012,7 @@ export default function FilmUploadForm() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            <div className="flex items-start space-x-3">
+            <div className="flex items-center space-x-3">
               <Checkbox
                 id="agreement-owner"
                 checked={agreements.owner}
@@ -1025,14 +1025,14 @@ export default function FilmUploadForm() {
               />
               <Label
                 htmlFor="agreement-owner"
-                className="font-normal leading-tight cursor-pointer mb-0.5"
+                className="font-normal leading-tight cursor-pointer"
               >
                 I hereby declare that I am the rightful owner of, or have been
                 granted legal authorization to distribute, the uploaded work. *
               </Label>
             </div>
 
-            <div className="flex items-start space-x-3">
+            <div className="flex items-center space-x-3">
               <Checkbox
                 id="agreement-rights"
                 checked={agreements.rights}
@@ -1045,7 +1045,7 @@ export default function FilmUploadForm() {
               />
               <Label
                 htmlFor="agreement-rights"
-                className="font-normal leading-tight cursor-pointer mb-1"
+                className="font-normal leading-tight cursor-pointer"
               >
                 I understand that JusB reserves the right to suspend or remove
                 the content and withhold pay deposits if ownership cannot be
@@ -1053,7 +1053,7 @@ export default function FilmUploadForm() {
               </Label>
             </div>
 
-            <div className="flex items-start space-x-3">
+            <div className="flex items-center space-x-3">
               <Checkbox
                 id="agreement-authority"
                 checked={agreements.authority}
@@ -1066,7 +1066,7 @@ export default function FilmUploadForm() {
               />
               <Label
                 htmlFor="agreement-authority"
-                className="font-normal leading-tight cursor-pointer mb-0.5"
+                className="font-normal leading-tight cursor-pointer"
               >
                 I confirm that the work does not infringe on any copyright,
                 trademark, or other intellectual property rights, and that I
