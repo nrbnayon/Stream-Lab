@@ -43,11 +43,11 @@ export function DashboardSidebar({ ...props }) {
             <SidebarMenuItem>
               <SidebarMenuButton
                 asChild
-                className="h-auto py-2 hover:bg-transparent"
+                className="h-auto py-2 hover:bg-transparent bg-transparent"
               >
                 <Link href="https://www.scrippyhub.com/" target="_blank">
                   <Image
-                    src="/scrippyee.png"
+                    src="/scrippye.png"
                     width={100}
                     height={40}
                     alt="Scrippy Hub"
