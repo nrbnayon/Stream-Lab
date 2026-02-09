@@ -72,8 +72,8 @@ export default function TrailerPopup({
             />
             {logline && (
               <div className="bg-transparent rounded-md px-4 space-y-2">
-                <h3 className="text-lg font-semibold">Synopsis</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <h3 className="text-lg font-semibold text-foreground">Synopsis</h3>
+                <p className="text-sm text-gray-300 leading-relaxed">
                   {logline}
                 </p>
               </div>
@@ -109,8 +109,8 @@ export default function TrailerPopup({
           />
           {logline && (
             <div className="bg-transparent rounded-md px-4 space-y-2">
-              <h3 className="text-lg font-semibold">Synopsis</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <h3 className="text-lg font-semibold text-foreground">Synopsis</h3>
+              <p className="text-sm text-gray-300 leading-relaxed">
                 {logline}
               </p>
             </div>
