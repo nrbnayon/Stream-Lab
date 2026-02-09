@@ -18,9 +18,28 @@ export default function UploadContent({
   disabled = false,
   description,
 }) {
-  const handleDrop = (acceptedFiles) => {
+  const handleDrop = (acceptedFiles, rejectedFiles) => {
     if (disabled) return;
-    
+
+    if (rejectedFiles && rejectedFiles.length > 0) {
+      const rejection = rejectedFiles[0];
+      if (rejection.errors.some((e) => e.code === "file-invalid-type")) {
+        const isMp4Only =
+          accept["video/mp4"] &&
+          accept["video/mp4"].includes(".mp4") &&
+          Object.keys(accept).length === 1;
+
+        if (isMp4Only) {
+          toast.error("Only .mp4 video files are allowed");
+        } else {
+          toast.error("Invalid file type");
+        }
+      } else {
+        toast.error(rejection.errors[0].message);
+      }
+      return;
+    }
+
     if (acceptedFiles && acceptedFiles.length > 0) {
       const file = acceptedFiles[0];
 
@@ -31,21 +50,40 @@ export default function UploadContent({
         return;
       }
 
-      // Validate file type
+      // Check specific extensions if provided
+      const allowedExtensions = Object.values(accept).flat();
+      if (allowedExtensions.length > 0) {
+        const fileName = file.name.toLowerCase();
+        const hasValidExtension = allowedExtensions.some((ext) =>
+          fileName.endsWith(ext.toLowerCase()),
+        );
+
+        if (!hasValidExtension) {
+          toast.error(
+            `Invalid file extension. Allowed: ${allowedExtensions.join(", ")}`,
+          );
+          return;
+        }
+      }
+
+      // Validate file type (MIME type check as fallback/confirmation)
       const acceptedTypes = Object.keys(accept);
       const fileType = file.type;
       const isAccepted = acceptedTypes.some((type) => {
+        if (type === "video/mp4") return fileType === "video/mp4";
         if (type === "image/*") return fileType.startsWith("image/");
         if (type === "video/*") return fileType.startsWith("video/");
         return fileType === type;
       });
 
       if (!isAccepted) {
-        const typeDescription = acceptedTypes.includes("image/*")
-          ? "image"
-          : acceptedTypes.includes("video/*")
-          ? "video"
-          : "file";
+        const typeDescription =
+          acceptedTypes.includes("image/*")
+            ? "image"
+            : acceptedTypes.includes("video/*") ||
+              acceptedTypes.includes("video/mp4")
+            ? "video"
+            : "file";
         toast.error(`Please select a valid ${typeDescription} file`);
         return;
       }

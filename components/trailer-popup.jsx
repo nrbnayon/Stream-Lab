@@ -22,7 +22,7 @@ export default function TrailerPopup({
   onClose,
   netflixMode = false,
 }) {
-  const { trailer_url, title } = movie;
+  const { trailer_url, title, logline } = movie;
   const videoRef = useRef(null);
   const [internalOpen, setInternalOpen] = useState(false);
 
@@ -62,7 +62,7 @@ export default function TrailerPopup({
               Watch the official trailer
             </DialogDescription>
           </DialogHeader>
-          <div className="relative">
+          <div className="space-y-4">
             <VideoPlayer
               src={trailer_url}
               ref={videoRef}
@@ -70,6 +70,14 @@ export default function TrailerPopup({
               controls={true}
               muted={false}
             />
+            {logline && (
+              <div className="bg-transparent rounded-md px-4 space-y-2">
+                <h3 className="text-lg font-semibold">Synopsis</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {logline}
+                </p>
+              </div>
+            )}
           </div>
         </DialogContent>
       </Dialog>
@@ -91,7 +99,7 @@ export default function TrailerPopup({
             Watch the official trailer
           </DialogDescription>
         </DialogHeader>
-        <div className="relative">
+        <div className="space-y-4">
           <VideoPlayer
             src={trailer_url}
             ref={videoRef}
@@ -99,6 +107,14 @@ export default function TrailerPopup({
             controls={true}
             muted={false}
           />
+          {logline && (
+            <div className="bg-transparent rounded-md px-4 space-y-2">
+              <h3 className="text-lg font-semibold">Synopsis</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {logline}
+              </p>
+            </div>
+          )}
         </div>
       </DialogContent>
     </Dialog>

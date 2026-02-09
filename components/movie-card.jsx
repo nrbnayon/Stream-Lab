@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { minutesToHours, secondsToMinutes, truncateText } from "@/lib/utils";
+import { cn, minutesToHours, secondsToMinutes, truncateText } from "@/lib/utils";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { PlayIcon, Time04Icon } from "@hugeicons/core-free-icons/index";
 import { Button } from "./ui/button";
@@ -54,12 +54,16 @@ export default function MovieCard({
   const movieDuration = full_film_duration || duration;
   const isDurationInSeconds = !!full_film_duration;
   const movieType = type || film_type;
+  // Capitalize first letter of movie type
+  const capitalizedMovieType = movieType
+    ? movieType.charAt(0).toUpperCase() + movieType.slice(1).toLowerCase()
+    : "";
   const trailerUrl = trailer_url || trailer_hls_url;
 
   const handleTrailerHover = () => {
     const timeout = setTimeout(() => {
       setIsTrailerOpen(true);
-    }, 800); // Netflix-like delay
+    }, 500); // Netflix-like delay
     setHoverTimeout(timeout);
   };
 
@@ -84,7 +88,7 @@ export default function MovieCard({
 
   return (
     <Card className="w-full">
-      <CardHeader>
+      <CardHeader className="p-0">
         <div className="relative aspect-video w-full overflow-hidden rounded-md">
           {useLink ? (
             <Link href={`/film/${id}`}>
@@ -122,12 +126,12 @@ export default function MovieCard({
             </Button>
           )}
         </div>
-        <CardTitle className="text-xl">
+        <h1 className="text-xl">
           {useLink ? <Link href={`/film/${id}`}>{title}</Link> : title}
-        </CardTitle>
+        </h1>
 
         {/* Badge and Duration */}
-        <div className="flex gap-5">
+        {/* <div className="flex gap-5">
           <Badge variant="secondary">{movieType}</Badge>
           {movieDuration && (
             <span className="text-secondary-foreground text-sm flex gap-2 items-center">
@@ -137,18 +141,41 @@ export default function MovieCard({
                 : minutesToHours(movieDuration)}
             </span>
           )}
-        </div>
+        </div> */}
 
         {/* movie description */}
-        {logline && (
+        {/* {logline && (
           <CardDescription className="text-base">
             {truncateText(logline)}
           </CardDescription>
-        )}
+        )} */}
+
+              {/* Badge, Duration, and Prices in one line */}
+        <div className="flex items-center justify-between gap-2 text-sm text-muted-foreground py-1">
+          <Badge variant="secondary" className="font-medium">
+            {capitalizedMovieType}
+          </Badge>
+          {movieDuration && (
+            <>
+              <span className="text-secondary-foreground text-sm flex gap-2 items-center">
+              <HugeiconsIcon icon={Time04Icon} size={18} />
+                {isDurationInSeconds
+                  ? secondsToMinutes(movieDuration)
+                  : minutesToHours(movieDuration)}
+              </span>
+              <span>•</span>
+            </>
+          )}
+          {rent_price && buy_price && (
+            <span className="font-semibold mr-6">
+              ${rent_price} / ${buy_price}
+            </span>
+          )}
+      </ div>
       </CardHeader>
 
       {/* Content | prices */}
-      <CardContent className="text-muted-foreground p-0">
+      {/* <CardContent className="text-muted-foreground p-0">
         <div className="grid grid-cols-2 gap-2">
           {rent_price && (
             <p className="flex justify-center gap-2 mr-8">
@@ -163,10 +190,12 @@ export default function MovieCard({
             </p>
           )}
         </div>
-      </CardContent>
+      </CardContent> */}
 
       {/* Footer | button & share */}
-      <CardFooter className="flex gap-2">
+      <CardFooter className={cn("flex gap-2", {
+        "-mt-3": rent_price && buy_price
+      })}>
         <div className="grid grid-cols-2 w-full gap-2">
           {rent_price && (
             <PaymentDialog
@@ -219,6 +248,7 @@ export default function MovieCard({
           movie={{
             trailer_url: trailerUrl,
             title: title,
+            logline: logline, // description
           }}
           isOpen={isTrailerOpen}
           onClose={handleTrailerClose}

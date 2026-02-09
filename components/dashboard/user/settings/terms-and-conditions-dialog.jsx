@@ -210,9 +210,6 @@ export default function TermsAndConditionsDialog() {
                     </li>
                   ))}
                 </ul>
-                <p className="text-lg text-primary font-bold mt-2">
-                  No Algorithms. Just People.
-                </p>
               </div>
             ))
           )}
