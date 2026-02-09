@@ -37,13 +37,13 @@ export function DashboardSidebar({ ...props }) {
       <SidebarContent>
         <RenderSidebarLinks />
 
-        <SidebarGroup>
+        <SidebarGroup className="bg-transparent p-0">
           {/* <SidebarGroupLabel>Third Party</SidebarGroupLabel> */}
-          <SidebarMenu>
-            <SidebarMenuItem>
+          <SidebarMenu className="bg-transparent">
+            <SidebarMenuItem className="bg-transparent">
               <SidebarMenuButton
                 asChild
-                className="h-auto py-2 hover:bg-transparent bg-transparent"
+                className="h-auto py-2 px-0 hover:bg-transparent bg-transparent"
               >
                 <Link href="https://www.scrippyhub.com/" target="_blank">
                   <Image
