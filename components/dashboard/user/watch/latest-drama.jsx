@@ -11,7 +11,7 @@ export default function LatestDrama() {
     return (
       <div className="my-5 md:my-10" id="latest-drama">
         <h2 className="text-2xl md:text-4xl font-medium leading-relaxed">
-          Short Films
+          Launch Titles
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {Array.from({ length: 8 }).map((_, i) => (
@@ -35,7 +35,7 @@ export default function LatestDrama() {
   return (
     <div className="my-5 md:my-10" id="latest-drama">
       <h2 className="text-2xl md:text-4xl font-medium leading-relaxed">
-        Short Films
+        Launch Titles
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {filmsToShow.map((movie) => (

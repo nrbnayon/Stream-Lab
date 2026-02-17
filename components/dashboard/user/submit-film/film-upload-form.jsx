@@ -29,10 +29,11 @@ import { useGetMeQuery } from "@/redux/store/api/usersApi";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { Progress } from "@/components/ui/progress";
-import { Type, PenTool, Upload, Eraser, Check, X } from "lucide-react";
+import { Type, PenTool, Upload, Eraser } from "lucide-react";
+import { getVideoDuration } from "@/lib/utils";
 
 const filmTypes = [
-  { value: "SHORT", label: "Short Film" },
+  { value: "SHORT", label: "Launch Titles" },
   { value: "MOVIE", label: "Movie" },
   { value: "DRAMA", label: "Drama" },
   { value: "DOCUMENTARY", label: "Documentary" },
@@ -43,6 +44,7 @@ export default function FilmUploadForm() {
   const [selectedType, setSelectedType] = useState("");
   const [trailer, setTrailer] = useState(null);
   const [fullFilm, setFullFilm] = useState(null);
+  const [fullFilmDuration, setFullFilmDuration] = useState(null);
   const [thumbnail, setThumbnail] = useState(null);
 
   // Agreements & Signature State
@@ -333,6 +335,22 @@ export default function FilmUploadForm() {
     });
   };
 
+  const handleFullFilmSet = async (file) => {
+    setFullFilm(file);
+    if (file) {
+      try {
+        const duration = await getVideoDuration(file);
+        setFullFilmDuration(duration);
+        // console.log("Duration:", duration);
+      } catch (error) {
+        console.error("Error getting duration", error);
+        setFullFilmDuration(null);
+      }
+    } else {
+      setFullFilmDuration(null);
+    }
+  };
+
   const handleFilmUpload = async (e) => {
     e.preventDefault();
 
@@ -463,6 +481,7 @@ export default function FilmUploadForm() {
             produced_by: formData.produced_by,
             notable_cast: formData.notable_cast,
             signature: signature,
+            full_film_duration: fullFilmDuration,
           },
           {
             headers: {
@@ -521,6 +540,7 @@ export default function FilmUploadForm() {
       setCurrentUploading("");
       setAgreements({ owner: false, rights: false, authority: false });
       setSignature("");
+      setFullFilmDuration(null);
     }, 2000);
   };
 
@@ -947,7 +967,7 @@ export default function FilmUploadForm() {
               accept={{ "video/mp4": [".mp4"] }}
               label="Full Film *"
               title="Upload your full film"
-              setContent={setFullFilm}
+              setContent={handleFullFilmSet}
               disabled={
                 uploadStatus === "PROCESSING" || uploadStatus === "UPLOADING"
               }
