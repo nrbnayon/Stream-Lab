@@ -12,7 +12,7 @@ import {
 } from "@/redux/store/api/filmsApi";
 import { useParams, useSearchParams } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
-import { minutesToHours } from "@/lib/utils";
+import {  formatDuration } from "@/lib/utils";
 import { useCallback, useEffect, useRef, useState } from "react";
 import DistroPopup from "@/components/DistroPopup";
 
@@ -140,7 +140,7 @@ export default function FilmDetails() {
           });
       }, 5000); // Increased debounce time
     },
-    [canWatchFullFilm, filmData?.id, updateWatchTime]
+    [canWatchFullFilm, filmData?.id, updateWatchTime],
   );
 
   // Handle immediate watch time update (on pause, seek, or component unmount)
@@ -180,7 +180,7 @@ export default function FilmDetails() {
           });
       }
     },
-    [canWatchFullFilm, filmData?.id, updateWatchTime]
+    [canWatchFullFilm, filmData?.id, updateWatchTime],
   );
 
   // Clean up timeout on component unmount
@@ -387,12 +387,12 @@ export default function FilmDetails() {
                   access_type === "Purchased"
                     ? "bg-green-100 text-green-800"
                     : access_type === "Filmmaker"
-                    ? "bg-purple-100 text-purple-800"
-                    : access_type === "Rented" || access_type === "Rent"
-                    ? isRentalExpired
-                      ? "bg-primary/70 text-red-800"
-                      : "bg-blue-100 text-blue-800"
-                    : "bg-gray-100 text-gray-800"
+                      ? "bg-purple-100 text-purple-800"
+                      : access_type === "Rented" || access_type === "Rent"
+                        ? isRentalExpired
+                          ? "bg-primary/70 text-red-800"
+                          : "bg-blue-100 text-blue-800"
+                        : "bg-gray-100 text-gray-800"
                 }`}
               >
                 {access_type === "Purchase" || access_type === "Purchased"
@@ -465,8 +465,8 @@ export default function FilmDetails() {
               </div>
               {current_watch_time && (
                 <p className="text-sm text-muted-foreground mt-1">
-                  Watched: {minutesToHours(current_watch_time)} of{" "}
-                  {minutesToHours(full_film_duration)}
+                  Watched: {formatDuration(current_watch_time)} of{" "}
+                  {formatDuration(full_film_duration)}
                 </p>
               )}
             </div>
@@ -496,7 +496,7 @@ export default function FilmDetails() {
             <div className="table-row">
               <div className="table-cell font-medium pr-12">Duration:</div>
               <div className="table-cell">
-                {minutesToHours(full_film_duration)}
+                {formatDuration(full_film_duration)}
               </div>
             </div>
           )}

@@ -7,7 +7,7 @@ import VideoPlayer from "@/components/video-player/video-player";
 import { useGetFilmDetailsQuery } from "@/redux/store/api/filmsApi";
 import { useParams, useSearchParams } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
-import { minutesToHours } from "@/lib/utils";
+import { formatDuration } from "@/lib/utils";
 import DistroPopup from "@/components/DistroPopup";
 
 export default function WatchFilm() {
@@ -171,7 +171,6 @@ export default function WatchFilm() {
         </div>
       </div>
 
-
       {/* Details section */}
       <section className="my-5 space-y-5">
         <div className="flex items-start justify-between">
@@ -224,8 +223,8 @@ export default function WatchFilm() {
                   access_type === "Owned"
                     ? "bg-green-100 text-green-800"
                     : access_type === "Rented"
-                    ? "bg-blue-100 text-blue-800"
-                    : "bg-gray-100 text-gray-800"
+                      ? "bg-blue-100 text-blue-800"
+                      : "bg-gray-100 text-gray-800"
                 }`}
               >
                 {access_type}
@@ -269,8 +268,8 @@ export default function WatchFilm() {
               </div>
               {current_watch_time && (
                 <p className="text-sm text-muted-foreground mt-1">
-                  Watched: {minutesToHours(current_watch_time)} of{" "}
-                  {minutesToHours(full_film_duration)}
+                  Watched: {formatDuration(current_watch_time)} of{" "}
+                  {formatDuration(full_film_duration)}
                 </p>
               )}
             </div>
@@ -300,7 +299,7 @@ export default function WatchFilm() {
             <div className="table-row">
               <div className="table-cell font-medium pr-12">Duration:</div>
               <div className="table-cell">
-                {minutesToHours(full_film_duration)}
+                {formatDuration(full_film_duration)}
               </div>
             </div>
           )}

@@ -381,7 +381,7 @@ export default function ManagerWatchPage() {
           <Card>
             <CardContent className="p-6">
               {/* Thumbnail */}
-              <div className="relative aspect-[2/3] mb-6 rounded-lg overflow-hidden">
+              <div className="relative aspect-2/3 mb-6 rounded-lg overflow-hidden">
                 <Image
                   src={filmDetails.thumbnail || "/placeholder-image.jpg"}
                   alt={filmDetails.title}

@@ -2,14 +2,11 @@
 import Image from "next/image";
 import {
   Card,
-  CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { cn, minutesToHours, secondsToMinutes, truncateText } from "@/lib/utils";
+import { cn, secondsToMinutes } from "@/lib/utils";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { PlayIcon, Time04Icon } from "@hugeicons/core-free-icons/index";
 import { Button } from "./ui/button";
@@ -130,26 +127,6 @@ export default function MovieCard({
           {useLink ? <Link href={`/film/${id}`}>{title}</Link> : title}
         </h1>
 
-        {/* Badge and Duration */}
-        {/* <div className="flex gap-5">
-          <Badge variant="secondary">{movieType}</Badge>
-          {movieDuration && (
-            <span className="text-secondary-foreground text-sm flex gap-2 items-center">
-              <HugeiconsIcon icon={Time04Icon} size={18} />
-              {isDurationInSeconds
-                ? secondsToMinutes(movieDuration)
-                : minutesToHours(movieDuration)}
-            </span>
-          )}
-        </div> */}
-
-        {/* movie description */}
-        {/* {logline && (
-          <CardDescription className="text-base">
-            {truncateText(logline)}
-          </CardDescription>
-        )} */}
-
               {/* Badge, Duration, and Prices in one line */}
         <div className="flex items-center justify-between gap-2 text-sm text-muted-foreground py-1">
           <Badge variant="secondary" className="font-medium">
@@ -161,7 +138,7 @@ export default function MovieCard({
               <HugeiconsIcon icon={Time04Icon} size={18} />
                 {isDurationInSeconds
                   ? secondsToMinutes(movieDuration)
-                  : minutesToHours(movieDuration)}
+                  : formatDuration(movieDuration)}
               </span>
               <span>•</span>
             </>
@@ -173,24 +150,6 @@ export default function MovieCard({
           )}
       </ div>
       </CardHeader>
-
-      {/* Content | prices */}
-      {/* <CardContent className="text-muted-foreground p-0">
-        <div className="grid grid-cols-2 gap-2">
-          {rent_price && (
-            <p className="flex justify-center gap-2 mr-8">
-              <span>Rent</span>
-              <span className="font-semibold">${rent_price}</span>
-            </p>
-          )}
-          {buy_price && (
-            <p className="flex justify-center gap-2 mr-22">
-              <span>Buy</span>
-              <span className="font-semibold">${buy_price}</span>
-            </p>
-          )}
-        </div>
-      </CardContent> */}
 
       {/* Footer | button & share */}
       <CardFooter className={cn("flex gap-2", {

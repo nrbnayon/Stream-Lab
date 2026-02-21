@@ -219,12 +219,6 @@ export default function AdminWatchPage() {
     );
   }
 
-  const formatDuration = (minutes) => {
-    if (!minutes) return "N/A";
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-    return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
-  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -442,7 +436,7 @@ export default function AdminWatchPage() {
           <Card>
             <CardContent className="p-6">
               {/* Thumbnail */}
-              <div className="relative aspect-[2/3] mb-6 rounded-lg overflow-hidden">
+              <div className="relative aspect-2/3 mb-6 rounded-lg overflow-hidden">
                 <Image
                   src={filmDetails.thumbnail || "/placeholder-image.jpg"}
                   alt={filmDetails.title}
