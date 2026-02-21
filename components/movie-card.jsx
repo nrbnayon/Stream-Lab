@@ -6,7 +6,7 @@ import {
   CardHeader,
 } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { cn, secondsToMinutes } from "@/lib/utils";
+import { cn, formatDuration, secondsToMinutes } from "@/lib/utils";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { PlayIcon, Time04Icon } from "@hugeicons/core-free-icons/index";
 import { Button } from "./ui/button";
