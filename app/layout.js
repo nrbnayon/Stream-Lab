@@ -27,14 +27,14 @@ export const metadata = {
     "earn money with movies",
     "movie studio platform",
   ],
-  authors: [{ name: "Nayon Kanti Halder" }],
+  authors: [{ name: "Justeven" }],
   creator: "Stream Lab",
   publisher: "Stream Lab",
   openGraph: {
     title: " JusB | No Algorithms. Just People",
     description:
       "Stream movies online and create your own powered movie studio. Share, publish, and monetize your films with Stream Lab.",
-    url: "https://stream-lab-one.vercel.app",
+    url: "https://beta.jusb.io",
     siteName: "Stream Lab",
     images: [
       {
@@ -53,16 +53,16 @@ export const metadata = {
     description:
       "Watch movies online and create your own powered studio with Stream Lab. Publish and earn from your films.",
     images: ["https://i.ibb.co.com/1Y09C1SN/brand-logo.png"],
-    creator: "@nrbnayon",
+    creator: "@justeven",
   },
-  metadataBase: new URL("https://stream-lab-one.vercel.app"),
+  metadataBase: new URL("https://beta.jusb.io"),
   robots: {
     index: true,
     follow: true,
     nocache: true,
   },
   alternates: {
-    canonical: "https://stream-lab-one.vercel.app",
+    canonical: "https://beta.jusb.io",
   },
 };
 
